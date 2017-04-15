@@ -7,5 +7,5 @@ build_script:
   - cmd: build.cmd CreatePackages
 test: off
 artifacts:
-- path: 'packaging\octokit*.nupkg'
-  name: OctokitPackages
+- path: 'packaging\sniper*.nupkg'
+  name: SniperPackages

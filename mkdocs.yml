@@ -1,9 +1,9 @@
-site_name : Octokit.net Documentation
-site_description: A GitHub API client for .NET
+site_name : Sniper Documentation
+site_description: A Target Process API client for .NET
 
 dev_addr: '0.0.0.0:8000'
 
-repo_url: https://github.com/octokit/octokit.net/
+repo_url: https://github.com/bluetread/sniper
 
 docs_dir: docs/
 site_dir: docs/_build/

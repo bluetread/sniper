@@ -1,8 +1,8 @@
 <Query Kind="Program">
-  <NuGetReference>Octokit</NuGetReference>
-  <NuGetReference>Octokit.Reactive</NuGetReference>
+  <NuGetReference>Sniper</NuGetReference>
+  <NuGetReference>Sniper.Reactive</NuGetReference>
   <NuGetReference>Rx-Main</NuGetReference>
-  <Namespace>Octokit</Namespace>
+  <Namespace>Sniper</Namespace>
   <Namespace>System.Net</Namespace>
   <Namespace>System.Threading.Tasks</Namespace>
 </Query>
@@ -12,17 +12,17 @@ async Task Main(string[] args)
 	var owner = string.Empty;
 	var reponame = string.Empty;
 	
-	owner = "octokit";
-	reponame = "octokit.net";
+	owner = "Sniper";
+	reponame = "Sniper";
 	
-	var client = new GitHubClient(new Octokit.ProductHeaderValue("octokit.samples"));
+	var client = new GitHubClient(new Sniper.ProductHeaderValue("Sniper.samples"));
 	
-	//Get releases for the octokit
+	//Get releases for the Sniper
 	var releases = await client.Repository.Release.GetAll(owner, reponame);
 	releases.Select(r => new { r.Name, r.Body }).Dump("Releases");
 	
 	//Don't want draft release and because we are using reactive the first one is the latest one.
-	var latestrelease = releases.First(r => r.Draft == false).Dump("Latest Octokit"); 
+	var latestrelease = releases.First(r => r.Draft == false).Dump("Latest Sniper"); 
 	
 	//Gets the assets for the latest relase
 	var assets = await client.Repository.Release.GetAllAssets(owner,reponame,latestrelease.Id);
@@ -33,7 +33,7 @@ async Task Main(string[] args)
 	
 	//Download the release
 	var wc = new WebClient();
-	var filename = Path.Combine( Path.GetTempPath(),"Octokit-Reactive.nupkg"); 
+	var filename = Path.Combine( Path.GetTempPath(),"Sniper-Reactive.nupkg"); 
 	await wc.DownloadFileTaskAsync(asset.BrowserDownloadUrl,filename);
 	filename.Dump();
 }

@@ -1,9 +1,9 @@
 <Query Kind="Program">
-  <NuGetReference>Octokit</NuGetReference>
-  <NuGetReference>Octokit.Reactive</NuGetReference>
+  <NuGetReference>Sniper</NuGetReference>
+  <NuGetReference>Sniper.Reactive</NuGetReference>
   <NuGetReference>Rx-Main</NuGetReference>
-  <Namespace>Octokit</Namespace>
-  <Namespace>Octokit.Reactive</Namespace>
+  <Namespace>Sniper</Namespace>
+  <Namespace>Sniper.Reactive</Namespace>
   <Namespace>System</Namespace>
   <Namespace>System.Reactive.Linq</Namespace>
   <Namespace>System.Threading.Tasks</Namespace>
@@ -16,9 +16,9 @@ async Task Main(string[] args)
 
 	//Search Issues with xamarin keyword and get the results
 	GitHubClient client = new GitHubClient(
-		new Octokit.ProductHeaderValue("Octokit.samples"));
-	owner = "octokit";
-	reponame = "octokit.net";
+		new Sniper.ProductHeaderValue("Sniper.samples"));
+	owner = "Sniper";
+	reponame = "Sniper";
 
 	// or if you don't want to give an app your creds
 	// you can use a token from an OAuth app

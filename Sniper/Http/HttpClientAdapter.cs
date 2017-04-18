@@ -148,11 +148,7 @@ namespace Sniper.Http
 
         private static string GetContentMediaType(HttpContent httpContent)
         {
-            if (httpContent.Headers?.ContentType != null)
-            {
-                return httpContent.Headers.ContentType.MediaType;
-            }
-            return null;
+            return httpContent.Headers?.ContentType?.MediaType;
         }
 
         public void Dispose()

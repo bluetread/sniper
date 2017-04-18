@@ -31,6 +31,11 @@ namespace Sniper.Http
             _http = new HttpClient(new RedirectHandler { InnerHandler = getHandler() });
         }
 
+        ~HttpClientAdapter()
+        {
+            Dispose(false);
+        }
+
         /// <summary>
         /// Sends the specified request and returns a response.
         /// </summary>
@@ -159,9 +164,10 @@ namespace Sniper.Http
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            // ReSharper disable once UseNullPropagation // Causes error when using  _http?.Dispose();
+            if (disposing && _http != null)
             {
-                _http?.Dispose();
+                _http.Dispose();
             }
         }
 

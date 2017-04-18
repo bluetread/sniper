@@ -1,9 +1,9 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Sniper.Http;
-using Sniper.Request;
 using Sniper.Response;
 using System.Collections.ObjectModel;
 using Sniper.ApiClients;
@@ -44,19 +44,7 @@ namespace Sniper
             return response.Body;
         }
 
-        /// <summary>
-        /// Gets the rendered Markdown for an arbitrary markdown document.
-        /// </summary>
-        /// <param name="markdown">An arbitrary Markdown document</param>
-        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
-        /// <returns>The rendered Markdown.</returns>
-        public async Task<string> RenderArbitraryMarkdown(NewArbitraryMarkdown markdown)
-        {
-            var endpoint = new Uri("markdown", UriKind.Relative);
-            var response = await _connection.Post<string>(endpoint, markdown, "text/html", "text/plain").ConfigureAwait(false);
-            return response.Body;
-        }
-
+      
    
         /// <summary>
         /// Returns a list of the licenses shown in the license picker on GitHub.com. This is not a comprehensive
@@ -112,3 +100,4 @@ namespace Sniper
         }
     }
 }
+#endif

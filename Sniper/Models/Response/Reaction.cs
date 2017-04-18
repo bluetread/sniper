@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response
@@ -15,7 +16,7 @@ namespace Sniper.Response
         Hooray
     }
 
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Reaction
     {
         public Reaction() { }
@@ -43,13 +44,7 @@ namespace Sniper.Response
         [Parameter(Key = "content")]
         public ReactionType Content { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Id: {0}, Reaction: {1}", Id, Content);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Id: {0}, Reaction: {1}", Id, Content);
     }
 }
-
+#endif

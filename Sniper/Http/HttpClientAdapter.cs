@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper.Http
 {
@@ -26,7 +26,7 @@ namespace Sniper.Http
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public HttpClientAdapter(Func<HttpMessageHandler> getHandler)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.GetHandler, getHandler);
+            Ensure.ArgumentNotNull(nameof(getHandler), getHandler);
             
             _http = new HttpClient(new RedirectHandler { InnerHandler = getHandler() });
         }
@@ -139,10 +139,7 @@ namespace Sniper.Http
             }
             catch (Exception)
             {
-                if (requestMessage != null)
-                {
-                    requestMessage.Dispose();
-                }
+                requestMessage?.Dispose();
                 throw;
             }
 
@@ -151,7 +148,7 @@ namespace Sniper.Http
 
         private static string GetContentMediaType(HttpContent httpContent)
         {
-            if (httpContent.Headers != null && httpContent.Headers.ContentType != null)
+            if (httpContent.Headers?.ContentType != null)
             {
                 return httpContent.Headers.ContentType.MediaType;
             }
@@ -168,7 +165,7 @@ namespace Sniper.Http
         {
             if (disposing)
             {
-                if (_http != null) _http.Dispose();
+                _http?.Dispose();
             }
         }
 

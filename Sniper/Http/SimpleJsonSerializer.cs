@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Sniper.Reflection;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper.Http
 {
@@ -25,7 +25,7 @@ namespace Sniper.Http
         class GitHubSerializerStrategy : PocoJsonSerializerStrategy
         {
             readonly List<string> _membersWhichShouldPublishNull = new List<string>();
-            Dictionary<Type, Dictionary<object, object>> _cachedEnums = new Dictionary<Type, Dictionary<object, object>>();
+            readonly Dictionary<Type, Dictionary<object, object>> _cachedEnums = new Dictionary<Type, Dictionary<object, object>>();
 
             protected override string MapClrMemberToJsonFieldName(MemberInfo member)
             {
@@ -53,7 +53,7 @@ namespace Sniper.Http
             [SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "Need to support .NET 2")]
             protected override bool TrySerializeUnknownTypes(object input, out object output)
             {
-                Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Input, input);
+                Ensure.ArgumentNotNull(nameof(input), input);
                 
                 var type = input.GetType();
                 var jsonObject = new JsonObject();
@@ -131,7 +131,8 @@ namespace Sniper.Http
                         if (ReflectionUtils.GetTypeInfo(underlyingType).IsEnum)
                         {
                             stringValue = RemoveHyphenAndUnderscore(stringValue);
-                            return Enum.Parse(underlyingType, stringValue, ignoreCase: true);
+
+                            if (underlyingType != null) return Enum.Parse(underlyingType, stringValue, ignoreCase: true);
                         }
                     }
 

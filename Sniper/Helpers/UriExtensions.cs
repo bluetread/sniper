@@ -53,9 +53,9 @@ namespace Sniper
                 }
             }
 
-            Func<string, string, string> mapValueFunc = (key, value) => key == "q" ? value : Uri.EscapeDataString(value);
+            string MapValueFunc(string key, string value) => key == "q" ? value : Uri.EscapeDataString(value);
 
-            string query = string.Join("&", p.Select(kvp => kvp.Key + "=" + mapValueFunc(kvp.Key, kvp.Value)));
+            string query = string.Join("&", p.Select(kvp => kvp.Key + "=" + MapValueFunc(kvp.Key, kvp.Value)));
             if (uri.IsAbsoluteUri)
             {
                 var uriBuilder = new UriBuilder(uri)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -8,7 +9,7 @@ namespace Sniper.Response
     /// <summary>
     /// An entry in the activity event stream
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Activity
     {
         public Activity() { }
@@ -61,12 +62,7 @@ namespace Sniper.Response
         public string Id { get; protected set; }
 
  
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Type: {0}", Type);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Type: {0}", Type);
     }
 }
+#endif

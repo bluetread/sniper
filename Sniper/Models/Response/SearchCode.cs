@@ -1,10 +1,11 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class SearchCode
     {
         public SearchCode() { }
@@ -55,9 +56,7 @@ namespace Sniper.Response
         /// </summary>
         public Repository Repository { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get { return string.Format(CultureInfo.InvariantCulture, "Sha: {0} Name: {1}", Sha, Name); }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Sha: {0} Name: {1}", Sha, Name);
     }
 }
+#endif

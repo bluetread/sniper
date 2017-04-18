@@ -2,7 +2,6 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
-using System.Runtime.Serialization;
 using Sniper.Http;
 
 namespace Sniper
@@ -19,10 +18,7 @@ namespace Sniper
         Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
     public class LegalRestrictionException : ApiException
     {
-        public override string Message
-        {
-            get { return ApiErrorMessageSafe ?? "Resource taken down due to a DMCA notice."; }
-        }
+        //public override string Message => ApiErrorMessageSafe ?? "Resource taken down due to a DMCA notice.";
 
         /// <summary>
         /// Constructs an instance of LegalRestrictionException
@@ -32,14 +28,7 @@ namespace Sniper
         {
         }
 
-        /// <summary>
-        /// Constructs an instance of LegalRestrictionException
-        /// </summary>
-        /// <param name="message">The exception message</param>
-        /// <param name="statusCode">The http status code returned by the response</param>
-        public LegalRestrictionException(string message, HttpStatusCode statusCode) : base(message, statusCode)
-        {
-        }
+      
 
         /// <summary>
         /// Constructs an instance of LegalRestrictionException
@@ -53,22 +42,6 @@ namespace Sniper
                 "LegalRestrictionException created with wrong status code");
         }
 
-
-        /// <summary>
-        /// Constructs an instance of LegalRestrictionException
-        /// </summary>
-        /// <param name="info">
-        /// The <see cref="SerializationInfo"/> that holds the
-        /// serialized object data about the exception being thrown.
-        /// </param>
-        /// <param name="context">
-        /// The <see cref="StreamingContext"/> that contains
-        /// contextual information about the source or destination.
-        /// </param>
-        protected LegalRestrictionException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
 
     }
 }

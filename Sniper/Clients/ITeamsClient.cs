@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿#if false
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Sniper.Request;
 using Sniper.Response;
@@ -81,12 +82,6 @@ namespace Sniper
         /// <returns>A list of the team's member <see cref="User"/>s.</returns>
         Task<IReadOnlyList<User>> GetAllMembers(int id, ApiOptions options);
 
-        /// <summary>
-        /// Returns newly created <see cref="Team" /> for the current org.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
-        /// <returns>Newly created <see cref="Team"/></returns>
-        Task<Team> Create(string org, NewTeam team);
 
         /// <summary>
         /// Returns updated <see cref="Team" /> for the current org.
@@ -189,3 +184,4 @@ namespace Sniper
         Task<bool> IsRepositoryManagedByTeam(int id, string owner, string repository);
     }
 }
+#endif

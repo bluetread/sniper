@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper.Http
 {
@@ -15,7 +15,7 @@ namespace Sniper.Http
             : base(response != null ? response.Body ?? new List<T>() : new List<T>())
         {
             Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.Response, response);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.NextPageFunc, nextPageFunc);
+            Ensure.ArgumentNotNull(nameof(nextPageFunc), nextPageFunc);
 
             _nextPageFunc = nextPageFunc;
             if (response != null)

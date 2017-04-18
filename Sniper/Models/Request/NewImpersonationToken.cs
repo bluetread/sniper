@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 
@@ -7,7 +8,7 @@ namespace Sniper.Request
     /// <summary>
     /// Describes a new Impersonation Token to create via the <see cref="IUserAdministrationClient.CreateImpersonationToken(string, NewImpersonationToken)"/> method.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class NewImpersonationToken
     {
         public NewImpersonationToken() { }
@@ -26,12 +27,7 @@ namespace Sniper.Request
         /// </summary>
         public IEnumerable<string> Scopes { get; set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Scopes: {0}", string.Join("\r\n", Scopes));
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Scopes: {0}", string.Join("\r\n", Scopes));
     }
 }
+#endif

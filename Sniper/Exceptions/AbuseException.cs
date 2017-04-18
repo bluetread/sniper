@@ -55,27 +55,7 @@ namespace Sniper
 
         public int? RetryAfterSeconds { get; }
 
-        public override string Message
-        {
-            get { return ApiErrorMessageSafe ?? "Request Forbidden - Abuse Detection"; }
-        }
-
-
-        /// <summary>
-        /// Constructs an instance of AbuseException
-        /// </summary>
-        /// <param name="info">
-        /// The <see cref="SerializationInfo"/> that holds the
-        /// serialized object data about the exception being thrown.
-        /// </param>
-        /// <param name="context">
-        /// The <see cref="StreamingContext"/> that contains
-        /// contextual information about the source or destination.
-        /// </param>
-        protected AbuseException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        //public override string Message => ApiErrorMessageSafe ?? "Request Forbidden - Abuse Detection";
 
         [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -83,6 +63,5 @@ namespace Sniper
             base.GetObjectData(info, context);
             info.AddValue("RetryAfterSeconds", RetryAfterSeconds);
         }
-
     }
 }

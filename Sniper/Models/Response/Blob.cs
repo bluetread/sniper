@@ -1,9 +1,10 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Blob
     {
         public Blob() { }
@@ -36,13 +37,7 @@ namespace Sniper.Response
         /// </summary>
         public int Size { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Sha: {0} Size: {1}", Sha, Size);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Sha: {0} Size: {1}", Sha, Size);
     }
 
     public enum EncodingType
@@ -51,3 +46,4 @@ namespace Sniper.Response
         Base64
     }
 }
+#endif

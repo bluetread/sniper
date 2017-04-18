@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sniper.Request;
 using Sniper.Response;
@@ -137,3 +138,4 @@ namespace Sniper
         Task DeletePublicKey(int keyId);
     }
 }
+#endif

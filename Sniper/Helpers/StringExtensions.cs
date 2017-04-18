@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Sniper.Application;
 using Sniper.Http;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper
 {
@@ -85,13 +85,13 @@ namespace Sniper
 
         public static string ToCapitalizedInvariant(this string value)
         {
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Value, value);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(value), value);
             return string.Concat(value[0].ToString().ToUpperInvariant(), value.Substring(1));
         }
 
         private static IEnumerable<string> SplitUpperCase(this string source)
         {
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Source, source);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(source), source);
 
             int wordStartIndex = 0;
             var letters = source.ToCharArray();

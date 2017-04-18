@@ -1,3 +1,4 @@
+#if false
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,28 +12,9 @@ namespace Sniper.Request
     /// Searching Repositories
     /// http://developer.github.com/v3/search/#search-repositories
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class SearchRepositoriesRequest : BaseSearchRequest
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SearchRepositoriesRequest"/> class.
-        /// </summary>
-        public SearchRepositoriesRequest()
-        {
-            Order = SortDirection.Descending;
-        }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SearchRepositoriesRequest"/> class.
-        /// </summary>
-        /// <param name="term">The search term.</param>
-        public SearchRepositoriesRequest(string term)
-            : base(term)
-        {
-            Order = SortDirection.Descending;
-        }
-
-      
-
         private IEnumerable<InQualifier> _inQualifier;
 
         /// <summary>
@@ -107,13 +89,7 @@ namespace Sniper.Request
             return parameters;
         }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Term: {0}", Term);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Term: {0}", Term);
     }
 
     /// <summary>
@@ -131,7 +107,7 @@ namespace Sniper.Request
     /// <summary>
     /// Helper class in generating the range values for a qualifer e.g. In or Size qualifiers
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Range
     {
         private readonly string _query = string.Empty;
@@ -176,10 +152,7 @@ namespace Sniper.Request
             }
         }
 
-        internal string DebuggerDisplay
-        {
-            get { return string.Format(CultureInfo.InvariantCulture, "Query: {0}", _query); }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Query: {0}", _query);
 
         /// <summary>
         /// Helper class that build a <see cref="Range"/> with a LessThan comparator used for filtering results
@@ -223,7 +196,7 @@ namespace Sniper.Request
     /// helper class in generating the date range values for the date qualifier e.g.
     /// https://help.github.com/articles/searching-repositories#created-and-last-updated
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class DateRange
     {
         private readonly string _query = string.Empty;
@@ -259,10 +232,7 @@ namespace Sniper.Request
             _query = string.Format(CultureInfo.InvariantCulture, "{0:yyyy-MM-dd}..{1:yyyy-MM-dd}", from, to);
         }
 
-        internal string DebuggerDisplay
-        {
-            get { return string.Format(CultureInfo.InvariantCulture, "Query: {0}", _query); }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Query: {0}", _query);
 
         /// <summary>
         /// helper method to create a LessThan Date Comparison
@@ -326,3 +296,4 @@ namespace Sniper.Request
         }
     }
 }
+#endif

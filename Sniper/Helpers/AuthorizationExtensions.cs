@@ -1,7 +1,6 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Threading.Tasks;
-using Sniper.Request;
-using Sniper.Response;
 
 namespace Sniper
 {
@@ -65,3 +64,4 @@ namespace Sniper
         }
     }
 }
+#endif

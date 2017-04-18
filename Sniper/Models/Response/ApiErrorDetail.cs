@@ -1,3 +1,4 @@
+#if false
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -7,7 +8,7 @@ namespace Sniper.Response
 
     [Serializable]
 
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class ApiErrorDetail
     {
         public ApiErrorDetail() { }
@@ -28,12 +29,7 @@ namespace Sniper.Response
 
         public string Resource { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Message: {0}, Code: {1}, Field: {2}", Message, Code, Field);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Message: {0}, Code: {1}, Field: {2}", Message, Code, Field);
     }
 }
+#endif

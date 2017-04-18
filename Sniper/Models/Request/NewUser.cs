@@ -1,13 +1,13 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
-using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
     /// <summary>
     /// Describes a new user to create via the <see cref="IUserAdministrationClient.Create(NewUser)"/> method.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class NewUser
     {
         public NewUser() { }
@@ -19,8 +19,8 @@ namespace Sniper.Request
         /// <param name="email">The email address of the user</param>
         public NewUser(string login, string email)
         {
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Email, email);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(login), login);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(email), email);
 
             Login = login;
             Email = email;
@@ -36,12 +36,7 @@ namespace Sniper.Request
         /// </summary>
         public string Email { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Login: {0} Email: {1}", Login, Email);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Login: {0} Email: {1}", Login, Email);
     }
 }
+#endif

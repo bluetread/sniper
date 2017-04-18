@@ -1,10 +1,11 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response.Enterprise
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class AdminStats
     {
         public AdminStats() { }
@@ -75,3 +76,4 @@ namespace Sniper.Response.Enterprise
         }
     }
 }
+#endif

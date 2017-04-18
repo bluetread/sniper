@@ -1,3 +1,4 @@
+#if false
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -7,7 +8,7 @@ namespace Sniper.Request
     /// <summary>
     /// Used to create a new authorization.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class AuthorizationUpdate
     {
         /// <summary>
@@ -50,3 +51,4 @@ namespace Sniper.Request
         }
     }
 }
+#endif

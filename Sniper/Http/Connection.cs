@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Sniper.Authentication;
-using Sniper.ToBeRemoved;
+using Sniper.Types;
 
 namespace Sniper.Http
 {
@@ -118,15 +118,15 @@ namespace Sniper.Http
             IHttpClient httpClient,
             IJsonSerializer serializer)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.ProductInformation, productInformation);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.BaseAddress, baseAddress);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.CredentialStore, credentialStore);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.HttpClient, httpClient);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Serializer, serializer);
-
+            Ensure.ArgumentNotNull(nameof(productInformation), productInformation);
+            Ensure.ArgumentNotNull(nameof(baseAddress), baseAddress);
+            Ensure.ArgumentNotNull(nameof(credentialStore), credentialStore);
+            Ensure.ArgumentNotNull(nameof(httpClient), httpClient);
+            Ensure.ArgumentNotNull(nameof(serializer), serializer);
+            
             if (!baseAddress.IsAbsoluteUri)
             {
-                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "The base address '{0}' must be an absolute URI", baseAddress), "baseAddress");
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "The base address '{0}' must be an absolute URI", baseAddress), nameof(baseAddress));
             }
 
             UserAgent = FormatUserAgent(productInformation);
@@ -145,7 +145,7 @@ namespace Sniper.Http
             // We've chosen to not wrap the _lastApiInfo in a lock.  Originally the code was returning a reference - so there was a danger of
             // on thread writing to the object while another was reading.  Now we are cloning the ApiInfo on request - thus removing the need (or overhead)
             // of putting locks in place.
-            return _lastApiInfo == null ? null : _lastApiInfo.Clone();
+            return _lastApiInfo?.Clone();
         }
         private ApiInfo _lastApiInfo;
 
@@ -308,8 +308,8 @@ namespace Sniper.Http
             Uri baseAddress = null)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.GreaterThanZero(OldGitHubToBeRemoved.Timeout, timeout);
-
+            Ensure.GreaterThanZero(nameof(timeout), timeout);
+            
             var request = new Request
             {
                 Method = method,
@@ -347,7 +347,7 @@ namespace Sniper.Http
         {
             if (!string.IsNullOrEmpty(accepts))
             {
-                request.Headers["Accept"] = accepts;
+                request.Headers[HttpKeys.HtmlKeys.HeaderKeys.Accept] = accepts;
             }
 
             if (!string.IsNullOrEmpty(twoFactorAuthenticationCode))
@@ -359,7 +359,7 @@ namespace Sniper.Http
             {
                 request.Body = body;
                 // Default Content Type per: http://developer.github.com/v3/
-                request.ContentType = contentType ?? "application/x-www-form-urlencoded";
+                request.ContentType = contentType ?? MimeTypes.ApplicationFormUrlEncoded;
             }
 
             return Run<T>(request, cancellationToken);
@@ -460,7 +460,7 @@ namespace Sniper.Http
         public async Task<HttpStatusCode> Delete(Uri uri, object data)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
 
             var request = new Request
             {
@@ -498,7 +498,7 @@ namespace Sniper.Http
         public Task<IApiResponse<T>> Delete<T>(Uri uri, object data)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
 
             return SendData<T>(uri, HttpMethod.Delete, data, null, null, CancellationToken.None);
         }
@@ -529,10 +529,7 @@ namespace Sniper.Http
         /// <summary>
         /// Gets the <seealso cref="ICredentialStore"/> used to provide credentials for the connection.
         /// </summary>
-        public ICredentialStore CredentialStore
-        {
-            get { return _authenticator.CredentialStore; }
-        }
+        public ICredentialStore CredentialStore => _authenticator.CredentialStore;
 
         /// <summary>
         /// Gets or sets the credentials used by the connection.
@@ -554,14 +551,15 @@ namespace Sniper.Http
             // Note this is for convenience. We probably shouldn't allow this to be mutable.
             set
             {
-                Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Value, value);
+                Ensure.ArgumentNotNull(nameof(value), value);
+                
                 _authenticator.CredentialStore = new InMemoryCredentialStore(value);
             }
         }
 
         private async Task<IApiResponse<string>> GetHtml(IRequest request)
         {
-            request.Headers.Add("Accept", AcceptHeaders.StableVersionHtml);
+            request.Headers.Add(HttpKeys.HtmlKeys.HeaderKeys.Accept, AcceptHeaders.StableVersionHtml);
             var response = await RunRequest(request, CancellationToken.None).ConfigureAwait(false);
             return new ApiResponse<string>(response, response.Body as string);
         }
@@ -645,7 +643,7 @@ namespace Sniper.Http
 
         internal static TwoFactorType ParseTwoFactorType(IResponse restResponse)
         {
-            if (restResponse == null || restResponse.Headers == null || !restResponse.Headers.Any()) return TwoFactorType.None;
+            if (restResponse?.Headers == null || !restResponse.Headers.Any()) return TwoFactorType.None;
             var otpHeader = restResponse.Headers.FirstOrDefault(header =>
                 header.Key.Equals("X-GitHub-OTP", StringComparison.OrdinalIgnoreCase));
             if (string.IsNullOrEmpty(otpHeader.Value)) return TwoFactorType.None;

@@ -1,3 +1,4 @@
+#if false
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -8,7 +9,7 @@ namespace Sniper.Response
     /// <summary>
     /// organization teams
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Team
     {
         public Team() { }
@@ -66,9 +67,7 @@ namespace Sniper.Response
         [Parameter(Key = "ldap_dn")]
         public string LdapDistinguishedName { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get { return string.Format(CultureInfo.InvariantCulture, "Name: {0} ", Name); }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Name: {0} ", Name);
     }
 }
+#endif

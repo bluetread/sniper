@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Sniper.Response
@@ -29,12 +30,7 @@ namespace Sniper.Response
         /// </summary>
         public IReadOnlyList<T> Items { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "TotalCount: {0}", TotalCount);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "TotalCount: {0}", TotalCount);
     }
 }
+#endif

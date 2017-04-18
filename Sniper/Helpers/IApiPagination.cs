@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Threading.Tasks;
 
 using System.Collections.Generic;
@@ -23,3 +24,4 @@ namespace Sniper
         Task<IReadOnlyList<T>> GetAllPages<T>(Func<Task<IReadOnlyPagedCollection<T>>> getFirstPage, Uri uri);
     }
 }
+#endif

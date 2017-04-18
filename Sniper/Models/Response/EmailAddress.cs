@@ -1,3 +1,4 @@
+#if false
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -7,7 +8,7 @@ namespace Sniper.Response
     /// <summary>
     /// A users email
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class EmailAddress
     {
         public EmailAddress() { }
@@ -36,13 +37,8 @@ namespace Sniper.Response
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
             Justification = "Used by DebuggerDisplayAttribute")]
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "EmailAddress: Email: {0}; Primary: {1}, Verified: {2}", Email, Primary, Verified);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture,
+            "EmailAddress: Email: {0}; Primary: {1}, Verified: {2}", Email, Primary, Verified);
     }
 }
+#endif

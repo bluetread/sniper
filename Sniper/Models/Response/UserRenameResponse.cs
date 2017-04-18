@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response
@@ -6,7 +7,7 @@ namespace Sniper.Response
     /// <summary>
     /// Represents the response information from a <see cref="UserAdministrationClient.Rename"/> operation
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class UserRenameResponse
     {
         public UserRenameResponse() { }
@@ -27,12 +28,7 @@ namespace Sniper.Response
         /// </summary>
         public string Url { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Message: {0}", Message);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Message: {0}", Message);
     }
 }
+#endif

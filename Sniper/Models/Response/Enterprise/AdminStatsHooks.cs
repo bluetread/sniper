@@ -1,10 +1,12 @@
-﻿using System;
+﻿#if false
+
+using System;
 using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response.Enterprise
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class AdminStatsHooks
     {
         public AdminStatsHooks() { }
@@ -31,12 +33,7 @@ namespace Sniper.Response.Enterprise
             get;
         }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return String.Format(CultureInfo.InvariantCulture, "TotalHooks: {0} ActiveHooks: {1} InactiveHooks: {2}", TotalHooks, ActiveHooks, InactiveHooks);
-            }
-        }
+        internal string DebuggerDisplay => String.Format(CultureInfo.InvariantCulture, "TotalHooks: {0} ActiveHooks: {1} InactiveHooks: {2}", TotalHooks, ActiveHooks, InactiveHooks);
     }
 }
+#endif

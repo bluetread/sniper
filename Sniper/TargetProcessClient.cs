@@ -1,7 +1,7 @@
 ﻿using System;
 using Sniper.ApiClients;
 using Sniper.Http;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper
 {
@@ -84,12 +84,14 @@ namespace Sniper
 
             Connection = connection;
             var apiConnection = new ApiConnection(connection);
+            Search = new SearchClient(apiConnection);
+#if false
             Authorization = new AuthorizationsClient(apiConnection);
             Miscellaneous = new MiscellaneousClient(connection);
             Oauth = new OAuthClient(connection);
             Repository = new RepositoriesClient(apiConnection);
-            Search = new SearchClient(apiConnection);
             User = new UsersClient(apiConnection);
+#endif
         }
 
         /// <summary>
@@ -112,11 +114,11 @@ namespace Sniper
         /// </remarks>
         public Credentials Credentials
         {
-            get { return Connection.Credentials; }
+            get => Connection.Credentials;
             // Note this is for convenience. We probably shouldn't allow this to be mutable.
             set
             {
-                Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Value, value);
+                Ensure.ArgumentNotNull(nameof(value), value);
                 Connection.Credentials = value;
             }
         }
@@ -125,16 +127,13 @@ namespace Sniper
         /// The base address of the GitHub API. This defaults to https://api.github.com,
         /// but you can change it if needed (to talk to a GitHub:Enterprise server for instance).
         /// </summary>
-        public Uri BaseAddress
-        {
-            get { return Connection.BaseAddress; }
-        }
+        public Uri BaseAddress => Connection.BaseAddress;
 
         /// <summary>
         /// Provides a client connection to make rest requests to HTTP endpoints.
         /// </summary>
         public IConnection Connection { get; }
-
+#if false
         /// <summary>
         /// Access GitHub's Authorization API.
         /// </summary>
@@ -174,7 +173,7 @@ namespace Sniper
         /// Refer to the API documentation for more information: https://developer.github.com/v3/users/
         /// </remarks>
         public IUsersClient User { get; }
-
+#endif
      
         /// <summary>
         /// Access GitHub's Search API.

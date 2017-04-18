@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -8,7 +9,7 @@ namespace Sniper.Request
     /// <summary>
     /// Used to request and filter a list of repositories.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class RepositoryRequest : RequestParameters
     {
         /// <summary>
@@ -28,13 +29,7 @@ namespace Sniper.Request
         /// </value>
         public RepositorySort? Sort { get; set; }
 
-        /// <summary>
-        /// Gets or sets the sort direction.
-        /// </summary>
-        /// <value>
-        /// The direction.
-        /// </value>
-        public SortDirection? Direction { get; set; }
+     
 
         /// <summary>
         /// Gets or sets the visibility property.
@@ -61,8 +56,6 @@ namespace Sniper.Request
                     propValues.Add(string.Format(CultureInfo.InvariantCulture, "Type: {0}", Type));
                 if (Sort.HasValue)
                     propValues.Add(string.Format(CultureInfo.InvariantCulture, "Sort: {0}", Sort));
-                if (Direction.HasValue)
-                    propValues.Add(string.Format(CultureInfo.InvariantCulture, "Direction: {0}", Direction));
                 if (Visibility.HasValue)
                     propValues.Add(string.Format(CultureInfo.InvariantCulture, "Visibility: {0}", Visibility));
                 if (Affiliation.HasValue)
@@ -199,3 +192,4 @@ namespace Sniper.Request
         All
     }
 }
+#endif

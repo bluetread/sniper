@@ -1,3 +1,4 @@
+#if false
 using System.Diagnostics.CodeAnalysis;
 
 namespace Sniper.Request
@@ -24,3 +25,4 @@ namespace Sniper.Request
         Pull
     }
 }
+#endif

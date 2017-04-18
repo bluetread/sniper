@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿#if false
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Sniper.Request;
 using Sniper.Response;
@@ -53,3 +54,4 @@ namespace Sniper
         IUserAdministrationClient Administration { get; }
     }
 }
+#endif

@@ -1,10 +1,11 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response.Enterprise
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class AdminStatsMilestones
     {
         public AdminStatsMilestones() { }
@@ -31,12 +32,7 @@ namespace Sniper.Response.Enterprise
             get;
         }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return String.Format(CultureInfo.InvariantCulture, "TotalMilestones: {0} OpenMilestones: {1} ClosedMilestones: {2}", TotalMilestones, OpenMilestones, ClosedMilestones);
-            }
-        }
+        internal string DebuggerDisplay => String.Format(CultureInfo.InvariantCulture, "TotalMilestones: {0} OpenMilestones: {1} ClosedMilestones: {2}", TotalMilestones, OpenMilestones, ClosedMilestones);
     }
 }
+#endif

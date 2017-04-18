@@ -1,10 +1,11 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response.Enterprise
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class LicenseInfo
     {
         public LicenseInfo() { }
@@ -49,12 +50,7 @@ namespace Sniper.Response.Enterprise
             get;
         }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return String.Format(CultureInfo.InvariantCulture, "Seats: {0} SeatsUsed: {1} DaysUntilExpiration: {2}", Seats, SeatsUsed, DaysUntilExpiration);
-            }
-        }
+        internal string DebuggerDisplay => String.Format(CultureInfo.InvariantCulture, "Seats: {0} SeatsUsed: {1} DaysUntilExpiration: {2}", Seats, SeatsUsed, DaysUntilExpiration);
     }
 }
+#endif

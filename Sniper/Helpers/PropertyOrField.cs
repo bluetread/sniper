@@ -77,10 +77,7 @@ namespace Sniper
             throw new InvalidOperationException("Property and Field cannot both be null");
         }
 
-        public string JsonFieldName
-        {
-            get { return MemberInfo.GetJsonFieldName(); }
-        }
+        public string JsonFieldName => MemberInfo.GetJsonFieldName();
 
         public ReflectionUtils.GetDelegate GetDelegate
         {
@@ -164,20 +161,11 @@ namespace Sniper
             }
         }
 
-        public bool CanDeserialize
-        {
-            get
-            {
-                return (IsPublic || HasParameterAttribute)
-                    && !IsStatic
-                    && CanWrite
-                    && (_fieldInfo == null || !_fieldInfo.IsInitOnly);
-            }
-        }
+        public bool CanDeserialize => (IsPublic || HasParameterAttribute)
+                                      && !IsStatic
+                                      && CanWrite
+                                      && (_fieldInfo == null || !_fieldInfo.IsInitOnly);
 
-        public bool CanSerialize
-        {
-            get { return IsPublic && CanRead && !IsStatic; }
-        }
+        public bool CanSerialize => IsPublic && CanRead && !IsStatic;
     }
 }

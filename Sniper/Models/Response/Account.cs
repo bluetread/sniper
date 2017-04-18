@@ -1,3 +1,4 @@
+#if false
 using System;
 
 namespace Sniper.Response
@@ -9,28 +10,20 @@ namespace Sniper.Response
     {
         protected Account() { }
 
-        protected Account(string avatarUrl, string bio, string blog, int collaborators, string company, DateTimeOffset createdAt, int diskUsage, string email, int followers, int following, bool? hireable, string htmlUrl, int totalPrivateRepos, int id, string location, string login, string name, int ownedPrivateRepos, Plan plan, int publicRepos, AccountType type, string url)
+        protected Account(string avatarUrl, string bio, string blog, string company, DateTimeOffset createdAt, int diskUsage, string email, string htmlUrl, int id, string location, string login, string name, AccountType type, string url)
         {
             AvatarUrl = avatarUrl;
             Bio = bio;
             Blog = blog;
-            Collaborators = collaborators;
             Company = company;
             CreatedAt = createdAt;
             DiskUsage = diskUsage;
             Email = email;
-            Followers = followers;
-            Following = following;
-            Hireable = hireable;
             HtmlUrl = htmlUrl;
-            TotalPrivateRepos = totalPrivateRepos;
             Id = id;
             Location = location;
             Login = login;
             Name = name;
-            OwnedPrivateRepos = ownedPrivateRepos;
-            Plan = plan;
-            PublicRepos = publicRepos;
             Type = type;
             Url = url;
         }
@@ -76,22 +69,6 @@ namespace Sniper.Response
         public string Email { get; protected set; }
 
         /// <summary>
-        /// Number of follwers the account has.
-        /// </summary>
-        public int Followers { get; protected set; }
-
-        /// <summary>
-        /// Number of other users the account is following.
-        /// </summary>
-        public int Following { get; protected set; }
-
-        /// <summary>
-        /// Indicates whether the account is currently hireable.
-        /// </summary>
-        /// <value>True if the account is hirable; otherwise, false.</value>
-        public bool? Hireable { get; protected set; }
-
-        /// <summary>
         /// The HTML URL for the account on github.com (or GitHub Enterprise).
         /// </summary>
         public string HtmlUrl { get; protected set; }
@@ -128,20 +105,7 @@ namespace Sniper.Response
         /// </summary>
         public int OwnedPrivateRepos { get; protected set; }
 
-        /// <summary>
-        /// Plan the account pays for.
-        /// </summary>
-        public Plan Plan { get; protected set; }
-
-      /// <summary>
-        /// Number of public repos the account owns.
-        /// </summary>
-        public int PublicRepos { get; protected set; }
-
-        /// <summary>
-        /// Total number of private repos the account owns.
-        /// </summary>
-        public int TotalPrivateRepos { get; protected set; }
+    
 
         /// <summary>
         /// The account's API URL.
@@ -149,3 +113,4 @@ namespace Sniper.Response
         public string Url { get; protected set; }
     }
 }
+#endif

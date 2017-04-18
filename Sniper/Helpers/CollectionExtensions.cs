@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper
 {
@@ -9,7 +9,7 @@ namespace Sniper
     {
         public static TValue SafeGet<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Dictionary, dictionary);
+            Ensure.ArgumentNotNull(nameof(dictionary), dictionary);
             
             TValue value;
             return dictionary.TryGetValue(key, out value) ? value : default(TValue);
@@ -17,18 +17,12 @@ namespace Sniper
 
         public static IList<string> Clone(this IReadOnlyList<string> input)
         {
-            if (input == null)
-                return null;
-
-            return input.Select(item => new string(item.ToCharArray())).ToList();
+            return input?.Select(item => new string(item.ToCharArray())).ToList();
         }
 
         public static IDictionary<string, Uri> Clone(this IReadOnlyDictionary<string, Uri> input)
         {
-            if (input == null)
-                return null;
-
-            return input.ToDictionary(item => new string(item.Key.ToCharArray()), item => new Uri(item.Value.ToString()));
+            return input?.ToDictionary(item => new string(item.Key.ToCharArray()), item => new Uri(item.Value.ToString()));
         }
     }
 }

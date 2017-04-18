@@ -1,9 +1,10 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Request
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class RepositoryPermissionRequest
     {
         /// <summary>
@@ -19,12 +20,7 @@ namespace Sniper.Request
         /// </summary>        
         public Permission Permission { get; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Permission: {0}", Permission);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Permission: {0}", Permission);
     }
 }
+#endif

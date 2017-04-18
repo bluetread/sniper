@@ -1,15 +1,16 @@
+#if false
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper.Response
 {
     /// <summary>
     /// Represents lines added and deleted at a given point in time
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class AdditionsAndDeletions
     {
         public AdditionsAndDeletions() { }
@@ -28,7 +29,7 @@ namespace Sniper.Response
         /// <exception cref="ArgumentException">If the list of data points is not 3 elements</exception>
         public AdditionsAndDeletions(IList<long> additionsAndDeletions)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.AdditionsAndDeletions, additionsAndDeletions);
+            Ensure.ArgumentNotNull(nameof(additionsAndDeletions), additionsAndDeletions);
 
             if (additionsAndDeletions.Count != 3)
             {
@@ -54,13 +55,8 @@ namespace Sniper.Response
         /// </summary>
         public int Deletions { get; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "{0}: Additions: {1} Deletions: {2}", Timestamp.ToString("d", CultureInfo.InvariantCulture), Additions, Deletions);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture,
+            "{0}: Additions: {1} Deletions: {2}", Timestamp.ToString("d", CultureInfo.InvariantCulture), Additions, Deletions);
     }
 }
+#endif

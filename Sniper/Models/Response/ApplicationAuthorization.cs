@@ -1,3 +1,4 @@
+#if false
 using System.Diagnostics;
 
 namespace Sniper.Response
@@ -5,7 +6,7 @@ namespace Sniper.Response
     /// <summary>
     /// Represents an oauth access given to a particular application.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class ApplicationAuthorization : Authorization
     {
         // TODO: I'd love to not need this
@@ -29,3 +30,4 @@ namespace Sniper.Response
         public string Token { get; }
     }
 }
+#endif

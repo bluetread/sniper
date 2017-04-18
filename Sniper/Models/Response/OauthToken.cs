@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class OauthToken
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
+    public class OAuthToken
     {
-        public OauthToken() { }
+        public OAuthToken() { }
 
-        public OauthToken(string tokenType, string accessToken, IReadOnlyList<string> scope)
+        public OAuthToken(string tokenType, string accessToken, IReadOnlyList<string> scope)
         {
             TokenType = tokenType;
             AccessToken = accessToken;
@@ -31,15 +32,10 @@ namespace Sniper.Response
         /// </summary>
         public IReadOnlyList<string> Scope { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "TokenType: {0}, AccessToken: {1}, Scopes: {2}",
-                    TokenType,
-                    AccessToken,
-                    Scope);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "TokenType: {0}, AccessToken: {1}, Scopes: {2}",
+            TokenType,
+            AccessToken,
+            Scope);
     }
 }
+#endif

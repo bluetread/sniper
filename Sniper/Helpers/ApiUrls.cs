@@ -1,5 +1,5 @@
 ﻿using System;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper
 {
@@ -1332,10 +1332,10 @@ namespace Sniper
         /// <returns></returns>
         public static Uri RepoCompare(string owner, string name, string @base, string head)
         {
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Base, @base);
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Head, head);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(owner), owner);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(name), name);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(@base), @base);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(head), head);
 
             var encodedBase = @base.UriEncode();
             var encodedHead = head.UriEncode();

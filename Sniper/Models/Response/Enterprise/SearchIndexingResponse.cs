@@ -1,11 +1,12 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response.Enterprise
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class SearchIndexingResponse
     {
         public SearchIndexingResponse() { }
@@ -20,12 +21,7 @@ namespace Sniper.Response.Enterprise
             get;
         }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return String.Format(CultureInfo.InvariantCulture, "Message: {0}", string.Join("\r\n", Message));
-            }
-        }
+        internal string DebuggerDisplay => String.Format(CultureInfo.InvariantCulture, "Message: {0}", string.Join("\r\n", Message));
     }
 }
+#endif

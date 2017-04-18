@@ -1,3 +1,4 @@
+#if false
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -7,7 +8,7 @@ namespace Sniper.Request
     /// <summary>
     /// Used to create a new authorization.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class NewAuthorization
     {
         // TODO: I'd love to not need this
@@ -62,12 +63,7 @@ namespace Sniper.Request
         /// </summary>
         public string NoteUrl { get; set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Note: {0}", Note);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Note: {0}", Note);
     }
 }
+#endif

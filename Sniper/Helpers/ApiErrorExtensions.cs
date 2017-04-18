@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿#if false
+using System.Linq;
 using Sniper.Response;
 
 namespace Sniper
@@ -14,3 +15,4 @@ namespace Sniper
         }
     }
 }
+#endif

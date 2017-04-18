@@ -1,4 +1,5 @@
-﻿namespace Sniper.Response
+﻿#if false
+namespace Sniper.Response
 {
     public enum TeamMembership
     {
@@ -7,3 +8,4 @@
         Active = 2
     }
 }
+#endif

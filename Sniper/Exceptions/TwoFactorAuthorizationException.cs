@@ -18,24 +18,14 @@ namespace Sniper
         Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
     public abstract class TwoFactorAuthorizationException : AuthorizationException
     {
-        /// <summary>
-        /// Constructs an instance of TwoFactorRequiredException.
-        /// </summary>
-        /// <param name="twoFactorType">Expected 2FA response type</param>
-        /// <param name="innerException">The inner exception</param>
-        protected TwoFactorAuthorizationException(TwoFactorType twoFactorType, Exception innerException)
-            : base(HttpStatusCode.Unauthorized, innerException)
-        {
-            TwoFactorType = twoFactorType;
-        }
+        protected TwoFactorAuthorizationException() { }
 
         /// <summary>
         /// Constructs an instance of TwoFactorRequiredException.
         /// </summary>
         /// <param name="response">The HTTP payload from the server</param>
         /// <param name="twoFactorType">Expected 2FA response type</param>
-        protected TwoFactorAuthorizationException(IResponse response, TwoFactorType twoFactorType)
-            : base(response)
+        protected TwoFactorAuthorizationException(IResponse response, TwoFactorType twoFactorType) : base(response)
         {
             Debug.Assert(response != null && response.StatusCode == HttpStatusCode.Unauthorized,
                 "TwoFactorRequiredException status code should be 401");
@@ -63,33 +53,12 @@ namespace Sniper
         /// </summary>
         public TwoFactorType TwoFactorType { get; }
 
-
-        /// <summary>
-        /// Constructs an instance of TwoFactorRequiredException.
-        /// </summary>
-        /// <param name="info">
-        /// The <see cref="SerializationInfo"/> that holds the
-        /// serialized object data about the exception being thrown.
-        /// </param>
-        /// <param name="context">
-        /// The <see cref="StreamingContext"/> that contains
-        /// contextual information about the source or destination.
-        /// </param>
-        protected TwoFactorAuthorizationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-            if (info == null) return;
-            TwoFactorType = (TwoFactorType)info.GetInt32("TwoFactorType");
-        }
-
         [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
             info.AddValue("TwoFactorType", TwoFactorType);
         }
-
-
     }
 
     /// <summary>

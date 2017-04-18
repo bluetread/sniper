@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
@@ -9,7 +10,7 @@ namespace Sniper.Request
     /// <summary>
     /// Used to initiate an OAuth2 authentication flow from 3rd party web sites.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class OAuthLoginRequest : RequestParameters
     {
         /// <summary>
@@ -60,15 +61,10 @@ namespace Sniper.Request
         [Parameter(Key = "state")]
         public string State { get; set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "ClientId: {0}, RedirectUri: {1}, Scopes: {2}",
-                    ClientId,
-                    RedirectUri,
-                    Scopes);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "ClientId: {0}, RedirectUri: {1}, Scopes: {2}",
+            ClientId,
+            RedirectUri,
+            Scopes);
     }
 }
+#endif

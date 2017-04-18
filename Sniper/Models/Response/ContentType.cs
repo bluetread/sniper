@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿#if false
+using System.Diagnostics.CodeAnalysis;
 
 namespace Sniper.Response
 {
@@ -14,3 +15,4 @@ namespace Sniper.Response
         Submodule
     }
 }
+#endif

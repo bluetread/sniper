@@ -1,10 +1,11 @@
+#if false
 using System;
 using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Repository
     {
         public Repository() { }
@@ -123,13 +124,8 @@ namespace Sniper.Response
 
         public long Size { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "Repository: Id: {0} Owner: {1}, Name: {2}", Id, Owner, Name);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture,
+            "Repository: Id: {0} Owner: {1}, Name: {2}", Id, Owner, Name);
     }
 }
+#endif

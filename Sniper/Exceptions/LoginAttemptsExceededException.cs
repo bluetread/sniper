@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.Serialization;
 using Sniper.Http;
 
 namespace Sniper
@@ -34,27 +33,9 @@ namespace Sniper
         {
         }
 
-        public override string Message
-        {
-            get { return ApiErrorMessageSafe ?? "Maximum number of login attempts exceeded"; }
-        }
+        //public override string Message => ApiErrorMessageSafe ?? "Maximum number of login attempts exceeded";
 
-
-        /// <summary>
-        /// Constructs an instance of LoginAttemptsExceededException
-        /// </summary>
-        /// <param name="info">
-        /// The <see cref="SerializationInfo"/> that holds the
-        /// serialized object data about the exception being thrown.
-        /// </param>
-        /// <param name="context">
-        /// The <see cref="StreamingContext"/> that contains
-        /// contextual information about the source or destination.
-        /// </param>
-        protected LoginAttemptsExceededException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+   
 
     }
 }

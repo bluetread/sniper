@@ -1,10 +1,11 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response.Enterprise
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class AdminStatsRepos
     {
         public AdminStatsRepos() { }
@@ -49,12 +50,7 @@ namespace Sniper.Response.Enterprise
             get;
         }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return String.Format(CultureInfo.InvariantCulture, "TotalRepos: {0} RootRepos: {1} ForkRepos: {2} OrgRepos: {3} TotalPushes: {4} TotalWikis: {5}", TotalRepos, RootRepos, ForkRepos, OrgRepos, TotalPushes, TotalWikis);
-            }
-        }
+        internal string DebuggerDisplay => String.Format(CultureInfo.InvariantCulture, "TotalRepos: {0} RootRepos: {1} ForkRepos: {2} OrgRepos: {3} TotalPushes: {4} TotalWikis: {5}", TotalRepos, RootRepos, ForkRepos, OrgRepos, TotalPushes, TotalWikis);
     }
 }
+#endif

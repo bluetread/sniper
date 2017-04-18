@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 
@@ -10,7 +11,7 @@ namespace Sniper.Request
     /// <remarks>
     /// API: https://developer.github.com/v3/git/commits/#create-a-commit
     /// </remarks>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class AssigneesUpdate
     {
         public AssigneesUpdate(IReadOnlyList<string> assignees)
@@ -20,12 +21,7 @@ namespace Sniper.Request
 
         public IReadOnlyList<string> Assignees { get; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Assignees: {0}", Assignees);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Assignees: {0}", Assignees);
     }
 }
+#endif

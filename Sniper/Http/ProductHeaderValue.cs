@@ -39,18 +39,12 @@
         /// <summary>
         /// The name of the product that's using Sniper
         /// </summary>
-        public string Name
-        {
-            get { return _productHeaderValue.Name; }
-        }
+        public string Name => _productHeaderValue.Name;
 
         /// <summary>
         /// The version of the product.
         /// </summary>
-        public string Version
-        {
-            get { return _productHeaderValue.Version; }
-        }
+        public string Version => _productHeaderValue.Version;
 
         public override bool Equals(object obj)
         {

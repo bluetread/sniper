@@ -1,10 +1,11 @@
+#if false
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Author
     {
         public Author() { }
@@ -59,13 +60,8 @@ namespace Sniper.Response
 
         public bool SiteAdmin { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "Author: Id: {0} Login: {1}", Id, Login);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture,
+            "Author: Id: {0} Login: {1}", Id, Login);
     }
 }
+#endif

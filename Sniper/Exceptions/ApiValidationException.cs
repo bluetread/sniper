@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
-using System.Runtime.Serialization;
 using Sniper.Http;
 
 namespace Sniper
@@ -17,21 +16,22 @@ namespace Sniper
         Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
     public class ApiValidationException : ApiException
     {
+
+        public ApiValidationException() {}
+
+#if false
         /// <summary>
         /// Constructs an instance of ApiValidationException
         /// </summary>
         public ApiValidationException() : base((HttpStatusCode)422, null)
         {
         }
-
+#endif
         /// <summary>
         /// Constructs an instance of ApiValidationException
         /// </summary>
         /// <param name="response">The HTTP payload from the server</param>
-        public ApiValidationException(IResponse response)
-            : this(response, null)
-        {
-        }
+        public ApiValidationException(IResponse response) : this(response, null) {}
 
         /// <summary>
         /// Constructs an instance of ApiValidationException
@@ -44,37 +44,17 @@ namespace Sniper
             Debug.Assert(response != null && response.StatusCode == (HttpStatusCode)422,
                 "ApiValidationException created with wrong status code");
         }
-
+#if false
         /// <summary>
         /// Constructs an instance of ApiValidationException
         /// </summary>
         /// <param name="innerException">The inner exception</param>
-        protected ApiValidationException(ApiException innerException)
-            : base(innerException)
+        protected ApiValidationException(ApiException innerException) : base(innerException)
         {
         }
+#endif
+        //public override string Message => ApiErrorMessageSafe ?? "Validation Failed";
 
-        public override string Message
-        {
-            get { return ApiErrorMessageSafe ?? "Validation Failed"; }
-        }
-
-
-        /// <summary>
-        /// Constructs an instance of ApiValidationException
-        /// </summary>
-        /// <param name="info">
-        /// The <see cref="SerializationInfo"/> that holds the
-        /// serialized object data about the exception being thrown.
-        /// </param>
-        /// <param name="context">
-        /// The <see cref="StreamingContext"/> that contains
-        /// contextual information about the source or destination.
-        /// </param>
-        protected ApiValidationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
 
     }
 }

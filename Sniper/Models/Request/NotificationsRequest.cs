@@ -1,3 +1,4 @@
+#if false
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -7,7 +8,7 @@ namespace Sniper.Request
     /// <summary>
     /// Specifies the parameters to filter notifications by
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class NotificationsRequest : RequestParameters
     {
         /// <summary>
@@ -36,12 +37,7 @@ namespace Sniper.Request
         /// </value>
         public DateTimeOffset? Before { get; set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "All: {0}, Participating: {1}, Since: {2}", All, Participating, Since);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "All: {0}, Participating: {1}, Since: {2}", All, Participating, Since);
     }
 }
+#endif

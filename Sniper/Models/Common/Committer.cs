@@ -8,7 +8,7 @@ namespace Sniper.Common
     /// Represents the author or committer to a Git commit. This is the information stored in Git and should not be
     /// confused with GitHub account information.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Committer
     {
         /// <summary>
@@ -53,9 +53,6 @@ namespace Sniper.Common
         /// </value>
         public DateTimeOffset Date { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get { return string.Format(CultureInfo.InvariantCulture, "Name: {0} Email: {1} Date: {2}", Name, Email, Date); }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Name: {0} Email: {1} Date: {2}", Name, Email, Date);
     }
 }

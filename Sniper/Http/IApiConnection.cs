@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
-using Sniper.Request;
-
-namespace Sniper.Http
+﻿namespace Sniper.Http
 {
     /// <summary>
     /// A connection for making API requests against URI endpoints.
@@ -18,7 +10,7 @@ namespace Sniper.Http
         /// The underlying connection.
         /// </summary>
         IConnection Connection { get; }
-
+#if false
         /// <summary>
         /// Gets the API resource at the specified URI.
         /// </summary>
@@ -72,15 +64,7 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         Task<IReadOnlyList<T>> GetAll<T>(Uri uri);
 
-        /// <summary>
-        /// Gets all API resources in the list at the specified URI.
-        /// </summary>
-        /// <typeparam name="T">Type of the API resource in the list.</typeparam>
-        /// <param name="uri">URI of the API resource to get</param>
-        /// <param name="options">Options for changing the API response</param>
-        /// <returns><see cref="IReadOnlyList{T}"/> of the The API resources in the list.</returns>
-        /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        Task<IReadOnlyList<T>> GetAll<T>(Uri uri, ApiOptions options);
+     
 
         /// <summary>
         /// Gets all API resources in the list at the specified URI.
@@ -108,33 +92,10 @@ namespace Sniper.Http
         /// <typeparam name="T">Type of the API resource in the list.</typeparam>
         /// <param name="uri">URI of the API resource to get</param>
         /// <param name="parameters">Parameters to add to the API request</param>
-        /// <param name="options">Options for changing the API response</param>
-        /// <returns><see cref="IReadOnlyList{T}"/> of the The API resources in the list.</returns>
-        /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        Task<IReadOnlyList<T>> GetAll<T>(Uri uri, IDictionary<string, string> parameters, ApiOptions options);
-
-        /// <summary>
-        /// Gets all API resources in the list at the specified URI.
-        /// </summary>
-        /// <typeparam name="T">Type of the API resource in the list.</typeparam>
-        /// <param name="uri">URI of the API resource to get</param>
-        /// <param name="parameters">Parameters to add to the API request</param>
         /// <param name="accepts">Accept header to use for the API request</param>
         /// <returns><see cref="IReadOnlyList{T}"/> of the The API resources in the list.</returns>
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         Task<IReadOnlyList<T>> GetAll<T>(Uri uri, IDictionary<string, string> parameters, string accepts);
-
-        /// <summary>
-        /// Gets all API resources in the list at the specified URI.
-        /// </summary>
-        /// <typeparam name="T">Type of the API resource in the list.</typeparam>
-        /// <param name="uri">URI of the API resource to get</param>
-        /// <param name="parameters">Parameters to add to the API request</param>
-        /// <param name="accepts">Accept header to use for the API request</param>
-        /// <param name="options">Options for changing the API response</param>
-        /// <returns><see cref="IReadOnlyList{T}"/> of the The API resources in the list.</returns>
-        /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        Task<IReadOnlyList<T>> GetAll<T>(Uri uri, IDictionary<string, string> parameters, string accepts, ApiOptions options);
 
         /// <summary>
         /// Creates a new API resource in the list at the specified URI.
@@ -352,5 +313,7 @@ namespace Sniper.Http
         /// <returns>The updated API resource.</returns>
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         Task<IReadOnlyList<T>> GetQueuedOperation<T>(Uri uri, CancellationToken cancellationToken);
+#endif
     }
+
 }

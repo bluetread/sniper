@@ -1,10 +1,11 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response.Enterprise
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class AdminStatsOrgs
     {
         public AdminStatsOrgs() { }
@@ -37,12 +38,7 @@ namespace Sniper.Response.Enterprise
             get;
         }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return String.Format(CultureInfo.InvariantCulture, "TotalOrgs: {0} DisabledOrgs: {1} TotalTeams: {2} TotalTeamMembers: {3}", TotalOrgs, DisabledOrgs, TotalTeams, TotalTeamMembers);
-            }
-        }
+        internal string DebuggerDisplay => String.Format(CultureInfo.InvariantCulture, "TotalOrgs: {0} DisabledOrgs: {1} TotalTeams: {2} TotalTeamMembers: {3}", TotalOrgs, DisabledOrgs, TotalTeams, TotalTeamMembers);
     }
 }
+#endif

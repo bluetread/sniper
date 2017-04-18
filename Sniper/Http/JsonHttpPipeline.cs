@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 using System.Net.Http;
-using Sniper.ToBeRemoved;
+
 using Sniper.Types;
 
 namespace Sniper.Http
@@ -21,7 +21,7 @@ namespace Sniper.Http
 
         public JsonHttpPipeline(IJsonSerializer serializer)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Serializer, serializer);
+            Ensure.ArgumentNotNull(nameof(serializer), serializer);
             
             _serializer = serializer;
         }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿#if false
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using Sniper.ApiClients;
 using Sniper.Authentication;
@@ -445,3 +446,4 @@ namespace Sniper
         }
     }
 }
+#endif

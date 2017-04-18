@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 using Sniper.ApiClients;
 using Sniper.Authentication;
-using Sniper.Paginations;
-using Sniper.Request;
-using Sniper.ToBeRemoved;
 
 namespace Sniper.Http
 {
@@ -18,28 +13,22 @@ namespace Sniper.Http
     /// </summary>
     public class ApiConnection : IApiConnection
     {
-        private readonly IApiPagination _pagination;
+        //private readonly IApiPagination _pagination;
+
+      
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiConnection"/> class.
         /// </summary>
         /// <param name="connection">A connection for making HTTP requests</param>
-        public ApiConnection(IConnection connection) : this(connection, new ApiPagination())
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ApiConnection"/> class.
-        /// </summary>
-        /// <param name="connection">A connection for making HTTP requests</param>
-        /// <param name="pagination">A paginator for paging API responses</param>
-        protected ApiConnection(IConnection connection, IApiPagination pagination)
+        ///// <param name="pagination">A paginator for paging API responses</param>
+        public ApiConnection(IConnection connection)
         {
             Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
-            Ensure.ArgumentNotNull(PaginationKeys.Pagination, pagination);
+            //Ensure.ArgumentNotNull(PaginationKeys.Pagination, pagination);
             
             Connection = connection;
-            _pagination = pagination;
+            //_pagination = pagination;
         }
 
         /// <summary>
@@ -110,96 +99,6 @@ namespace Sniper.Http
             return response.Body;
         }
 
-        /// <summary>
-        /// Gets all API resources in the list at the specified URI.
-        /// </summary>
-        /// <typeparam name="T">Type of the API resource in the list.</typeparam>
-        /// <param name="uri">URI of the API resource to get</param>
-        /// <returns><see cref="IReadOnlyList{T}"/> of the The API resources in the list.</returns>
-        /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        public Task<IReadOnlyList<T>> GetAll<T>(Uri uri)
-        {
-            return GetAll<T>(uri, ApiOptions.None);
-        }
-
-        /// <summary>
-        /// Gets all API resources in the list at the specified URI.
-        /// </summary>
-        /// <typeparam name="T">Type of the API resource in the list.</typeparam>
-        /// <param name="uri">URI of the API resource to get</param>
-        /// <param name="options">Options for changing the API response</param>
-        /// <returns><see cref="IReadOnlyList{T}"/> of the The API resources in the list.</returns>
-        /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        public Task<IReadOnlyList<T>> GetAll<T>(Uri uri, ApiOptions options)
-        {
-            return GetAll<T>(uri, null, null, options);
-        }
-
-        /// <summary>
-        /// Gets all API resources in the list at the specified URI.
-        /// </summary>
-        /// <typeparam name="T">Type of the API resource in the list.</typeparam>
-        /// <param name="uri">URI of the API resource to get</param>
-        /// <param name="parameters">Parameters to add to the API request</param>
-        /// <returns><see cref="IReadOnlyList{T}"/> of the The API resources in the list.</returns>
-        /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        public Task<IReadOnlyList<T>> GetAll<T>(Uri uri, IDictionary<string, string> parameters)
-        {
-            return GetAll<T>(uri, parameters, null, ApiOptions.None);
-        }
-
-        /// <summary>
-        /// Gets all API resources in the list at the specified URI.
-        /// </summary>
-        /// <typeparam name="T">Type of the API resource in the list.</typeparam>
-        /// <param name="uri">URI of the API resource to get</param>
-        /// <param name="accepts">Accept header to use for the API request</param>
-        /// <returns><see cref="IReadOnlyList{T}"/> of the The API resources in the list.</returns>
-        /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        public Task<IReadOnlyList<T>> GetAll<T>(Uri uri, string accepts)
-        {
-            return GetAll<T>(uri, null, accepts, ApiOptions.None);
-        }
-
-        /// <summary>
-        /// Gets all API resources in the list at the specified URI.
-        /// </summary>
-        /// <typeparam name="T">Type of the API resource in the list.</typeparam>
-        /// <param name="uri">URI of the API resource to get</param>
-        /// <param name="parameters">Parameters to add to the API request</param>
-        /// <param name="options">Options for changing the API response</param>
-        /// <returns><see cref="IReadOnlyList{T}"/> of the The API resources in the list.</returns>
-        /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        public Task<IReadOnlyList<T>> GetAll<T>(Uri uri, IDictionary<string, string> parameters, ApiOptions options)
-        {
-            return GetAll<T>(uri, parameters, null, options);
-        }
-
-        /// <summary>
-        /// Gets all API resources in the list at the specified URI.
-        /// </summary>
-        /// <typeparam name="T">Type of the API resource in the list.</typeparam>
-        /// <param name="uri">URI of the API resource to get</param>
-        /// <param name="parameters">Parameters to add to the API request</param>
-        /// <param name="accepts">Accept header to use for the API request</param>
-        /// <returns><see cref="IReadOnlyList{T}"/> of the The API resources in the list.</returns>
-        /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        public Task<IReadOnlyList<T>> GetAll<T>(Uri uri, IDictionary<string, string> parameters, string accepts)
-        {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-
-            return _pagination.GetAllPages(async () => await GetPage<T>(uri, parameters, accepts).ConfigureAwait(false), uri);
-        }
-
-        public Task<IReadOnlyList<T>> GetAll<T>(Uri uri, IDictionary<string, string> parameters, string accepts, ApiOptions options)
-        {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
-
-            parameters = Pagination.Setup(parameters, options);
-
-            return _pagination.GetAllPages(async () => await GetPage<T>(uri, parameters, accepts, options).ConfigureAwait(false), uri);
-        }
 
         /// <summary>
         /// Creates a new API resource in the list at the specified URI.
@@ -240,7 +139,7 @@ namespace Sniper.Http
         public Task<T> Post<T>(Uri uri, object data)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
 
             return Post<T>(uri, data, null, null);
         }
@@ -272,7 +171,7 @@ namespace Sniper.Http
         public async Task<T> Post<T>(Uri uri, object data, string accepts, string contentType)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
 
             var response = await Connection.Post<T>(uri, data, accepts, contentType).ConfigureAwait(false);
             return response.Body;
@@ -292,7 +191,7 @@ namespace Sniper.Http
         public async Task<T> Post<T>(Uri uri, object data, string accepts, string contentType, string twoFactorAuthenticationCode)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
             Ensure.ArgumentNotNull(AuthenticationKeys.TwoFactorAuthenticationCode, twoFactorAuthenticationCode);
 
             var response = await Connection.Post<T>(uri, data, accepts, contentType, twoFactorAuthenticationCode).ConfigureAwait(false);
@@ -303,7 +202,7 @@ namespace Sniper.Http
         public async Task<T> Post<T>(Uri uri, object data, string accepts, string contentType, TimeSpan timeout)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
 
             var response = await Connection.Post<T>(uri, data, accepts, contentType, timeout).ConfigureAwait(false);
             return response.Body;
@@ -332,7 +231,7 @@ namespace Sniper.Http
         public async Task<T> Put<T>(Uri uri, object data)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
 
             var response = await Connection.Put<T>(uri, data).ConfigureAwait(false);
 
@@ -351,7 +250,8 @@ namespace Sniper.Http
         public async Task<T> Put<T>(Uri uri, object data, string twoFactorAuthenticationCode)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
+            
             Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.TwoFactorAuthenticationCode, twoFactorAuthenticationCode);
 
             var response = await Connection.Put<T>(uri, data, twoFactorAuthenticationCode).ConfigureAwait(false);
@@ -372,7 +272,7 @@ namespace Sniper.Http
         public async Task<T> Put<T>(Uri uri, object data, string twoFactorAuthenticationCode, string accepts)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
 
             var response = await Connection.Put<T>(uri, data, twoFactorAuthenticationCode, accepts).ConfigureAwait(false);
 
@@ -416,7 +316,7 @@ namespace Sniper.Http
         public async Task<T> Patch<T>(Uri uri, object data)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
 
             var response = await Connection.Patch<T>(uri, data).ConfigureAwait(false);
 
@@ -435,7 +335,7 @@ namespace Sniper.Http
         public async Task<T> Patch<T>(Uri uri, object data, string accepts)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
             Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Accepts, accepts);
 
             var response = await Connection.Patch<T>(uri, data, accepts).ConfigureAwait(false);
@@ -477,7 +377,7 @@ namespace Sniper.Http
         public Task Delete(Uri uri, object data)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
 
             return Connection.Delete(uri, data);
         }
@@ -492,7 +392,7 @@ namespace Sniper.Http
         public Task Delete(Uri uri, object data, string accepts)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
             Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Accepts, accepts);
 
             return Connection.Delete(uri, data, accepts);
@@ -507,7 +407,7 @@ namespace Sniper.Http
         public async Task<T> Delete<T>(Uri uri, object data)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
 
             var response = await Connection.Delete<T>(uri, data).ConfigureAwait(false);
 
@@ -525,14 +425,14 @@ namespace Sniper.Http
         public async Task<T> Delete<T>(Uri uri, object data, string accepts)
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Data, data);
+            Ensure.ArgumentNotNull(nameof(data), data);
             Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Accepts, accepts);
 
             var response = await Connection.Delete<T>(uri, data, accepts).ConfigureAwait(false);
 
             return response.Body;
         }
-
+#if false
         /// <summary>
         /// Executes a GET to the API object at the specified URI. This operation is appropriate for API calls which 
         /// queue long running calculations and return a collection of a resource.
@@ -579,30 +479,6 @@ namespace Sniper.Http
                 response,
                 nextPageUri => Connection.Get<List<T>>(nextPageUri, parameters, accepts));
         }
-
-        private async Task<IReadOnlyPagedCollection<TU>> GetPage<TU>(
-            Uri uri,
-            IDictionary<string, string> parameters,
-            string accepts,
-            ApiOptions options)
-        {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-
-            var connection = Connection;
-
-            var response = await connection.Get<List<TU>>(uri, parameters, accepts).ConfigureAwait(false);
-            return new ReadOnlyPagedCollection<TU>(
-                response,
-                nextPageUri =>
-                {
-                    var shouldContinue = Pagination.ShouldContinue(
-                        nextPageUri,
-                        options);
-
-                    return shouldContinue
-                        ? connection.Get<List<TU>>(nextPageUri, parameters, accepts)
-                        : null;
-                });
-        }
+#endif
     }
 }

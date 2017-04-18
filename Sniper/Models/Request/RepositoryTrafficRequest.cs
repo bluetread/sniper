@@ -1,10 +1,11 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
 using Sniper.Response;
 
 namespace Sniper.Request
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class RepositoryTrafficRequest : RequestParameters
     {
         public RepositoryTrafficRequest() { }
@@ -16,9 +17,7 @@ namespace Sniper.Request
 
         public TrafficDayOrWeek Per { get; }
 
-        internal string DebuggerDisplay
-        {
-            get { return string.Format(CultureInfo.InvariantCulture, "Per: {0}", Per); }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Per: {0}", Per);
     }
 }
+#endif

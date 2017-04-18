@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -10,7 +11,7 @@ namespace Sniper.Request
     /// <summary>
     /// Searching Users
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class SearchUsersRequest : BaseSearchRequest
     {
         /// <summary>
@@ -99,13 +100,7 @@ namespace Sniper.Request
             return new ReadOnlyCollection<string>(parameters);
         }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Term: {0} ", Term);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Term: {0} ", Term);
     }
 
     /// <summary>
@@ -154,3 +149,4 @@ namespace Sniper.Request
         Joined
     }
 }
+#endif

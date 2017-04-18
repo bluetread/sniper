@@ -5,14 +5,14 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper.Http
 {
 
     [Serializable]
 
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class RateLimit
 
         : ISerializable
@@ -31,9 +31,9 @@ namespace Sniper.Http
 
         public RateLimit(int limit, int remaining, long reset)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Limit, limit);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Remaining, remaining);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Reset, reset);
+            Ensure.ArgumentNotNull(nameof(limit), limit);
+            Ensure.ArgumentNotNull(nameof(remaining), remaining);
+            Ensure.ArgumentNotNull(nameof(reset), reset);
 
             Limit = limit;
             Remaining = remaining;
@@ -54,7 +54,7 @@ namespace Sniper.Http
         /// The date and time at which the current rate limit window resets
         /// </summary>
         [Parameter(Key = "ignoreThisField")]
-        public DateTimeOffset Reset { get { return ResetAsUtcEpochSeconds.FromUnixTime(); } }
+        public DateTimeOffset Reset => ResetAsUtcEpochSeconds.FromUnixTime();
 
         /// <summary>
         /// The date and time at which the current rate limit window resets - in UTC epoch seconds
@@ -75,7 +75,7 @@ namespace Sniper.Http
 
         protected RateLimit(SerializationInfo info, StreamingContext context)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Info, info);
+            Ensure.ArgumentNotNull(nameof(info), info);
 
             Limit = info.GetInt32("Limit");
             Remaining = info.GetInt32("Remaining");
@@ -85,7 +85,7 @@ namespace Sniper.Http
         [SecurityCritical]
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Info, info);
+            Ensure.ArgumentNotNull(nameof(info), info);
 
             info.AddValue("Limit", Limit);
             info.AddValue("Remaining", Remaining);
@@ -93,13 +93,7 @@ namespace Sniper.Http
         }
 
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Limit {0}, Remaining {1}, Reset {2} ", Limit, Remaining, Reset);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Limit {0}, Remaining {1}, Reset {2} ", Limit, Remaining, Reset);
 
         /// <summary>
         /// Allows you to clone RateLimit

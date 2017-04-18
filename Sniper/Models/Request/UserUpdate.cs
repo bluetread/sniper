@@ -1,3 +1,4 @@
+#if false
 using System.Diagnostics;
 using System.Globalization;
 
@@ -7,7 +8,7 @@ namespace Sniper.Request
     /// Represents updatable fields on a user. Values that are null will not be sent in the request.
     /// Use string.empty if you want to clear a value.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class UserUpdate
     {
         /// <summary>
@@ -45,12 +46,7 @@ namespace Sniper.Request
         /// </summary>
         public bool? Hireable { get; set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Name: {0}", Name);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Name: {0}", Name);
     }
 }
+#endif

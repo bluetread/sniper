@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Sniper.Request;
@@ -56,3 +57,4 @@ namespace Sniper
         Task Delete(params string[] emailAddresses);
     }
 }
+#endif

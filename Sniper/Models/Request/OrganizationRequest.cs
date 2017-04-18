@@ -1,13 +1,13 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
-using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
     /// <summary>
     /// Used as part of the request to retrieve all organizations.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class OrganizationRequest : RequestParameters
     {
         /// <summary>
@@ -16,7 +16,7 @@ namespace Sniper.Request
         /// <param name="since">The integer Id of the last Organization that you've seen.</param>
         public OrganizationRequest(int since)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Since, since);
+            Ensure.ArgumentNotNull(nameof(since), since);
             
             Since = since;
         }
@@ -26,12 +26,7 @@ namespace Sniper.Request
         /// </summary>
         public long Since { get; set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Since: {0} ", Since);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Since: {0} ", Since);
     }
 }
+#endif

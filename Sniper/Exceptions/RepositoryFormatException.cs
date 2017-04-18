@@ -14,25 +14,18 @@ namespace Sniper
         Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
     public class RepositoryFormatException : Exception
     {
-        private readonly string message;
+        private readonly string _message;
 
         public RepositoryFormatException(IEnumerable<string> invalidRepositories)
         {
             var parameterList = string.Join(", ", invalidRepositories);
-            message = string.Format(
+            _message = string.Format(
                 CultureInfo.InvariantCulture,
                 "The list of repositories must be formatted as 'owner/name' - these values don't match this rule: {0}",
                 parameterList);
         }
 
-        public override string Message
-        {
-            get
-            {
-                return message;
-            }
-        }
-
+        public override string Message => _message;
 
         /// <summary>
         /// Constructs an instance of LoginAttemptsExceededException
@@ -45,11 +38,9 @@ namespace Sniper
         /// The <see cref="StreamingContext"/> that contains
         /// contextual information about the source or destination.
         /// </param>
-        protected RepositoryFormatException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
+        protected RepositoryFormatException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            if (info == null) return;
-            message = info.GetString("Message");
+            _message = info.GetString("Message");
         }
 
         [SecurityCritical]

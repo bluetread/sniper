@@ -1,9 +1,10 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class BlobReference
     {
         public BlobReference() { }
@@ -18,12 +19,7 @@ namespace Sniper.Response
         /// </summary>
         public string Sha { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Sha: {0}", Sha);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Sha: {0}", Sha);
     }
 }
+#endif

@@ -3,9 +3,6 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Sniper.Http;
-using Sniper.Request;
-
-using System.Collections.Generic;
 using Sniper.ApiClients;
 
 namespace Sniper
@@ -15,37 +12,6 @@ namespace Sniper
     /// </summary>
     public static class ApiExtensions
     {
-        /// <summary>
-        /// Gets all API resources in the list at the specified URI.
-        /// </summary>
-        /// <typeparam name="T">Type of the API resource in the list.</typeparam>
-        /// <param name="connection">The connection to use</param>
-        /// <param name="uri">URI of the API resource to get</param>
-        /// <returns><see cref="IReadOnlyList{T}"/> of the The API resources in the list.</returns>
-        /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        public static Task<IReadOnlyList<T>> GetAll<T>(this IApiConnection connection, Uri uri)
-        {
-            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-
-            return connection.GetAll<T>(uri, ApiOptions.None);
-        }
-
-        /// <summary>
-        /// Gets the HTML content of the API resource at the specified URI.
-        /// </summary>
-        /// <param name="connection">The connection to use</param>
-        /// <param name="uri">URI of the API resource to get</param>
-        /// <returns>The API resource's HTML content.</returns>
-        /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        public static Task<string> GetHtml(this IApiConnection connection, Uri uri)
-        {
-            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-
-            return connection.GetHtml(uri, null);
-        }
-
         /// <summary>
         /// Performs an asynchronous HTTP GET request that expects a <seealso cref="IResponse"/> containing HTML.
         /// </summary>
@@ -92,7 +58,7 @@ namespace Sniper
 
             return connection.Get<T>(uri, null, null, cancellationToken);
         }
-
+#if false
         /// <summary>
         /// Returns true if the API call represents a true response, or false if it represents a false response.
         /// Throws an exception if the HTTP status does not match either a true or false response.
@@ -114,5 +80,14 @@ namespace Sniper
             }
             return response.StatusCode == HttpStatusCode.NoContent;
         }
+#else
+        //TODO: This is temporary
+        public static bool IsTrue(this IResponse response)
+        {
+            Ensure.ArgumentNotNull(nameof(response), response);
+            return HttpStatusCode.NoContent == response.StatusCode;
+        }
+
+#endif
     }
 }

@@ -1,10 +1,11 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class ReactionSummary
     {
         public int TotalCount { get; protected set; }
@@ -18,21 +19,16 @@ namespace Sniper.Response
         public int Hooray { get; protected set; }
         public Uri Url { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    "TotalCount: {0} +1: {1} -1: {2} Laugh: {3} Confused: {4} Heart: {5} Hooray: {6}",
-                    TotalCount,
-                    Plus1,
-                    Minus1,
-                    Laugh,
-                    Confused,
-                    Heart,
-                    Hooray);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(
+            CultureInfo.InvariantCulture,
+            "TotalCount: {0} +1: {1} -1: {2} Laugh: {3} Confused: {4} Heart: {5} Hooray: {6}",
+            TotalCount,
+            Plus1,
+            Minus1,
+            Laugh,
+            Confused,
+            Heart,
+            Hooray);
     }
 }
+#endif

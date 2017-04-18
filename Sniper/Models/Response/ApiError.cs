@@ -1,3 +1,4 @@
+#if false
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +12,7 @@ namespace Sniper.Response
 
     [Serializable]
 
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class ApiError
     {
         public ApiError() { }
@@ -43,12 +44,7 @@ namespace Sniper.Response
         /// </summary>
         public IReadOnlyList<ApiErrorDetail> Errors { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Message: {0}", Message);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Message: {0}", Message);
     }
 }
+#endif

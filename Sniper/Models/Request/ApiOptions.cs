@@ -1,16 +1,14 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Sniper.Request
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class ApiOptions
     {
-        public static ApiOptions None
-        {
-            get { return new ApiOptions(); }
-        }
+        public static ApiOptions None => new ApiOptions();
 
         /// <summary>
         /// Specify the start page for pagination actions
@@ -59,3 +57,4 @@ namespace Sniper.Request
         }
     }
 }
+#endif

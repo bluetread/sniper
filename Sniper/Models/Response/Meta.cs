@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 
@@ -7,7 +8,7 @@ namespace Sniper.Response
     /// <summary>
     /// Response from the /meta endpoint that provides information about GitHub.com or a GitHub Enterprise instance. 
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Meta
     {
         /// <summary>
@@ -77,16 +78,11 @@ namespace Sniper.Response
         /// </summary>
         public IReadOnlyList<string> Importer { get; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(
-                    CultureInfo.InvariantCulture,
-                    "GitHubServicesSha: {0}, VerifiablePasswordAuthentication: {1} ",
-                    GitHubServicesSha,
-                    VerifiablePasswordAuthentication);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(
+            CultureInfo.InvariantCulture,
+            "GitHubServicesSha: {0}, VerifiablePasswordAuthentication: {1} ",
+            GitHubServicesSha,
+            VerifiablePasswordAuthentication);
     }
 }
+#endif

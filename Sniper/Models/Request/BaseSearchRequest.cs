@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -17,7 +17,6 @@ namespace Sniper.Request
         {
             Page = 1;
             PerPage = 100;
-            Order = SortDirection.Descending;
         }
 
         /// <summary>
@@ -26,7 +25,7 @@ namespace Sniper.Request
         /// <param name="term">The term.</param>
         protected BaseSearchRequest(string term) : this()
         {
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Term, term);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(term), term);
             Term = term;
         }
 
@@ -35,10 +34,6 @@ namespace Sniper.Request
         /// </summary>
         public string Term { get; }
 
-        /// <summary>
-        /// Optional Sort order if sort parameter is provided. One of asc or desc; the default is desc.
-        /// </summary>
-        public SortDirection Order { get; set; }
 
         /// <summary>
         /// Page of paginated results
@@ -56,3 +51,4 @@ namespace Sniper.Request
         public abstract IReadOnlyList<string> MergedQualifiers();
     }
 }
+#endif

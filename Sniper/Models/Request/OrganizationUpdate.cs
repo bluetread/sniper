@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Request
@@ -7,7 +8,7 @@ namespace Sniper.Request
     /// Represents updateable fields on an organization. Values that are null will not be sent in the request.
     /// Use string.empty to clear a value.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class OrganizationUpdate
     {
         /// <summary>
@@ -43,12 +44,7 @@ namespace Sniper.Request
         /// </value>
         public string Description { get; set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "{0}", Name);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "{0}", Name);
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -6,7 +7,7 @@ using System.Globalization;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class RepositoryTrafficCloneSummary
     {
         public RepositoryTrafficCloneSummary() { }
@@ -26,13 +27,10 @@ namespace Sniper.Response
 
         public IReadOnlyList<RepositoryTrafficClone> Clones { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get { return string.Format(CultureInfo.InvariantCulture, "Number: {0} Uniques: {1}", Count, Uniques); }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Number: {0} Uniques: {1}", Count, Uniques);
     }
 
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class RepositoryTrafficClone
     {
         public RepositoryTrafficClone() { }
@@ -52,10 +50,7 @@ namespace Sniper.Response
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
         public int Uniques { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get { return string.Format(CultureInfo.InvariantCulture, "Number: {0} Uniques: {1}", Count, Uniques); }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Number: {0} Uniques: {1}", Count, Uniques);
     }
 
     public enum TrafficDayOrWeek
@@ -64,3 +59,4 @@ namespace Sniper.Response
         Week
     }
 }
+#endif

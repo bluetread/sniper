@@ -1,4 +1,5 @@
-﻿namespace Sniper.Request
+﻿#if false
+namespace Sniper.Request
 {
     /// <summary>
     /// Wraps a string for the body of a request.
@@ -23,3 +24,4 @@
         public string Body { get; }
     }
 }
+#endif

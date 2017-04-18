@@ -1,8 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿#if false
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using Sniper.Request;
-using Sniper.Response;
 
 namespace Sniper
 {
@@ -288,3 +287,4 @@ namespace Sniper
         Task Delete(int id, string twoFactorAuthenticationCode);
     }
 }
+#endif

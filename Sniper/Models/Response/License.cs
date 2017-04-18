@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -10,7 +11,7 @@ using Sniper.Permissions;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class License : LicenseMetadata
     {
         public License(string key, string name, Uri url, Uri htmlUrl, bool featured, string description, string category,
@@ -85,12 +86,7 @@ namespace Sniper.Response
         /// </summary>
         public string Body { get; protected set; }
 
-        internal override string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "{0} Category: {1}", base.DebuggerDisplay, Category);
-            }
-        }
+        internal override string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "{0} Category: {1}", base.DebuggerDisplay, Category);
     }
 }
+#endif

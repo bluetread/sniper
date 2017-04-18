@@ -1,13 +1,13 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
-using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
     /// <summary>
     /// Information about an author or committer.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Signature
     {
         /// <summary>
@@ -17,8 +17,8 @@ namespace Sniper.Request
         /// <param name="email"></param>
         public Signature(string name, string email)
         {
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Email, email);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(name), name);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(email), email);
 
             Name = name;
             Email = email;
@@ -34,12 +34,7 @@ namespace Sniper.Request
         /// </summary>
         public string Email { get; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Name: {0} Email: {1}", Name, Email);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Name: {0} Email: {1}", Name, Email);
     }
 }
+#endif

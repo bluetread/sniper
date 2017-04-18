@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿#if false
+using System.Threading.Tasks;
 using Sniper.Http;
 using Sniper.Request;
 using Sniper.Response;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper
 {
@@ -31,9 +32,9 @@ namespace Sniper
         /// <param name="reference">The SHA of the blob</param>
         public Task<Blob> Get(string owner, string name, string reference)
         {
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Reference, reference);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(owner), owner);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(name), name);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(reference), reference);
 
             return ApiConnection.Get<Blob>(ApiUrls.Blob(owner, name, reference));
         }
@@ -48,7 +49,7 @@ namespace Sniper
         /// <param name="reference">The SHA of the blob</param>
         public Task<Blob> Get(long repositoryId, string reference)
         {
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Reference, reference);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(reference), reference);
 
             return ApiConnection.Get<Blob>(ApiUrls.Blob(repositoryId, reference));
         }
@@ -64,9 +65,9 @@ namespace Sniper
         /// <param name="newBlob">The new Blob</param>
         public Task<BlobReference> Create(string owner, string name, NewBlob newBlob)
         {
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.NewBlob, newBlob);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(owner), owner);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(name), name);
+            Ensure.ArgumentNotNull(nameof(newBlob), newBlob);
 
             return ApiConnection.Post<BlobReference>(ApiUrls.Blobs(owner, name), newBlob);
         }
@@ -81,9 +82,10 @@ namespace Sniper
         /// <param name="newBlob">The new Blob</param>
         public Task<BlobReference> Create(long repositoryId, NewBlob newBlob)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.NewBlob, newBlob);
+            Ensure.ArgumentNotNull(nameof(newBlob), newBlob);
 
             return ApiConnection.Post<BlobReference>(ApiUrls.Blobs(repositoryId), newBlob);
         }
     }
 }
+#endif

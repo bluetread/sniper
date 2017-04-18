@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Threading.Tasks;
 using Sniper.Request;
 using Sniper.Response;
@@ -29,6 +30,7 @@ namespace Sniper
         /// </remarks>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<OauthToken> CreateAccessToken(OAuthTokenRequest request);
+        Task<OAuthToken> CreateAccessToken(OAuthTokenRequest request);
     }
 }
+#endif

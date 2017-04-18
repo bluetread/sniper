@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿#if false
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Sniper.Request;
 using Sniper.Response;
 
 namespace Sniper
@@ -22,13 +22,6 @@ namespace Sniper
         /// <returns>The rendered Markdown.</returns>
         Task<string> RenderRawMarkdown(string markdown);
 
-        /// <summary>
-        /// Gets the rendered Markdown for an arbitrary markdown document.
-        /// </summary>
-        /// <param name="markdown">An arbitrary Markdown document</param>
-        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
-        /// <returns>The rendered Markdown.</returns>
-        Task<string> RenderArbitraryMarkdown(NewArbitraryMarkdown markdown);
 
         /// <summary>
         /// Returns a list of the licenses shown in the license picker on GitHub.com. This is not a comprehensive
@@ -63,3 +56,4 @@ namespace Sniper
         Task<Meta> GetMetadata();
     }
 }
+#endif

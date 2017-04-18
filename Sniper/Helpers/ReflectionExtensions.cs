@@ -13,7 +13,7 @@ namespace Sniper
             var memberName = memberInfo.Name;
             var paramAttr = memberInfo.GetCustomAttribute<ParameterAttribute>();
 
-            if (paramAttr != null && !string.IsNullOrEmpty(paramAttr.Key))
+            if (!string.IsNullOrEmpty(paramAttr?.Key))
             {
                 memberName = paramAttr.Key;
             }

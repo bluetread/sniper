@@ -1,7 +1,8 @@
-﻿using System.Diagnostics;
+﻿#if false
+
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -9,7 +10,7 @@ namespace Sniper.Request
     /// Represents updatable fields on a repository. Values that are null will not be sent in the request.
     /// Use string.empty if you want to clear a value.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class RepositoryUpdate
     {
 
@@ -19,7 +20,7 @@ namespace Sniper.Request
         /// <param name="name">The name of the repository. This is the only required parameter.</param>
         public RepositoryUpdate(string name)
         {
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(name), name);
 
             Name = name;
         }
@@ -80,9 +81,7 @@ namespace Sniper.Request
         public bool? AllowMergeCommit { get; set; }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal string DebuggerDisplay
-        {
-            get { return string.Format(CultureInfo.CurrentCulture, "RepositoryUpdate: Name: {0}", Name); }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.CurrentCulture, "RepositoryUpdate: Name: {0}", Name);
     }
 }
+#endif

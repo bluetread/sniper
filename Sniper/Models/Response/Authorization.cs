@@ -1,3 +1,4 @@
+#if false
 using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -8,13 +9,13 @@ namespace Sniper.Response
     /// <summary>
     /// Represents an oauth access given to a particular application.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Authorization
     {
         // TODO: I'd love to not need this
         public Authorization() { }
 
-        public Authorization(int id, string url, OauthApplication application, string note, string noteUrl, DateTimeOffset createdAt, DateTimeOffset updateAt, string[] scopes)
+        public Authorization(int id, string url, OAuthApplication application, string note, string noteUrl, DateTimeOffset createdAt, DateTimeOffset updateAt, string[] scopes)
         {
             Id = id;
             Url = url;
@@ -43,7 +44,7 @@ namespace Sniper.Response
         /// <summary>
         /// The <see cref="Application"/> that created this <see cref="Authorization"/>.
         /// </summary>
-        public OauthApplication Application { get; protected set; }
+        public OAuthApplication Application { get; protected set; }
 
         /// <summary>
         /// The last eight characters of the user's token
@@ -87,17 +88,9 @@ namespace Sniper.Response
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "Special type of model object that only updates none-null fields.")]
         public string[] Scopes { get; protected set; }
 
-        public string ScopesDelimited
-        {
-            get { return string.Join(",", Scopes); }
-        }
+        public string ScopesDelimited => string.Join(",", Scopes);
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Id: {0} CreatedAt: {1} ", Id, CreatedAt);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Id: {0} CreatedAt: {1} ", Id, CreatedAt);
     }
 }
+#endif

@@ -1,3 +1,4 @@
+#if false
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Sniper.Request;
@@ -14,29 +15,6 @@ namespace Sniper
     /// </remarks>
     public interface IRepositoriesClient
     {
-
-        /// <summary>
-        /// Creates a new repository for the current user.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/#create">API documentation</a> for more information.
-        /// </remarks>
-        /// <param name="newRepository">A <see cref="NewRepository"/> instance describing the new repository to create</param>
-        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
-        /// <returns>A <see cref="Repository"/> instance for the created repository.</returns>
-        Task<Repository> Create(NewRepository newRepository);
-
-        /// <summary>
-        /// Creates a new repository in the specified organization.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/#create">API documentation</a> for more information.
-        /// </remarks>
-        /// <param name="organizationLogin">Login of the organization in which to create the repository</param>
-        /// <param name="newRepository">A <see cref="NewRepository"/> instance describing the new repository to create</param>
-        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
-        /// <returns>A <see cref="Repository"/> instance for the created repository</returns>
-        Task<Repository> Create(string organizationLogin, NewRepository newRepository);
 
         /// <summary>
         /// Deletes the specified repository.
@@ -254,3 +232,4 @@ namespace Sniper
     
     }
 }
+#endif

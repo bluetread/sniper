@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response
@@ -6,12 +7,12 @@ namespace Sniper.Response
     /// <summary>
     /// Represents an oauth application.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class OauthApplication
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
+    public class OAuthApplication
     {
-        public OauthApplication() { }
+        public OAuthApplication() { }
 
-        public OauthApplication(string name, string url)
+        public OAuthApplication(string name, string url)
         {
             Name = name;
             Url = url;
@@ -27,9 +28,7 @@ namespace Sniper.Response
         /// </summary>
         public string Url { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get { return string.Format(CultureInfo.InvariantCulture, "Name: {0}", Name); }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Name: {0}", Name);
     }
 }
+#endif

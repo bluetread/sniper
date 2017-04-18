@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿#if false
+using System.Threading.Tasks;
 using Sniper.Request;
 using Sniper.Response;
 
@@ -57,3 +58,4 @@ namespace Sniper
         Task<BlobReference> Create(long repositoryId, NewBlob newBlob);
     }
 }
+#endif

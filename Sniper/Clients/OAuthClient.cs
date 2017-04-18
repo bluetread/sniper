@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Sniper.ApiClients;
@@ -59,7 +60,7 @@ namespace Sniper
         /// </remarks>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<OauthToken> CreateAccessToken(OAuthTokenRequest request)
+        public async Task<OAuthToken> CreateAccessToken(OAuthTokenRequest request)
         {
             Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
 
@@ -67,8 +68,9 @@ namespace Sniper
 
             var body = new FormUrlEncodedContent(request.ToParametersDictionary());
 
-            var response = await _connection.Post<OauthToken>(endPoint, body, MimeTypes.ApplicationJson, null, _hostAddress).ConfigureAwait(false);
+            var response = await _connection.Post<OAuthToken>(endPoint, body, MimeTypes.ApplicationJson, null, _hostAddress).ConfigureAwait(false);
             return response.Body;
         }
     }
 }
+#endif

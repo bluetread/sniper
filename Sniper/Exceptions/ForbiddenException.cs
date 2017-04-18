@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
-using System.Runtime.Serialization;
 using Sniper.Http;
 
 namespace Sniper
@@ -21,9 +20,7 @@ namespace Sniper
         /// Constructs an instance of ForbiddenException
         /// </summary>
         /// <param name="response">The HTTP payload from the server</param>
-        public ForbiddenException(IResponse response) : this(response, null)
-        {
-        }
+        public ForbiddenException(IResponse response) : this(response, null) {}
 
         /// <summary>
         /// Constructs an instance of ForbiddenException
@@ -37,27 +34,9 @@ namespace Sniper
                 "ForbiddenException created with wrong status code");
         }
 
-        public override string Message
-        {
-            get { return ApiErrorMessageSafe ?? "Request Forbidden"; }
-        }
+        // public override string Message => ApiErrorMessageSafe ?? "Request Forbidden";
 
-
-        /// <summary>
-        /// Constructs an instance of ForbiddenException
-        /// </summary>
-        /// <param name="info">
-        /// The <see cref="SerializationInfo"/> that holds the
-        /// serialized object data about the exception being thrown.
-        /// </param>
-        /// <param name="context">
-        /// The <see cref="StreamingContext"/> that contains
-        /// contextual information about the source or destination.
-        /// </param>
-        protected ForbiddenException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+     
 
     }
 }

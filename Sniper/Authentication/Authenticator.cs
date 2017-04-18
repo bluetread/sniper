@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sniper.Http;
-using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -17,7 +16,7 @@ namespace Sniper
 
         public Authenticator(ICredentialStore credentialStore)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.CredentialStore, credentialStore);
+            Ensure.ArgumentNotNull(nameof(credentialStore), credentialStore);
 
             CredentialStore = credentialStore;
         }

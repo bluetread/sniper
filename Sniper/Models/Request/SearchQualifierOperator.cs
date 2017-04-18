@@ -1,4 +1,5 @@
-﻿namespace Sniper.Request
+﻿#if false
+namespace Sniper.Request
 {
     /// <summary>
     /// Used to qualify a search term.
@@ -26,3 +27,4 @@
         GreaterThanOrEqualTo
     }
 }
+#endif

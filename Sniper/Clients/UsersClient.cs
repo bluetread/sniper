@@ -1,9 +1,10 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Threading.Tasks;
 using Sniper.Http;
 using Sniper.Request;
 using Sniper.Response;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper
 {
@@ -43,7 +44,7 @@ namespace Sniper
         /// <param name="login">The login name for the user</param>
         public Task<User> Get(string login)
         {
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(login), login);
 
             return ApiConnection.Get<User>(ApiUrls.User(login));
         }
@@ -66,7 +67,7 @@ namespace Sniper
         /// <returns>A <see cref="User"/></returns>
         public Task<User> Update(UserUpdate user)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.User, user);
+            Ensure.ArgumentNotNull(nameof(user), user);
             
             return ApiConnection.Patch<User>(_userEndpoint, user);
         }
@@ -80,3 +81,4 @@ namespace Sniper
         public IUserAdministrationClient Administration { get; }
     }
 }
+#endif

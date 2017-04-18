@@ -1,13 +1,13 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
-using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
     /// <summary>
     /// Describes the new login when renaming a user via the <see cref="IUserAdministrationClient.Rename(string, UserRename)"/> method.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class UserRename
     {
         public UserRename() { }
@@ -18,7 +18,7 @@ namespace Sniper.Request
         /// <param name="login">The new login for the user.</param>
         public UserRename(string login)
         {
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(login), login);
 
             Login = login;
         }
@@ -28,12 +28,7 @@ namespace Sniper.Request
         /// </summary>
         public string Login { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Login: {0}", Login);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Login: {0}", Login);
     }
 }
+#endif

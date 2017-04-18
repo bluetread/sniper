@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
 using Sniper.Response;
 
@@ -7,7 +8,7 @@ namespace Sniper.Request
     /// <summary>
     /// Used to create a Blob.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class NewBlob
     {
         /// <summary>
@@ -20,12 +21,7 @@ namespace Sniper.Request
         /// </summary>
         public EncodingType Encoding { get; set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Encoding: {0}", Encoding);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Encoding: {0}", Encoding);
     }
 }
+#endif

@@ -15,20 +15,17 @@ namespace Sniper
         Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
     public class RepositoryWebHookConfigException : Exception
     {
-        private readonly string message;
+        private readonly string _message;
 
         public RepositoryWebHookConfigException(IEnumerable<string> invalidConfig)
         {
             var parameterList = string.Join(", ", invalidConfig.Select(ic => ic.FromRubyCase()));
-            message = string.Format(CultureInfo.InvariantCulture,
+            _message = string.Format(CultureInfo.InvariantCulture,
                 "Duplicate webhook config values found - these values: {0} should not be passed in as part of the config values. Use the properties on the NewRepositoryWebHook class instead.",
                 parameterList);
         }
 
-        public override string Message
-        {
-            get { return message; }
-        }
+        public override string Message => _message;
 
         /// <summary>
         /// Constructs an instance of RepositoryWebHookConfigException
@@ -41,11 +38,9 @@ namespace Sniper
         /// The <see cref="StreamingContext"/> that contains
         /// contextual information about the source or destination.
         /// </param>
-        protected RepositoryWebHookConfigException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
+        protected RepositoryWebHookConfigException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            if (info == null) return;
-            message = info.GetString("Message");
+            _message = info.GetString("Message");
         }
 
         [SecurityCritical]

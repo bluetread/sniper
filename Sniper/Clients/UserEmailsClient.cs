@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using Sniper.ApiClients;
 using Sniper.Http;
 using Sniper.Request;
 using Sniper.Response;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper
 {
@@ -62,7 +63,7 @@ namespace Sniper
         /// <returns>Returns the added <see cref="EmailAddress"/>es.</returns>
         public Task<IReadOnlyList<EmailAddress>> Add(params string[] emailAddresses)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.EmailAddresses, emailAddresses);
+            Ensure.ArgumentNotNull(nameof(emailAddresses), emailAddresses);
             if (emailAddresses.Any(string.IsNullOrWhiteSpace))
                 throw new ArgumentException("Cannot contain null, empty or whitespace values", nameof(emailAddresses));
 
@@ -79,7 +80,7 @@ namespace Sniper
         /// <returns>Returns the added <see cref="EmailAddress"/>es.</returns>
         public Task Delete(params string[] emailAddresses)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.EmailAddresses, emailAddresses);
+            Ensure.ArgumentNotNull(nameof(emailAddresses), emailAddresses);
             if (emailAddresses.Any(string.IsNullOrWhiteSpace))
                 throw new ArgumentException("Cannot contain null, empty or whitespace values", nameof(emailAddresses));
 
@@ -87,3 +88,4 @@ namespace Sniper
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿namespace Sniper.Response
+﻿#if false
+namespace Sniper.Response
 {
     public enum AccountType
     {
@@ -18,3 +19,4 @@
         Bot
     }
 }
+#endif

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class SearchUsersResult : SearchResult<User>
     {
         public SearchUsersResult() { }
@@ -14,3 +15,4 @@ namespace Sniper.Response
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if false
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using Sniper.Authentication;
@@ -8,7 +9,7 @@ namespace Sniper.Request
     /// <summary>
     /// Used to create an Oauth login request.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class OAuthTokenRequest : RequestParameters
     {
         /// <summary>
@@ -57,16 +58,11 @@ namespace Sniper.Request
         [Parameter(Key = "redirect_uri")]
         public Uri RedirectUri { get; set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "ClientId: {0}, ClientSecret: {1}, Code: {2}, RedirectUri: {3}",
-                    ClientId,
-                    ClientSecret,
-                    Code,
-                    RedirectUri);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "ClientId: {0}, ClientSecret: {1}, Code: {2}, RedirectUri: {3}",
+            ClientId,
+            ClientSecret,
+            Code,
+            RedirectUri);
     }
 }
+#endif

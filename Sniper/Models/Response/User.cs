@@ -1,3 +1,4 @@
+#if false
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -7,13 +8,13 @@ namespace Sniper.Response
     /// <summary>
     /// Represents a user on GitHub.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class User : Account
     {
         public User() { }
 
-        public User(string avatarUrl, string bio, string blog, int collaborators, string company, DateTimeOffset createdAt, int diskUsage, string email, int followers, int following, bool? hireable, string htmlUrl, int totalPrivateRepos, int id, string location, string login, string name, int ownedPrivateRepos, Plan plan, int publicRepos, string url, RepositoryPermissions permissions, bool siteAdmin, string ldapDistinguishedName, DateTimeOffset? suspendedAt)
-            : base(avatarUrl, bio, blog, collaborators, company, createdAt, diskUsage, email, followers, following, hireable, htmlUrl, totalPrivateRepos, id, location, login, name, ownedPrivateRepos, plan, publicRepos, AccountType.User, url)
+        public User(string avatarUrl, string bio, string blog, string company, DateTimeOffset createdAt, int diskUsage, string email, string htmlUrl, int id, string location, string login, string name, string url, RepositoryPermissions permissions, bool siteAdmin, string ldapDistinguishedName, DateTimeOffset? suspendedAt)
+            : base(avatarUrl, bio, blog, company, createdAt, diskUsage, email, htmlUrl, id, location, login, name, AccountType.User, url)
         {
             Permissions = permissions;
             SiteAdmin = siteAdmin;
@@ -36,7 +37,7 @@ namespace Sniper.Response
         /// <summary>
         /// Whether or not the user is currently suspended
         /// </summary>
-        public bool Suspended { get { return SuspendedAt.HasValue; } }
+        public bool Suspended => SuspendedAt.HasValue;
 
         /// <summary>
         /// LDAP Binding (GitHub Enterprise only)
@@ -44,13 +45,8 @@ namespace Sniper.Response
         [Parameter(Key = "ldap_dn")]
         public string LdapDistinguishedName { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "User: Id: {0} Login: {1}", Id, Login);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture,
+            "User: Id: {0} Login: {1}", Id, Login);
     }
 }
+#endif

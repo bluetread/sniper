@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response
@@ -6,7 +7,7 @@ namespace Sniper.Response
     /// <summary>
     /// Represents a Signature Verification Object in Git Data Commit Payload.
     /// </summary>
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Verification
     {
         /// <summary>
@@ -30,19 +31,13 @@ namespace Sniper.Response
         /// </summary>
         public string Payload { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(
-                     CultureInfo.InvariantCulture,
-                     "Verification: {0} Verified: {1} Reason: {2} Signature: {3} Payload",
-                     Verified,
-                     Reason.ToString(),
-                     Signature,
-                     Payload);
-            }
-        }
+        internal string DebuggerDisplay => string.Format(
+            CultureInfo.InvariantCulture,
+            "Verification: {0} Verified: {1} Reason: {2} Signature: {3} Payload",
+            Verified,
+            Reason.ToString(),
+            Signature,
+            Payload);
     }
 
     public enum VerificationReason
@@ -81,3 +76,4 @@ namespace Sniper.Response
         Valid
     }
 }
+#endif

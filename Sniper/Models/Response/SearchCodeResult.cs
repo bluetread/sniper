@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿#if false
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class SearchCodeResult : SearchResult<SearchCode>
     {
         public SearchCodeResult() { }
@@ -11,3 +12,4 @@ namespace Sniper.Response
         public SearchCodeResult(int totalCount, bool incompleteResults, IReadOnlyList<SearchCode> items) : base(totalCount, incompleteResults, items) {}
     }
 }
+#endif

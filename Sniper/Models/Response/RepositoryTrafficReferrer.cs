@@ -1,10 +1,11 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class RepositoryTrafficReferrer
     {
         public RepositoryTrafficReferrer() { }
@@ -24,9 +25,7 @@ namespace Sniper.Response
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
         public int Uniques { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get { return string.Format(CultureInfo.InvariantCulture, "Referrer: {0}, Count: {1}", Referrer, Count); }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Referrer: {0}, Count: {1}", Referrer, Count);
     }
 }
+#endif

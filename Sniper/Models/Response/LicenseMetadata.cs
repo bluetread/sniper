@@ -1,18 +1,19 @@
-﻿using System;
+﻿#if false
+
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using Sniper.Http;
-using Sniper.ToBeRemoved;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class LicenseMetadata
     {
         public LicenseMetadata(string key, string name, Uri url)
         {
             Ensure.ArgumentNotNullOrEmptyString(HttpKeys.Key, key);
-            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(name), name);
             Ensure.ArgumentNotNull(HttpKeys.Url, url);
             
             Key = key;
@@ -39,12 +40,7 @@ namespace Sniper.Response
         /// </summary>
         public Uri Url { get; protected set; }
 
-        internal virtual string DebuggerDisplay
-        {
-            get
-            {
-                return string.Format(CultureInfo.InvariantCulture, "Key: {0} Name: {1}", Key, Name);
-            }
-        }
+        internal virtual string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Key: {0} Name: {1}", Key, Name);
     }
 }
+#endif

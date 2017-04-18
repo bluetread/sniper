@@ -1,19 +1,20 @@
-﻿using System.Diagnostics;
+﻿#if false
+using System.Diagnostics;
 using System.Globalization;
 using Sniper.Http;
-using Sniper.ToBeRemoved;
+
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class MiscellaneousRateLimit
     {
         public MiscellaneousRateLimit() { }
 
         public MiscellaneousRateLimit(ResourceRateLimit resources, RateLimit rate)
         {
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Resource, resources);
-            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Rate, rate);
+            Ensure.ArgumentNotNull(nameof(resources), resources);
+            Ensure.ArgumentNotNull(nameof(rate), rate);
 
             Resources = resources;
             Rate = rate;
@@ -29,12 +30,7 @@ namespace Sniper.Response
         /// </summary>
         public RateLimit Rate { get; }
 
-        internal string DebuggerDisplay
-        {
-            get
-            {
-                return Resources == null ? "No rates found" : string.Format(CultureInfo.InvariantCulture, Resources.DebuggerDisplay);
-            }
-        }
+        internal string DebuggerDisplay => Resources == null ? "No rates found" : string.Format(CultureInfo.InvariantCulture, Resources.DebuggerDisplay);
     }
 }
+#endif

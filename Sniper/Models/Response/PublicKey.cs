@@ -1,9 +1,10 @@
+#if false
 using System.Diagnostics;
 using System.Globalization;
 
 namespace Sniper.Response
 {
-    [DebuggerDisplay("{DebuggerDisplay,nq}")]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class PublicKey
     {
         public PublicKey() { }
@@ -30,9 +31,7 @@ namespace Sniper.Response
         /// </remarks>
         public string Title { get; protected set; }
 
-        internal string DebuggerDisplay
-        {
-            get { return string.Format(CultureInfo.InvariantCulture, "Id: {0} Key: {1}", Id, Key); }
-        }
+        internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Id: {0} Key: {1}", Id, Key);
     }
 }
+#endif

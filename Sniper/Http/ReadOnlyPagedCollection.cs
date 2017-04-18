@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Http
 {
@@ -13,8 +14,8 @@ namespace Sniper.Http
         public ReadOnlyPagedCollection(IApiResponse<List<T>> response, Func<Uri, Task<IApiResponse<List<T>>>> nextPageFunc)
             : base(response != null ? response.Body ?? new List<T>() : new List<T>())
         {
-            Ensure.ArgumentNotNull(response, "response");
-            Ensure.ArgumentNotNull(nextPageFunc, "nextPageFunc");
+            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.Response, response);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.NextPageFunc, nextPageFunc);
 
             _nextPageFunc = nextPageFunc;
             if (response != null)

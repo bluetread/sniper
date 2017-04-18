@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Sniper.Http;
 using Sniper.Request;
 using Sniper.Response;
+using Sniper.ToBeRemoved;
 using Authorization = Sniper.Response.Authorization;
 
 namespace Sniper
@@ -36,8 +37,8 @@ namespace Sniper
         /// <returns>The created <see cref="User"/> object</returns>
         public Task<User> Create(NewUser newUser)
         {
-            Ensure.ArgumentNotNull(newUser, "newUser");
-
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.NewUser, newUser);
+            
             var endpoint = ApiUrls.UserAdministration();
 
             return ApiConnection.Post<User>(endpoint, newUser);
@@ -56,8 +57,8 @@ namespace Sniper
         /// <returns>A <see cref="UserRenameResponse"/> object indicating the queued task message and Url to the user</returns>
         public Task<UserRenameResponse> Rename(string login, UserRename userRename)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
-            Ensure.ArgumentNotNull(userRename, "userRename");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.UserRename, userRename);
 
             var endpoint = ApiUrls.UserAdministration(login);
 
@@ -76,9 +77,9 @@ namespace Sniper
         /// <returns>An <see cref="Authorization"/> object containing the impersonation token</returns>
         public Task<Authorization> CreateImpersonationToken(string login, NewImpersonationToken newImpersonationToken)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
-            Ensure.ArgumentNotNull(newImpersonationToken, "newImpersonationToken");
-
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.NewImpersonationToken, newImpersonationToken);
+            
             var endpoint = ApiUrls.UserAdministrationAuthorization(login);
 
             return ApiConnection.Post<Authorization>(endpoint, newImpersonationToken);
@@ -95,7 +96,7 @@ namespace Sniper
         /// <returns></returns>
         public async Task DeleteImpersonationToken(string login)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
 
             var endpoint = ApiUrls.UserAdministrationAuthorization(login);
 
@@ -117,7 +118,7 @@ namespace Sniper
         /// <returns></returns>
         public Task Promote(string login)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
             var endpoint = ApiUrls.UserAdministrationSiteAdmin(login);
             return ApiConnection.Put(endpoint);
         }
@@ -133,7 +134,7 @@ namespace Sniper
         /// <returns></returns>
         public Task Demote(string login)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
             var endpoint = ApiUrls.UserAdministrationSiteAdmin(login);
             return ApiConnection.Delete(endpoint);
         }
@@ -149,7 +150,7 @@ namespace Sniper
         /// <returns></returns>
         public Task Suspend(string login)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
             var endpoint = ApiUrls.UserAdministrationSuspension(login);
             return ApiConnection.Put(endpoint);
         }
@@ -165,7 +166,7 @@ namespace Sniper
         /// <returns></returns>
         public Task Unsuspend(string login)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
             var endpoint = ApiUrls.UserAdministrationSuspension(login);
             return ApiConnection.Delete(endpoint);
         }
@@ -195,7 +196,7 @@ namespace Sniper
         /// <returns></returns>
         public async Task Delete(string login)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
             var endpoint = ApiUrls.UserAdministration(login);
 
             var response = await Connection.Delete(endpoint).ConfigureAwait(false);
@@ -216,7 +217,7 @@ namespace Sniper
         /// <returns></returns>
         public async Task DeletePublicKey(int keyId)
         {
-            Ensure.ArgumentNotNull(keyId, "keyId");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.KeyId, keyId);
             var endpoint = ApiUrls.UserAdministrationPublicKeys(keyId);
 
             var response = await Connection.Delete(endpoint).ConfigureAwait(false);

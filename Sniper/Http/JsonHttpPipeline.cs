@@ -2,6 +2,8 @@
 using System.Collections;
 using System.IO;
 using System.Net.Http;
+using Sniper.ToBeRemoved;
+using Sniper.Types;
 
 namespace Sniper.Http
 {
@@ -19,18 +21,18 @@ namespace Sniper.Http
 
         public JsonHttpPipeline(IJsonSerializer serializer)
         {
-            Ensure.ArgumentNotNull(serializer, "serializer");
-
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Serializer, serializer);
+            
             _serializer = serializer;
         }
 
         public void SerializeRequest(IRequest request)
         {
-            Ensure.ArgumentNotNull(request, "request");
+            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
 
-            if (!request.Headers.ContainsKey("Accept"))
+            if (!request.Headers.ContainsKey(HttpKeys.HtmlKeys.HeaderKeys.Accept))
             {
-                request.Headers["Accept"] = AcceptHeaders.RedirectsPreviewThenStableVersionJson;
+                request.Headers[HttpKeys.HtmlKeys.HeaderKeys.Accept] = AcceptHeaders.RedirectsPreviewThenStableVersionJson;
             }
 
             if (request.Method == HttpMethod.Get || request.Body == null) return;
@@ -41,9 +43,9 @@ namespace Sniper.Http
 
         public IApiResponse<T> DeserializeResponse<T>(IResponse response)
         {
-            Ensure.ArgumentNotNull(response, "response");
+            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.Response, response);
 
-            if (response.ContentType != null && response.ContentType.Equals("application/json", StringComparison.Ordinal))
+            if (response.ContentType != null && response.ContentType.Equals(MimeTypes.ApplicationJson, StringComparison.Ordinal))
             {
                 var body = response.Body as string;
                 // simple json does not support the root node being empty. Will submit a pr but in the mean time....

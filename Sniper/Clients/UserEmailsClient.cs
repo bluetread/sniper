@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Sniper.ApiClients;
 using Sniper.Http;
 using Sniper.Request;
 using Sniper.Response;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -45,7 +47,7 @@ namespace Sniper
         /// <returns>The <see cref="EmailAddress"/>es for the authenticated user.</returns>
         public Task<IReadOnlyList<EmailAddress>> GetAll(ApiOptions options)
         {
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             return ApiConnection.GetAll<EmailAddress>(ApiUrls.Emails(), options);
         }
@@ -60,9 +62,9 @@ namespace Sniper
         /// <returns>Returns the added <see cref="EmailAddress"/>es.</returns>
         public Task<IReadOnlyList<EmailAddress>> Add(params string[] emailAddresses)
         {
-            Ensure.ArgumentNotNull(emailAddresses, "emailAddresses");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.EmailAddresses, emailAddresses);
             if (emailAddresses.Any(string.IsNullOrWhiteSpace))
-                throw new ArgumentException("Cannot contain null, empty or whitespace values", "emailAddresses");
+                throw new ArgumentException("Cannot contain null, empty or whitespace values", nameof(emailAddresses));
 
             return ApiConnection.Post<IReadOnlyList<EmailAddress>>(ApiUrls.Emails(), emailAddresses);
         }
@@ -77,9 +79,9 @@ namespace Sniper
         /// <returns>Returns the added <see cref="EmailAddress"/>es.</returns>
         public Task Delete(params string[] emailAddresses)
         {
-            Ensure.ArgumentNotNull(emailAddresses, "emailAddresses");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.EmailAddresses, emailAddresses);
             if (emailAddresses.Any(string.IsNullOrWhiteSpace))
-                throw new ArgumentException("Cannot contain null, empty or whitespace values", "emailAddresses");
+                throw new ArgumentException("Cannot contain null, empty or whitespace values", nameof(emailAddresses));
 
             return ApiConnection.Delete(ApiUrls.Emails(), emailAddresses);
         }

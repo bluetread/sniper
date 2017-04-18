@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -18,7 +19,7 @@ namespace Sniper.Request
         /// <param name="name">The name of the repository. This is the only required parameter.</param>
         public RepositoryUpdate(string name)
         {
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
 
             Name = name;
         }

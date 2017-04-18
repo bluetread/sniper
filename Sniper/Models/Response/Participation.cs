@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Response
 {
@@ -16,8 +17,8 @@ namespace Sniper.Response
 
         public Participation(IEnumerable<int> all, IEnumerable<int> owner)
         {
-            Ensure.ArgumentNotNull(all, "all");
-            Ensure.ArgumentNotNull(owner, "owner");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.All, all);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Owner, owner);
 
             All = new ReadOnlyCollection<int>(all.ToList());
             Owner = new ReadOnlyCollection<int>(owner.ToList());

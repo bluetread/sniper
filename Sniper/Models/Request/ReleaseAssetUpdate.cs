@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -15,7 +16,7 @@ namespace Sniper.Request
         /// <param name="name">The name.</param>
         public ReleaseAssetUpdate(string name)
         {
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
 
             Name = name;
         }

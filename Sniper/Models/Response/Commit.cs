@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using Sniper.Common;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Response
 {
@@ -14,7 +15,7 @@ namespace Sniper.Response
         public Commit(string url, string label, string @ref, string sha, User user, Repository repository, string message, Committer author, Committer committer, GitReference tree, IEnumerable<GitReference> parents, int commentCount)
             : base(url, label, @ref, sha, user, repository)
         {
-            Ensure.ArgumentNotNull(parents, "parents");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Parents, parents);
 
             Message = message;
             Author = author;

@@ -9,17 +9,14 @@ namespace Sniper.Response.Enterprise
     {
         public AdminStats() { }
 
-        public AdminStats(AdminStatsRepos repos, AdminStatsHooks hooks, AdminStatsPages pages, AdminStatsOrgs orgs, AdminStatsUsers users, AdminStatsPulls pulls, AdminStatsIssues issues, AdminStatsMilestones milestones, AdminStatsGists gists, AdminStatsComments comments)
+        public AdminStats(AdminStatsRepos repos, AdminStatsPages pages, AdminStatsOrgs orgs, AdminStatsUsers users, AdminStatsIssues issues, AdminStatsMilestones milestones, AdminStatsComments comments)
         {
             Repos = repos;
-            Hooks = hooks;
             Pages = pages;
             Orgs = orgs;
             Users = users;
-            Pulls = pulls;
             Issues = issues;
             Milestones = milestones;
-            Gists = gists;
             Comments = comments;
         }
 
@@ -28,10 +25,6 @@ namespace Sniper.Response.Enterprise
             get;
         }
 
-        public AdminStatsHooks Hooks
-        {
-            get;
-        }
 
         public AdminStatsPages Pages
         {
@@ -48,22 +41,12 @@ namespace Sniper.Response.Enterprise
             get;
         }
 
-        public AdminStatsPulls Pulls
-        {
-            get;
-        }
-
         public AdminStatsIssues Issues
         {
             get;
         }
 
         public AdminStatsMilestones Milestones
-        {
-            get;
-        }
-
-        public AdminStatsGists Gists
         {
             get;
         }
@@ -77,17 +60,14 @@ namespace Sniper.Response.Enterprise
         {
             get
             {
-                string fieldsPresent = String.Concat(
-                    Repos != null ? "Repos," : "",
-                    Hooks != null ? "Hooks," : "",
-                    Pages != null ? "Pages," : "",
-                    Orgs != null ? "Orgs," : "",
-                    Users != null ? "Users," : "",
-                    Pulls != null ? "Pulls," : "",
-                    Issues != null ? "Issues," : "",
-                    Milestones != null ? "Milestones," : "",
-                    Gists != null ? "Gists," : "",
-                    Comments != null ? "Comments," : ""
+                string fieldsPresent = string.Concat(
+                    Repos != null ? "Repos," : string.Empty,
+                    Pages != null ? "Pages," : string.Empty,
+                    Orgs != null ? "Orgs," : string.Empty,
+                    Users != null ? "Users," : string.Empty,
+                    Issues != null ? "Issues," : string.Empty,
+                    Milestones != null ? "Milestones," : string.Empty,
+                    Comments != null ? "Comments," : string.Empty
                     ).Trim(',');
 
                 return String.Format(CultureInfo.InvariantCulture, "Statistics: {0}", fieldsPresent);

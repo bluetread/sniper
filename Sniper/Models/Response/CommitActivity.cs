@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Response
 {
@@ -13,7 +14,7 @@ namespace Sniper.Response
 
         public CommitActivity(IEnumerable<WeeklyCommitActivity> activity)
         {
-            Ensure.ArgumentNotNull(activity, "activity");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Activity, activity);
 
             Activity = new ReadOnlyCollection<WeeklyCommitActivity>(activity.ToList());
         }

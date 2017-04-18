@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -16,8 +17,8 @@ namespace Sniper.Request
         /// <param name="email"></param>
         public Signature(string name, string email)
         {
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNullOrEmptyString(email, "email");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Email, email);
 
             Name = name;
             Email = email;

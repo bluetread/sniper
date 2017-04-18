@@ -6,7 +6,7 @@ using Sniper.Http;
 using Sniper.Request;
 
 using System.Collections.Generic;
-
+using Sniper.ApiClients;
 
 namespace Sniper
 {
@@ -25,8 +25,8 @@ namespace Sniper
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public static Task<IReadOnlyList<T>> GetAll<T>(this IApiConnection connection, Uri uri)
         {
-            Ensure.ArgumentNotNull(connection, "connection");
-            Ensure.ArgumentNotNull(uri, "uri");
+            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
+            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
 
             return connection.GetAll<T>(uri, ApiOptions.None);
         }
@@ -40,8 +40,8 @@ namespace Sniper
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public static Task<string> GetHtml(this IApiConnection connection, Uri uri)
         {
-            Ensure.ArgumentNotNull(connection, "connection");
-            Ensure.ArgumentNotNull(uri, "uri");
+            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
+            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
 
             return connection.GetHtml(uri, null);
         }
@@ -54,8 +54,8 @@ namespace Sniper
         /// <returns><seealso cref="IResponse"/> representing the received HTTP response</returns>
         public static Task<IApiResponse<string>> GetHtml(this IConnection connection, Uri uri)
         {
-            Ensure.ArgumentNotNull(connection, "connection");
-            Ensure.ArgumentNotNull(uri, "uri");
+            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
+            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
 
             return connection.GetHtml(uri, null);
         }
@@ -70,8 +70,8 @@ namespace Sniper
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public static Task<IApiResponse<T>> GetResponse<T>(this IConnection connection, Uri uri)
         {
-            Ensure.ArgumentNotNull(connection, "connection");
-            Ensure.ArgumentNotNull(uri, "uri");
+            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
+            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
 
             return connection.Get<T>(uri, null, null);
         }
@@ -87,8 +87,8 @@ namespace Sniper
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public static Task<IApiResponse<T>> GetResponse<T>(this IConnection connection, Uri uri, CancellationToken cancellationToken)
         {
-            Ensure.ArgumentNotNull(connection, "connection");
-            Ensure.ArgumentNotNull(uri, "uri");
+            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
+            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
 
             return connection.Get<T>(uri, null, null, cancellationToken);
         }
@@ -106,8 +106,8 @@ namespace Sniper
         /// <returns></returns>
         public static bool IsTrue(this IResponse response)
         {
-            Ensure.ArgumentNotNull(response, "response");
-
+            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.Response, response);
+            
             if (response.StatusCode != HttpStatusCode.NotFound && response.StatusCode != HttpStatusCode.NoContent)
             {
                 throw new ApiException("Invalid Status Code returned. Expected a 204 or a 404", response.StatusCode);

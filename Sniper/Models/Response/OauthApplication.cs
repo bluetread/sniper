@@ -7,11 +7,11 @@ namespace Sniper.Response
     /// Represents an oauth application.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class Application
+    public class OauthApplication
     {
-        public Application() { }
+        public OauthApplication() { }
 
-        public Application(string name, string url)
+        public OauthApplication(string name, string url)
         {
             Name = name;
             Url = url;

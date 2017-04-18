@@ -13,13 +13,12 @@ namespace Sniper.Http
 
         public static ApiInfo ParseResponseHeaders(IDictionary<string, string> responseHeaders)
         {
-            Ensure.ArgumentNotNull(responseHeaders, "responseHeaders");
+            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.ResponseHeaders, responseHeaders);
 
             var httpLinks = new Dictionary<string, Uri>();
             var oauthScopes = new List<string>();
             var acceptedOauthScopes = new List<string>();
-            string etag = null;
-
+            
             if (responseHeaders.ContainsKey("X-Accepted-OAuth-Scopes"))
             {
                 acceptedOauthScopes.AddRange(responseHeaders["X-Accepted-OAuth-Scopes"]
@@ -32,11 +31,6 @@ namespace Sniper.Http
                 oauthScopes.AddRange(responseHeaders["X-OAuth-Scopes"]
                     .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                     .Select(x => x.Trim()));
-            }
-
-            if (responseHeaders.ContainsKey("ETag"))
-            {
-                etag = responseHeaders["ETag"];
             }
 
             if (responseHeaders.ContainsKey("Link"))
@@ -54,7 +48,7 @@ namespace Sniper.Http
                 }
             }
 
-            return new ApiInfo(httpLinks, oauthScopes, acceptedOauthScopes, etag, new RateLimit(responseHeaders));
+            return new ApiInfo(httpLinks, oauthScopes, acceptedOauthScopes, new RateLimit(responseHeaders));
         }
     }
 }

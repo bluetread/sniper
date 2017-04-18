@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Sniper.Http;
-using static Sniper.Constants;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -17,14 +17,14 @@ namespace Sniper
 
         public Authenticator(ICredentialStore credentialStore)
         {
-            Ensure.ArgumentNotNull(Authentication.CredentialStore, credentialStore);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.CredentialStore, credentialStore);
 
             CredentialStore = credentialStore;
         }
 
         public async Task Apply(IRequest request)
         {
-            Ensure.ArgumentNotNull(Authentication.Request, request);
+            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
 
             var credentials = await CredentialStore.GetCredentials().ConfigureAwait(false) ?? Credentials.Anonymous;
             _authenticators[credentials.AuthenticationType].Authenticate(request, credentials);

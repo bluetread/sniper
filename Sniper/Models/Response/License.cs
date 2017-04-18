@@ -4,34 +4,26 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using Sniper.Http;
+using Sniper.Licenses;
+using Sniper.Permissions;
 
 namespace Sniper.Response
 {
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public class License : LicenseMetadata
     {
-        public License(
-            string key,
-            string name,
-            Uri url,
-            Uri htmlUrl,
-            bool featured,
-            string description,
-            string category,
-            string implementation,
-            string body,
-            IEnumerable<string> required,
-            IEnumerable<string> permitted,
-            IEnumerable<string> forbidden) : base(key, name, url)
+        public License(string key, string name, Uri url, Uri htmlUrl, bool featured, string description, string category,
+            string implementation, string body, IEnumerable<string> required, IEnumerable<string> permitted, IEnumerable<string> forbidden) : base(key, name, url)
         {
-            Ensure.ArgumentNotNull(htmlUrl, "htmlUrl");
-            Ensure.ArgumentNotNull(description, "description");
-            Ensure.ArgumentNotNull(category, "category");
-            Ensure.ArgumentNotNull(implementation, "implementation");
-            Ensure.ArgumentNotNull(body, "body");
-            Ensure.ArgumentNotNull(required, "required");
-            Ensure.ArgumentNotNull(permitted, "permitted");
-            Ensure.ArgumentNotNull(forbidden, "forbidden");
+            Ensure.ArgumentNotNull(LicenseKeys.HtmlUrl, htmlUrl);
+            Ensure.ArgumentNotNull(LicenseKeys.Description, description);
+            Ensure.ArgumentNotNull(LicenseKeys.Category, category);
+            Ensure.ArgumentNotNull(LicenseKeys.Implementation, implementation);
+            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.Body, body);
+            Ensure.ArgumentNotNull(PermissionKeys.Required, required);
+            Ensure.ArgumentNotNull(PermissionKeys.Permitted, permitted);
+            Ensure.ArgumentNotNull(PermissionKeys.Forbidden, forbidden);
 
             HtmlUrl = htmlUrl;
             Featured = featured;

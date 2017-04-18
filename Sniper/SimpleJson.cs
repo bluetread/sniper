@@ -841,7 +841,7 @@ namespace Sniper
                             // parse the 32 bit hex into an integer codepoint
                             uint codePoint;
                             if (!(success = UInt32.TryParse(new string(json, index, 4), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out codePoint)))
-                                return "";
+                                return string.Empty;
 
                             // convert the integer codepoint to a unicode char and add to string
                             if (0xD800 <= codePoint && codePoint <= 0xDBFF)  // if high surrogate
@@ -863,7 +863,7 @@ namespace Sniper
                                     }
                                 }
                                 success = false;    // invalid surrogate pair
-                                return "";
+                                return string.Empty;
                             }
                             s.Append(ConvertFromUtf32((int)codePoint));
                             // skip 4 chars

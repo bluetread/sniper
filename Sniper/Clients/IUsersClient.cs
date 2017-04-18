@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Sniper.Request;
 using Sniper.Response;
@@ -22,18 +21,7 @@ namespace Sniper
         ///</remarks>
         IUserEmailsClient Email { get; }
 
-        /// <summary>
-        /// A client for GitHub's User Keys API
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/users/keys/">Keys API documentation</a> for more information.
-        ///</remarks>
-        IUserKeysClient GitSshKey { get; }
-
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Gpg")]
-        IUserGpgKeysClient GpgKey { get; }
-
-        /// <summary>
+      /// <summary>
         /// Returns the user specified by the login.
         /// </summary>
         /// <param name="login">The login name for the user</param>
@@ -55,14 +43,6 @@ namespace Sniper
         /// <exception cref="AuthorizationException">Thrown if the client is not authenticated.</exception>
         /// <returns>A <see cref="User"/></returns>
         Task<User> Update(UserUpdate user);
-
-        /// <summary>
-        /// A client for GitHub's User Followers API
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/users/followers/">Followers API documentation</a> for more information.
-        ///</remarks>
-        IFollowersClient Followers { get; }
 
         /// <summary>
         /// A client for GitHub's User Administration API

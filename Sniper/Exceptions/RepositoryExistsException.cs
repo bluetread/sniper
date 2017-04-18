@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Security;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -26,16 +27,11 @@ namespace Sniper
         /// <param name="name">The name of the existing repository</param>
         /// <param name="baseAddress">The base address of the repository.</param>
         /// <param name="innerException">The inner validation exception.</param>
-        public RepositoryExistsException(
-            string organization,
-            string name,
-            Uri baseAddress,
-            ApiValidationException innerException)
-            : base(innerException)
+        public RepositoryExistsException(string organization, string name, Uri baseAddress, ApiValidationException innerException) : base(innerException)
         {
-            Ensure.ArgumentNotNullOrEmptyString(organization, "organization");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNull(baseAddress, "baseAddress");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Organization, organization);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.BaseAddress, baseAddress);
 
             Organization = organization;
             RepositoryName = name;
@@ -58,7 +54,7 @@ namespace Sniper
             ApiValidationException innerException)
             : base(innerException)
         {
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
 
             RepositoryName = name;
 

@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Http
 {
@@ -21,8 +22,8 @@ namespace Sniper.Http
 
         public RateLimit(IDictionary<string, string> responseHeaders)
         {
-            Ensure.ArgumentNotNull(responseHeaders, "responseHeaders");
-
+            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.ResponseHeaders, responseHeaders);
+            
             Limit = (int)GetHeaderValueAsInt32Safe(responseHeaders, "X-RateLimit-Limit");
             Remaining = (int)GetHeaderValueAsInt32Safe(responseHeaders, "X-RateLimit-Remaining");
             ResetAsUtcEpochSeconds = GetHeaderValueAsInt32Safe(responseHeaders, "X-RateLimit-Reset");
@@ -30,9 +31,9 @@ namespace Sniper.Http
 
         public RateLimit(int limit, int remaining, long reset)
         {
-            Ensure.ArgumentNotNull(limit, "limit");
-            Ensure.ArgumentNotNull(remaining, "remaining");
-            Ensure.ArgumentNotNull(reset, "reset");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Limit, limit);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Remaining, remaining);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Reset, reset);
 
             Limit = limit;
             Remaining = remaining;
@@ -74,7 +75,7 @@ namespace Sniper.Http
 
         protected RateLimit(SerializationInfo info, StreamingContext context)
         {
-            Ensure.ArgumentNotNull(info, "info");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Info, info);
 
             Limit = info.GetInt32("Limit");
             Remaining = info.GetInt32("Remaining");
@@ -84,7 +85,7 @@ namespace Sniper.Http
         [SecurityCritical]
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            Ensure.ArgumentNotNull(info, "info");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Info, info);
 
             info.AddValue("Limit", Limit);
             info.AddValue("Remaining", Remaining);

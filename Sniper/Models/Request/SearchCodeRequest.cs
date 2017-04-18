@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -40,8 +41,8 @@ namespace Sniper.Request
         public SearchCodeRequest(string term, string owner, string name)
             : this(term)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
 
             Repos.Add(owner, name);
         }
@@ -55,11 +56,7 @@ namespace Sniper.Request
         /// http://developer.github.com/v3/search/#search-code
         /// </remarks>
         public CodeSearchSort? SortField { get; set; }
-        public override string Sort
-        {
-            get { return SortField.ToParameter(); }
-        }
-
+      
         /// <summary>
         /// Qualifies which fields are searched. With this qualifier you can restrict 
         /// the search to just the file contents, the file path, or both.
@@ -79,24 +76,6 @@ namespace Sniper.Request
                 }
             }
         }
-
-        /// <summary>
-        /// Searches code based on the language it’s written in.
-        /// </summary>
-        /// <remarks>
-        /// https://help.github.com/articles/searching-code#language
-        /// </remarks>
-        public Language? Language { get; set; }
-
-        /// <summary>
-        /// Specifies that code from forked repositories should be searched. 
-        /// Repository forks will not be searchable unless the fork has more 
-        /// stars than the parent repository.
-        /// </summary>
-        /// <remarks>
-        /// https://help.github.com/articles/searching-code#forks
-        /// </remarks>
-        public bool? Forks { get; set; }
 
         /// <summary>
         /// Finds files that match a certain size (in bytes).
@@ -158,18 +137,6 @@ namespace Sniper.Request
                     string.Join(",", In.Select(i => i.ToParameter()))));
             }
 
-            if (Language != null)
-            {
-                parameters.Add(string.Format(CultureInfo.InvariantCulture, "language:{0}", Language.ToParameter()));
-            }
-
-            if (Forks != null)
-            {
-                // API is expecting 'true', bool.ToString() returns 'True', if there is a better way,
-                // please, oh please let me know...
-                parameters.Add(string.Format(CultureInfo.InvariantCulture, "fork:{0}", Forks.Value.ToString().ToLower()));
-            }
-
             if (Size != null)
             {
                 parameters.Add(string.Format(CultureInfo.InvariantCulture, "size:{0}", Size));
@@ -214,7 +181,7 @@ namespace Sniper.Request
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "Term: {0} Sort: {1}", Term, Sort);
+                return string.Format(CultureInfo.InvariantCulture, "Term: {0}", Term);
             }
         }
     }

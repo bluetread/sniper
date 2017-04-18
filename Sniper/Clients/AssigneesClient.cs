@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Sniper.ApiClients;
 using Sniper.Http;
 using Sniper.Request;
 using Sniper.Response;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
     /// <summary>
     /// A client for GitHub's Issue Assignees API.
     /// </summary>
-    /// <remarks>
-    /// See the <a href="http://developer.github.com/v3/issues/assignees/">Issue Assignees API documentation</a> for more information.
-    /// </remarks>
     public class AssigneesClient : ApiClient, IAssigneesClient
     {
         /// <summary>
@@ -29,8 +28,8 @@ namespace Sniper
         /// <param name="name">The name of the repository</param>
         public Task<IReadOnlyList<User>> GetAllForRepository(string owner, string name)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
 
             return GetAllForRepository(owner, name, ApiOptions.None);
         }
@@ -52,9 +51,9 @@ namespace Sniper
         /// <param name="options">The options to change API's response.</param>
         public Task<IReadOnlyList<User>> GetAllForRepository(string owner, string name, ApiOptions options)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             var endpoint = ApiUrls.Assignees(owner, name);
 
@@ -68,7 +67,7 @@ namespace Sniper
         /// <param name="options">The options to change API's response.</param>
         public Task<IReadOnlyList<User>> GetAllForRepository(long repositoryId, ApiOptions options)
         {
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             var endpoint = ApiUrls.Assignees(repositoryId);
 
@@ -83,9 +82,9 @@ namespace Sniper
         /// <param name="assignee">Username of the prospective assignee</param>
         public async Task<bool> CheckAssignee(string owner, string name, string assignee)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNullOrEmptyString(assignee, "assignee");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Assignee, assignee);
 
             try
             {
@@ -108,9 +107,9 @@ namespace Sniper
         /// <returns></returns>
         public Task<Issue> AddAssignees(string owner, string name, int number, AssigneesUpdate assignees)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNull(assignees, "assignees");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Assignees, assignees);
 
             return ApiConnection.Post<Issue>(ApiUrls.IssueAssignees(owner, name, number), assignees);
         }
@@ -125,9 +124,9 @@ namespace Sniper
         /// <returns></returns>
         public Task<Issue> RemoveAssignees(string owner, string name, int number, AssigneesUpdate assignees)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNull(assignees, "assignees");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Assignees, assignees);
 
             return ApiConnection.Delete<Issue>(ApiUrls.IssueAssignees(owner, name, number), assignees);
         }
@@ -139,7 +138,7 @@ namespace Sniper
         /// <param name="assignee">Username of the prospective assignee</param>
         public async Task<bool> CheckAssignee(long repositoryId, string assignee)
         {
-            Ensure.ArgumentNotNullOrEmptyString(assignee, "assignee");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Assignee, assignee);
 
             try
             {

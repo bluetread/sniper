@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
+using Sniper.Authentication;
 using Sniper.Http;
-using static Sniper.Constants;
     
 namespace Sniper
 {
@@ -17,18 +17,18 @@ namespace Sniper
         ///</remarks>
         public void Authenticate(IRequest request, ICredentials credentials)
         {
-            Ensure.ArgumentNotNull(Authentication.Request, request);
-            Ensure.ArgumentNotNull(Authentication.Credentials, credentials);
-            Ensure.ArgumentNotNull(Authentication.CredentialsPassword, credentials.Password);
+            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(AuthenticationKeys.Credentials, credentials);
+            Ensure.ArgumentNotNull(AuthenticationKeys.CredentialsPassword, credentials.Password);
 
             var token = credentials.GetToken();
             if (credentials.Login != null)
             {
-                throw new InvalidOperationException(Authentication.Messages.TokenLoginFailed);
+                throw new InvalidOperationException(AuthenticationKeys.Messages.TokenLoginFailed);
             }
             if (token != null)
             {
-                request.Headers[Authentication.Keys.Authorization] = string.Format(CultureInfo.InvariantCulture, "Token {0}", token);
+                request.Headers[AuthenticationKeys.Keys.Authorization] = string.Format(CultureInfo.InvariantCulture, "Token {0}", token);
             }
         }
     }

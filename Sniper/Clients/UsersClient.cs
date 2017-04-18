@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Sniper.Http;
 using Sniper.Request;
 using Sniper.Response;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -23,10 +24,6 @@ namespace Sniper
         public UsersClient(IApiConnection apiConnection) : base(apiConnection)
         {
             Email = new UserEmailsClient(apiConnection);
-            Followers = new FollowersClient(apiConnection);
-            GitSshKey = new UserKeysClient(apiConnection);
-            GpgKey = new UserGpgKeysClient(apiConnection);
-
             Administration = new UserAdministrationClient(apiConnection);
         }
 
@@ -38,21 +35,7 @@ namespace Sniper
         ///</remarks>
         public IUserEmailsClient Email { get; }
 
-        /// <summary>
-        /// A client for GitHub's User Keys API
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/users/keys/">Keys API documentation</a> for more information.
-        ///</remarks>
-        public IUserKeysClient GitSshKey { get; }
-
-        /// <summary>
-        /// A client for GitHub's UserUser GPG Keys API.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/users/gpg_keys/">User GPG Keys documentation</a> for more information.
-        /// </remarks>
-        public IUserGpgKeysClient GpgKey { get; }
+      
 
         /// <summary>
         /// Returns the user specified by the login.
@@ -60,7 +43,7 @@ namespace Sniper
         /// <param name="login">The login name for the user</param>
         public Task<User> Get(string login)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
 
             return ApiConnection.Get<User>(ApiUrls.User(login));
         }
@@ -83,18 +66,10 @@ namespace Sniper
         /// <returns>A <see cref="User"/></returns>
         public Task<User> Update(UserUpdate user)
         {
-            Ensure.ArgumentNotNull(user, "user");
-
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.User, user);
+            
             return ApiConnection.Patch<User>(_userEndpoint, user);
         }
-
-        /// <summary>
-        /// A client for GitHub's User Followers API
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/users/followers/">Followers API documentation</a> for more information.
-        ///</remarks>
-        public IFollowersClient Followers { get; }
 
         /// <summary>
         /// A client for GitHub's User Administration API 

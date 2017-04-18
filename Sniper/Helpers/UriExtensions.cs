@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sniper.Http;
 
 namespace Sniper
 {
@@ -17,7 +18,7 @@ namespace Sniper
         /// <returns>Updated request Uri</returns>
         public static Uri ApplyParameters(this Uri uri, IDictionary<string, string> parameters)
         {
-            Ensure.ArgumentNotNull(uri, "uri");
+            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
 
             if (parameters == null || !parameters.Any()) return uri;
 
@@ -34,12 +35,11 @@ namespace Sniper
             {
                 var hasQueryString = uri.OriginalString.IndexOf("?", StringComparison.Ordinal);
                 queryString = hasQueryString == -1
-                    ? ""
+                    ? string.Empty
                     : uri.OriginalString.Substring(hasQueryString);
             }
 
-            var values = queryString.Replace("?", "")
-                                    .Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
+            var values = queryString.Replace("?", string.Empty).Split(new[] { '&' }, StringSplitOptions.RemoveEmptyEntries);
 
             var existingParameters = values.ToDictionary(
                         key => key.Substring(0, key.IndexOf('=')),

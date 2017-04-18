@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Sniper.Request;
 using Sniper.Response;
@@ -157,36 +156,36 @@ namespace Sniper
         /// </summary>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns></returns>
-        Task<bool> AddRepository(int id, string organization, string repoName);
+        Task<bool> AddRepository(int id, string organization, string repository);
 
         /// <summary>
         /// Add a repository to the team
         /// </summary>
         /// <param name="id">The team identifier.</param>
         /// <param name="organization">Org to associate the repo with.</param>
-        /// <param name="repoName">Name of the repo.</param>
+        /// <param name="repository">Name of the repo.</param>
         /// <param name="permission">The permission to grant the team on this repository.</param>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns></returns>
-        Task<bool> AddRepository(int id, string organization, string repoName, RepositoryPermissionRequest permission);
+        Task<bool> AddRepository(int id, string organization, string repository, RepositoryPermissionRequest permission);
 
         /// <summary>
         /// Remove a repository from the team
         /// </summary>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns></returns>
-        Task<bool> RemoveRepository(int id, string organization, string repoName);
+        Task<bool> RemoveRepository(int id, string organization, string repository);
 
         /// <summary>
         /// Gets whether or not the given repository is managed by the given team.
         /// </summary>
         /// <param name="id">The team identifier</param>
         /// <param name="owner">Owner of the org the team is associated with.</param>
-        /// <param name="repo">Name of the repo.</param>
+        /// <param name="repository">Name of the repo.</param>
         /// <remarks>
         /// See the <a href="https://developer.github.com/v3/orgs/teams/#get-team-repo">API documentation</a> for more information.
         /// </remarks>
         /// <returns><see langword="true"/> if the repository is managed by the given team; <see langword="false"/> otherwise.</returns>
-        Task<bool> IsRepositoryManagedByTeam(int id, string owner, string repo);
+        Task<bool> IsRepositoryManagedByTeam(int id, string owner, string repository);
     }
 }

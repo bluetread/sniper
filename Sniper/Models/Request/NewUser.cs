@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -18,8 +19,8 @@ namespace Sniper.Request
         /// <param name="email">The email address of the user</param>
         public NewUser(string login, string email)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
-            Ensure.ArgumentNotNullOrEmptyString(email, "email");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Email, email);
 
             Login = login;
             Email = email;

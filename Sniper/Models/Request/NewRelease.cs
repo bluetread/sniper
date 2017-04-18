@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Globalization;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -15,11 +16,11 @@ namespace Sniper.Request
         /// <summary>
         /// Initializes a new instance of the <see cref="NewRelease"/> class.
         /// </summary>
-        /// <param name="tagName">Name of the tag to create in the repository for this release.</param>
-        public NewRelease(string tagName)
+        /// <param name="tag">Name of the tag to create in the repository for this release.</param>
+        public NewRelease(string tag)
         {
-            Ensure.ArgumentNotNullOrEmptyString(tagName, "tagName");
-            TagName = tagName;
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Tag, tag);
+            TagName = tag;
         }
 
         /// <summary>

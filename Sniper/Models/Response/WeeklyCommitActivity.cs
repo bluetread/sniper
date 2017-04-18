@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Response
 {
@@ -14,7 +15,7 @@ namespace Sniper.Response
 
         public WeeklyCommitActivity(IEnumerable<int> days, int total, long week)
         {
-            Ensure.ArgumentNotNull(days, "days");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Days, days);
 
             Days = new ReadOnlyCollection<int>(days.ToList());
             Total = total;

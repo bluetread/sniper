@@ -2,34 +2,36 @@
   <Words>
     <Recognized>
       <Word>Api</Word>
-      <Word>Etag</Word>
+      <Word>Auth</Word>
+      <Word>Commitish</Word>
       <Word>Git</Word>
-      <Word>Gists</Word>
-      <Word>Gravatar</Word>
+      <Word>Gzip</Word>
       <Word>Hireable</Word>
-      <Word>Sniper</Word>
+      <Word>IOAuth</Word>
+      <Word>Mergeable</Word>
       <Word>OAuth</Word>
       <Word>Poco</Word>
-      <Word>Ssh</Word>
-      <Word>Svn</Word>
-      <Word>Emoji</Word>
-      <Word>Emojis</Word>
       <Word>Sha</Word>
-      <Word>Color</Word>
-      <Word>Prerelease</Word>
-      <Word>Commitish</Word>
-      <Word>Mergeable</Word>
-      <Word>Symlink</Word>
+      <Word>Ssh</Word>
       <Word>Submodule</Word>
-      <Word>Forkee</Word>
-      <Word>Tarball</Word>
+      <Word>Svn</Word>
+      <Word>Symlink</Word>
       <Word>Unsuspend</Word>
-      <Word>Zipball</Word>
-      <Word>Gpg</Word>
     </Recognized>
+    <DiscreteExceptions>
+      <Term>OAuth</Term>
+    </DiscreteExceptions>
   </Words>
   <Acronyms>
     <CasingExceptions>
+      <Acronym>Auth</Acronym>
+      <Acronym>C2Hs</Acronym>
+      <Acronym>Cl</Acronym>
+      <Acronym>Hs</Acronym>
+      <Acronym>IOAuth</Acronym>
+      <Acronym>Ml</Acronym>
+      <Acronym>OAuth</Acronym>
+      <Acronym>Py</Acronym>
       <Acronym>Poco</Acronym>
       <Acronym>Ssh</Acronym>
       <Acronym>Svn</Acronym>

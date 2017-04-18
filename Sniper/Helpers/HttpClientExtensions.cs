@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Sniper.Http;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -8,8 +9,8 @@ namespace Sniper
     {
         public static Task<IResponse> Send(this IHttpClient httpClient, IRequest request)
         {
-            Ensure.ArgumentNotNull(httpClient, "httpClient");
-            Ensure.ArgumentNotNull(request, "request");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.HttpClient, httpClient);
+            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
 
             return httpClient.Send(request, CancellationToken.None);
         }

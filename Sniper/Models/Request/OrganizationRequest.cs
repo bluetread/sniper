@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -15,8 +16,8 @@ namespace Sniper.Request
         /// <param name="since">The integer Id of the last Organization that you've seen.</param>
         public OrganizationRequest(int since)
         {
-            Ensure.ArgumentNotNull(since, "since");
-
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Since, since);
+            
             Since = since;
         }
 

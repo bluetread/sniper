@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Response
 {
@@ -27,7 +28,8 @@ namespace Sniper.Response
         /// <exception cref="ArgumentException">If the list of data points is not 3 elements</exception>
         public AdditionsAndDeletions(IList<long> additionsAndDeletions)
         {
-            Ensure.ArgumentNotNull(additionsAndDeletions, "additionsAndDeletions");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.AdditionsAndDeletions, additionsAndDeletions);
+
             if (additionsAndDeletions.Count != 3)
             {
                 throw new ArgumentException("Addition and deletion aggregate must only contain three data points.");

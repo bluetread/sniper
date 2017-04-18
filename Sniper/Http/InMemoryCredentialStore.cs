@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Sniper.Authentication;
 
 namespace Sniper.Http
 {
@@ -15,8 +16,8 @@ namespace Sniper.Http
         /// <param name="credentials"></param>
         public InMemoryCredentialStore(Credentials credentials)
         {
-            Ensure.ArgumentNotNull(credentials, "credentials");
-
+            Ensure.ArgumentNotNull(AuthenticationKeys.Credentials, credentials);
+            
             _credentials = credentials;
         }
 

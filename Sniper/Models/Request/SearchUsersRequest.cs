@@ -27,14 +27,7 @@ namespace Sniper.Request
         /// </summary>
         public UsersSearchSort? SortField { get; set; }
 
-        /// <summary>
-        /// The sort field as a string.
-        /// </summary>
-        public override string Sort
-        {
-            get { return SortField.ToParameter(); }
-        }
-
+  
         /// <summary>
         /// Filter users based on the number of followers they have.
         /// <remarks>https://help.github.com/articles/searching-users#followers</remarks>       
@@ -59,17 +52,7 @@ namespace Sniper.Request
         /// </summary>
         public Range Repositories { get; set; }
 
-        /// <summary>
-        /// Search for users that have repositories that match a certain language.
-        /// <remarks>https://help.github.com/articles/searching-users#language</remarks>       
-        /// </summary>
-        public Language? Language { get; set; }
-
-        /// <summary>
-        /// With this qualifier you can restrict the search to just personal accounts or just organization accounts.
-        /// <remarks>https://help.github.com/articles/searching-users#type</remarks>       
-        /// </summary>
-        public AccountSearchType? AccountType { get; set; }
+   
 
         private IEnumerable<UserInQualifier> _inQualifier;
 
@@ -94,10 +77,7 @@ namespace Sniper.Request
         {
             var parameters = new List<string>();
 
-            if (AccountType != null)
-            {
-                parameters.Add(string.Format(CultureInfo.InvariantCulture, "type:{0}", AccountType));
-            }
+          
 
             if (In != null)
             {
@@ -114,20 +94,7 @@ namespace Sniper.Request
                 parameters.Add(string.Format(CultureInfo.InvariantCulture, "location:{0}", Location));
             }
 
-            if (Language != null)
-            {
-                parameters.Add(string.Format(CultureInfo.InvariantCulture, "language:{0}", Language));
-            }
-
-            if (Created != null)
-            {
-                parameters.Add(string.Format(CultureInfo.InvariantCulture, "created:{0}", Created));
-            }
-
-            if (Followers != null)
-            {
-                parameters.Add(string.Format(CultureInfo.InvariantCulture, "followers:{0}", Followers));
-            }
+         
 
             return new ReadOnlyCollection<string>(parameters);
         }
@@ -136,7 +103,7 @@ namespace Sniper.Request
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "Term: {0} Sort: {1}", Term, Sort);
+                return string.Format(CultureInfo.InvariantCulture, "Term: {0} ", Term);
             }
         }
     }

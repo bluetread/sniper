@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Net;
 using System.Threading.Tasks;
+using Sniper.Paginations;
 
 namespace Sniper
 {
@@ -17,7 +18,7 @@ namespace Sniper
     {
         public async Task<IReadOnlyList<T>> GetAllPages<T>(Func<Task<IReadOnlyPagedCollection<T>>> getFirstPage, Uri uri)
         {
-            Ensure.ArgumentNotNull(getFirstPage, "getFirstPage");
+            Ensure.ArgumentNotNull(PaginationKeys.FirstPage, getFirstPage);
             try
             {
                 var page = await getFirstPage().ConfigureAwait(false);

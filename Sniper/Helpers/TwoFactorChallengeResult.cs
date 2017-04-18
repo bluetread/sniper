@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Sniper.Authentication;
 
 namespace Sniper
 {
@@ -21,7 +22,7 @@ namespace Sniper
         public TwoFactorChallengeResult(string authenticationCode)
             : this(authenticationCode, false)
         {
-            Ensure.ArgumentNotNull(authenticationCode, "authenticationCode");
+            Ensure.ArgumentNotNull(AuthenticationKeys.AuthenticationCode, authenticationCode);
         }
 
         private TwoFactorChallengeResult(string authenticationCode, bool resendCodeRequested)

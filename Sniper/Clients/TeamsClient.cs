@@ -1,12 +1,13 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
 using Sniper.Http;
 using Sniper.Request;
 using Sniper.Response;
 
 using System.Collections.Generic;
-
+using Sniper.ApiClients;
+using Sniper.Repositories;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -22,10 +23,7 @@ namespace Sniper
         /// Initializes a new GitHub Orgs Team API client.
         /// </summary>
         /// <param name="apiConnection">An API connection.</param>
-        public TeamsClient(IApiConnection apiConnection)
-            : base(apiConnection)
-        {
-        }
+        public TeamsClient(IApiConnection apiConnection) : base(apiConnection) {}
 
         /// <summary>
         /// Gets a single <see cref="Team"/> by identifier.
@@ -62,8 +60,8 @@ namespace Sniper
         /// <returns>A list of the orgs's teams <see cref="Team"/>s.</returns>
         public Task<IReadOnlyList<Team>> GetAll(string org, ApiOptions options)
         {
-            Ensure.ArgumentNotNullOrEmptyString(org, "org");
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Org, org);
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             var endpoint = ApiUrls.OrganizationTeams(org);
             return ApiConnection.GetAll<Team>(endpoint, options);
@@ -87,7 +85,7 @@ namespace Sniper
         /// <returns>A list of the user's <see cref="Team"/>s.</returns>
         public Task<IReadOnlyList<Team>> GetAllForCurrent(ApiOptions options)
         {
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             var endpoint = ApiUrls.UserTeams();
 
@@ -118,7 +116,7 @@ namespace Sniper
         /// <returns>A list of the team's member <see cref="User"/>s.</returns>
         public Task<IReadOnlyList<User>> GetAllMembers(int id, ApiOptions options)
         {
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             var endpoint = ApiUrls.TeamMembers(id);
 
@@ -159,8 +157,8 @@ namespace Sniper
         /// <returns>Newly created <see cref="Team"/></returns>
         public Task<Team> Create(string org, NewTeam team)
         {
-            Ensure.ArgumentNotNullOrEmptyString(org, "org");
-            Ensure.ArgumentNotNull(team, "team");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Org, org);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Team, team);
 
             var endpoint = ApiUrls.OrganizationTeams(org);
             return ApiConnection.Post<Team>(endpoint, team);
@@ -173,7 +171,7 @@ namespace Sniper
         /// <returns>Updated <see cref="Team"/></returns>
         public Task<Team> Update(int id, UpdateTeam team)
         {
-            Ensure.ArgumentNotNull(team, "team");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Team, team);
 
             var endpoint = ApiUrls.Teams(id);
             return ApiConnection.Patch<Team>(endpoint, team);
@@ -203,7 +201,7 @@ namespace Sniper
         /// <returns>A <see cref="TeamMembership"/> result indicating the membership status</returns>
         public async Task<TeamMembership> AddMembership(int id, string login)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
 
             var endpoint = ApiUrls.TeamMember(id, login);
 
@@ -239,7 +237,7 @@ namespace Sniper
         /// <returns><see langword="true"/> if the user was removed from the team; <see langword="false"/> otherwise.</returns>
         public async Task<bool> RemoveMembership(int id, string login)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
 
             var endpoint = ApiUrls.TeamMember(id, login);
 
@@ -275,7 +273,7 @@ namespace Sniper
         /// <returns>The team's repositories</returns>
         public Task<IReadOnlyList<Repository>> GetAllRepositories(int id, ApiOptions options)
         {
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             var endpoint = ApiUrls.TeamRepositories(id);
 
@@ -287,12 +285,12 @@ namespace Sniper
         /// </summary>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns></returns>
-        public async Task<bool> AddRepository(int id, string organization, string repoName)
+        public async Task<bool> AddRepository(int id, string organization, string repository)
         {
-            Ensure.ArgumentNotNullOrEmptyString(organization, "organization");
-            Ensure.ArgumentNotNullOrEmptyString(repoName, "repoName");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Organization, organization);
+            Ensure.ArgumentNotNullOrEmptyString(RepositoryKeys.Repository, repository);
 
-            var endpoint = ApiUrls.TeamRepository(id, organization, repoName);
+            var endpoint = ApiUrls.TeamRepository(id, organization, repository);
 
             try
             {
@@ -310,20 +308,20 @@ namespace Sniper
         /// </summary>
         /// <param name="id">The team identifier.</param>
         /// <param name="organization">Org to associate the repo with.</param>
-        /// <param name="repoName">Name of the repo.</param>
+        /// <param name="repository">Name of the repo.</param>
         /// <param name="permission">The permission to grant the team on this repository.</param>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns></returns>
-        public async Task<bool> AddRepository(int id, string organization, string repoName, RepositoryPermissionRequest permission)
+        public async Task<bool> AddRepository(int id, string organization, string repository, RepositoryPermissionRequest permission)
         {
-            Ensure.ArgumentNotNullOrEmptyString(organization, "organization");
-            Ensure.ArgumentNotNullOrEmptyString(repoName, "repoName");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Organization, organization);
+            Ensure.ArgumentNotNullOrEmptyString(RepositoryKeys.Repository, repository);
 
-            var endpoint = ApiUrls.TeamRepository(id, organization, repoName);
+            var endpoint = ApiUrls.TeamRepository(id, organization, repository);
 
             try
             {
-                var httpStatusCode = await ApiConnection.Connection.Put<HttpStatusCode>(endpoint, permission, "", AcceptHeaders.OrganizationPermissionsPreview).ConfigureAwait(false);
+                var httpStatusCode = await ApiConnection.Connection.Put<HttpStatusCode>(endpoint, permission, string.Empty, AcceptHeaders.OrganizationPermissionsPreview).ConfigureAwait(false);
                 return httpStatusCode.HttpResponse.StatusCode == HttpStatusCode.NoContent;
             }
             catch (NotFoundException)
@@ -337,12 +335,12 @@ namespace Sniper
         /// </summary>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns></returns>
-        public async Task<bool> RemoveRepository(int id, string organization, string repoName)
+        public async Task<bool> RemoveRepository(int id, string organization, string repository)
         {
-            Ensure.ArgumentNotNullOrEmptyString(organization, "organization");
-            Ensure.ArgumentNotNullOrEmptyString(repoName, "repoName");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Organization, organization);
+            Ensure.ArgumentNotNullOrEmptyString(RepositoryKeys.Repository, repository);
 
-            var endpoint = ApiUrls.TeamRepository(id, organization, repoName);
+            var endpoint = ApiUrls.TeamRepository(id, organization, repository);
 
             try
             {
@@ -361,17 +359,17 @@ namespace Sniper
         /// </summary>
         /// <param name="id">The team identifier</param>
         /// <param name="owner">Owner of the org the team is associated with.</param>
-        /// <param name="repo">Name of the repo.</param>
+        /// <param name="repository">Name of the repo.</param>
         /// <remarks>
         /// See the <a href="https://developer.github.com/v3/orgs/teams/#get-team-repo">API documentation</a> for more information.
         /// </remarks>
         /// <returns><see langword="true"/> if the repository is managed by the given team; <see langword="false"/> otherwise.</returns>
-        public async Task<bool> IsRepositoryManagedByTeam(int id, string owner, string repo)
+        public async Task<bool> IsRepositoryManagedByTeam(int id, string owner, string repository)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(repo, "repo");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(RepositoryKeys.Repository, repository);
 
-            var endpoint = ApiUrls.TeamRepository(id, owner, repo);
+            var endpoint = ApiUrls.TeamRepository(id, owner, repository);
 
             try
             {

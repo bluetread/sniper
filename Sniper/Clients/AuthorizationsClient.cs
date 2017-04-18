@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
-using System;
 using System.Collections.Generic;
+using Sniper.ApiClients;
+using Sniper.Authentication;
 using Sniper.Http;
 using Sniper.Request;
 using Sniper.Response;
@@ -27,7 +28,7 @@ namespace Sniper
         /// Gets all <see cref="Authorization"/>s for the authenticated user.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="http://developer.github.com/v3/oauth/#list-your-authorizations">API documentation</a> for more information.
         /// </remarks>
         /// <exception cref="AuthorizationException">
@@ -44,7 +45,7 @@ namespace Sniper
         /// Gets all <see cref="Authorization"/>s for the authenticated user.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="http://developer.github.com/v3/oauth/#list-your-authorizations">API documentation</a> for more information.
         /// </remarks>
         /// <param name="options">Options for changing the API response</param>
@@ -55,7 +56,7 @@ namespace Sniper
         /// <returns>A list of <see cref="Authorization"/>s for the authenticated user.</returns>
         public Task<IReadOnlyList<Authorization>> GetAll(ApiOptions options)
         {
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             return ApiConnection.GetAll<Authorization>(ApiUrls.Authorizations(), options);
         }
@@ -64,7 +65,7 @@ namespace Sniper
         /// Gets a specific <see cref="Authorization"/> for the authenticated user.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="http://developer.github.com/v3/oauth/#get-a-single-authorization">API documentation</a> for more information.
         /// </remarks>
         /// <param name="id">The Id of the <see cref="Authorization"/> to get</param>
@@ -83,7 +84,7 @@ namespace Sniper
         /// Creates a new personal token for the authenticated user.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization">API documentation</a> for more information.
         /// </remarks>
         /// <param name="newAuthorization">Describes the new authorization to create</param>
@@ -97,7 +98,7 @@ namespace Sniper
         /// <returns>The created <see cref="Authorization"/>.</returns>
         public Task<ApplicationAuthorization> Create(NewAuthorization newAuthorization)
         {
-            Ensure.ArgumentNotNull(newAuthorization, "newAuthorization");
+            Ensure.ArgumentNotNull(AuthenticationKeys.NewAuthorization, newAuthorization);
 
             var requestData = new
             {
@@ -116,7 +117,7 @@ namespace Sniper
         /// Creates a new personal token for the authenticated user.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization">API documentation</a> for more information.
         /// </remarks>
         /// <param name="twoFactorAuthenticationCode">The two-factor authentication code in response to the current user's previous challenge</param>
@@ -129,12 +130,10 @@ namespace Sniper
         /// </exception>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>The created <see cref="Authorization"/>.</returns>
-        public Task<ApplicationAuthorization> Create(
-            NewAuthorization newAuthorization,
-            string twoFactorAuthenticationCode)
+        public Task<ApplicationAuthorization> Create(NewAuthorization newAuthorization, string twoFactorAuthenticationCode)
         {
-            Ensure.ArgumentNotNull(newAuthorization, "newAuthorization");
-            Ensure.ArgumentNotNullOrEmptyString(twoFactorAuthenticationCode, "twoFactorAuthenticationCode");
+            Ensure.ArgumentNotNull(AuthenticationKeys.NewAuthorization, newAuthorization);
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.TwoFactorAuthenticationCode, twoFactorAuthenticationCode);
 
             var requestData = new
             {
@@ -153,7 +152,7 @@ namespace Sniper
         /// doesn’t already exist for the user; otherwise, it fails.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app">API documentation</a> for more information.
         /// </remarks>
         /// <param name="clientId">Client Id of the OAuth application for the token</param>
@@ -172,9 +171,9 @@ namespace Sniper
             string clientSecret,
             NewAuthorization newAuthorization)
         {
-            Ensure.ArgumentNotNullOrEmptyString(clientId, "clientId");
-            Ensure.ArgumentNotNullOrEmptyString(clientSecret, "clientSecret");
-            Ensure.ArgumentNotNull(newAuthorization, "newAuthorization");
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientSecret, clientSecret);
+            Ensure.ArgumentNotNull(AuthenticationKeys.NewAuthorization, newAuthorization);
 
             var requestData = new
             {
@@ -196,7 +195,7 @@ namespace Sniper
         /// doesn’t already exist for the user; otherwise, it fails.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app">API documentation</a> for more information.
         /// </remarks>
         /// <param name="clientId">Client Id of the OAuth application for the token</param>
@@ -211,16 +210,13 @@ namespace Sniper
         /// </exception>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>The created <see cref="Authorization"/>.</returns>
-        public Task<ApplicationAuthorization> Create(
-            string clientId,
-            string clientSecret,
-            NewAuthorization newAuthorization,
-            string twoFactorAuthenticationCode)
+        public Task<ApplicationAuthorization> Create(string clientId, string clientSecret, NewAuthorization newAuthorization, string twoFactorAuthenticationCode)
         {
-            Ensure.ArgumentNotNullOrEmptyString(clientId, "clientId");
-            Ensure.ArgumentNotNullOrEmptyString(clientSecret, "clientSecret");
-            Ensure.ArgumentNotNull(newAuthorization, "newAuthorization");
-            Ensure.ArgumentNotNullOrEmptyString(twoFactorAuthenticationCode, "twoFactorAuthenticationCode");
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientSecret, clientSecret);
+            Ensure.ArgumentNotNull(AuthenticationKeys.NewAuthorization, newAuthorization);
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.TwoFactorAuthenticationCode, twoFactorAuthenticationCode);
+            
 
             var requestData = new
             {
@@ -241,7 +237,7 @@ namespace Sniper
         /// exist for the user; otherwise, returns the user’s existing authorization for that application.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app">API documentation</a> for more information.
         /// </remarks>
         /// <param name="clientId">Client Id of the OAuth application for the token</param>
@@ -260,9 +256,9 @@ namespace Sniper
             string clientSecret,
             NewAuthorization newAuthorization)
         {
-            Ensure.ArgumentNotNullOrEmptyString(clientId, "clientId");
-            Ensure.ArgumentNotNullOrEmptyString(clientSecret, "clientSecret");
-            Ensure.ArgumentNotNull(newAuthorization, "newAuthorization");
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientSecret, clientSecret);
+            Ensure.ArgumentNotNull(AuthenticationKeys.NewAuthorization, newAuthorization);
 
             var requestData = new
             {
@@ -282,7 +278,7 @@ namespace Sniper
         /// exist for the user; otherwise, returns the user’s existing authorization for that application.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app">API documentation</a> for more information.
         /// </remarks>
         /// <param name="clientId">Client Id of the OAuth application for the token</param>
@@ -303,10 +299,10 @@ namespace Sniper
             NewAuthorization newAuthorization,
             string twoFactorAuthenticationCode)
         {
-            Ensure.ArgumentNotNullOrEmptyString(clientId, "clientId");
-            Ensure.ArgumentNotNullOrEmptyString(clientSecret, "clientSecret");
-            Ensure.ArgumentNotNull(newAuthorization, "newAuthorization");
-            Ensure.ArgumentNotNullOrEmptyString(twoFactorAuthenticationCode, "twoFactorAuthenticationCode");
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientSecret, clientSecret);
+            Ensure.ArgumentNotNull(AuthenticationKeys.NewAuthorization, newAuthorization);
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.TwoFactorAuthenticationCode, twoFactorAuthenticationCode);
 
             var requestData = new
             {
@@ -333,7 +329,7 @@ namespace Sniper
         /// Checks the validity of an OAuth token without running afoul of normal rate limits for failed login attempts.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#check-an-authorization">API documentation</a> for more information.
         /// </remarks>
         /// <param name="clientId">Client Id of the OAuth application for the token</param>
@@ -341,8 +337,8 @@ namespace Sniper
         /// <returns>The valid <see cref="ApplicationAuthorization"/>.</returns>
         public Task<ApplicationAuthorization> CheckApplicationAuthentication(string clientId, string accessToken)
         {
-            Ensure.ArgumentNotNullOrEmptyString(clientId, "clientId");
-            Ensure.ArgumentNotNullOrEmptyString(accessToken, "accessToken");
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.AccessToken, accessToken);
 
             var endpoint = ApiUrls.ApplicationAuthorization(clientId, accessToken);
             return ApiConnection.Get<ApplicationAuthorization>(endpoint, null);
@@ -352,7 +348,7 @@ namespace Sniper
         /// Resets a valid OAuth token for an OAuth application without end user involvement.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#reset-an-authorization">API documentation</a> for more information.
         /// </remarks>
         /// <param name="clientId">ClientID of the OAuth application for the token</param>
@@ -360,8 +356,8 @@ namespace Sniper
         /// <returns>The valid <see cref="ApplicationAuthorization"/> with a new OAuth token</returns>
         public Task<ApplicationAuthorization> ResetApplicationAuthentication(string clientId, string accessToken)
         {
-            Ensure.ArgumentNotNullOrEmptyString(clientId, "clientId");
-            Ensure.ArgumentNotNullOrEmptyString(accessToken, "accessToken");
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.AccessToken, accessToken);
 
             var requestData = new { };
 
@@ -372,7 +368,7 @@ namespace Sniper
         /// Revokes a single OAuth token for an OAuth application.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#revoke-an-authorization-for-an-application">API documentation for more information.</a>
         /// </remarks>
         /// <param name="clientId">ClientID of the OAuth application for the token</param>
@@ -380,8 +376,8 @@ namespace Sniper
         /// <returns>A <see cref="Task"/> for the request's execution.</returns>
         public Task RevokeApplicationAuthentication(string clientId, string accessToken)
         {
-            Ensure.ArgumentNotNullOrEmptyString(clientId, "clientId");
-            Ensure.ArgumentNotNullOrEmptyString(accessToken, "accessToken");
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.AccessToken, accessToken);
 
             return ApiConnection.Delete(
                 ApiUrls.ApplicationAuthorization(clientId, accessToken));
@@ -391,7 +387,7 @@ namespace Sniper
         /// Updates the specified <see cref="Authorization"/>.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="http://developer.github.com/v3/oauth/#update-an-existing-authorization">API 
         /// documentation</a> for more details.
         /// </remarks>
@@ -404,18 +400,16 @@ namespace Sniper
         /// <returns>The updated <see cref="Authorization"/>.</returns>
         public Task<Authorization> Update(int id, AuthorizationUpdate authorizationUpdate)
         {
-            Ensure.ArgumentNotNull(authorizationUpdate, "authorizationUpdate");
-
-            return ApiConnection.Patch<Authorization>(
-                ApiUrls.Authorizations(id),
-                authorizationUpdate);
+            Ensure.ArgumentNotNull(AuthenticationKeys.AuthorizationUpdate, authorizationUpdate);
+            
+            return ApiConnection.Patch<Authorization>(ApiUrls.Authorizations(id), authorizationUpdate);
         }
 
         /// <summary>
         /// Deletes the specified <see cref="Authorization"/>.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="http://developer.github.com/v3/oauth/#delete-an-authorization">API 
         /// documentation</a> for more details.
         /// </remarks>
@@ -434,7 +428,7 @@ namespace Sniper
         /// Deletes the specified <see cref="Authorization"/>.
         /// </summary>
         /// <remarks>
-        /// This method requires authentication.
+        /// This method requires AuthenticationKeys.
         /// See the <a href="http://developer.github.com/v3/oauth/#delete-an-authorization">API 
         /// documentation</a> for more details.
         /// </remarks>

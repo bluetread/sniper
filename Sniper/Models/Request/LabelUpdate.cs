@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -20,8 +21,8 @@ namespace Sniper.Request
         /// <param name="color">The color of the label.</param>
         public LabelUpdate(string name, string color)
         {
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNullOrEmptyString(color, "color");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Color, color);
 
             Name = name;
             Color = color;

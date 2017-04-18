@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -27,7 +28,7 @@ namespace Sniper.Request
         /// </param>
         public ReferenceUpdate(string sha, bool force)
         {
-            Ensure.ArgumentNotNullOrEmptyString(sha, "sha");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Sha, sha);
 
             Sha = sha;
             Force = force;

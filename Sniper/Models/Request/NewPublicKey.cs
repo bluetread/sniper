@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using Sniper.Http;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -14,8 +16,8 @@ namespace Sniper.Request
 
         public NewPublicKey(string title, string key)
         {
-            Ensure.ArgumentNotNullOrEmptyString(title, "title");
-            Ensure.ArgumentNotNullOrEmptyString(key, "key");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Title, title);
+            Ensure.ArgumentNotNullOrEmptyString(HttpKeys.Key, key);
 
             Title = title;
             Key = key;

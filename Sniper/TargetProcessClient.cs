@@ -1,6 +1,7 @@
 ﻿using System;
-using Sniper.Enterprise;
+using Sniper.ApiClients;
 using Sniper.Http;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -79,21 +80,13 @@ namespace Sniper
         /// <param name="connection">The underlying <seealso cref="IConnection"/> used to make requests</param>
         public TargetProcessClient(IConnection connection)
         {
-            Ensure.ArgumentNotNull(connection, "connection");
+            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
 
             Connection = connection;
             var apiConnection = new ApiConnection(connection);
-            Activity = new ActivitiesClient(apiConnection);
             Authorization = new AuthorizationsClient(apiConnection);
-            Enterprise = new EnterpriseClient(apiConnection);
-            Gist = new GistsClient(apiConnection);
-            Git = new GitDatabaseClient(apiConnection);
-            Issue = new IssuesClient(apiConnection);
-            Migration = new MigrationClient(apiConnection);
             Miscellaneous = new MiscellaneousClient(connection);
-            Oauth = new OauthClient(connection);
-            Organization = new OrganizationsClient(apiConnection);
-            PullRequest = new PullRequestsClient(apiConnection);
+            Oauth = new OAuthClient(connection);
             Repository = new RepositoriesClient(apiConnection);
             Search = new SearchClient(apiConnection);
             User = new UsersClient(apiConnection);
@@ -123,7 +116,7 @@ namespace Sniper
             // Note this is for convenience. We probably shouldn't allow this to be mutable.
             set
             {
-                Ensure.ArgumentNotNull(value, "value");
+                Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Value, value);
                 Connection.Credentials = value;
             }
         }
@@ -151,30 +144,6 @@ namespace Sniper
         public IAuthorizationsClient Authorization { get; }
 
         /// <summary>
-        /// Access GitHub's Activity API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/activity/
-        /// </remarks>
-        public IActivitiesClient Activity { get; }
-
-        /// <summary>
-        /// Access GitHub's Issue API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/issues/
-        /// </remarks>
-        public IIssuesClient Issue { get; }
-
-        /// <summary>
-        /// Access GitHub's Migration API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/migration/
-        /// </remarks>
-        public IMigrationClient Migration { get; }
-
-        /// <summary>
         /// Access GitHub's Miscellaneous API.
         /// </summary>
         /// <remarks>
@@ -188,23 +157,7 @@ namespace Sniper
         /// <remarks>
         /// Refer to the API documentation for more information: https://developer.github.com/v3/oauth/
         /// </remarks>
-        public IOauthClient Oauth { get; }
-
-        /// <summary>
-        /// Access GitHub's Organizations API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/orgs/
-        /// </remarks>
-        public IOrganizationsClient Organization { get; }
-
-        /// <summary>
-        /// Access GitHub's Pull Requests API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/pulls/
-        /// </remarks>
-        public IPullRequestsClient PullRequest { get; }
+        public IOAuthClient Oauth { get; }
 
         /// <summary>
         /// Access GitHub's Repositories API.
@@ -213,15 +166,7 @@ namespace Sniper
         /// Refer to the API documentation for more information: https://developer.github.com/v3/repos/
         /// </remarks>
         public IRepositoriesClient Repository { get; }
-
-        /// <summary>
-        /// Access GitHub's Gists API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/gists/
-        /// </remarks>
-        public IGistsClient Gist { get; }
-
+    
         /// <summary>
         /// Access GitHub's Users API.
         /// </summary>
@@ -230,14 +175,7 @@ namespace Sniper
         /// </remarks>
         public IUsersClient User { get; }
 
-        /// <summary>
-        /// Access GitHub's Git Data API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/git/
-        /// </remarks>
-        public IGitDatabaseClient Git { get; }
-
+     
         /// <summary>
         /// Access GitHub's Search API.
         /// </summary>
@@ -246,19 +184,9 @@ namespace Sniper
         /// </remarks>
         public ISearchClient Search { get; }
 
-        /// <summary>
-        /// Access GitHub's Enterprise API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/enterprise/
-        /// </remarks>
-        public IEnterpriseClient Enterprise { get; }
-
-       
-
         private static Uri FixUpBaseUri(Uri uri)
         {
-            Ensure.ArgumentNotNull(uri, "uri");
+            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
 
             if (uri.Host.Equals("targetprocess.com") || uri.Host.Equals("api.targetprocess.com"))
             {

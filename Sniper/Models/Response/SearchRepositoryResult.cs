@@ -8,9 +8,6 @@ namespace Sniper.Response
     {
         public SearchRepositoryResult() { }
 
-        public SearchRepositoryResult(int totalCount, bool incompleteResults, IReadOnlyList<Repository> items)
-            : base(totalCount, incompleteResults, items)
-        {
-        }
+        public SearchRepositoryResult(int totalCount, bool incompleteResults, IReadOnlyList<Repository> items) : base(totalCount, incompleteResults, items) {}
     }
 }

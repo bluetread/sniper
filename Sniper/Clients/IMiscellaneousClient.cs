@@ -15,14 +15,6 @@ namespace Sniper
     public interface IMiscellaneousClient
     {
         /// <summary>
-        /// Gets all the emojis available to use on GitHub.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
-        /// <returns>An <see cref="IReadOnlyDictionary{TKey,TValue}"/> of emoji and their URI.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-        Task<IReadOnlyList<Emoji>> GetAllEmojis();
-
-        /// <summary>
         /// Gets the rendered Markdown for the specified plain-text Markdown document.
         /// </summary>
         /// <param name="markdown">A plain-text Markdown document</param>
@@ -37,20 +29,6 @@ namespace Sniper
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>The rendered Markdown.</returns>
         Task<string> RenderArbitraryMarkdown(NewArbitraryMarkdown markdown);
-
-        /// <summary>
-        /// List all templates available to pass as an option when creating a repository.
-        /// </summary>
-        /// <returns>A list of template names</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
-        Task<IReadOnlyList<string>> GetAllGitIgnoreTemplates();
-
-        /// <summary>
-        /// Retrieves the source for a single GitIgnore template
-        /// </summary>
-        /// <param name="templateName"></param>
-        /// <returns>A template and its source</returns>
-        Task<GitIgnoreTemplate> GetGitIgnoreTemplate(string templateName);
 
         /// <summary>
         /// Returns a list of the licenses shown in the license picker on GitHub.com. This is not a comprehensive

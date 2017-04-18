@@ -8,14 +8,14 @@ namespace Sniper
     /// <summary>
     /// Provides methods used in the OAuth web flow.
     /// </summary>
-    public interface IOauthClient
+    public interface IOAuthClient
     {
         /// <summary>
         /// Gets the URL used in the first step of the web flow. The Web application should redirect to this URL.
         /// </summary>
         /// <param name="request">Parameters to the Oauth web flow login url</param>
         /// <returns></returns>
-        Uri GetGitHubLoginUrl(OauthLoginRequest request);
+        Uri GetGitHubLoginUrl(OAuthLoginRequest request);
 
         /// <summary>
         /// Makes a request to get an access token using the code returned when GitHub.com redirects back from the URL
@@ -29,6 +29,6 @@ namespace Sniper
         /// </remarks>
         /// <param name="request"></param>
         /// <returns></returns>
-        Task<OauthToken> CreateAccessToken(OauthTokenRequest request);
+        Task<OauthToken> CreateAccessToken(OAuthTokenRequest request);
     }
 }

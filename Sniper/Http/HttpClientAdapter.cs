@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Http
 {
@@ -25,8 +26,8 @@ namespace Sniper.Http
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public HttpClientAdapter(Func<HttpMessageHandler> getHandler)
         {
-            Ensure.ArgumentNotNull(getHandler, "getHandler");
-
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.GetHandler, getHandler);
+            
             _http = new HttpClient(new RedirectHandler { InnerHandler = getHandler() });
         }
 
@@ -38,7 +39,7 @@ namespace Sniper.Http
         /// <returns>A <see cref="Task" /> of <see cref="IResponse"/></returns>
         public async Task<IResponse> Send(IRequest request, CancellationToken cancellationToken)
         {
-            Ensure.ArgumentNotNull(request, "request");
+            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
 
             var cancellationTokenForRequest = GetCancellationTokenForRequest(request, cancellationToken);
 
@@ -67,8 +68,8 @@ namespace Sniper.Http
 
         protected virtual async Task<IResponse> BuildResponse(HttpResponseMessage responseMessage)
         {
-            Ensure.ArgumentNotNull(responseMessage, "responseMessage");
-
+            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.ResponseMessage, responseMessage);
+            
             object responseBody = null;
             string contentType = null;
 
@@ -106,7 +107,7 @@ namespace Sniper.Http
 
         protected virtual HttpRequestMessage BuildRequestMessage(IRequest request)
         {
-            Ensure.ArgumentNotNull(request, "request");
+            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
             HttpRequestMessage requestMessage = null;
             try
             {

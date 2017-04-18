@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Http
 {
@@ -15,7 +16,7 @@ namespace Sniper.Http
 
         public Credentials(string token)
         {
-            Ensure.ArgumentNotNullOrEmptyString(token, "token");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Token, token);
 
             Login = null;
             Password = token;
@@ -24,8 +25,8 @@ namespace Sniper.Http
 
         public Credentials(string login, string password)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
-            Ensure.ArgumentNotNullOrEmptyString(password, "password");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Password, password);
 
             Login = login;
             Password = password;

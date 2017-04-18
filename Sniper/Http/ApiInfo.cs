@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-
-
-
 namespace Sniper.Http
 {
     /// <summary>
@@ -12,19 +9,14 @@ namespace Sniper.Http
     /// </summary>
     public class ApiInfo
     {
-        public ApiInfo(IDictionary<string, Uri> links,
-            IList<string> oauthScopes,
-            IList<string> acceptedOauthScopes,
-            string etag,
-            RateLimit rateLimit)
+        public ApiInfo(IDictionary<string, Uri> links, IList<string> oauthScopes, IList<string> acceptedOAuthScopes, RateLimit rateLimit)
         {
-            Ensure.ArgumentNotNull(links, "links");
-            Ensure.ArgumentNotNull(oauthScopes, "oauthScopes");
+            Ensure.ArgumentNotNull(nameof(links), links);
+            Ensure.ArgumentNotNull(nameof(oauthScopes), oauthScopes);
 
             Links = new ReadOnlyDictionary<string, Uri>(links);
             OauthScopes = new ReadOnlyCollection<string>(oauthScopes);
-            AcceptedOauthScopes = new ReadOnlyCollection<string>(acceptedOauthScopes);
-            Etag = etag;
+            AcceptedOAuthScopes = new ReadOnlyCollection<string>(acceptedOAuthScopes);
             RateLimit = rateLimit;
         }
 
@@ -36,12 +28,7 @@ namespace Sniper.Http
         /// <summary>
         /// Oauth scopes accepted for this particular call.
         /// </summary>
-        public IReadOnlyList<string> AcceptedOauthScopes { get; }
-
-        /// <summary>
-        /// Etag
-        /// </summary>
-        public string Etag { get; }
+        public IReadOnlyList<string> AcceptedOAuthScopes { get; }
 
         /// <summary>
         /// Links to things like next/previous pages
@@ -61,14 +48,10 @@ namespace Sniper.Http
         {
             // Seem to have to do this to pass a whole bunch of tests (for example Sniper.Tests.Clients.EventsClientTests.DeserializesCommitCommentEventCorrectly)
             // I believe this has something to do with the Mocking framework.
-            if (Links == null || OauthScopes == null || RateLimit == null || Etag == null)
+            if (Links == null || OauthScopes == null || RateLimit == null)
                 return null;
 
-            return new ApiInfo(Links.Clone(),
-                                OauthScopes.Clone(),
-                                AcceptedOauthScopes.Clone(),
-                                new string(Etag.ToCharArray()),
-                                RateLimit.Clone());
+            return new ApiInfo(Links.Clone(), OauthScopes.Clone(), AcceptedOAuthScopes.Clone(), RateLimit.Clone());
         }
     }
 }

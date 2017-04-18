@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -98,7 +99,7 @@ namespace Sniper.Request
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "IncludeAdmins: {0} Strict: {1} Contexts: {2}", IncludeAdmins, Strict, Contexts == null ? "" : String.Join(",", Contexts));
+                return string.Format(CultureInfo.InvariantCulture, "IncludeAdmins: {0} Strict: {1} Contexts: {2}", IncludeAdmins, Strict, Contexts == null ? string.Empty : String.Join(",", Contexts));
             }
         }
     }
@@ -124,7 +125,7 @@ namespace Sniper.Request
         /// <param name="teams">Teams allowed to push to this branch</param>
         public BranchProtectionPushRestrictionsUpdate(BranchProtectionTeamCollection teams)
         {
-            Ensure.ArgumentNotNull(teams, "teams");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Teams, teams);
 
             Teams = teams;
             Users = new BranchProtectionUserCollection();
@@ -136,7 +137,7 @@ namespace Sniper.Request
         /// <param name="users">Users allowed to push to this branch</param>
         public BranchProtectionPushRestrictionsUpdate(BranchProtectionUserCollection users)
         {
-            Ensure.ArgumentNotNull(users, "users");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Users, users);
 
             Teams = new BranchProtectionTeamCollection();
             Users = users;
@@ -149,8 +150,8 @@ namespace Sniper.Request
         /// <param name="users">Users allowed to push to this branch</param>
         public BranchProtectionPushRestrictionsUpdate(BranchProtectionTeamCollection teams, BranchProtectionUserCollection users)
         {
-            Ensure.ArgumentNotNull(teams, "teams");
-            Ensure.ArgumentNotNull(users, "users");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Teams, teams);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Users, users);
 
             Teams = teams;
             Users = users;
@@ -172,8 +173,8 @@ namespace Sniper.Request
             {
                 return string.Format(CultureInfo.InvariantCulture,
                     "Teams: {0} Users: {1}",
-                    Teams == null ? "" : Teams.DebuggerDisplay,
-                    Users == null ? "" : Users.DebuggerDisplay);
+                    Teams == null ? string.Empty : Teams.DebuggerDisplay,
+                    Users == null ? string.Empty : Users.DebuggerDisplay);
             }
         }
     }

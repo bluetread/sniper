@@ -9,7 +9,7 @@ namespace Sniper.Response
     {
         protected Account() { }
 
-        protected Account(string avatarUrl, string bio, string blog, int collaborators, string company, DateTimeOffset createdAt, int diskUsage, string email, int followers, int following, bool? hireable, string htmlUrl, int totalPrivateRepos, int id, string location, string login, string name, int ownedPrivateRepos, Plan plan, int privateGists, int publicGists, int publicRepos, AccountType type, string url)
+        protected Account(string avatarUrl, string bio, string blog, int collaborators, string company, DateTimeOffset createdAt, int diskUsage, string email, int followers, int following, bool? hireable, string htmlUrl, int totalPrivateRepos, int id, string location, string login, string name, int ownedPrivateRepos, Plan plan, int publicRepos, AccountType type, string url)
         {
             AvatarUrl = avatarUrl;
             Bio = bio;
@@ -30,8 +30,6 @@ namespace Sniper.Response
             Name = name;
             OwnedPrivateRepos = ownedPrivateRepos;
             Plan = plan;
-            PrivateGists = privateGists;
-            PublicGists = publicGists;
             PublicRepos = publicRepos;
             Type = type;
             Url = url;
@@ -135,17 +133,7 @@ namespace Sniper.Response
         /// </summary>
         public Plan Plan { get; protected set; }
 
-        /// <summary>
-        /// Number of private gists the account has created.
-        /// </summary>
-        public int? PrivateGists { get; protected set; }
-
-        /// <summary>
-        /// Number of public gists the account has created.
-        /// </summary>
-        public int PublicGists { get; protected set; }
-
-        /// <summary>
+      /// <summary>
         /// Number of public repos the account owns.
         /// </summary>
         public int PublicRepos { get; protected set; }

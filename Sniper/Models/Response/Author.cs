@@ -9,7 +9,7 @@ namespace Sniper.Response
     {
         public Author() { }
 
-        public Author(string login, int id, string avatarUrl, string url, string htmlUrl, string followersUrl, string followingUrl, string gistsUrl, string type, string starredUrl, string subscriptionsUrl, string organizationsUrl, string reposUrl, string eventsUrl, string receivedEventsUrl, bool siteAdmin)
+        public Author(string login, int id, string avatarUrl, string url, string htmlUrl, string followersUrl, string followingUrl, string type, string starredUrl, string subscriptionsUrl, string organizationsUrl, string reposUrl, string eventsUrl, string receivedEventsUrl, bool siteAdmin)
         {
             Login = login;
             Id = id;
@@ -18,7 +18,6 @@ namespace Sniper.Response
             HtmlUrl = htmlUrl;
             FollowersUrl = followersUrl;
             FollowingUrl = followingUrl;
-            GistsUrl = gistsUrl;
             Type = type;
             StarredUrl = starredUrl;
             SubscriptionsUrl = subscriptionsUrl;
@@ -42,8 +41,6 @@ namespace Sniper.Response
         public string FollowersUrl { get; protected set; }
 
         public string FollowingUrl { get; protected set; }
-
-        public string GistsUrl { get; protected set; }
 
         public string StarredUrl { get; protected set; }
 

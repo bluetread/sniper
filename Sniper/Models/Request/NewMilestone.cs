@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -16,8 +17,8 @@ namespace Sniper.Request
         /// <param name="title">The title.</param>
         public NewMilestone(string title)
         {
-            Ensure.ArgumentNotNull(title, "title");
-
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Title, title);
+            
             Title = title;
             State = ItemState.Open;
         }

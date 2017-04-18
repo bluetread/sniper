@@ -9,20 +9,14 @@ namespace Sniper.Response.Enterprise
     {
         public AdminStatsComments() { }
 
-        public AdminStatsComments(int totalCommitComments, int totalGistComments, int totalIssueComments, int totalPullRequestComments)
+        public AdminStatsComments(int totalCommitComments, int totalIssueComments, int totalPullRequestComments)
         {
             TotalCommitComments = totalCommitComments;
-            TotalGistComments = totalGistComments;
             TotalIssueComments = totalIssueComments;
             TotalPullRequestComments = totalPullRequestComments;
         }
 
         public int TotalCommitComments
-        {
-            get;
-        }
-
-        public int TotalGistComments
         {
             get;
         }
@@ -41,7 +35,7 @@ namespace Sniper.Response.Enterprise
         {
             get
             {
-                return String.Format(CultureInfo.InvariantCulture, "TotalCommitComments: {0} TotalGistComments: {1} TotalIssueComments: {2} TotalPullRequestComments: {3}", TotalCommitComments, TotalGistComments, TotalIssueComments, TotalPullRequestComments);
+                return String.Format(CultureInfo.InvariantCulture, "TotalCommitComments: {0} TotalIssueComments: {1} TotalPullRequestComments: {2}", TotalCommitComments, TotalIssueComments, TotalPullRequestComments);
             }
         }
     }

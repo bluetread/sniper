@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Sniper.ApiClients;
 using Sniper.Http;
 using Sniper.Request;
 using Sniper.Response;
+using Sniper.Types;
 
 namespace Sniper
 {
     /// <summary>
     /// Provides methods used in the OAuth web flow.
     /// </summary>
-    public class OauthClient : IOauthClient
+    public class OAuthClient : IOAuthClient
     {
         private readonly IConnection _connection;
         private readonly Uri _hostAddress;
@@ -19,11 +21,11 @@ namespace Sniper
         /// Create an instance of the OauthClient
         /// </summary>
         /// <param name="connection">The underlying connection to use</param>
-        public OauthClient(IConnection connection)
+        public OAuthClient(IConnection connection)
         {
-            Ensure.ArgumentNotNull(connection, "connection");
+            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
 
-            this._connection = connection;
+            _connection = connection;
             var baseAddress = connection.BaseAddress ?? TargetProcessClient.TargetProcessDotComUrl;
 
             // The Oauth login stuff uses https://github.com and not the https://api.github.com URLs.
@@ -37,9 +39,9 @@ namespace Sniper
         /// </summary>
         /// <param name="request">Parameters to the Oauth web flow login url</param>
         /// <returns></returns>
-        public Uri GetGitHubLoginUrl(OauthLoginRequest request)
+        public Uri GetGitHubLoginUrl(OAuthLoginRequest request)
         {
-            Ensure.ArgumentNotNull(request, "request");
+            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
 
             return new Uri(_hostAddress, ApiUrls.OauthAuthorize())
                 .ApplyParameters(request.ToParametersDictionary());
@@ -57,15 +59,15 @@ namespace Sniper
         /// </remarks>
         /// <param name="request"></param>
         /// <returns></returns>
-        public async Task<OauthToken> CreateAccessToken(OauthTokenRequest request)
+        public async Task<OauthToken> CreateAccessToken(OAuthTokenRequest request)
         {
-            Ensure.ArgumentNotNull(request, "request");
+            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
 
             var endPoint = ApiUrls.OauthAccessToken();
 
             var body = new FormUrlEncodedContent(request.ToParametersDictionary());
 
-            var response = await _connection.Post<OauthToken>(endPoint, body, "application/json", null, _hostAddress).ConfigureAwait(false);
+            var response = await _connection.Post<OauthToken>(endPoint, body, MimeTypes.ApplicationJson, null, _hostAddress).ConfigureAwait(false);
             return response.Body;
         }
     }

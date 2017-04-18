@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -26,7 +26,7 @@ namespace Sniper.Request
         /// <param name="term">The term.</param>
         protected BaseSearchRequest(string term) : this()
         {
-            Ensure.ArgumentNotNullOrEmptyString(term, "term");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Term, term);
             Term = term;
         }
 
@@ -34,28 +34,6 @@ namespace Sniper.Request
         /// The search term
         /// </summary>
         public string Term { get; }
-
-        /// <summary>
-        /// The sort field
-        /// </summary>
-        public abstract string Sort
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Gets the sort order as a properly formatted lowercased query string parameter.
-        /// </summary>
-        /// <value>
-        /// The sort order.
-        /// </value>
-        private string SortOrder
-        {
-            get
-            {
-                return Order.ToParameter();
-            }
-        }
 
         /// <summary>
         /// Optional Sort order if sort parameter is provided. One of asc or desc; the default is desc.
@@ -76,46 +54,5 @@ namespace Sniper.Request
         /// All qualifiers that are used for this search
         /// </summary>
         public abstract IReadOnlyList<string> MergedQualifiers();
-
-        /// <summary>
-        /// Add qualifiers onto the search term
-        /// </summary>
-        private string TermAndQualifiers
-        {
-            get
-            {
-                var mergedParameters = string.Join("+", MergedQualifiers());
-                if (string.IsNullOrEmpty(Term))
-                {
-                    return mergedParameters;
-                }
-                else
-                {
-                    return Term + (mergedParameters.IsNotBlank() ? "+" + mergedParameters : "");
-                }
-            }
-        }
-
-        /// <summary>
-        /// Get the query parameters that will be appending onto the search
-        /// </summary>
-        public IDictionary<string, string> Parameters
-        {
-            get
-            {
-                var d = new Dictionary<string, string>
-                {
-                    { "page", Page.ToString(CultureInfo.CurrentCulture) }
-                    , { "per_page", PerPage.ToString(CultureInfo.CurrentCulture) }
-                    , { "order", SortOrder }
-                    , { "q", TermAndQualifiers }
-                };
-                if (!string.IsNullOrWhiteSpace(Sort))
-                {
-                    d.Add("sort", Sort);
-                }
-                return d;
-            }
-        }
     }
 }

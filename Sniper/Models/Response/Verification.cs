@@ -53,12 +53,6 @@ namespace Sniper.Response
         [Parameter(Value = "not_signing_key")]
         NotSigningKey,
 
-        [Parameter(Value = "gpgverify_error")]
-        GpgVerifyError,
-
-        [Parameter(Value = "gpgverify_unavailable")]
-        GpgVerifyUnavailable,
-
         [Parameter(Value = "unsigned")]
         Unsigned,
 

@@ -174,7 +174,7 @@ namespace Sniper.Response
                     "IncludeAdmins: {0} Strict: {1} Contexts: {2}",
                     IncludeAdmins,
                     Strict,
-                    Contexts == null ? "" : String.Join(",", Contexts));
+                    Contexts == null ? string.Empty : String.Join(",", Contexts));
             }
         }
     }
@@ -209,8 +209,8 @@ namespace Sniper.Response
             {
                 return string.Format(CultureInfo.InvariantCulture,
                     "Teams: {0} Users: {1}",
-                    Teams == null ? "" : String.Join(",", Teams),
-                    Users == null ? "" : String.Join(",", Users));
+                    Teams == null ? string.Empty : String.Join(",", Teams),
+                    Users == null ? string.Empty : String.Join(",", Users));
             }
         }
     }

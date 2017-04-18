@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using Sniper.Http;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Response
 {
@@ -17,9 +18,9 @@ namespace Sniper.Response
 
         internal Readme(ReadmeResponse response, IApiConnection client)
         {
-            Ensure.ArgumentNotNull(response, "response");
-            Ensure.ArgumentNotNull(client, "client");
-
+            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.Response, response);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Client, client);
+            
             Name = response.Name;
             Url = new Uri(response.Url);
             HtmlUrl = new Uri(response.HtmlUrl);
@@ -33,7 +34,7 @@ namespace Sniper.Response
 
         public Readme(Lazy<Task<string>> htmlContent, string content, string name, Uri htmlUrl, Uri url)
         {
-            this._htmlContent = htmlContent;
+            _htmlContent = htmlContent;
             Content = content;
             Name = name;
             HtmlUrl = htmlUrl;

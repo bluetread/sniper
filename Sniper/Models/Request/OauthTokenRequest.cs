@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using Sniper.Authentication;
 
 namespace Sniper.Request
 {
@@ -8,7 +9,7 @@ namespace Sniper.Request
     /// Used to create an Oauth login request.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class OauthTokenRequest : RequestParameters
+    public class OAuthTokenRequest : RequestParameters
     {
         /// <summary>
         /// Creates an instance of the OAuth login request with the required parameter.
@@ -16,11 +17,11 @@ namespace Sniper.Request
         /// <param name="clientId">The client Id you received from GitHub when you registered the application.</param>
         /// <param name="clientSecret">The client secret you received from GitHub when you registered.</param>
         /// <param name="code">The code you received as a response to making the OAuth login request</param>
-        public OauthTokenRequest(string clientId, string clientSecret, string code)
+        public OAuthTokenRequest(string clientId, string clientSecret, string code)
         {
-            Ensure.ArgumentNotNullOrEmptyString(clientId, "clientId");
-            Ensure.ArgumentNotNullOrEmptyString(clientSecret, "clientSecret");
-            Ensure.ArgumentNotNullOrEmptyString(code, "code");
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientSecret, clientSecret);
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.Code, code);
 
             ClientId = clientId;
             ClientSecret = clientSecret;
@@ -40,7 +41,7 @@ namespace Sniper.Request
         public string ClientSecret { get; }
 
         /// <summary>
-        /// The code you received as a response to making the <see cref="IOauthClient.CreateAccessToken">OAuth login
+        /// The code you received as a response to making the <see cref="IOAuthClient.CreateAccessToken">OAuth login
         /// request</see>.
         /// </summary>
         [Parameter(Key = "code")]

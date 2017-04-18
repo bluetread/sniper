@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
 using Sniper.Common;
+using Sniper.Http;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -15,7 +17,7 @@ namespace Sniper.Request
         /// <param name="message">The message.</param>
         protected ContentRequest(string message)
         {
-            Ensure.ArgumentNotNullOrEmptyString(message, "message");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Message, message);
 
             Message = message;
         }
@@ -27,7 +29,7 @@ namespace Sniper.Request
         /// <param name="branch">The branch the request is for.</param>
         protected ContentRequest(string message, string branch) : this(message)
         {
-            Ensure.ArgumentNotNullOrEmptyString(branch, "branch");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Branch, branch);
 
             Branch = branch;
         }
@@ -66,7 +68,7 @@ namespace Sniper.Request
         /// <param name="sha">The sha.</param>
         public DeleteFileRequest(string message, string sha) : base(message)
         {
-            Ensure.ArgumentNotNullOrEmptyString(sha, "sha");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Sha, sha);
 
             Sha = sha;
         }
@@ -79,7 +81,7 @@ namespace Sniper.Request
         /// <param name="branch">The branch the request is for.</param>
         public DeleteFileRequest(string message, string sha, string branch) : base(message, branch)
         {
-            Ensure.ArgumentNotNullOrEmptyString(sha, "sha");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Sha, sha);
 
             Sha = sha;
         }
@@ -127,7 +129,7 @@ namespace Sniper.Request
         /// <param name="convertContentToBase64">True to convert content to base64.</param>
         public CreateFileRequest(string message, string content, bool convertContentToBase64) : base(message)
         {
-            Ensure.ArgumentNotNull(content, "content");
+            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Content, content);
 
             if (convertContentToBase64)
             {
@@ -145,7 +147,7 @@ namespace Sniper.Request
         /// <param name="convertContentToBase64">True to convert content to base64.</param>
         public CreateFileRequest(string message, string content, string branch, bool convertContentToBase64) : base(message, branch)
         {
-            Ensure.ArgumentNotNullOrEmptyString(content, "content");
+            Ensure.ArgumentNotNullOrEmptyString(HttpKeys.HtmlKeys.HeaderKeys.Content, content);
 
             if (convertContentToBase64)
             {
@@ -205,7 +207,7 @@ namespace Sniper.Request
         public UpdateFileRequest(string message, string content, string sha, bool convertContentToBase64)
             : base(message, content, convertContentToBase64)
         {
-            Ensure.ArgumentNotNullOrEmptyString(sha, "sha");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Sha, sha);
 
             Sha = sha;
         }
@@ -221,7 +223,7 @@ namespace Sniper.Request
         public UpdateFileRequest(string message, string content, string sha, string branch, bool convertContentToBase64)
            : base(message, content, branch, convertContentToBase64)
         {
-            Ensure.ArgumentNotNullOrEmptyString(sha, "sha");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Sha, sha);
 
             Sha = sha;
         }

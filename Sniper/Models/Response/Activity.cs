@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using Sniper.Response.ActivityPayloads;
 
 namespace Sniper.Response
 {
@@ -61,11 +60,7 @@ namespace Sniper.Response
         /// </summary>
         public string Id { get; protected set; }
 
-        /// <summary>
-        /// The payload associated with the activity event.
-        /// </summary>
-        public ActivityPayload Payload { get; protected set; }
-
+ 
         internal string DebuggerDisplay
         {
             get

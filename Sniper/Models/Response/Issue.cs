@@ -12,7 +12,7 @@ namespace Sniper.Response
     {
         public Issue() { }
 
-        public Issue(Uri url, Uri htmlUrl, Uri commentsUrl, Uri eventsUrl, int number, ItemState state, string title, string body, User closedBy, User user, IReadOnlyList<Label> labels, User assignee, IReadOnlyList<User> assignees, Milestone milestone, int comments, PullRequest pullRequest, DateTimeOffset? closedAt, DateTimeOffset createdAt, DateTimeOffset? updatedAt, int id, bool locked, Repository repository)
+        public Issue(Uri url, Uri htmlUrl, Uri commentsUrl, Uri eventsUrl, int number, ItemState state, string title, string body, User closedBy, User user, IReadOnlyList<Label> labels, User assignee, IReadOnlyList<User> assignees, Milestone milestone, int comments, DateTimeOffset? closedAt, DateTimeOffset createdAt, DateTimeOffset? updatedAt, int id, bool locked, Repository repository)
         {
             Id = id;
             Url = url;
@@ -30,7 +30,6 @@ namespace Sniper.Response
             Assignees = assignees;
             Milestone = milestone;
             Comments = comments;
-            PullRequest = pullRequest;
             ClosedAt = closedAt;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
@@ -117,8 +116,6 @@ namespace Sniper.Response
         /// The number of comments on the issue.
         /// </summary>
         public int Comments { get; protected set; }
-
-        public PullRequest PullRequest { get; protected set; }
 
         /// <summary>
         /// The date the issue was closed if closed.

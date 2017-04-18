@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
-using Sniper.Response;
 
 namespace Sniper.Request
 {
@@ -89,37 +88,7 @@ namespace Sniper.Request
             }
         }
 
-        /// <summary>
-        /// Excludes issues in repositories that match a certain language.
-        /// </summary>
-        /// <remarks>
-        /// https://help.github.com/articles/searching-issues/#search-by-the-main-language-of-a-repository
-        /// </remarks>
-        public Language? Language { get; set; }
-
-        /// <summary>
-        /// Excludes pull requests based on the status of the commits.
-        /// </summary>
-        /// <remarks>
-        /// https://help.github.com/articles/searching-issues/#search-based-on-commit-status
-        /// </remarks>
-        public CommitState? Status { get; set; }
-
-        /// <summary>
-        /// Excludes pull requests based on the branch they came from.
-        /// </summary>
-        /// <remarks>
-        /// https://help.github.com/articles/searching-issues/#search-based-on-branch-names
-        /// </remarks>
-        public string Head { get; set; }
-
-        /// <summary>
-        /// Excludes pull requests based on the branch they are merging into.
-        /// </summary>
-        /// <remarks>
-        /// https://help.github.com/articles/searching-issues/#search-based-on-branch-names
-        /// </remarks>
-        public string Base { get; set; }
+ 
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public IReadOnlyList<string> MergedQualifiers()
@@ -159,26 +128,6 @@ namespace Sniper.Request
             if (Labels != null)
             {
                 parameters.AddRange(Labels.Select(label => string.Format(CultureInfo.InvariantCulture, "-label:{0}", label)));
-            }
-
-            if (Language != null)
-            {
-                parameters.Add(string.Format(CultureInfo.InvariantCulture, "-language:{0}", Language.ToParameter()));
-            }
-
-            if (Status.HasValue)
-            {
-                parameters.Add(string.Format(CultureInfo.InvariantCulture, "-status:{0}", Status.Value.ToParameter()));
-            }
-
-            if (Head.IsNotBlank())
-            {
-                parameters.Add(string.Format(CultureInfo.InvariantCulture, "-head:{0}", Head));
-            }
-
-            if (Base.IsNotBlank())
-            {
-                parameters.Add(string.Format(CultureInfo.InvariantCulture, "-base:{0}", Base));
             }
 
             return new ReadOnlyCollection<string>(parameters);

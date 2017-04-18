@@ -2,11 +2,13 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
 using Sniper.Http;
 using Sniper.Request;
 using Sniper.Response;
 using System.Collections.Generic;
+using Sniper.ApiClients;
+using Sniper.Repositories;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -24,23 +26,6 @@ namespace Sniper
         /// <param name="apiConnection">An API connection</param>
         public RepositoriesClient(IApiConnection apiConnection) : base(apiConnection)
         {
-            Status = new CommitStatusClient(apiConnection);
-            Hooks = new RepositoryHooksClient(apiConnection);
-            Forks = new RepositoryForksClient(apiConnection);
-            Collaborator = new RepoCollaboratorsClient(apiConnection);
-            Statistics = new StatisticsClient(apiConnection);
-            Deployment = new DeploymentsClient(apiConnection);
-            PullRequest = new PullRequestsClient(apiConnection);
-            Comment = new RepositoryCommentsClient(apiConnection);
-            Commit = new RepositoryCommitsClient(apiConnection);
-            Release = new ReleasesClient(apiConnection);
-            DeployKeys = new RepositoryDeployKeysClient(apiConnection);
-            Merging = new MergingClient(apiConnection);
-            Content = new RepositoryContentsClient(apiConnection);
-            Page = new RepositoryPagesClient(apiConnection);
-            Invitation = new RepositoryInvitationsClient(apiConnection);
-            Branch = new RepositoryBranchesClient(apiConnection);
-            Traffic = new RepositoryTrafficClient(apiConnection);
         }
 
         /// <summary>
@@ -54,8 +39,8 @@ namespace Sniper
         /// <returns>A <see cref="Repository"/> instance for the created repository.</returns>
         public Task<Repository> Create(NewRepository newRepository)
         {
-            Ensure.ArgumentNotNull(newRepository, "newRepository");
-
+            Ensure.ArgumentNotNull(RepositoryKeys.NewRepository, newRepository);
+            
             return Create(ApiUrls.Repositories(), null, newRepository);
         }
 
@@ -71,8 +56,8 @@ namespace Sniper
         /// <returns>A <see cref="Repository"/> instance for the created repository</returns>
         public Task<Repository> Create(string organizationLogin, NewRepository newRepository)
         {
-            Ensure.ArgumentNotNull(organizationLogin, "organizationLogin");
-            Ensure.ArgumentNotNull(newRepository, "newRepository");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.OrganizationLogin, organizationLogin);
+            Ensure.ArgumentNotNull(RepositoryKeys.NewRepository, newRepository);
             if (string.IsNullOrEmpty(newRepository.Name))
                 throw new ArgumentException("The new repository's name must not be null.");
 
@@ -145,8 +130,8 @@ namespace Sniper
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         public Task Delete(string owner, string name)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
 
             return ApiConnection.Delete(ApiUrls.Repository(owner, name));
         }
@@ -166,22 +151,6 @@ namespace Sniper
         }
 
         /// <summary>
-        /// Gets the specified branch.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/repos/branches/#get-branch">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="branchName">The name of the branch</param>
-        [Obsolete("Please use RepositoriesClient.Branch.Get() instead.  This method will be removed in a future version")]
-        public Task<Branch> GetBranch(long repositoryId, string branchName)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(branchName, "branchName");
-
-            return Branch.Get(repositoryId, branchName);
-        }
-
-        /// <summary>
         /// Updates the specified repository with the values given in <paramref name="update"/>
         /// </summary>
         /// <param name="owner">The owner of the repository</param>
@@ -190,10 +159,10 @@ namespace Sniper
         /// <returns>The updated <see cref="T:Sniper.Repository"/></returns>
         public Task<Repository> Edit(string owner, string name, RepositoryUpdate update)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNull(update, "update");
-            Ensure.ArgumentNotNull(update.Name, "update.Name");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Update, update);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.UpdateName, update.Name);
 
             return ApiConnection.Patch<Repository>(ApiUrls.Repository(owner, name), update, AcceptHeaders.SquashCommitPreview);
         }
@@ -206,46 +175,11 @@ namespace Sniper
         /// <returns>The updated <see cref="T:Sniper.Repository"/></returns>
         public Task<Repository> Edit(long repositoryId, RepositoryUpdate update)
         {
-            Ensure.ArgumentNotNull(update, "update");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Update, update);
 
             return ApiConnection.Patch<Repository>(ApiUrls.Repository(repositoryId), update, AcceptHeaders.SquashCommitPreview);
         }
-
-        /// <summary>
-        /// Edit the specified branch with the values given in <paramref name="update"/>
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <param name="branch">The name of the branch</param>
-        /// <param name="update">New values to update the branch with</param>
-        /// <returns>The updated <see cref="T:Sniper.Branch"/></returns>
-        [Obsolete("This existing implementation will cease to work when the Branch Protection API preview period ends.  Please use the RepositoryBranchesClient methods instead.")]
-        public Task<Branch> EditBranch(string owner, string name, string branch, BranchUpdate update)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNullOrEmptyString(branch, "branch");
-            Ensure.ArgumentNotNull(update, "update");
-
-            return Branch.Edit(owner, name, branch, update);
-        }
-
-        /// <summary>
-        /// Edit the specified branch with the values given in <paramref name="update"/>
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="branch">The name of the branch</param>
-        /// <param name="update">New values to update the branch with</param>
-        /// <returns>The updated <see cref="T:Sniper.Branch"/></returns>
-        [Obsolete("This existing implementation will cease to work when the Branch Protection API preview period ends.  Please use the RepositoryBranchesClient methods instead.")]
-        public Task<Branch> EditBranch(long repositoryId, string branch, BranchUpdate update)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(branch, "branch");
-            Ensure.ArgumentNotNull(update, "update");
-
-            return Branch.Edit(repositoryId, branch, update);
-        }
-
+       
         /// <summary>
         /// Gets the specified repository.
         /// </summary>
@@ -258,8 +192,8 @@ namespace Sniper
         /// <returns>A <see cref="Repository"/></returns>
         public Task<Repository> Get(string owner, string name)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
 
             return ApiConnection.Get<Repository>(ApiUrls.Repository(owner, name), null, AcceptHeaders.SquashCommitPreview);
         }
@@ -306,7 +240,7 @@ namespace Sniper
         /// <returns>A <see cref="IReadOnlyPagedCollection{Repository}"/> of <see cref="Repository"/>.</returns>
         public Task<IReadOnlyList<Repository>> GetAllPublic(PublicRepositoryRequest request)
         {
-            Ensure.ArgumentNotNull(request, "request");
+            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
 
             var url = ApiUrls.AllPublicRepositories(request.Since);
 
@@ -340,7 +274,7 @@ namespace Sniper
         /// <returns>A <see cref="IReadOnlyPagedCollection{Repository}"/> of <see cref="Repository"/>.</returns>
         public Task<IReadOnlyList<Repository>> GetAllForCurrent(ApiOptions options)
         {
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             return ApiConnection.GetAll<Repository>(ApiUrls.Repositories(), options);
         }
@@ -358,15 +292,15 @@ namespace Sniper
         /// <returns>A <see cref="IReadOnlyPagedCollection{Repository}"/> of <see cref="Repository"/>.</returns>
         public Task<IReadOnlyList<Repository>> GetAllForCurrent(RepositoryRequest request)
         {
-            Ensure.ArgumentNotNull(request, "request");
+            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
 
             return GetAllForCurrent(request, ApiOptions.None);
         }
 
         public Task<IReadOnlyList<Repository>> GetAllForCurrent(RepositoryRequest request, ApiOptions options)
         {
-            Ensure.ArgumentNotNull(request, "request");
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             return ApiConnection.GetAll<Repository>(ApiUrls.Repositories(), request.ToParametersDictionary(), options);
         }
@@ -383,7 +317,7 @@ namespace Sniper
         /// <returns>A <see cref="IReadOnlyPagedCollection{Repository}"/> of <see cref="Repository"/>.</returns>
         public Task<IReadOnlyList<Repository>> GetAllForUser(string login)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
 
             return GetAllForUser(login, ApiOptions.None);
         }
@@ -400,8 +334,8 @@ namespace Sniper
         /// <returns>A <see cref="IReadOnlyPagedCollection{Repository}"/> of <see cref="Repository"/>.</returns>
         public Task<IReadOnlyList<Repository>> GetAllForUser(string login, ApiOptions options)
         {
-            Ensure.ArgumentNotNullOrEmptyString(login, "login");
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Login, login);
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             return ApiConnection.GetAll<Repository>(ApiUrls.Repositories(login), options);
         }
@@ -417,7 +351,7 @@ namespace Sniper
         /// <returns>A <see cref="IReadOnlyPagedCollection{Repository}"/> of <see cref="Repository"/>.</returns>
         public Task<IReadOnlyList<Repository>> GetAllForOrg(string organization)
         {
-            Ensure.ArgumentNotNullOrEmptyString(organization, "organization");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Organization, organization);
 
             return GetAllForOrg(organization, ApiOptions.None);
         }
@@ -434,188 +368,14 @@ namespace Sniper
         /// <returns>A <see cref="IReadOnlyPagedCollection{Repository}"/> of <see cref="Repository"/>.</returns>
         public Task<IReadOnlyList<Repository>> GetAllForOrg(string organization, ApiOptions options)
         {
-            Ensure.ArgumentNotNullOrEmptyString(organization, "organization");
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Organization, organization);
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             return ApiConnection.GetAll<Repository>(ApiUrls.OrganizationRepositories(organization), options);
         }
 
-        /// <summary>
-        /// A client for GitHub's Repository Branches API.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/branches/">Branches API documentation</a> for more details
-        /// </remarks>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
-        public IRepositoryBranchesClient Branch { get; }
-
-        /// <summary>
-        /// A client for GitHub's Commit Status API.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/statuses/">Commit Status API documentation</a> for more
-        /// details. Also check out the <a href="https://github.com/blog/1227-commit-status-api">blog post</a> 
-        /// that announced this feature.
-        /// </remarks>
-        public ICommitStatusClient Status { get; }
-
-        /// <summary>
-        /// A client for GitHub's Repository Hooks API.
-        /// </summary>
-        /// <remarks>See <a href="http://developer.github.com/v3/repos/hooks/">Hooks API documentation</a> for more information.</remarks>
-        public IRepositoryHooksClient Hooks { get; }
-
-        /// <summary>
-        /// A client for GitHub's Repository Forks API.
-        /// </summary>
-        /// <remarks>See <a href="http://developer.github.com/v3/repos/forks/">Forks API documentation</a> for more information.</remarks>        
-        public IRepositoryForksClient Forks { get; }
-
-        /// <summary>
-        /// A client for GitHub's Repo Collaborators.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/collaborators/">Collaborators API documentation</a> for more details
-        /// </remarks>
-        public IRepoCollaboratorsClient Collaborator { get; }
-
-        /// <summary>
-        /// Client for GitHub's Repository Deployments API
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/repos/deployments/">Deployments API documentation</a> for more details
-        /// </remarks>
-        public IDeploymentsClient Deployment { get; }
-
-        /// <summary>
-        /// Client for GitHub's Repository Statistics API
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/statistics/">Statistics API documentation</a> for more details
-        ///</remarks>
-        public IStatisticsClient Statistics { get; }
-
-        /// <summary>
-        /// Client for GitHub's Repository Commits API
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/commits/">Commits API documentation</a> for more details
-        ///</remarks>
-        public IRepositoryCommitsClient Commit { get; }
-
-        /// <summary>
-        /// Access GitHub's Releases API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/repos/releases/
-        /// </remarks>
-        public IReleasesClient Release { get; }
-
-        /// <summary>
-        /// Client for GitHub's Repository Merging API
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/repos/merging/">Merging API documentation</a> for more details
-        ///</remarks>
-        public IMergingClient Merging { get; }
-
-        /// <summary>
-        /// Client for managing pull requests.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/pulls/">Pull Requests API documentation</a> for more details
-        /// </remarks>
-        public IPullRequestsClient PullRequest { get; }
-
-        /// <summary>
-        /// Client for managing commit comments in a repository.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/comments/">Repository Comments API documentation</a> for more information.
-        /// </remarks>
-        public IRepositoryCommentsClient Comment { get; }
-
-        /// <summary>
-        /// Client for managing deploy keys in a repository.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/repos/keys/">Repository Deploy Keys API documentation</a> for more information.
-        /// </remarks>
-        public IRepositoryDeployKeysClient DeployKeys { get; }
-
-        /// <summary>
-        /// Client for managing the contents of a repository.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/contents/">Repository Contents API documentation</a> for more information.
-        /// </remarks>
-        public IRepositoryContentsClient Content { get; }
-
-        /// <summary>
-        /// Gets all the branches for the specified repository.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/repos/branches/#list-branches">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        [Obsolete("Please use RepositoriesClient.Branch.GetAll() instead.  This method will be removed in a future version")]
-        public Task<IReadOnlyList<Branch>> GetAllBranches(string owner, string name)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-
-            return Branch.GetAll(owner, name);
-        }
-
-        /// <summary>
-        /// Gets all the branches for the specified repository.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/repos/branches/#list-branches">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="repositoryId">The Id of the repository</param>
-        [Obsolete("Please use RepositoriesClient.Branch.GetAll() instead.  This method will be removed in a future version")]
-        public Task<IReadOnlyList<Branch>> GetAllBranches(long repositoryId)
-        {
-            return Branch.GetAll(repositoryId);
-        }
-
-        /// <summary>
-        /// Gets all the branches for the specified repository.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/repos/branches/#list-branches">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <param name="options">Options for changing the API response</param>
-        [Obsolete("Please use RepositoriesClient.Branch.GetAll() instead.  This method will be removed in a future version")]
-        public Task<IReadOnlyList<Branch>> GetAllBranches(string owner, string name, ApiOptions options)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNull(options, "options");
-
-            return Branch.GetAll(owner, name, options);
-        }
-
-        /// <summary>
-        /// Gets all the branches for the specified repository.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/repos/branches/#list-branches">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="options">Options for changing the API response</param>
-        [Obsolete("Please use RepositoriesClient.Branch.GetAll() instead.  This method will be removed in a future version")]
-        public Task<IReadOnlyList<Branch>> GetAllBranches(long repositoryId, ApiOptions options)
-        {
-            Ensure.ArgumentNotNull(options, "options");
-
-            return Branch.GetAll(repositoryId, options);
-        }
-
+     
+       
         /// <summary>
         /// Gets all contributors for the specified repository. Does not include anonymous contributors.
         /// </summary>
@@ -627,24 +387,12 @@ namespace Sniper
         /// <returns>All contributors of the repository.</returns>
         public Task<IReadOnlyList<RepositoryContributor>> GetAllContributors(string owner, string name)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
 
             return GetAllContributors(owner, name, false);
         }
 
-        /// <summary>
-        /// Gets all contributors for the specified repository. Does not include anonymous contributors.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/#list-contributors">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>All contributors of the repository.</returns>
-        public Task<IReadOnlyList<RepositoryContributor>> GetAllContributors(long repositoryId)
-        {
-            return GetAllContributors(repositoryId, false);
-        }
 
         /// <summary>
         /// Gets all contributors for the specified repository. Does not include anonymous contributors.
@@ -658,29 +406,14 @@ namespace Sniper
         /// <returns>All contributors of the repository.</returns>
         public Task<IReadOnlyList<RepositoryContributor>> GetAllContributors(string owner, string name, ApiOptions options)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             return GetAllContributors(owner, name, false, options);
         }
 
-        /// <summary>
-        /// Gets all contributors for the specified repository. Does not include anonymous contributors.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/#list-contributors">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="options">Options for changing the API response</param>
-        /// <returns>All contributors of the repository.</returns>
-        public Task<IReadOnlyList<RepositoryContributor>> GetAllContributors(long repositoryId, ApiOptions options)
-        {
-            Ensure.ArgumentNotNull(options, "options");
-
-            return GetAllContributors(repositoryId, false, options);
-        }
-
+    
         /// <summary>
         /// Gets all contributors for the specified repository. With the option to include anonymous contributors.
         /// </summary>
@@ -693,24 +426,10 @@ namespace Sniper
         /// <returns>All contributors of the repository.</returns>
         public Task<IReadOnlyList<RepositoryContributor>> GetAllContributors(string owner, string name, bool includeAnonymous)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
 
             return GetAllContributors(owner, name, includeAnonymous, ApiOptions.None);
-        }
-
-        /// <summary>
-        /// Gets all contributors for the specified repository. With the option to include anonymous contributors.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/#list-contributors">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="includeAnonymous">True if anonymous contributors should be included in result; Otherwise false</param>
-        /// <returns>All contributors of the repository.</returns>
-        public Task<IReadOnlyList<RepositoryContributor>> GetAllContributors(long repositoryId, bool includeAnonymous)
-        {
-            return GetAllContributors(repositoryId, includeAnonymous, ApiOptions.None);
         }
 
         /// <summary>
@@ -726,9 +445,9 @@ namespace Sniper
         /// <returns>All contributors of the repository.</returns>
         public Task<IReadOnlyList<RepositoryContributor>> GetAllContributors(string owner, string name, bool includeAnonymous, ApiOptions options)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             var parameters = new Dictionary<string, string>();
             if (includeAnonymous)
@@ -737,26 +456,7 @@ namespace Sniper
             return ApiConnection.GetAll<RepositoryContributor>(ApiUrls.RepositoryContributors(owner, name), parameters, options);
         }
 
-        /// <summary>
-        /// Gets all contributors for the specified repository. With the option to include anonymous contributors.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/#list-contributors">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="includeAnonymous">True if anonymous contributors should be included in result; Otherwise false</param>
-        /// <param name="options">Options for changing the API response</param>
-        /// <returns>All contributors of the repository.</returns>
-        public Task<IReadOnlyList<RepositoryContributor>> GetAllContributors(long repositoryId, bool includeAnonymous, ApiOptions options)
-        {
-            Ensure.ArgumentNotNull(options, "options");
-
-            var parameters = new Dictionary<string, string>();
-            if (includeAnonymous)
-                parameters.Add("anon", "1");
-
-            return ApiConnection.GetAll<RepositoryContributor>(ApiUrls.RepositoryContributors(repositoryId), parameters, options);
-        }
+       
 
         /// <summary>
         /// Gets all languages for the specified repository.
@@ -769,8 +469,8 @@ namespace Sniper
         /// <returns>All languages used in the repository and the number of bytes of each language.</returns>
         public async Task<IReadOnlyList<RepositoryLanguage>> GetAllLanguages(string owner, string name)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
 
             var endpoint = ApiUrls.RepositoryLanguages(owner, name);
             var data = await ApiConnection.Get<Dictionary<string, long>>(endpoint).ConfigureAwait(false);
@@ -779,22 +479,7 @@ namespace Sniper
                 data.Select(kvp => new RepositoryLanguage(kvp.Key, kvp.Value)).ToList());
         }
 
-        /// <summary>
-        /// Gets all languages for the specified repository.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/#list-languages">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>All languages used in the repository and the number of bytes of each language.</returns>
-        public async Task<IReadOnlyList<RepositoryLanguage>> GetAllLanguages(long repositoryId)
-        {
-            var endpoint = ApiUrls.RepositoryLanguages(repositoryId);
-            var data = await ApiConnection.Get<Dictionary<string, long>>(endpoint).ConfigureAwait(false);
-
-            return new ReadOnlyCollection<RepositoryLanguage>(
-                data.Select(kvp => new RepositoryLanguage(kvp.Key, kvp.Value)).ToList());
-        }
+  
 
         /// <summary>
         /// Gets all teams for the specified repository.
@@ -807,8 +492,8 @@ namespace Sniper
         /// <returns>All <see cref="T:Sniper.Team"/>s associated with the repository</returns>
         public Task<IReadOnlyList<Team>> GetAllTeams(string owner, string name)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
 
             return GetAllTeams(owner, name, ApiOptions.None);
         }
@@ -838,9 +523,9 @@ namespace Sniper
         /// <returns>All <see cref="T:Sniper.Team"/>s associated with the repository</returns>
         public Task<IReadOnlyList<Team>> GetAllTeams(string owner, string name, ApiOptions options)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             return ApiConnection.GetAll<Team>(ApiUrls.RepositoryTeams(owner, name), options);
         }
@@ -856,117 +541,9 @@ namespace Sniper
         /// <returns>All <see cref="T:Sniper.Team"/>s associated with the repository</returns>
         public Task<IReadOnlyList<Team>> GetAllTeams(long repositoryId, ApiOptions options)
         {
-            Ensure.ArgumentNotNull(options, "options");
+            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
 
             return ApiConnection.GetAll<Team>(ApiUrls.RepositoryTeams(repositoryId), options);
         }
-
-        /// <summary>
-        /// Gets all tags for the specified repository.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/#list-tags">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <returns>All of the repositories tags.</returns>
-        public Task<IReadOnlyList<RepositoryTag>> GetAllTags(string owner, string name)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-
-            return GetAllTags(owner, name, ApiOptions.None);
-        }
-
-        /// <summary>
-        /// Gets all tags for the specified repository.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/#list-tags">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>All of the repositories tags.</returns>
-        public Task<IReadOnlyList<RepositoryTag>> GetAllTags(long repositoryId)
-        {
-            return GetAllTags(repositoryId, ApiOptions.None);
-        }
-
-        /// <summary>
-        /// Gets all tags for the specified repository.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/#list-tags">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <param name="options">Options for changing the API response</param>
-        /// <returns>All of the repositories tags.</returns>
-        public Task<IReadOnlyList<RepositoryTag>> GetAllTags(string owner, string name, ApiOptions options)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNull(options, "options");
-
-            return ApiConnection.GetAll<RepositoryTag>(ApiUrls.RepositoryTags(owner, name), options);
-        }
-
-        /// <summary>
-        /// Gets all tags for the specified repository.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/repos/#list-tags">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="options">Options for changing the API response</param>
-        /// <returns>All of the repositories tags.</returns>
-        public Task<IReadOnlyList<RepositoryTag>> GetAllTags(long repositoryId, ApiOptions options)
-        {
-            Ensure.ArgumentNotNull(options, "options");
-
-            return ApiConnection.GetAll<RepositoryTag>(ApiUrls.RepositoryTags(repositoryId), options);
-        }
-
-        /// <summary>
-        /// Gets the specified branch.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/repos/branches/#get-branch">API documentation</a> for more details
-        /// </remarks>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <param name="branchName">The name of the branch</param>
-        [Obsolete("Please use RepositoriesClient.Branch.Get() instead.  This method will be removed in a future version")]
-        public Task<Branch> GetBranch(string owner, string name, string branchName)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNullOrEmptyString(branchName, "branchName");
-
-            return Branch.Get(owner, name, branchName);
-        }
-
-        /// <summary>
-        /// A client for GitHub's Repository Pages API.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/repos/pages/">Repository Pages API documentation</a> for more information.
-        /// </remarks>
-        public IRepositoryPagesClient Page { get; }
-
-        /// <summary>
-        /// A client for GitHub's Repository Invitations API.
-        /// </summary>
-        /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/repos/invitations/">Repository Invitations API documentation</a> for more information.
-        /// </remarks>
-        public IRepositoryInvitationsClient Invitation { get; }
-
-        /// <summary>
-        /// Access GitHub's Repository Traffic API
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/repos/traffic/
-        /// </remarks>
-        public IRepositoryTrafficClient Traffic { get; }
     }
 }

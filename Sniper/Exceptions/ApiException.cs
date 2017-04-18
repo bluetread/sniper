@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.Security;
 using Sniper.Http;
 using Sniper.Response;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -65,7 +66,7 @@ namespace Sniper
         public ApiException(IResponse response, Exception innerException)
             : base(null, innerException)
         {
-            Ensure.ArgumentNotNull(response, "response");
+            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.Response, response);
 
             StatusCode = response.StatusCode;
             ApiError = GetApiErrorFromExceptionMessage(response);
@@ -78,8 +79,8 @@ namespace Sniper
         /// <param name="innerException">The inner exception</param>
         protected ApiException(ApiException innerException)
         {
-            Ensure.ArgumentNotNull(innerException, "innerException");
-
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.InnerException, innerException);
+            
             StatusCode = innerException.StatusCode;
             ApiError = innerException.ApiError;
         }
@@ -94,7 +95,7 @@ namespace Sniper
         protected ApiException(ApiError apiError, HttpStatusCode statusCode, Exception innerException)
             : base(null, innerException)
         {
-            Ensure.ArgumentNotNull(apiError, "apiError");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.ApiError, apiError);
 
             ApiError = apiError;
             StatusCode = statusCode;

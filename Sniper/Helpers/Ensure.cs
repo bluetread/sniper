@@ -11,8 +11,8 @@ namespace Sniper
         /// <summary>
         /// Checks an argument to ensure it isn't null.
         /// </summary>
-        /// <param name = "value">The argument value to check</param>
         /// <param name = "name">The name of the argument</param>
+        /// <param name = "value">The argument value to check</param>
         public static void ArgumentNotNull(string name, [ValidatedNotNull]object value)
         {
             if (value != null) return;
@@ -23,14 +23,14 @@ namespace Sniper
         /// <summary>
         /// Checks a string argument to ensure it isn't null or empty.
         /// </summary>
-        /// <param name = "value">The argument value to check</param>
         /// <param name = "name">The name of the argument</param>
+        /// <param name = "value">The argument value to check</param>
         public static void ArgumentNotNullOrEmptyString(string name, [ValidatedNotNull]string value)
         {
             ArgumentNotNull(name, value);
             if (!string.IsNullOrWhiteSpace(value)) return;
 
-            throw new ArgumentException("String cannot be empty", name);
+            throw new ArgumentException("Parameter cannot be empty", nameof(name));
         }
 
         /// <summary>

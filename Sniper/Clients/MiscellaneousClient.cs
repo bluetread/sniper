@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Threading.Tasks;
 using Sniper.Http;
 using Sniper.Request;
 using Sniper.Response;
 using System.Collections.ObjectModel;
+using Sniper.ApiClients;
 
 namespace Sniper
 {
@@ -26,25 +26,12 @@ namespace Sniper
         /// <param name="connection">An API connection</param>
         public MiscellaneousClient(IConnection connection)
         {
-            Ensure.ArgumentNotNull(connection, "connection");
+            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
 
             _connection = connection;
         }
 
-        /// <summary>
-        /// Gets all the emojis available to use on GitHub.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
-        /// <returns>An <see cref="IReadOnlyDictionary{TKey,TValue}"/> of emoji and their URI.</returns>
-        public async Task<IReadOnlyList<Emoji>> GetAllEmojis()
-        {
-            var endpoint = new Uri("emojis", UriKind.Relative);
-            var response = await _connection.Get<Dictionary<string, string>>(endpoint, null, null).ConfigureAwait(false);
-            return new ReadOnlyCollection<Emoji>(
-                response.Body.Select(kvp => new Emoji(kvp.Key, new Uri(kvp.Value))).ToArray());
-        }
-
-        /// <summary>
+       /// <summary>
         /// Gets the rendered Markdown for the specified plain-text Markdown document.
         /// </summary>
         /// <param name="markdown">A plain-text Markdown document</param>
@@ -70,33 +57,7 @@ namespace Sniper
             return response.Body;
         }
 
-        /// <summary>
-        /// List all templates available to pass as an option when creating a repository.
-        /// </summary>
-        /// <returns>A list of template names</returns>
-        public async Task<IReadOnlyList<string>> GetAllGitIgnoreTemplates()
-        {
-            var endpoint = new Uri("gitignore/templates", UriKind.Relative);
-
-            var response = await _connection.Get<string[]>(endpoint, null, null).ConfigureAwait(false);
-            return new ReadOnlyCollection<string>(response.Body);
-        }
-
-        /// <summary>
-        /// Retrieves the source for a single GitIgnore template
-        /// </summary>
-        /// <param name="templateName"></param>
-        /// <returns>A template and its source</returns>
-        public async Task<GitIgnoreTemplate> GetGitIgnoreTemplate(string templateName)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(templateName, "templateName");
-
-            var endpoint = new Uri("gitignore/templates/" + Uri.EscapeUriString(templateName), UriKind.Relative);
-
-            var response = await _connection.Get<GitIgnoreTemplate>(endpoint, null, null).ConfigureAwait(false);
-            return response.Body;
-        }
-
+   
         /// <summary>
         /// Returns a list of the licenses shown in the license picker on GitHub.com. This is not a comprehensive
         /// list of all possible OSS licenses.

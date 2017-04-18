@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
 using Sniper.Http;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Response
 {
@@ -11,8 +12,8 @@ namespace Sniper.Response
 
         public ResourceRateLimit(RateLimit core, RateLimit search)
         {
-            Ensure.ArgumentNotNull(core, "core");
-            Ensure.ArgumentNotNull(search, "search");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Core, core);
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Search, search);
 
             Core = core;
             Search = search;

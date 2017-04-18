@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using Sniper.Response;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -12,8 +11,6 @@ namespace Sniper
         private static readonly Uri _currentUserRepositoriesUrl = new Uri("user/repos", UriKind.Relative);
         private static readonly Uri _currentUserOrganizationsUrl = new Uri("user/orgs", UriKind.Relative);
         private static readonly Uri _currentUserSshKeys = new Uri("user/keys", UriKind.Relative);
-        private static readonly Uri _currentUserGpgKeys = new Uri("user/gpg_keys", UriKind.Relative);
-        private static readonly Uri _currentUserStars = new Uri("user/starred", UriKind.Relative);
         private static readonly Uri _currentUserWatched = new Uri("user/subscriptions", UriKind.Relative);
         private static readonly Uri _currentUserEmailsEndpoint = new Uri("user/emails", UriKind.Relative);
         private static readonly Uri _currentUserNotificationsEndpoint = new Uri("notifications", UriKind.Relative);
@@ -567,40 +564,7 @@ namespace Sniper
             return "orgs/{0}/members".FormatUri(org);
         }
 
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns all of the members of the organization
-        /// </summary>
-        /// <param name="org">The organization</param>
-        /// <param name="filter">The member filter, <see cref="OrganizationMembersFilter"/></param>
-        /// <returns>The correct uri</returns>
-        public static Uri Members(string org, OrganizationMembersFilter filter)
-        {
-            return "orgs/{0}/members?filter={1}".FormatUri(org, filter.ToParameter());
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns all of the members of the organization
-        /// </summary>
-        /// <param name="org">The organization</param>
-        /// <param name="role">The role filter, <see cref="OrganizationMembersRole"/></param>
-        /// <returns>The correct uri</returns>
-        public static Uri Members(string org, OrganizationMembersRole role)
-        {
-            return "orgs/{0}/members?role={1}".FormatUri(org, role.ToParameter());
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns all of the members of the organization
-        /// </summary>
-        /// <param name="org">The organization</param>
-        /// <param name="filter">The member filter, <see cref="OrganizationMembersFilter"/></param>
-        /// <param name="role">The role filter, <see cref="OrganizationMembersRole"/></param>
-        /// <returns>The correct uri</returns>
-        public static Uri Members(string org, OrganizationMembersFilter filter, OrganizationMembersRole role)
-        {
-            return "orgs/{0}/members?filter={1}&role={2}".FormatUri(org, filter.ToParameter(), role.ToParameter());
-        }
-
+   
         /// <summary>
         /// Returns the <see cref="Uri"/> that returns all of the public members of the organization
         /// </summary>
@@ -924,67 +888,7 @@ namespace Sniper
             return "repos/{0}/{1}/subscription".FormatUri(owner, name);
         }
 
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that lists the starred repositories for the authenticated user.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <returns>The <see cref="Uri"/> that lists the starred repositories for the authenticated user.</returns>
-        public static Uri Stargazers(string owner, string name)
-        {
-            return "repos/{0}/{1}/stargazers".FormatUri(owner, name);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that lists the starred repositories for the authenticated user.
-        /// </summary>
-        public static Uri Starred()
-        {
-            return _currentUserStars;
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that lists the starred repositories for the specified user.
-        /// </summary>
-        /// <param name="user">The user that has the stars</param>
-        public static Uri StarredByUser(string user)
-        {
-            return "users/{0}/starred".FormatUri(user);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that shows whether the repo is starred by the current user.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <returns></returns>
-        public static Uri Starred(string owner, string name)
-        {
-            return "user/starred/{0}/{1}".FormatUri(owner, name);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified tag.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <param name="reference">The tag reference (SHA)</param>
-        /// <returns></returns>
-        public static Uri Tag(string owner, string name, string reference)
-        {
-            return "repos/{0}/{1}/git/tags/{2}".FormatUri(owner, name, reference);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for creating a tag object.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <returns></returns>
-        public static Uri CreateTag(string owner, string name)
-        {
-            return "repos/{0}/{1}/git/tags".FormatUri(owner, name);
-        }
+    
 
         /// <summary>
         /// Returns the <see cref="Uri"/> that returns the list of public events.
@@ -993,219 +897,6 @@ namespace Sniper
         public static Uri Events()
         {
             return "events".FormatUri();
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the feeds available to the authenticating user.
-        /// </summary>
-        /// <returns></returns>
-        public static Uri Feeds()
-        {
-            return "feeds".FormatUri();
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the list of public gists.
-        /// </summary>
-        public static Uri Gist()
-        {
-            return "gists".FormatUri();
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified gist.
-        /// </summary>
-        /// <param name="id">The id of the gist</param>
-        public static Uri Gist(string id)
-        {
-            return "gists/{0}".FormatUri(id);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the forks for the specified gist.
-        /// </summary>
-        /// <param name="id">The id of the gist</param>
-        public static Uri ForkGist(string id)
-        {
-            return "gists/{0}/forks".FormatUri(id);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for all public gists.
-        /// </summary>
-        public static Uri PublicGists()
-        {
-            return "gists/public".FormatUri();
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for all started public gists.
-        /// </summary>
-        public static Uri StarredGists()
-        {
-            return "gists/starred".FormatUri();
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for all gists for a given user.
-        /// </summary>
-        /// <param name="user">The user to search for</param>
-        public static Uri UsersGists(string user)
-        {
-            return "users/{0}/gists".FormatUri(user);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> to star a given gist.
-        /// </summary>
-        /// <param name="id">The id of the gist</param>
-        public static Uri StarGist(string id)
-        {
-            return "gists/{0}/star".FormatUri(id);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the comments for the specified gist.
-        /// </summary>
-        /// <param name="gistId">The id of the gist</param>
-        public static Uri GistComments(string gistId)
-        {
-            return "gists/{0}/comments".FormatUri(gistId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the commits for the specified gist.
-        /// </summary>
-        /// <param name="id">The id of the gist</param>
-        public static Uri GistCommits(string id)
-        {
-            return "gists/{0}/commits".FormatUri(id);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the specified pull request.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <param name="number">The pull request number</param>
-        /// <returns></returns>
-        public static Uri PullRequest(string owner, string name, int number)
-        {
-            return "repos/{0}/{1}/pulls/{2}".FormatUri(owner, name, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that lists the pull requests for a repository.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <returns></returns>
-        public static Uri PullRequests(string owner, string name)
-        {
-            return "repos/{0}/{1}/pulls".FormatUri(owner, name);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the pull request merge state.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <param name="number">The pull request number</param>
-        /// <returns>The <see cref="Uri"/> that returns the pull request merge state.</returns>
-        public static Uri MergePullRequest(string owner, string name, int number)
-        {
-            return "repos/{0}/{1}/pulls/{2}/merge".FormatUri(owner, name, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the commits on a pull request.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <param name="number">The pull request number</param>
-        /// <returns>The <see cref="Uri"/> that returns the commits on a pull request.</returns>
-        public static Uri PullRequestCommits(string owner, string name, int number)
-        {
-            return "repos/{0}/{1}/pulls/{2}/commits".FormatUri(owner, name, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the files on a pull request.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <param name="number">The pull request number</param>
-        /// <returns>The <see cref="Uri"/> that returns the files on a pull request.</returns>
-        public static Uri PullRequestFiles(string owner, string name, int number)
-        {
-            return "repos/{0}/{1}/pulls/{2}/files".FormatUri(owner, name, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for a spesific comment for the specified commit.
-        /// </summary>
-        /// <param name="gistId">The id of the gist</param>
-        /// <param name="commentId">The id of the comment</param>
-        public static Uri GistComment(string gistId, int commentId)
-        {
-            return "gists/{0}/comments/{1}".FormatUri(gistId, commentId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified commit.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <param name="reference">The commit reference (SHA)</param>
-        /// <returns></returns>
-        public static Uri Commit(string owner, string name, string reference)
-        {
-            return "repos/{0}/{1}/git/commits/{2}".FormatUri(owner, name, reference);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified reference.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <returns></returns>
-        public static Uri Reference(string owner, string name)
-        {
-            return "repos/{0}/{1}/git/refs".FormatUri(owner, name);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified reference.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <param name="referenceName">The reference name</param>
-        /// <returns></returns>
-        public static Uri Reference(string owner, string name, string referenceName)
-        {
-            return "repos/{0}/{1}/git/refs/{2}".FormatUri(owner, name, referenceName);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for creating a commit object.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <returns></returns>
-        public static Uri CreateCommit(string owner, string name)
-        {
-            return "repos/{0}/{1}/git/commits".FormatUri(owner, name);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for creating a merge object.
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <returns></returns>
-        public static Uri CreateMerge(string owner, string name)
-        {
-            return "repos/{0}/{1}/merges".FormatUri(owner, name);
         }
 
         /// <summary>
@@ -1358,7 +1049,7 @@ namespace Sniper
         /// <returns></returns>
         public static Uri Blobs(string owner, string name)
         {
-            return Blob(owner, name, "");
+            return Blob(owner, name, string.Empty);
         }
 
         /// <summary>
@@ -1436,9 +1127,7 @@ namespace Sniper
 
         /// <summary>
         /// Returns the <see cref="Uri"/> for teams
-        /// use for getting, updating, or deleting a <see cref="Team"/>.
         /// </summary>
-        /// <param name="id">The id of the <see cref="Team"/>.</param>
         /// <returns></returns>
         public static Uri Teams(int id)
         {
@@ -1643,10 +1332,10 @@ namespace Sniper
         /// <returns></returns>
         public static Uri RepoCompare(string owner, string name, string @base, string head)
         {
-            Ensure.ArgumentNotNullOrEmptyString(owner, "owner");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNullOrEmptyString(@base, "base");
-            Ensure.ArgumentNotNullOrEmptyString(head, "head");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Owner, owner);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Base, @base);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Head, head);
 
             var encodedBase = @base.UriEncode();
             var encodedHead = head.UriEncode();
@@ -1984,18 +1673,7 @@ namespace Sniper
             return "repos/{0}/{1}/contents/{2}".FormatUri(owner, name, path);
         }
 
-        /// <summary>
-        /// Creates the relative <see cref="Uri"/> for getting an archive of a given repository's contents, in a specific format
-        /// </summary>
-        /// <param name="owner">The owner of the repository</param>
-        /// <param name="name">The name of the repository</param>
-        /// <param name="archiveFormat">The format of the archive. Can be either tarball or zipball</param>
-        /// <param name="reference">A valid Git reference.</param>
-        /// <returns>The <see cref="Uri"/> for getting an archive of a given repository's contents, in a specific format</returns>
-        public static Uri RepositoryArchiveLink(string owner, string name, ArchiveFormat archiveFormat, string reference)
-        {
-            return "repos/{0}/{1}/{2}/{3}".FormatUri(owner, name, archiveFormat.ToParameter(), reference);
-        }
+      
 
         /// <summary>
         /// Creates the relative <see cref="Uri"/> for getting the contents of the specified repository and path
@@ -2137,12 +1815,7 @@ namespace Sniper
         {
             return EnterpriseAdminStats("users");
         }
-
-        public static Uri EnterpriseAdminStatsGists()
-        {
-            return EnterpriseAdminStats("gists");
-        }
-
+      
         public static Uri EnterpriseAdminStatsPulls()
         {
             return EnterpriseAdminStats("pulls");
@@ -2286,7 +1959,7 @@ namespace Sniper
         /// <returns>The <see cref="Uri"/> for a specific blob.</returns>
         public static Uri Blobs(long repositoryId)
         {
-            return Blob(repositoryId, "");
+            return Blob(repositoryId, string.Empty);
         }
 
         /// <summary>
@@ -2454,27 +2127,6 @@ namespace Sniper
         }
 
         /// <summary>
-        /// Returns the <see cref="Uri"/> that returns all the GPG Keys for the authenticated user.
-        /// </summary>
-        /// <returns>The <see cref="Uri"/> that returns all the GPG Keys for the authenticated user.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Gpg")]
-        public static Uri GpgKeys()
-        {
-            return _currentUserGpgKeys;
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the GPG Key for the authenticated user for the specified Id.
-        /// </summary>
-        /// <param name="id">The <see cref="Uri"/> that returns the GPG Key for the authenticated user for the specified Id.</param>
-        /// <returns></returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Gpg")]
-        public static Uri GpgKeys(int id)
-        {
-            return "user/gpg_keys/{0}".FormatUri(id);
-        }
-
-        /// <summary>
         /// Returns the <see cref="Uri"/> for the specified issue.
         /// </summary>
         /// <param name="repositoryId">The Id of the repository</param>
@@ -2517,40 +2169,7 @@ namespace Sniper
             return "repositories/{0}/issues/{1}/comments".FormatUri(repositoryId, number);
         }
 
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the named label for the specified issue.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="number">The issue number</param>
-        /// <param name="labelName">The name of the label</param>
-        /// <returns>The <see cref="Uri"/> that returns the named label for the specified issue.</returns>
-        public static Uri IssueLabel(long repositoryId, int number, string labelName)
-        {
-            return "repositories/{0}/issues/{1}/labels/{2}".FormatUri(repositoryId, number, labelName);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns all of the labels for the specified issue.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="number">The issue number</param>
-        /// <returns>The <see cref="Uri"/> that returns all of the labels for the specified issue.</returns>
-        public static Uri IssueLabels(long repositoryId, int number)
-        {
-            return "repositories/{0}/issues/{1}/labels".FormatUri(repositoryId, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified issue to be locked/unlocked.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="number">The issue number</param>
-        /// <returns>The <see cref="Uri"/> for the specified issue to be locked/unlocked.</returns>
-        public static Uri IssueLock(long repositoryId, int number)
-        {
-            return "repositories/{0}/issues/{1}/lock".FormatUri(repositoryId, number);
-        }
-
+     
         /// <summary>
         /// Returns the <see cref="Uri"/> that returns all of the issues for the currently logged in user specific to the repository.
         /// </summary>
@@ -2593,79 +2212,6 @@ namespace Sniper
             return "repositories/{0}/issues/events".FormatUri(repositoryId);
         }
 
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the specified label.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="labelName">The name of label</param>
-        /// <returns>The <see cref="Uri"/> that returns the specified label.</returns>
-        public static Uri Label(long repositoryId, string labelName)
-        {
-            return "repositories/{0}/labels/{1}".FormatUri(repositoryId, labelName);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns all of the labels for the specified repository.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that returns all of the labels for the specified repository.</returns>
-        public static Uri Labels(long repositoryId)
-        {
-            return "repositories/{0}/labels".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the latest release for the specified repository
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that returns the latest release for the specified repository</returns>
-        public static Uri LatestRelease(long repositoryId)
-        {
-            return "repositories/{0}/releases/latest".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the pull request merge state.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="number">The pull request number</param>
-        /// <returns>The <see cref="Uri"/> that returns the pull request merge state.</returns>
-        public static Uri MergePullRequest(long repositoryId, int number)
-        {
-            return "repositories/{0}/pulls/{1}/merge".FormatUri(repositoryId, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the specified milestone.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="number">The milestone number</param>
-        /// <returns>The <see cref="Uri"/> that returns the specified milestone.</returns>
-        public static Uri Milestone(long repositoryId, int number)
-        {
-            return "repositories/{0}/milestones/{1}".FormatUri(repositoryId, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns all of the labels for all issues in the specified milestone.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="number">The milestone number</param>
-        /// <returns>The <see cref="Uri"/> that returns all of the labels for all issues in the specified milestone.</returns>
-        public static Uri MilestoneLabels(long repositoryId, int number)
-        {
-            return "repositories/{0}/milestones/{1}/labels".FormatUri(repositoryId, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns all of the milestones for the specified repository.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that returns all of the milestones for the specified repository.</returns>
-        public static Uri Milestones(long repositoryId)
-        {
-            return "repositories/{0}/milestones".FormatUri(repositoryId);
-        }
 
         /// <summary>
         /// Returns the <see cref="Uri"/> that returns all of the notifications for the currently logged in user specific to the repository.
@@ -2677,180 +2223,7 @@ namespace Sniper
             return "repositories/{0}/notifications".FormatUri(repositoryId);
         }
 
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the specified pull request.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="number">The pull request number</param>
-        /// <returns>The <see cref="Uri"/> that returns the specified pull request.</returns>
-        public static Uri PullRequest(long repositoryId, int number)
-        {
-            return "repositories/{0}/pulls/{1}".FormatUri(repositoryId, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the commits on a pull request.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="number">The pull request number</param>
-        /// <returns>The <see cref="Uri"/> that returns the commits on a pull request.</returns>
-        public static Uri PullRequestCommits(long repositoryId, int number)
-        {
-            return "repositories/{0}/pulls/{1}/commits".FormatUri(repositoryId, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns the files on a pull request.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="number">The pull request number</param>
-        /// <returns>The <see cref="Uri"/> that returns the files on a pull request.</returns>
-        public static Uri PullRequestFiles(long repositoryId, int number)
-        {
-            return "repositories/{0}/pulls/{1}/files".FormatUri(repositoryId, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified pull request review comment.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="number">The comment number</param>
-        /// <returns>The <see cref="Uri"/> that </returns>
-        public static Uri PullRequestReviewComment(long repositoryId, int number)
-        {
-            return "repositories/{0}/pulls/comments/{1}".FormatUri(repositoryId, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the comments of a specified pull request review.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="number">The pull request number</param>
-        /// <returns>The <see cref="Uri"/> that </returns>
-        public static Uri PullRequestReviewComments(long repositoryId, int number)
-        {
-            return "repositories/{0}/pulls/{1}/comments".FormatUri(repositoryId, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the pull request review comments on a specified repository.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that </returns>
-        public static Uri PullRequestReviewCommentsRepository(long repositoryId)
-        {
-            return "repositories/{0}/pulls/comments".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that lists the pull requests for a repository.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that lists the pull requests for a repository.</returns>
-        public static Uri PullRequests(long repositoryId)
-        {
-            return "repositories/{0}/pulls".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified reference.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for the specified reference.</returns>
-        public static Uri Reference(long repositoryId)
-        {
-            return "repositories/{0}/git/refs".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified reference.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="referenceName">The reference name</param>
-        /// <returns>The <see cref="Uri"/> for the specified reference.</returns>
-        public static Uri Reference(long repositoryId, string referenceName)
-        {
-            return "repositories/{0}/git/refs/{1}".FormatUri(repositoryId, referenceName);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns all the assets for the specified release for the specified repository.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="id">The id of the release</param>
-        /// <returns>The <see cref="Uri"/> that returns all the assets for the specified release for the specified repository.</returns>
-        public static Uri ReleaseAssets(long repositoryId, int id)
-        {
-            return "repositories/{0}/releases/{1}/assets".FormatUri(repositoryId, id);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns all of the releases for the specified repository.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that returns all of the releases for the specified repository.</returns>
-        public static Uri Releases(long repositoryId)
-        {
-            return "repositories/{0}/releases".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns a single release for the specified repository
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="id">The id of the release</param>
-        /// <returns>The <see cref="Uri"/> that returns a single release for the specified repository</returns>
-        public static Uri Releases(long repositoryId, int id)
-        {
-            return "repositories/{0}/releases/{1}".FormatUri(repositoryId, id);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for a repository branch.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="branchName">The name of the branch</param>
-        /// <returns>The <see cref="Uri"/> for a repository branch.</returns>
-        public static Uri RepoBranch(long repositoryId, string branchName)
-        {
-            return "repositories/{0}/branches/{1}".FormatUri(repositoryId, branchName);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns all of the branches for the specified repository.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that returns all of the branches for the specified repository.</returns>
-        public static Uri RepoBranches(long repositoryId)
-        {
-            return "repositories/{0}/branches".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that returns all of the collaborators for the specified repository.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that returns all of the collaborators for the specified repository.</returns>
-        public static Uri RepoCollaborators(long repositoryId)
-        {
-            return "repositories/{0}/collaborators".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for comparing two commits.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="base">The base commit</param>
-        /// <param name="head">The head commit</param>
-        /// <returns>The <see cref="Uri"/> for comparing two commits.</returns>
-        public static Uri RepoCompare(long repositoryId, string @base, string head)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(@base, "base");
-            Ensure.ArgumentNotNullOrEmptyString(head, "head");
-            var encodedBase = @base.UriEncode();
-            var encodedHead = head.UriEncode();
-            return "repositories/{0}/compare/{1}...{2}".FormatUri(repositoryId, encodedBase, encodedHead);
-        }
+    
 
         /// <summary>
         /// Returns the <see cref="Uri"/> for a repository.
@@ -2862,48 +2235,7 @@ namespace Sniper
             return "repositories/{0}".FormatUri(repositoryId);
         }
 
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for getting an archive of a given repository's contents, in a specific format
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="archiveFormat">The format of the archive. Can be either tarball or zipball</param>
-        /// <param name="reference">A valid Git reference.</param>
-        /// <returns>The <see cref="Uri"/> for getting an archive of a given repository's contents, in a specific format</returns>
-        public static Uri RepositoryArchiveLink(long repositoryId, ArchiveFormat archiveFormat, string reference)
-        {
-            return "repositories/{0}/{1}/{2}".FormatUri(repositoryId, archiveFormat.ToParameter(), reference);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository commits.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="reference">The commit reference (SHA)</param>
-        /// <returns>The <see cref="Uri"/> for repository commits.</returns>
-        public static Uri RepositoryCommit(long repositoryId, string reference)
-        {
-            return "repositories/{0}/commits/{1}".FormatUri(repositoryId, reference);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository commits.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for repository commits.</returns>
-        public static Uri RepositoryCommits(long repositoryId)
-        {
-            return "repositories/{0}/commits".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for getting the contents of the specified repository's root
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for getting the contents of the specified repository's root</returns>
-        public static Uri RepositoryContent(long repositoryId)
-        {
-            return "repositories/{0}/contents".FormatUri(repositoryId);
-        }
+       
 
         /// <summary>
         /// Returns the <see cref="Uri"/> for getting the contents of the specified repository and path
@@ -2928,100 +2260,7 @@ namespace Sniper
             return "repositories/{0}/contents/{1}?ref={2}".FormatUri(repositoryId, path, reference);
         }
 
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository contributors.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for repository contributors.</returns>
-        public static Uri RepositoryContributors(long repositoryId)
-        {
-            return "repositories/{0}/contributors".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for a deploy key for a repository
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="number">The id of the deploy key of the repository</param>
-        /// <returns>The <see cref="Uri"/> for a deploy key for a repository</returns>
-        public static Uri RepositoryDeployKey(long repositoryId, int number)
-        {
-            return "repositories/{0}/keys/{1}".FormatUri(repositoryId, number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for deploy keys for a repository.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for deploy keys for a repository.</returns>
-        public static Uri RepositoryDeployKeys(long repositoryId)
-        {
-            return "repositories/{0}/keys".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that lists the repository forks for the specified reference.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that lists the repository forks for the specified reference.</returns>
-        public static Uri RepositoryForks(long repositoryId)
-        {
-            return "repositories/{0}/forks".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that gets the repository hook for the specified reference.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="hookId">The identifier of the repository hook</param>
-        /// <returns>The <see cref="Uri"/> that gets the repository hook for the specified reference.</returns>
-        public static Uri RepositoryHookById(long repositoryId, int hookId)
-        {
-            return "repositories/{0}/hooks/{1}".FormatUri(repositoryId, hookId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that can ping a specified repository hook
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="hookId">The identifier of the repository hook</param>
-        /// <returns>The <see cref="Uri"/> that can ping a specified repository hook</returns>
-        public static Uri RepositoryHookPing(long repositoryId, int hookId)
-        {
-            return "repositories/{0}/hooks/{1}/pings".FormatUri(repositoryId, hookId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that lists the repository hooks for the specified reference.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that lists the repository hooks for the specified reference.</returns>
-        public static Uri RepositoryHooks(long repositoryId)
-        {
-            return "repositories/{0}/hooks".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that can tests a specified repository hook
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="hookId">The identifier of the repository hook</param>
-        /// <returns>The <see cref="Uri"/> that can tests a specified repository hook</returns>
-        public static Uri RepositoryHookTest(long repositoryId, int hookId)
-        {
-            return "repositories/{0}/hooks/{1}/tests".FormatUri(repositoryId, hookId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository languages.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for repository languages.</returns>
-        public static Uri RepositoryLanguages(long repositoryId)
-        {
-            return "repositories/{0}/languages".FormatUri(repositoryId);
-        }
-
+    
         /// <summary>
         /// Returns the <see cref="Uri"/> for getting the page metadata for a given repository
         /// </summary>
@@ -3032,26 +2271,7 @@ namespace Sniper
             return "repositories/{0}/pages".FormatUri(repositoryId);
         }
 
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for getting all build metadata for a given repository
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for getting all build metadata for a given repository</returns>
-        public static Uri RepositoryPageBuilds(long repositoryId)
-        {
-            return "repositories/{0}/pages/builds".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for getting the build metadata for the last build for a given repository
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for getting the build metadata for the last build for a given repository</returns>
-        public static Uri RepositoryPageBuildsLatest(long repositoryId)
-        {
-            return "repositories/{0}/pages/builds/latest".FormatUri(repositoryId);
-        }
-
+   
         /// <summary>
         /// Returns the <see cref="Uri"/> for getting the README of the specified repository
         /// </summary>
@@ -3062,15 +2282,7 @@ namespace Sniper
             return "repositories/{0}/readme".FormatUri(repositoryId);
         }
 
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository tags.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for repository tags.</returns>
-        public static Uri RepositoryTags(long repositoryId)
-        {
-            return "repositories/{0}/tags".FormatUri(repositoryId);
-        }
+      
 
         /// <summary>
         /// Returns the <see cref="Uri"/> for repository teams.
@@ -3082,261 +2294,6 @@ namespace Sniper
             return "repositories/{0}/teams".FormatUri(repositoryId);
         }
 
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that lists the starred repositories for the authenticated user.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that lists the starred repositories for the authenticated user.</returns>
-        public static Uri Stargazers(long repositoryId)
-        {
-            return "repositories/{0}/stargazers".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the code frequency for the given repository
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for the code frequency for the given repository</returns>
-        public static Uri StatsCodeFrequency(long repositoryId)
-        {
-            return "repositories/{0}/stats/code_frequency".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the commit activity for the given repository
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for the commit activity for the given repository</returns>
-        public static Uri StatsCommitActivity(long repositoryId)
-        {
-            return "repositories/{0}/stats/commit_activity".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the contributors for the given repository
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for the contributors for the given repository</returns>
-        public static Uri StatsContributors(long repositoryId)
-        {
-            return "repositories/{0}/stats/contributors".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the participation for the given repository
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for the participation for the given repository</returns>
-        public static Uri StatsParticipation(long repositoryId)
-        {
-            return "repositories/{0}/stats/participation".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the punch card for the given repository
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for the punch card for the given repository</returns>
-        public static Uri StatsPunchCard(long repositoryId)
-        {
-            return "repositories/{0}/stats/punch_card".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified tag.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="reference">The tag reference (SHA)</param>
-        /// <returns>The <see cref="Uri"/> for the specified tag.</returns>
-        public static Uri Tag(long repositoryId, string reference)
-        {
-            return "repositories/{0}/git/tags/{1}".FormatUri(repositoryId, reference);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified tree.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for the specified tree.</returns>
-        public static Uri Tree(long repositoryId)
-        {
-            return "repositories/{0}/git/trees".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified tree.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="reference">The tree reference (SHA)</param>
-        /// <returns>The <see cref="Uri"/> for the specified tree.</returns>
-        public static Uri Tree(long repositoryId, string reference)
-        {
-            return "repositories/{0}/git/trees/{1}".FormatUri(repositoryId, reference);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for the specified tree.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <param name="reference">The tree reference (SHA)</param>
-        /// <returns>The <see cref="Uri"/> for the specified tree.</returns>
-        public static Uri TreeRecursive(long repositoryId, string reference)
-        {
-            return "repositories/{0}/git/trees/{1}?recursive=1".FormatUri(repositoryId, reference);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that shows whether the repo is starred by the current user.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that shows whether the repo is starred by the current user.</returns>
-        public static Uri Watched(long repositoryId)
-        {
-            return "repositories/{0}/subscription".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> that lists the watched repositories for the authenticated user.
-        /// </summary>
-        /// <param name="repositoryId">The Id of the repository</param>
-        /// <returns>The <see cref="Uri"/> that lists the watched repositories for the authenticated user.</returns>
-        public static Uri Watchers(long repositoryId)
-        {
-            return "repositories/{0}/subscribers".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for deleting a reaction.
-        /// </summary>
-        /// <param name="number">The reaction number</param>
-        /// <returns>The <see cref="Uri"/> that lists the watched repositories for the authenticated user.</returns>
-        public static Uri Reactions(int number)
-        {
-            return "reactions/{0}".FormatUri(number);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository invitations.
-        /// </summary>
-        /// <param name="repositoryId">The id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for repository invitations.</returns>
-        public static Uri RepositoryInvitations(long repositoryId)
-        {
-            return "repositories/{0}/invitations".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for a single repository invitation.
-        /// </summary>
-        /// <param name="repositoryId">The id of the repository</param>
-        /// <param name="invitationId">The id of the invitation</param>
-        /// <returns>The <see cref="Uri"/> for repository invitations.</returns>
-        public static Uri RepositoryInvitations(long repositoryId, int invitationId)
-        {
-            return "repositories/{0}/invitations/{1}".FormatUri(repositoryId, invitationId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for invitations for the current user.
-        /// </summary>
-        /// <returns>The <see cref="Uri"/> for invitations for the current user.</returns>
-        public static Uri UserInvitations()
-        {
-            return "user/repository_invitations".FormatUri();
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for a single invitation of the current user.
-        /// </summary>
-        /// <param name="invitationId">The id of the invitation</param>
-        /// <returns>The <see cref="Uri"/> for invitations for the current user.</returns>
-        public static Uri UserInvitations(int invitationId)
-        {
-            return "user/repository_invitations/{0}".FormatUri(invitationId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository traffice referrers.
-        /// </summary>
-        /// <param name="owner">The owner of repo</param>
-        /// <param name="repo">The name of repo</param>
-        /// <returns>The <see cref="Uri"/> for repository traffic referrers.</returns>
-        public static Uri RepositoryTrafficReferrers(string owner, string repo)
-        {
-            return "repos/{0}/{1}/traffic/popular/referrers".FormatUri(owner, repo);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository traffice referrers.
-        /// </summary>
-        /// <param name="repositoryId">The id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for repository traffic referrers.</returns>
-        public static Uri RepositoryTrafficReferrers(long repositoryId)
-        {
-            return "repositories/{0}/traffic/popular/referrers".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository traffice paths.
-        /// </summary>
-        /// <param name="owner">The owner of repo</param>
-        /// <param name="repo">The name of repo</param>
-        /// <returns>The <see cref="Uri"/> for repository traffic paths.</returns>
-        public static Uri RepositoryTrafficPaths(string owner, string repo)
-        {
-            return "repos/{0}/{1}/traffic/popular/paths".FormatUri(owner, repo);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository traffice paths.
-        /// </summary>
-        /// <param name="repositoryId">The id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for repository traffic paths.</returns>
-        public static Uri RepositoryTrafficPaths(long repositoryId)
-        {
-            return "repositories/{0}/traffic/popular/paths".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository traffice views.
-        /// </summary>
-        /// <param name="owner">The owner of repo</param>
-        /// <param name="repo">The name of repo</param>
-        /// <returns>The <see cref="Uri"/> for repository traffic views.</returns>
-        public static Uri RepositoryTrafficViews(string owner, string repo)
-        {
-            return "repos/{0}/{1}/traffic/views".FormatUri(owner, repo);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository traffice views.
-        /// </summary>
-        /// <param name="repositoryId">The id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for repository traffic views.</returns>
-        public static Uri RepositoryTrafficViews(long repositoryId)
-        {
-            return "repositories/{0}/traffic/views".FormatUri(repositoryId);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository traffice clones.
-        /// </summary>
-        /// <param name="owner">The owner of repo</param>
-        /// <param name="repo">The name of repo</param>
-        /// <returns>The <see cref="Uri"/> for repository traffic clones.</returns>
-        public static Uri RepositoryTrafficClones(string owner, string repo)
-        {
-            return "repos/{0}/{1}/traffic/clones".FormatUri(owner, repo);
-        }
-
-        /// <summary>
-        /// Returns the <see cref="Uri"/> for repository traffice clones.
-        /// </summary>
-        /// <param name="repositoryId">The id of the repository</param>
-        /// <returns>The <see cref="Uri"/> for repository traffic clones.</returns>
-        public static Uri RepositoryTrafficClones(long repositoryId)
-        {
-            return "repositories/{0}/traffic/clones".FormatUri(repositoryId);
-        }
+   
     }
 }

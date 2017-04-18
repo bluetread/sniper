@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -8,8 +9,8 @@ namespace Sniper
     {
         public static TValue SafeGet<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key)
         {
-            Ensure.ArgumentNotNull(dictionary, "dictionary");
-
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Dictionary, dictionary);
+            
             TValue value;
             return dictionary.TryGetValue(key, out value) ? value : default(TValue);
         }

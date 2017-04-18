@@ -2,8 +2,9 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+using Sniper.Application.Messages;
+using Sniper.Authentication;
 using Sniper.Http;
-using static Sniper.Constants;
 
 namespace Sniper
 {
@@ -19,17 +20,17 @@ namespace Sniper
         ///</remarks>
         public void Authenticate(IRequest request, ICredentials credentials)
         {
-            Ensure.ArgumentNotNull(Authentication.Request, request);
-            Ensure.ArgumentNotNull(Authentication.Credentials, credentials);
-            Ensure.ArgumentNotNull(Authentication.CredentialsLogin, credentials.Login);
+            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(AuthenticationKeys.Credentials, credentials);
+            Ensure.ArgumentNotNull(AuthenticationKeys.CredentialsLogin, credentials.Login);
 
-            Debug.Assert(credentials.Password != null, Authentication.Messages.EmptyPassword);
+            Debug.Assert(credentials.Password != null, AuthenticationKeys.Messages.EmptyPassword);
 
-            var header = string.Format(CultureInfo.InvariantCulture, Authentication.Messages.BasicAuthorizationMessageFormat, 
+            var header = string.Format(CultureInfo.InvariantCulture, AuthenticationKeys.Messages.BasicAuthorizationMessageFormat, 
                 Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format(CultureInfo.InvariantCulture, 
-                Application.Messages.StandardKeyValueFormat, credentials.Login, credentials.Password))));
+                MessageKeys.StandardKeyValueFormat, credentials.Login, credentials.Password))));
 
-            request.Headers[Authentication.Keys.Authorization] = header;
+            request.Headers[AuthenticationKeys.Keys.Authorization] = header;
         }
     }
 }

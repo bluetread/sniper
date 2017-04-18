@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using Sniper.Http;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Response
 {
@@ -9,10 +11,10 @@ namespace Sniper.Response
     {
         public LicenseMetadata(string key, string name, Uri url)
         {
-            Ensure.ArgumentNotNullOrEmptyString(key, "key");
-            Ensure.ArgumentNotNullOrEmptyString(name, "name");
-            Ensure.ArgumentNotNull(url, "url");
-
+            Ensure.ArgumentNotNullOrEmptyString(HttpKeys.Key, key);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Name, name);
+            Ensure.ArgumentNotNull(HttpKeys.Url, url);
+            
             Key = key;
             Name = name;
             Url = url;

@@ -15,7 +15,7 @@ namespace Sniper.Http
 
         public Response(IDictionary<string, string> headers)
         {
-            Ensure.ArgumentNotNull(headers, "headers");
+            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Headers, headers);
 
             Headers = new ReadOnlyDictionary<string, string>(headers);
             ApiInfo = ApiInfoParser.ParseResponseHeaders(headers);
@@ -23,8 +23,8 @@ namespace Sniper.Http
 
         public Response(HttpStatusCode statusCode, object body, IDictionary<string, string> headers, string contentType)
         {
-            Ensure.ArgumentNotNull(headers, "headers");
-
+            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Headers, headers);
+            
             StatusCode = statusCode;
             Body = body;
             Headers = new ReadOnlyDictionary<string, string>(headers);

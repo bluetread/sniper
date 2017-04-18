@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Response
 {
@@ -12,7 +13,7 @@ namespace Sniper.Response
 
         public Merge(Author author, Author committer, Commit commit, IEnumerable<GitReference> parents, string commentsUrl, int commentCount, string htmlUrl)
         {
-            Ensure.ArgumentNotNull(parents, "parents");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Parents, parents);
 
             Author = author;
             Committer = committer;

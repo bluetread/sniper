@@ -1,6 +1,4 @@
-﻿using System;
-using Sniper.Enterprise;
-using Sniper.Http;
+﻿using Sniper.Http;
 
 namespace Sniper
 {
@@ -22,29 +20,6 @@ namespace Sniper
         /// </remarks>
         IAuthorizationsClient Authorization { get; }
 
-        /// <summary>
-        /// Access GitHub's Activity API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/activity/
-        /// </remarks>
-        IActivitiesClient Activity { get; }
-
-        /// <summary>
-        /// Access GitHub's Issue API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/issues/
-        /// </remarks>
-        IIssuesClient Issue { get; }
-
-        /// <summary>
-        /// Access GitHub's Migration API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/migration/
-        /// </remarks>
-        IMigrationClient Migration { get; }
 
         /// <summary>
         /// Access GitHub's Miscellaneous API.
@@ -60,23 +35,9 @@ namespace Sniper
         /// <remarks>
         /// Refer to the API documentation for more information: https://developer.github.com/v3/oauth/
         /// </remarks>
-        IOauthClient Oauth { get; }
+        IOAuthClient Oauth { get; }
 
-        /// <summary>
-        /// Access GitHub's Organizations API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/orgs/
-        /// </remarks>
-        IOrganizationsClient Organization { get; }
-
-        /// <summary>
-        /// Access GitHub's Pull Requests API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/pulls/
-        /// </remarks>
-        IPullRequestsClient PullRequest { get; }
+    
 
         /// <summary>
         /// Access GitHub's Repositories API.
@@ -85,15 +46,7 @@ namespace Sniper
         /// Refer to the API documentation for more information: https://developer.github.com/v3/repos/
         /// </remarks>
         IRepositoriesClient Repository { get; }
-
-        /// <summary>
-        /// Access GitHub's Gists API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/gists/
-        /// </remarks>
-        IGistsClient Gist { get; }
-
+      
         /// <summary>
         /// Access GitHub's Users API.
         /// </summary>
@@ -103,27 +56,11 @@ namespace Sniper
         IUsersClient User { get; }
 
         /// <summary>
-        /// Access GitHub's Git Data API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/git/
-        /// </remarks>
-        IGitDatabaseClient Git { get; }
-
-        /// <summary>
         /// Access GitHub's Search API.
         /// </summary>
         /// <remarks>
         /// Refer to the API documentation for more information: https://developer.github.com/v3/search/
         /// </remarks>
         ISearchClient Search { get; }
-
-        /// <summary>
-        /// Access GitHub's Enterprise API
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/enterprise/
-        /// </remarks>
-        IEnterpriseClient Enterprise { get; }
     }
 }

@@ -4,8 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Sniper.Reflection;
-using Sniper.Response;
-using Sniper.Response.ActivityPayloads;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Http
 {
@@ -54,8 +53,8 @@ namespace Sniper.Http
             [SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "Need to support .NET 2")]
             protected override bool TrySerializeUnknownTypes(object input, out object output)
             {
-                Ensure.ArgumentNotNull(input, "input");
-
+                Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Input, input);
+                
                 var type = input.GetType();
                 var jsonObject = new JsonObject();
                 var getters = GetCache[type];
@@ -84,13 +83,10 @@ namespace Sniper.Http
                 return p.ToParameter();
             }
 
-            private string _type;
-
             // Overridden to handle enums.
             public override object DeserializeObject(object value, Type type)
             {
                 var stringValue = value as string;
-                var jsonValue = value as JsonObject;
 
                 if (stringValue != null)
                 {
@@ -150,29 +146,16 @@ namespace Sniper.Http
                         }
                     }
                 }
-                else if (jsonValue != null)
-                {
-                    if (type == typeof(Activity))
-                    {
-                        _type = jsonValue["type"].ToString();
-                    }
-                }
-
-                if (type == typeof(ActivityPayload))
-                {
-                    var payloadType = GetPayloadType(_type);
-                    return base.DeserializeObject(value, payloadType);
-                }
-
+               
                 return base.DeserializeObject(value, type);
             }
 
             static string RemoveHyphenAndUnderscore(string stringValue)
             {
                 // remove '-' from values coming in to be able to enum utf-8
-                stringValue = stringValue.Replace("-", "");
+                stringValue = stringValue.Replace("-", string.Empty);
                 // remove '-' from values coming in to be able to enum EventInfoState names with underscores in them. Like "head_ref_deleted" 
-                stringValue = stringValue.Replace("_", "");
+                stringValue = stringValue.Replace("_", string.Empty);
                 return stringValue;
             }
 
@@ -183,30 +166,6 @@ namespace Sniper.Http
                     .ToDictionary(
                         p => p.JsonFieldName,
                         p => new KeyValuePair<Type, ReflectionUtils.SetDelegate>(p.Type, p.SetDelegate));
-            }
-
-            private static Type GetPayloadType(string activityType)
-            {
-                switch (activityType)
-                {
-                    case "CommitCommentEvent":
-                        return typeof(CommitCommentPayload);
-                    case "ForkEvent":
-                        return typeof(ForkEventPayload);
-                    case "IssueCommentEvent":
-                        return typeof(IssueCommentPayload);
-                    case "IssuesEvent":
-                        return typeof(IssueEventPayload);
-                    case "PullRequestEvent":
-                        return typeof(PullRequestEventPayload);
-                    case "PullRequestReviewCommentEvent":
-                        return typeof(PullRequestCommentPayload);
-                    case "PushEvent":
-                        return typeof(PushEventPayload);
-                    case "WatchEvent":
-                        return typeof(StarredEventPayload);
-                }
-                return typeof(ActivityPayload);
             }
         }
     }

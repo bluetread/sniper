@@ -14,7 +14,7 @@ namespace Sniper.Response
         // TODO: I'd love to not need this
         public Authorization() { }
 
-        public Authorization(int id, string url, Application application, string note, string noteUrl, DateTimeOffset createdAt, DateTimeOffset updateAt, string[] scopes)
+        public Authorization(int id, string url, OauthApplication application, string note, string noteUrl, DateTimeOffset createdAt, DateTimeOffset updateAt, string[] scopes)
         {
             Id = id;
             Url = url;
@@ -43,7 +43,7 @@ namespace Sniper.Response
         /// <summary>
         /// The <see cref="Application"/> that created this <see cref="Authorization"/>.
         /// </summary>
-        public Application Application { get; protected set; }
+        public OauthApplication Application { get; protected set; }
 
         /// <summary>
         /// The last eight characters of the user's token

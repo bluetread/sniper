@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using Sniper.ToBeRemoved;
 
 namespace Sniper.Request
 {
@@ -24,8 +25,8 @@ namespace Sniper.Request
         /// <param name="sha">The SHA1 value to set this reference to</param>
         public NewReference(string reference, string sha)
         {
-            Ensure.ArgumentNotNullOrEmptyString(reference, "reference");
-            Ensure.ArgumentNotNullOrEmptyString(sha, "sha");
+            Ensure.ArgumentNotNull(OldGitHubToBeRemoved.Reference, reference);
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Sha, sha);
 
             Ref = GetReference(reference);
             Sha = sha;

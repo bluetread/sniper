@@ -5,6 +5,9 @@ using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using Sniper.Application;
+using Sniper.Http;
+using Sniper.ToBeRemoved;
 
 namespace Sniper
 {
@@ -22,7 +25,7 @@ namespace Sniper
 
         public static Uri FormatUri(this string pattern, params object[] args)
         {
-            Ensure.ArgumentNotNullOrEmptyString(pattern, "pattern");
+            Ensure.ArgumentNotNullOrEmptyString(HttpKeys.Pattern, pattern);
 
             return new Uri(string.Format(CultureInfo.InvariantCulture, pattern, args), UriKind.Relative);
         }
@@ -70,25 +73,25 @@ namespace Sniper
         [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Ruby don't care. Ruby don't play that.")]
         public static string ToRubyCase(this string propertyName)
         {
-            Ensure.ArgumentNotNullOrEmptyString(propertyName, "propertyName");
+            Ensure.ArgumentNotNullOrEmptyString(ApplicationKeys.PropertyName, propertyName);
             return string.Join("_", propertyName.SplitUpperCase()).ToLowerInvariant();
         }
 
         public static string FromRubyCase(this string propertyName)
         {
-            Ensure.ArgumentNotNullOrEmptyString(propertyName, "propertyName");
-            return string.Join("", propertyName.Split('_')).ToCapitalizedInvariant();
+            Ensure.ArgumentNotNullOrEmptyString(ApplicationKeys.PropertyName, propertyName);
+            return string.Join(string.Empty, propertyName.Split('_')).ToCapitalizedInvariant();
         }
 
         public static string ToCapitalizedInvariant(this string value)
         {
-            Ensure.ArgumentNotNullOrEmptyString(value, "value");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Value, value);
             return string.Concat(value[0].ToString().ToUpperInvariant(), value.Substring(1));
         }
 
         private static IEnumerable<string> SplitUpperCase(this string source)
         {
-            Ensure.ArgumentNotNullOrEmptyString(source, "source");
+            Ensure.ArgumentNotNullOrEmptyString(OldGitHubToBeRemoved.Source, source);
 
             int wordStartIndex = 0;
             var letters = source.ToCharArray();

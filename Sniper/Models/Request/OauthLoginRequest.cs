@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
+using Sniper.Authentication;
 
 namespace Sniper.Request
 {
@@ -9,15 +10,15 @@ namespace Sniper.Request
     /// Used to initiate an OAuth2 authentication flow from 3rd party web sites.
     /// </summary>
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
-    public class OauthLoginRequest : RequestParameters
+    public class OAuthLoginRequest : RequestParameters
     {
         /// <summary>
         /// Creates an instance of the OAuth login request with the required parameter.
         /// </summary>
         /// <param name="clientId">The client Id you received from GitHub when you registered the application.</param>
-        public OauthLoginRequest(string clientId)
+        public OAuthLoginRequest(string clientId)
         {
-            Ensure.ArgumentNotNullOrEmptyString(clientId, "clientId");
+            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
 
             ClientId = clientId;
             Scopes = new Collection<string>();

@@ -1,4 +1,5 @@
 ﻿using System;
+using static Sniper.WarningsErrors.MessageSuppression;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Sniper
@@ -9,8 +10,7 @@ namespace Sniper
     /// </summary>
     [Serializable]
 
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
-        Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
+    [SuppressMessage(Categories.Design, MessageAttributes.ImplementStandardExceptionConstructors, Justification = Justifications.SpecificToTargetProcess)]
     public class TwoFactorChallengeFailedException : TwoFactorAuthorizationException
     {
 #if false

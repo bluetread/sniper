@@ -4,12 +4,12 @@ using Sniper.Http;
 namespace Sniper
 {
     /// <summary>
-    /// A client for GitHub's Issue Assignees API.
+    /// A client for GitHub's Issue Assignees API. //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     public class AssigneesClient : ApiClient //, IAssigneesClient
     {
         /// <summary>
-        /// Instantiates a new GitHub Issue Assignees API client.
+        /// Instantiates a new GitHub Issue Assignees API client. //TODO: Replace with TargetProcess if this is usable
         /// </summary>
         /// <param name="apiConnection">An API connection</param>
         public AssigneesClient(IApiConnection apiConnection) : base(apiConnection) {}

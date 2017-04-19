@@ -7,10 +7,10 @@ using Sniper.Response;
 namespace Sniper
 {
     /// <summary>
-    /// A client for GitHub's miscellaneous APIs.
+    /// A client for GitHub's miscellaneous APIs.  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     /// <remarks>
-    /// See the <a href="http://developer.github.com/v3/misc/">Miscellaneous API documentation</a> for more details.
+    /// See the <a href="http://developer.github.com/v3/misc/">Miscellaneous API documentation</a> for more details.  //TODO: Replace with TargetProcess if this is usable
     /// </remarks>
     public interface IMiscellaneousClient
     {
@@ -29,7 +29,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>This is a PREVIEW API! Use it at your own risk.</remarks>
         /// <returns>A list of licenses available on the site</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        [SuppressMessage(Categories.Design, "CA1024:UsePropertiesWhereAppropriate")]
         Task<IReadOnlyList<LicenseMetadata>> GetAllLicenses();
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Sniper
         /// </summary>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>An <see cref="MiscellaneousRateLimit"/> of Rate Limits.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        [SuppressMessage(Categories.Design, "CA1024:UsePropertiesWhereAppropriate")]
         Task<MiscellaneousRateLimit> GetRateLimits();
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Sniper
         /// </summary>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>An <see cref="Meta"/> containing metadata about the GitHub instance.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        [SuppressMessage(Categories.Design, "CA1024:UsePropertiesWhereAppropriate")]
         Task<Meta> GetMetadata();
     }
 }

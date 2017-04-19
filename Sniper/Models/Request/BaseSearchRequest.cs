@@ -7,7 +7,7 @@ namespace Sniper.Request
     /// <summary>
     /// Base class for searching issues/code/users/repos
     /// </summary>
-    [SuppressMessage("Microsoft.Design", "CA1012:AbstractTypesShouldNotHaveConstructors")]
+    [SuppressMessage(Categories.Design, "CA1012:AbstractTypesShouldNotHaveConstructors")]
     public abstract class BaseSearchRequest
     {
         /// <summary>

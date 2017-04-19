@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using static Sniper.WarningsErrors.MessageSuppression;
 using System.Diagnostics.CodeAnalysis;
+
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -11,8 +13,7 @@ namespace Sniper
 
     [Serializable]
 
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
-        Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
+    [SuppressMessage(Categories.Design, MessageAttributes.ImplementStandardExceptionConstructors, Justification = Justifications.SpecificToTargetProcess)]
     public class RepositoryWebHookConfigException : Exception
     {
         private readonly string _message;
@@ -21,7 +22,7 @@ namespace Sniper
         {
             var parameterList = string.Join(", ", invalidConfig.Select(ic => ic.FromRubyCase()));
             _message = string.Format(CultureInfo.InvariantCulture,
-                "Duplicate webhook config values found - these values: {0} should not be passed in as part of the config values. Use the properties on the NewRepositoryWebHook class instead.",
+                "Duplicate webhook config values found - these values: {0} should not be passed in as part of the config values. Use the properties on the NewRepositoryWebHook class instead.", //TODO:const
                 parameterList);
         }
 
@@ -40,14 +41,14 @@ namespace Sniper
         /// </param>
         protected RepositoryWebHookConfigException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            _message = info.GetString("Message");
+            _message = info.GetString("Message");//TODO:const
         }
 
         [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue("Message", Message);
+            info.AddValue("Message", Message);//TODO:const
         }
 
     }

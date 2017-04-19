@@ -18,7 +18,7 @@ namespace Sniper.Request
         /// <value>
         /// The type.
         /// </value>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
+        [SuppressMessage(Categories.Naming, "CA1721:PropertyNamesShouldNotMatchGetMethods")]
         public RepositoryType? Type { get; set; }
 
         /// <summary>

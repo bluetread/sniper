@@ -9,7 +9,7 @@ namespace Sniper
     /// A client for GitHub's OAuth API.
     /// </summary>
     /// <remarks>
-    /// See the <a href="http://developer.github.com/v3/oauth/">OAuth API documentation</a> for more details.
+    /// See the <a href="http://developer.github.com/v3/oauth/">OAuth API documentation</a> for more details.  //TODO: Replace with TargetProcess if this is usable
     /// </remarks>
     public interface IAuthorizationsClient
     {
@@ -18,14 +18,14 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="http://developer.github.com/v3/oauth/#list-your-authorizations">API documentation</a> for more information.
+        /// See the <a href="http://developer.github.com/v3/oauth/#list-your-authorizations">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <exception cref="AuthorizationException">
         /// Thrown when the current user does not have permission to make the request.
         /// </exception>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>A list of <see cref="Authorization"/>s for the authenticated user.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate",
+        [SuppressMessage(Categories.Design, "CA1024:UsePropertiesWhereAppropriate",
             Justification = "It's an API call, so it's not a property.")]
         Task<IReadOnlyList<Authorization>> GetAll();
 
@@ -34,7 +34,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="http://developer.github.com/v3/oauth/#list-your-authorizations">API documentation</a> for more information.
+        /// See the <a href="http://developer.github.com/v3/oauth/#list-your-authorizations">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="options">Options for changing the API response</param>
         /// <exception cref="AuthorizationException">
@@ -42,7 +42,7 @@ namespace Sniper
         /// </exception>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>A list of <see cref="Authorization"/>s for the authenticated user.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate",
+        [SuppressMessage(Categories.Design, "CA1024:UsePropertiesWhereAppropriate",
             Justification = "It's an API call, so it's not a property.")]
         Task<IReadOnlyList<Authorization>> GetAll(ApiOptions options);
 
@@ -51,7 +51,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="http://developer.github.com/v3/oauth/#get-a-single-authorization">API documentation</a> for more information.
+        /// See the <a href="http://developer.github.com/v3/oauth/#get-a-single-authorization">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="id">The Id of the <see cref="Authorization"/> to get</param>
         /// <exception cref="AuthorizationException">
@@ -59,7 +59,7 @@ namespace Sniper
         /// </exception>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>The specified <see cref="Authorization"/>.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get",
+        [SuppressMessage(Categories.Naming, "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get",
             Justification = "It's fiiiine. It's fine. Trust us.")]
         Task<Authorization> Get(int id);
 
@@ -68,7 +68,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization">API documentation</a> for more information.
+        /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="newAuthorization">Describes the new authorization to create</param>
         /// <exception cref="AuthorizationException">
@@ -86,7 +86,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization">API documentation</a> for more information.
+        /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="twoFactorAuthenticationCode">The two-factor authentication code in response to the current user's previous challenge</param>
         /// <param name="newAuthorization">Describes the new authorization to create</param>
@@ -106,7 +106,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app">API documentation</a> for more information.
+        /// See the <a href="http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="clientId">Client Id of the OAuth application for the token</param>
         /// <param name="clientSecret">The client secret</param>
@@ -130,7 +130,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app">API documentation</a> for more information.
+        /// See the <a href="http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="clientId">Client Id of the OAuth application for the token</param>
         /// <param name="clientSecret">The client secret</param>
@@ -156,7 +156,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app">API documentation</a> for more information.
+        /// See the <a href="http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="clientId">Client Id of the OAuth application for the token</param>
         /// <param name="clientSecret">The client secret</param>
@@ -180,7 +180,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app">API documentation</a> for more information.
+        /// See the <a href="http://developer.github.com/v3/oauth/#get-or-create-an-authorization-for-a-specific-app">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="clientId">Client Id of the OAuth application for the token</param>
         /// <param name="clientSecret">The client secret</param>
@@ -205,7 +205,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#check-an-authorization">API documentation</a> for more information.
+        /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#check-an-authorization">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="clientId">Client Id of the OAuth application for the token</param>
         /// <param name="accessToken">The OAuth token to check</param>
@@ -217,7 +217,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#reset-an-authorization">API documentation</a> for more information.
+        /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#reset-an-authorization">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="clientId">ClientID of the OAuth application for the token</param>
         /// <param name="accessToken">The OAuth token to reset</param>
@@ -229,7 +229,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#revoke-an-authorization-for-an-application">API documentation for more information.</a>
+        /// See the <a href="https://developer.github.com/v3/oauth_authorizations/#revoke-an-authorization-for-an-application">API documentation for more information.</a>  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="clientId">ClientID of the OAuth application for the token</param>
         /// <param name="accessToken">The OAuth token to revoke</param>
@@ -241,7 +241,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="http://developer.github.com/v3/oauth/#update-an-existing-authorization">API 
+        /// See the <a href="http://developer.github.com/v3/oauth/#update-an-existing-authorization">API   //TODO: Replace with TargetProcess if this is usable
         /// documentation</a> for more details.
         /// </remarks>
         /// <param name="id">Id of the <see cref="Authorization"/> to update</param>
@@ -258,7 +258,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="http://developer.github.com/v3/oauth/#delete-an-authorization">API 
+        /// See the <a href="http://developer.github.com/v3/oauth/#delete-an-authorization">API   //TODO: Replace with TargetProcess if this is usable
         /// documentation</a> for more details.
         /// </remarks>
         /// <param name="id">The system-wide Id of the authorization to delete</param>
@@ -274,7 +274,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="http://developer.github.com/v3/oauth/#delete-an-authorization">API 
+        /// See the <a href="http://developer.github.com/v3/oauth/#delete-an-authorization">API   //TODO: Replace with TargetProcess if this is usable
         /// documentation</a> for more details.
         /// </remarks>
         /// <param name="id">The system-wide Id of the authorization to delete</param>

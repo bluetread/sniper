@@ -12,7 +12,7 @@ namespace Sniper.Response
     {
         public RepositoryTrafficViewSummary() { }
 
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
+        [SuppressMessage(Categories.Naming, "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
         public RepositoryTrafficViewSummary(int count, int uniques, IReadOnlyList<RepositoryTrafficView> views)
         {
             Count = count;
@@ -22,7 +22,7 @@ namespace Sniper.Response
 
         public int Count { get; protected set; }
 
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
+        [SuppressMessage(Categories.Naming, "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
         public int Uniques { get; protected set; }
 
         public IReadOnlyList<RepositoryTrafficView> Views { get; protected set; }
@@ -35,7 +35,7 @@ namespace Sniper.Response
     {
         public RepositoryTrafficView() { }
 
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
+        [SuppressMessage(Categories.Naming, "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
         public RepositoryTrafficView(DateTimeOffset timestamp, int count, int uniques)
         {
             Timestamp = timestamp;
@@ -47,7 +47,7 @@ namespace Sniper.Response
 
         public int Count { get; protected set; }
 
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
+        [SuppressMessage(Categories.Naming, "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
         public int Uniques { get; protected set; }
 
         internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Timestamp: {0} Number: {1} Uniques: {2}", Timestamp, Count, Uniques);

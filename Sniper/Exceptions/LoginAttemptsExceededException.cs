@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using Sniper.Http;
+using static Sniper.WarningsErrors.MessageSuppression;
+using System.Diagnostics.CodeAnalysis;
+
 
 namespace Sniper
 {
@@ -10,8 +12,7 @@ namespace Sniper
 
     [Serializable]
 
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
-        Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
+    [SuppressMessage(Categories.Design, MessageAttributes.ImplementStandardExceptionConstructors, Justification = Justifications.SpecificToTargetProcess)]
     public class LoginAttemptsExceededException : ForbiddenException
     {
         /// <summary>

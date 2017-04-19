@@ -9,10 +9,10 @@ using Sniper.Response;
 namespace Sniper
 {
     /// <summary>
-    /// A client for GitHub's Users API.
+    /// A client for GitHub's Users API.  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     /// <remarks>
-    /// See the <a href="http://developer.github.com/v3/users/">Users API documentation</a> for more information.
+    /// See the <a href="http://developer.github.com/v3/users/">Users API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
     /// </remarks>
     public class UsersClient : ApiClient, IUsersClient
     {
@@ -32,7 +32,7 @@ namespace Sniper
         /// A client for GitHub's User Emails API
         /// </summary>
         /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/users/emails/">Emails API documentation</a> for more information.
+        /// See the <a href="http://developer.github.com/v3/users/emails/">Emails API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         ///</remarks>
         public IUserEmailsClient Email { get; }
 
@@ -76,7 +76,7 @@ namespace Sniper
         /// A client for GitHub's User Administration API 
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/users/administration/">User Administration API documentation</a> for more information.
+        /// See the <a href="https://developer.github.com/v3/users/administration/">User Administration API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         ///</remarks>
         public IUserAdministrationClient Administration { get; }
     }

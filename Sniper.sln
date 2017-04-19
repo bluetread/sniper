@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{ADA30220-ADA3-1965-0220-ABCDEF123456}") = "Sniper", "Sniper\Sniper.csproj", "{ADA30220-ADA3-0000-0220-ABCDEF123456}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sniper", "Sniper\Sniper.csproj", "{ADA30220-ADA3-0000-0220-ABCDEF123456}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

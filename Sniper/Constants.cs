@@ -19,10 +19,31 @@ namespace Sniper.Application.Messages
 {
     public static class MessageKeys
     {
-        public const string StandardKeyValueFormat = @"{0}:{1}";
+        public const string ConvertErrorFromUtf32RangeStandard = "The argument must be from 0 to 0x10FFFF.";
+        public const string ConvertErrorFromUtf32RangeSurrogate = "The argument must not be in surrogate pair range.";
+        public const string EmptyParameter = "Parameter cannot be empty";
         public const string EmptyPassword = "Passwords should never be null/empty";
+        public const string EmptyValue = "Cannot contain null, empty or whitespace values";
+        public const string FieldAndPropertyBothNull = "Property and Field cannot both be null";
+        public const string JsonStringInvalid = "Invalid JSON string";
+        public const string StandardKeyValueFormat = @"{0}:{1}";
+        public const string TimespanZero = "Timespan must be greater than zero";
     }
 }
+
+namespace Sniper.Application.Parameters
+{
+    public static class ParameterKeys
+    {
+        public const string IgnoreField = "ignoreThisField";
+        public const string Limit = "Limit";
+        public const string Remaining = "Remaining";
+        public const string Reset = "reset";
+        public const string ResetAsUtcEpochSeconds = "ResetAsUtcEpochSeconds";
+    }
+
+}
+
 namespace Sniper.Authentication
 {
     public static class AuthenticationKeys
@@ -61,6 +82,30 @@ namespace Sniper.Authentication
                 "The Login is not null for a token authentication request. You probably did something wrong.";
         }
     }
+}
+
+namespace Sniper.FileAndDirectory
+{
+    public static class ConfigurationFiles
+    {
+        public const string ApplicationConfigurationFile = "sniper.json";
+        internal static string ConfigurationDirectory = "_configuration";
+        internal static string ConfigurationDirectoryFormat = $@"~\{ConfigurationDirectory}";
+        internal static string ConfigurationDirectoryFileFormat = $@"{ConfigurationDirectoryFormat}\{{0}}";
+        public const string LocalFile = "local";
+    }
+
+    public static class FileExtensions
+    {
+        public const string CloudConfig = "cscfg";
+        public const string Html = "html";
+        public const string Json = "json";
+        public const string LocalConfig = "config";
+        public const string Pdf = "pdf";
+        public const string Text = "txt";
+        public const string Xml = "xml";
+    }
+
 }
 
 namespace Sniper.Http
@@ -463,3 +508,44 @@ namespace Sniper.Types
     }
 }
 #endif
+
+
+namespace Sniper.WarningsErrors
+{
+    public static class MessageSuppression
+    {
+        internal static class Categories
+        {
+            public const string Design = "Microsoft.Design";
+            public const string Naming = "Microsoft.Naming";
+            public const string Maintainability = "Microsoft.Maintainability";
+            public const string Performance = "Microsoft.Performance";
+            public const string Reliability = "Microsoft.Reliability";
+            public const string Usage = "Microsoft.Usage";
+        }
+
+        internal static class MessageAttributes
+        {
+            public const string AvoidExcessiveComplexity = "CA1502:AvoidExcessiveComplexity";
+            public const string AvoidUncalledPrivateCode = "CA1811:AvoidUncalledPrivateCode";
+            public const string DisposeObjectsBeforeLosingScope = "CA2000:DisposeObjectsBeforeLosingScope";
+            public const string IdentifiersShouldBeSpelledCorrectly = "CA1704:IdentifiersShouldBeSpelledCorrectly";
+            public const string IdentifiersShouldHaveCorrectSuffix = "CA1710:IdentifiersShouldHaveCorrectSuffix";
+            public const string IdentifiersShouldNotMatchKeywords = "CA1716:IdentifiersShouldNotMatchKeywords";
+            public const string ImplementStandardExceptionConstructors = "CA1032:ImplementStandardExceptionConstructors";
+            public const string NonConstantFieldsShouldNotBeVisible = "CA2211:NonConstantFieldsShouldNotBeVisible";
+            public const string ReviewUnusedParameters = "CA1801:ReviewUnusedParameters";
+            public const string TypeNamesShouldNotMatchNamespaces = "CA1724:TypeNamesShouldNotMatchNamespaces";
+            public const string UseGenericsWhereAppropriate = "CA1007:UseGenericsWhereAppropriate";
+            public const string UsePropertiesWhereAppropriate = "CA1024:UsePropertiesWhereAppropriate";
+        }
+
+        internal static class Justifications
+        {
+            public const string DotNet2Support = "Need to support .NET 2";
+            public const string NetworkRequest = "Makes a network request";
+            public const string SpecificToTargetProcess = "These exceptions are specific to the Target Process API and not general purpose exceptions";
+        }
+    }
+
+}

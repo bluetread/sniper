@@ -4,9 +4,9 @@ using System;
 namespace Sniper.Response
 {
     /// <summary>
-    /// Base class for a GitHub account, most often either a <see cref="User"/> or <see cref="Organization"/>.
+    /// Base class for a GitHub account, most often either a <see cref="User"/> or <see cref="Organization"/>.  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
-    public abstract class Account
+    public abstract class Account  //TODO: Replace with TargetProcess if this is usable
     {
         protected Account() { }
 
@@ -69,7 +69,7 @@ namespace Sniper.Response
         public string Email { get; protected set; }
 
         /// <summary>
-        /// The HTML URL for the account on github.com (or GitHub Enterprise).
+        /// The HTML URL for the account on github.com (or GitHub Enterprise).  //TODO: Replace with TargetProcess if this is usable
         /// </summary>
         public string HtmlUrl { get; protected set; }
 
@@ -96,7 +96,7 @@ namespace Sniper.Response
         /// <summary>
         /// The type of account associated with this entity
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
+        SuppressMessage(Categories.Naming, "CA1721:PropertyNamesShouldNotMatchGetMethods")]
         public AccountType? Type { get; protected set; }
 
 

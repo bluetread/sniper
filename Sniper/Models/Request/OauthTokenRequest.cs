@@ -10,7 +10,7 @@ namespace Sniper.Request
     /// Used to create an Oauth login request.
     /// </summary>
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
-    public class OAuthTokenRequest : RequestParameters
+    public class OAuthTokenRequest : RequestParameters  //TODO: Replace with TargetProcess if this is usable
     {
         /// <summary>
         /// Creates an instance of the OAuth login request with the required parameter.
@@ -30,7 +30,7 @@ namespace Sniper.Request
         }
 
         /// <summary>
-        /// The client Id you received from GitHub when you registered the application.
+        /// The client Id you received from GitHub when you registered the application.  //TODO: Replace with TargetProcess if this is usable
         /// </summary>
         [Parameter(Key = "client_id")]
         public string ClientId { get; }
@@ -42,7 +42,7 @@ namespace Sniper.Request
         public string ClientSecret { get; }
 
         /// <summary>
-        /// The code you received as a response to making the <see cref="IOAuthClient.CreateAccessToken">OAuth login
+        /// The code you received as a response to making the <see cref="IOAuthClient.CreateAccessToken">OAuth login  //TODO: Replace with TargetProcess if this is usable
         /// request</see>.
         /// </summary>
         [Parameter(Key = "code")]
@@ -52,7 +52,7 @@ namespace Sniper.Request
         /// The URL in your app where users will be sent after authorization.
         /// </summary>
         /// <remarks>
-        /// See the documentation about <see href="https://developer.github.com/v3/oauth/#redirect-urls">redirect urls
+        /// See the documentation about <see href="https://developer.github.com/v3/oauth/#redirect-urls">redirect urls  //TODO: Replace with TargetProcess if this is usable
         /// </see> for more information.
         /// </remarks>
         [Parameter(Key = "redirect_uri")]

@@ -9,7 +9,7 @@ namespace Sniper.Response
     /// Response from the /meta endpoint that provides information about GitHub.com or a GitHub Enterprise instance. 
     /// </summary>
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
-    public class Meta
+    public class Meta  //TODO: Replace with TargetProcess if this is usable
     {
         /// <summary>
         /// Create an instance of the Meta
@@ -22,7 +22,7 @@ namespace Sniper.Response
         /// Create an instance of the Meta
         /// </summary>
         /// <param name="verifiablePasswordAuthentication">Whether authentication with username and password is supported.</param>
-        /// <param name="gitHubServicesSha">The currently-deployed SHA of github-services.</param>
+        /// <param name="gitHubServicesSha">The currently-deployed SHA of github-services.</param>  //TODO: Replace with TargetProcess if this is usable
         /// <param name="hooks">An array of IP addresses in CIDR format specifying the addresses that incoming service hooks will originate from on GitHub.com.</param>
         /// <param name="git">An array of IP addresses in CIDR format specifying the Git servers for the GitHub server</param>
         /// <param name="pages">An array of IP addresses in CIDR format specifying the A records for GitHub Pages.</param>

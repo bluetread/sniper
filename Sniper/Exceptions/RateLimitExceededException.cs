@@ -1,4 +1,5 @@
 ﻿using System;
+using static Sniper.WarningsErrors.MessageSuppression;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Security;
@@ -7,20 +8,19 @@ using Sniper.Http;
 namespace Sniper
 {
     /// <summary>
-    /// Exception thrown when GitHub API Rate limits are exceeded.
+    /// Exception thrown when GitHub API Rate limits are exceeded.  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     /// <summary>
     /// <para>
     /// For requests using Basic Authentication or OAuth, you can make up to 5,000 requests per hour. For
     /// unauthenticated requests, the rate limit allows you to make up to 60 requests per hour.
     /// </para>
-    /// <para>See http://developer.github.com/v3/#rate-limiting for more details.</para>
+    /// <para>See http://developer.github.com/v3/#rate-limiting for more details.</para>  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
 
     [Serializable]
 
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
-        Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
+    [SuppressMessage(Categories.Design, MessageAttributes.ImplementStandardExceptionConstructors, Justification = Justifications.SpecificToTargetProcess)]
     public class RateLimitExceededException : ForbiddenException
     {
         private readonly RateLimit _rateLimit;
@@ -71,7 +71,7 @@ namespace Sniper
         {
             base.GetObjectData(info, context);
 
-            info.AddValue("RateLimit", _rateLimit);
+            info.AddValue("RateLimit", _rateLimit); //TODO:const
         }
 
     }

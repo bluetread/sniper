@@ -53,9 +53,7 @@ using System;
 using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
@@ -64,10 +62,12 @@ using System.Text;
 using Sniper.Reflection;
 #if !SIMPLE_JSON_NO_LINQ_EXPRESSION
 using System.Linq.Expressions;
+using Sniper.Application.Messages;
 #endif
 #if SIMPLE_JSON_DYNAMIC
 using System.Dynamic;
 #endif
+using static Sniper.WarningsErrors.MessageSuppression;
 
 // ReSharper disable LoopCanBeConvertedToQuery
 // ReSharper disable RedundantExplicitArrayCreation
@@ -79,7 +79,7 @@ namespace Sniper
     /// </summary>
     [GeneratedCode("simple-json", "1.0.0")]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldHaveCorrectSuffix)]
 #if SIMPLE_JSON_OBJARRAYINTERNAL
     internal
 #else
@@ -113,7 +113,7 @@ namespace Sniper
     /// </summary>
     [GeneratedCode("simple-json", "1.0.0")]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldHaveCorrectSuffix)]
 #if SIMPLE_JSON_OBJARRAYINTERNAL
     internal
 #else
@@ -159,9 +159,9 @@ namespace Sniper
         internal static object GetAtIndex(IDictionary<string, object> obj, int index)
         {
             if (obj == null)
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             if (index >= obj.Count)
-                throw new ArgumentOutOfRangeException("index");
+                throw new ArgumentOutOfRangeException(nameof(index));
             int i = 0;
             foreach (KeyValuePair<string, object> o in obj)
                 if (i++ == index) return o.Value;
@@ -275,7 +275,7 @@ namespace Sniper
         /// <param name="arrayIndex">Index of the array.</param>
         public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
         {
-            if (array == null) throw new ArgumentNullException("array");
+            if (array == null) throw new ArgumentNullException(nameof(array));
             int num = Count;
             foreach (KeyValuePair<string, object> kvp in this)
             {
@@ -359,7 +359,7 @@ namespace Sniper
         {
             // <pex>
             if (binder == null)
-                throw new ArgumentNullException("binder");
+                throw new ArgumentNullException(nameof(binder));
             // </pex>
             Type targetType = binder.Type;
 
@@ -386,7 +386,7 @@ namespace Sniper
         {
             // <pex>
             if (binder == null)
-                throw new ArgumentNullException("binder");
+                throw new ArgumentNullException(nameof(binder));
             // </pex>
             return _members.Remove(binder.Name);
         }
@@ -402,7 +402,7 @@ namespace Sniper
         /// </returns>
         public override bool TryGetIndex(GetIndexBinder binder, object[] indexes, out object result)
         {
-            if (indexes == null) throw new ArgumentNullException("indexes");
+            if (indexes == null) throw new ArgumentNullException(nameof(indexes));
             if (indexes.Length == 1)
             {
                 result = ((IDictionary<string, object>)this)[(string)indexes[0]];
@@ -443,7 +443,7 @@ namespace Sniper
         /// </returns>
         public override bool TrySetIndex(SetIndexBinder binder, object[] indexes, object value)
         {
-            if (indexes == null) throw new ArgumentNullException("indexes");
+            if (indexes == null) throw new ArgumentNullException(nameof(indexes));
             if (indexes.Length == 1)
             {
                 ((IDictionary<string, object>)this)[(string)indexes[0]] = value;
@@ -464,7 +464,7 @@ namespace Sniper
         {
             // <pex>
             if (binder == null)
-                throw new ArgumentNullException("binder");
+                throw new ArgumentNullException(nameof(binder));
             // </pex>
             _members[binder.Name] = value;
             return true;
@@ -546,7 +546,7 @@ namespace Sniper
             object obj;
             if (TryDeserializeObject(json, out obj))
                 return obj;
-            throw new SerializationException("Invalid JSON string");
+            throw new SerializationException(MessageKeys.JsonStringInvalid);
         }
 
         /// <summary>
@@ -561,7 +561,7 @@ namespace Sniper
         /// <returns>
         /// Returns true if successfull otherwise false.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "Need to support .NET 2")]
+        [SuppressMessage(Categories.Design, MessageAttributes.UsePropertiesWhereAppropriate, Justification = Justifications.DotNet2Support)]
         public static bool TryDeserializeObject(string json, out object obj)
         {
             bool success = true;
@@ -888,9 +888,9 @@ namespace Sniper
         {
             // http://www.java2s.com/Open-Source/CSharp/2.6.4-mono-.net-core/System/System/Char.cs.htm
             if (utf32 < 0 || utf32 > 0x10FFFF)
-                throw new ArgumentOutOfRangeException("utf32", "The argument must be from 0 to 0x10FFFF.");
+                throw new ArgumentOutOfRangeException(nameof(utf32), MessageKeys.ConvertErrorFromUtf32RangeStandard);
             if (0xD800 <= utf32 && utf32 <= 0xDFFF)
-                throw new ArgumentOutOfRangeException("utf32", "The argument must not be in surrogate pair range.");
+                throw new ArgumentOutOfRangeException(nameof(utf32), MessageKeys.ConvertErrorFromUtf32RangeSurrogate);
             if (utf32 < 0x10000)
                 return new string((char)utf32, 1);
             utf32 -= 0x10000;
@@ -940,7 +940,7 @@ namespace Sniper
             return NextToken(json, ref saveIndex);
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage(Categories.Maintainability, MessageAttributes.AvoidExcessiveComplexity)]
         static int NextToken(char[] json, ref int index)
         {
             EatWhitespace(json, ref index);
@@ -1011,7 +1011,12 @@ namespace Sniper
 
         static bool SerializeValue(IJsonSerializerStrategy jsonSerializerStrategy, object value, StringBuilder builder)
         {
+            const string JsonFalse = "false";
+            const string JsonTrue = "true";
+            const string JsonNull = "null";
+
             bool success = true;
+
             string stringValue = value as string;
             if (stringValue != null)
                 success = SerializeString(stringValue, builder);
@@ -1037,9 +1042,9 @@ namespace Sniper
                         else if (IsNumeric(value))
                             success = SerializeNumber(value, builder);
                         else if (value is bool)
-                            builder.Append((bool)value ? "true" : "false");
+                            builder.Append((bool)value ? JsonTrue : JsonFalse);
                         else if (value == null)
-                            builder.Append("null");
+                            builder.Append(JsonNull);
                         else
                         {
                             object serializedObject;
@@ -1262,7 +1267,7 @@ namespace Sniper
 #endif
  interface IJsonSerializerStrategy
     {
-        [SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "Need to support .NET 2")]
+        [SuppressMessage(Categories.Design, MessageAttributes.UseGenericsWhereAppropriate, Justification = Justifications.DotNet2Support)]
         bool TrySerializeNonPrimitiveObject(object input, out object output);
         object DeserializeObject(object value, Type type);
     }
@@ -1363,7 +1368,7 @@ namespace Sniper
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         public virtual object DeserializeObject(object value, Type type)
         {
-            if (type == null) throw new ArgumentNullException("type");
+            if (type == null) throw new ArgumentNullException(nameof(type));
             string str = value as string;
 
             if (type == typeof(Guid) && string.IsNullOrEmpty(str))
@@ -1519,7 +1524,7 @@ namespace Sniper
             return Convert.ToDouble(p, CultureInfo.InvariantCulture);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "Need to support .NET 2")]
+        [SuppressMessage(Categories.Design, MessageAttributes.UseGenericsWhereAppropriate, Justification = Justifications.DotNet2Support)]
         protected virtual bool TrySerializeKnownTypes(object input, out object output)
         {
             bool returnValue = true;
@@ -1544,10 +1549,10 @@ namespace Sniper
             }
             return returnValue;
         }
-        [SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "Need to support .NET 2")]
+        [SuppressMessage(Categories.Design, MessageAttributes.UseGenericsWhereAppropriate, Justification = Justifications.DotNet2Support)]
         protected virtual bool TrySerializeUnknownTypes(object input, out object output)
         {
-            if (input == null) throw new ArgumentNullException("input");
+            if (input == null) throw new ArgumentNullException(nameof(input));
             output = null;
             Type type = input.GetType();
             if (type.FullName == null)

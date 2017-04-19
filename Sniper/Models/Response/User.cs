@@ -11,7 +11,7 @@ namespace Sniper.Response
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class User : Account
     {
-        public User() { }
+        public User() { }  //TODO: Replace with TargetProcess if this is usable
 
         public User(string avatarUrl, string bio, string blog, string company, DateTimeOffset createdAt, int diskUsage, string email, string htmlUrl, int id, string location, string login, string name, string url, RepositoryPermissions permissions, bool siteAdmin, string ldapDistinguishedName, DateTimeOffset? suspendedAt)
             : base(avatarUrl, bio, blog, company, createdAt, diskUsage, email, htmlUrl, id, location, login, name, AccountType.User, url)

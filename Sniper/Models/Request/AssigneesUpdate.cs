@@ -9,7 +9,7 @@ namespace Sniper.Request
     /// Used to add assignees to an issue.
     /// </summary>
     /// <remarks>
-    /// API: https://developer.github.com/v3/git/commits/#create-a-commit
+    /// API: https://developer.github.com/v3/git/commits/#create-a-commit  //TODO: Replace with TargetProcess if this is usable
     /// </remarks>
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class AssigneesUpdate

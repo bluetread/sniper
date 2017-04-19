@@ -7,7 +7,7 @@ using Sniper.Http;
 namespace Sniper.Response
 {
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
-    public class MiscellaneousRateLimit
+    public class MiscellaneousRateLimit  //TODO: Replace with TargetProcess if this is usable
     {
         public MiscellaneousRateLimit() { }
 
@@ -26,7 +26,7 @@ namespace Sniper.Response
         public ResourceRateLimit Resources { get; }
 
         /// <summary>
-        /// Legacy rate limit - to be depreciated - https://developer.github.com/v3/rate_limit/#deprecation-notice
+        /// Legacy rate limit - to be depreciated - https://developer.github.com/v3/rate_limit/#deprecation-notice  //TODO: Replace with TargetProcess if this is usable
         /// </summary>
         public RateLimit Rate { get; }
 

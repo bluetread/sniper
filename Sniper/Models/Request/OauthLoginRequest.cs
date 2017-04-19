@@ -35,7 +35,7 @@ namespace Sniper.Request
         /// The URL in your app where users will be sent after authorization.
         /// </summary>
         /// <remarks>
-        /// See the documentation about <see href="https://developer.github.com/v3/oauth/#redirect-urls">redirect urls
+        /// See the documentation about <see href="https://developer.github.com/v3/oauth/#redirect-urls">redirect urls  //TODO: Replace with TargetProcess if this is usable
         /// </see> for more information.
         /// </remarks>
         [Parameter(Key = "redirect_uri")]
@@ -48,7 +48,7 @@ namespace Sniper.Request
         /// automatically complete with the same scopes that were used last time the user completed the flow.
         /// </summary>
         /// <remarks>
-        /// See the <see href="https://developer.github.com/v3/oauth/#scopes">scopes documentation</see> for more
+        /// See the <see href="https://developer.github.com/v3/oauth/#scopes">scopes documentation</see> for more  //TODO: Replace with TargetProcess if this is usable
         /// information about scopes.
         /// </remarks>
         [Parameter(Key = "scope")]

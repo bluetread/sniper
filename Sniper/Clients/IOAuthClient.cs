@@ -9,7 +9,7 @@ namespace Sniper
     /// <summary>
     /// Provides methods used in the OAuth web flow.
     /// </summary>
-    public interface IOAuthClient
+    public interface IOAuthClient  //TODO: Replace with TargetProcess if this is usable
     {
         /// <summary>
         /// Gets the URL used in the first step of the web flow. The Web application should redirect to this URL.
@@ -20,7 +20,7 @@ namespace Sniper
 
         /// <summary>
         /// Makes a request to get an access token using the code returned when GitHub.com redirects back from the URL
-        /// <see cref="GetGitHubLoginUrl">GitHub login url</see> to the application.
+        /// <see cref="GetGitHubLoginUrl">GitHub login url</see> to the application.  //TODO: Replace with TargetProcess if this is usable
         /// </summary>
         /// <remarks>
         /// If the user accepts your request, GitHub redirects back to your site with a temporary code in a code

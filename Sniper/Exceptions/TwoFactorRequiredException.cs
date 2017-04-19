@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using Sniper.Http;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {
@@ -12,8 +13,7 @@ namespace Sniper
 
     [Serializable]
 
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
-        Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
+    [SuppressMessage(Categories.Design, MessageAttributes.ImplementStandardExceptionConstructors, Justification = Justifications.SpecificToTargetProcess)]
     public class TwoFactorRequiredException : TwoFactorAuthorizationException
     {
      
@@ -27,7 +27,7 @@ namespace Sniper
             : base(response, twoFactorType)
         {
             Debug.Assert(response != null && response.StatusCode == HttpStatusCode.Unauthorized,
-                "TwoFactorRequiredException status code should be 401");
+                "TwoFactorRequiredException status code should be 401"); //TODO:const
         }
 
         //public override string Message => ApiErrorMessageSafe ?? "Two-factor authentication code is required";

@@ -4,7 +4,7 @@
 namespace Sniper
 {
     /// <summary>
-    /// Class for retrieving GitHub API URLs
+    /// Class for retrieving GitHub API URLs  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     public static partial class ApiUrls
     {

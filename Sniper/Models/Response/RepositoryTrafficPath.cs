@@ -10,7 +10,7 @@ namespace Sniper.Response
     {
         public RepositoryTrafficPath() { }
 
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
+        [SuppressMessage(Categories.Naming, "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
         public RepositoryTrafficPath(string path, string title, int count, int uniques)
         {
             Path = path;
@@ -25,7 +25,7 @@ namespace Sniper.Response
 
         public int Count { get; protected set; }
 
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
+        [SuppressMessage(Categories.Naming, "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
         public int Uniques { get; protected set; }
 
         internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Path: {0}, Title: {1}", Path, Title);

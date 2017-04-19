@@ -7,7 +7,7 @@ using Sniper.Http;
 namespace Sniper.Request
 {
     /// <summary>
-    /// Base class with common properties for all the Repository Content Request APIs.
+    /// Base class with common properties for all the Repository Content Request APIs.  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     public abstract class ContentRequest
     {
@@ -64,7 +64,7 @@ namespace Sniper.Request
     /// <summary>
     /// Represents the parameters to create a file in a repository.
     /// </summary>
-    /// <remarks>https://developer.github.com/v3/repos/contents/#create-a-file</remarks>
+    /// <remarks>https://developer.github.com/v3/repos/contents/#create-a-file</remarks>  //TODO: Replace with TargetProcess if this is usable
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class CreateFileRequest : ContentRequest
     {

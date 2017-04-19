@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using Sniper.Http;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {
@@ -12,8 +13,7 @@ namespace Sniper
 
     [Serializable]
 
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
-        Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
+    [SuppressMessage(Categories.Design, MessageAttributes.ImplementStandardExceptionConstructors, Justification = Justifications.SpecificToTargetProcess)]
     public class AuthorizationException : ApiException
     {
         public AuthorizationException() {}
@@ -31,8 +31,7 @@ namespace Sniper
         /// <param name="innerException">The inner exception</param>
         public AuthorizationException(IResponse response, Exception innerException) : base(response, innerException)
         {
-            Debug.Assert(response != null && response.StatusCode == HttpStatusCode.Unauthorized,
-                "AuthorizationException created with wrong status code");
+            Debug.Assert(response != null && response.StatusCode == HttpStatusCode.Unauthorized, "AuthorizationException created with wrong status code"); //TODO:const
         }
        
     }

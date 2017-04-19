@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Sniper.Application.Messages;
+using System;
 using System.Diagnostics.CodeAnalysis;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {
@@ -13,11 +15,12 @@ namespace Sniper
         /// </summary>
         /// <param name = "name">The name of the argument</param>
         /// <param name = "value">The argument value to check</param>
+        [SuppressMessage(Categories.Usage, MessageAttributes.ReviewUnusedParameters)]
         public static void ArgumentNotNull(string name, [ValidatedNotNull]object value)
         {
             if (value != null) return;
 
-            throw new ArgumentNullException(name);
+            throw new ArgumentNullException(nameof(name));
         }
 
         /// <summary>
@@ -30,7 +33,7 @@ namespace Sniper
             ArgumentNotNull(name, value);
             if (!string.IsNullOrWhiteSpace(value)) return;
 
-            throw new ArgumentException("Parameter cannot be empty", nameof(name));
+            throw new ArgumentException(MessageKeys.EmptyParameter, nameof(name));
         }
 
         /// <summary>
@@ -38,14 +41,14 @@ namespace Sniper
         /// </summary>
         /// <param name = "value">The argument value to check</param>
         /// <param name = "name">The name of the argument</param>
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [SuppressMessage(Categories.Performance, MessageAttributes.AvoidUncalledPrivateCode)]
         public static void GreaterThanZero(string name, [ValidatedNotNull]TimeSpan value)
         {
             ArgumentNotNull(name, value);
 
             if (value.TotalMilliseconds > 0) return;
 
-            throw new ArgumentException("Timespan must be greater than zero", name);
+            throw new ArgumentException(MessageKeys.TimespanZero, name);
         }
     }
 

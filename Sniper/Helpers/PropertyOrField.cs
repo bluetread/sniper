@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Sniper.Reflection;
+using System;
 using System.Reflection;
-using Sniper.Reflection;
+using static Sniper.Application.Messages.MessageKeys;
 
 namespace Sniper
 {
@@ -59,7 +60,7 @@ namespace Sniper
                 return _propertyInfo.GetValue(instance);
             if (_fieldInfo != null)
                 return _fieldInfo.GetValue(instance);
-            throw new InvalidOperationException("Property and Field cannot both be null");
+            throw new InvalidOperationException(FieldAndPropertyBothNull);
         }
 
         public void SetValue(object instance, object value)
@@ -74,7 +75,7 @@ namespace Sniper
                 _fieldInfo.SetValue(instance, value);
                 return;
             }
-            throw new InvalidOperationException("Property and Field cannot both be null");
+            throw new InvalidOperationException(FieldAndPropertyBothNull);
         }
 
         public string JsonFieldName => MemberInfo.GetJsonFieldName();
@@ -96,7 +97,7 @@ namespace Sniper
 
                 if (getDelegate == null)
                 {
-                    throw new InvalidOperationException("Property and Field cannot both be null");
+                    throw new InvalidOperationException(FieldAndPropertyBothNull);
                 }
 
                 if (Base64Encoded)
@@ -127,7 +128,7 @@ namespace Sniper
                 }
                 if (setDelegate == null)
                 {
-                    throw new InvalidOperationException("Property and Field cannot both be null");
+                    throw new InvalidOperationException(FieldAndPropertyBothNull);
                 }
                 if (Base64Encoded)
                 {
@@ -157,7 +158,7 @@ namespace Sniper
                 {
                     return _fieldInfo.FieldType;
                 }
-                throw new InvalidOperationException("Property and Field cannot both be null");
+                throw new InvalidOperationException(FieldAndPropertyBothNull);
             }
         }
 

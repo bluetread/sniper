@@ -6,7 +6,7 @@ namespace Sniper.Common
 {
     /// <summary>
     /// Represents the author or committer to a Git commit. This is the information stored in Git and should not be
-    /// confused with GitHub account information.
+    /// confused with GitHub account information.  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Committer

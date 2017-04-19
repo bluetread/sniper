@@ -13,10 +13,10 @@ using Sniper.Repositories;
 namespace Sniper
 {
     /// <summary>
-    /// A client for GitHub's Organization Teams API.
+    /// A client for GitHub's Organization Teams API.   //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     /// <remarks>
-    /// See the <a href="http://developer.github.com/v3/orgs/teams/">Organization Teams API documentation</a> for more information.
+    /// See the <a href="http://developer.github.com/v3/orgs/teams/">Organization Teams API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
     /// </remarks>
     public class TeamsClient : ApiClient, ITeamsClient
     {
@@ -30,7 +30,7 @@ namespace Sniper
         /// Gets a single <see cref="Team"/> by identifier.
         /// </summary>
         /// <remarks>
-        /// https://developer.github.com/v3/orgs/teams/#get-team
+        /// https://developer.github.com/v3/orgs/teams/#get-team  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="id">The team identifier.</param>
         /// <returns>The <see cref="Team"/> with the given identifier.</returns>
@@ -98,7 +98,7 @@ namespace Sniper
         /// </summary>
         /// <param name="id">The team identifier</param>
         /// <remarks>
-        /// https://developer.github.com/v3/orgs/teams/#list-team-members
+        /// https://developer.github.com/v3/orgs/teams/#list-team-members  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <returns>A list of the team's member <see cref="User"/>s.</returns>
         public Task<IReadOnlyList<User>> GetAllMembers(int id)
@@ -110,7 +110,7 @@ namespace Sniper
         /// Returns all members of the given team. 
         /// </summary>
         /// <remarks>
-        /// https://developer.github.com/v3/orgs/teams/#list-team-members
+        /// https://developer.github.com/v3/orgs/teams/#list-team-members  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="id">The team identifier</param>
         /// <param name="options">Options to change API behaviour.</param>
@@ -181,7 +181,7 @@ namespace Sniper
         /// Adds a <see cref="User"/> to a <see cref="Team"/>.
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/orgs/teams/#add-team-member">API documentation</a> for more information.
+        /// See the <a href="https://developer.github.com/v3/orgs/teams/#add-team-member">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="id">The team identifier.</param>
         /// <param name="login">The user to add to the team.</param>
@@ -218,7 +218,7 @@ namespace Sniper
         /// Removes a <see cref="User"/> from a <see cref="Team"/>.
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/orgs/teams/#remove-team-member">API documentation</a> for more information.
+        /// See the <a href="https://developer.github.com/v3/orgs/teams/#remove-team-member">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="id">The team identifier.</param>
         /// <param name="login">The user to remove from the team.</param>
@@ -349,7 +349,7 @@ namespace Sniper
         /// <param name="owner">Owner of the org the team is associated with.</param>
         /// <param name="repository">Name of the repo.</param>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/orgs/teams/#get-team-repo">API documentation</a> for more information.
+        /// See the <a href="https://developer.github.com/v3/orgs/teams/#get-team-repo">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <returns><see langword="true"/> if the repository is managed by the given team; <see langword="false"/> otherwise.</returns>
         public async Task<bool> IsRepositoryManagedByTeam(int id, string owner, string repository)

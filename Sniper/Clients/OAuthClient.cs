@@ -11,7 +11,7 @@ using Sniper.Types;
 namespace Sniper
 {
     /// <summary>
-    /// Provides methods used in the OAuth web flow.
+    /// Provides methods used in the OAuth web flow.  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     public class OAuthClient : IOAuthClient
     {
@@ -29,7 +29,7 @@ namespace Sniper
             _connection = connection;
             var baseAddress = connection.BaseAddress ?? TargetProcessClient.TargetProcessDotComUrl;
 
-            // The Oauth login stuff uses https://github.com and not the https://api.github.com URLs.
+            // The Oauth login stuff uses https://github.com and not the https://api.github.com URLs.  //TODO: Replace with TargetProcess if this is usable
             _hostAddress = baseAddress.Host.Equals("api.github.com")
                 ? new Uri("https://github.com")
                 : baseAddress;

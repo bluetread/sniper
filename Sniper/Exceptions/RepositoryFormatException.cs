@@ -4,14 +4,14 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {
 
     [Serializable]
 
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
-        Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
+    [SuppressMessage(Categories.Design, MessageAttributes.ImplementStandardExceptionConstructors, Justification = Justifications.SpecificToTargetProcess)]
     public class RepositoryFormatException : Exception
     {
         private readonly string _message;
@@ -21,7 +21,7 @@ namespace Sniper
             var parameterList = string.Join(", ", invalidRepositories);
             _message = string.Format(
                 CultureInfo.InvariantCulture,
-                "The list of repositories must be formatted as 'owner/name' - these values don't match this rule: {0}",
+                "The list of repositories must be formatted as 'owner/name' - these values don't match this rule: {0}", //TODO:const
                 parameterList);
         }
 
@@ -40,14 +40,14 @@ namespace Sniper
         /// </param>
         protected RepositoryFormatException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
-            _message = info.GetString("Message");
+            _message = info.GetString("Message"); //TODO:const
         }
 
         [SecurityCritical]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue("Message", Message);
+            info.AddValue("Message", Message); //TODO:const
         }
 
     }

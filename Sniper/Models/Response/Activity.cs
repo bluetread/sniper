@@ -28,7 +28,7 @@ namespace Sniper.Response
         /// <summary>
         /// The type of the activity.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods")]
+        [SuppressMessage(Categories.Naming, "CA1721:PropertyNamesShouldNotMatchGetMethods")]
         public string Type { get; protected set; }
 
         /// <summary>

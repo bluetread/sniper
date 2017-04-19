@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using static Sniper.WarningsErrors.MessageSuppression;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Sniper.Http
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces")]
+    [SuppressMessage(Categories.Naming, MessageAttributes.TypeNamesShouldNotMatchNamespaces)]
     public class Request : IRequest
     {
         public Request()

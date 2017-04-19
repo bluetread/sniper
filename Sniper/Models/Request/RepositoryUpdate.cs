@@ -80,7 +80,7 @@ namespace Sniper.Request
         /// </summary>
         public bool? AllowMergeCommit { get; set; }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [SuppressMessage(Categories.Performance, MessageAttributes.AvoidUncalledPrivateCode)]
         internal string DebuggerDisplay => string.Format(CultureInfo.CurrentCulture, "RepositoryUpdate: Name: {0}", Name);
     }
 }

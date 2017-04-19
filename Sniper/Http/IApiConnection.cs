@@ -18,7 +18,7 @@
         /// <param name="uri">URI of the API resource to get</param>
         /// <returns>The API resource.</returns>
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get")]
+        [SuppressMessage(Categories.Naming, "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get")]
         Task<T> Get<T>(Uri uri);
 
         /// <summary>
@@ -29,7 +29,7 @@
         /// <param name="parameters">Parameters to add to the API request</param>
         /// <returns>The API resource.</returns>
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get",
+        [SuppressMessage(Categories.Naming, "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get",
             Justification = "It's fiiiine. It's fine. Trust us.")]
         Task<T> Get<T>(Uri uri, IDictionary<string, string> parameters);
 
@@ -42,7 +42,7 @@
         /// <param name="accepts">Accept header to use for the API request</param>
         /// <returns>The API resource.</returns>
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get",
+        [SuppressMessage(Categories.Naming, "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get",
             Justification = "It's fiiiine. It's fine. Trust us.")]
         Task<T> Get<T>(Uri uri, IDictionary<string, string> parameters, string accepts);
 

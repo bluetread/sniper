@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
 {
@@ -12,7 +13,7 @@ namespace Sniper.Http
         /// Retrieve the credentials from the underlying store
         /// </summary>
         /// <returns>A continuation containing credentials</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "Nope")]
+        [SuppressMessage(Categories.Design, MessageAttributes.UsePropertiesWhereAppropriate)]
         Task<Credentials> GetCredentials();
     }
 }

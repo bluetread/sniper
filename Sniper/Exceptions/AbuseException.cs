@@ -5,6 +5,7 @@ using System.Net;
 using System.Runtime.Serialization;
 using System.Security;
 using Sniper.Http;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {
@@ -15,8 +16,7 @@ namespace Sniper
 
     [Serializable]
 
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
-        Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
+    [SuppressMessage(Categories.Design, MessageAttributes.ImplementStandardExceptionConstructors, Justification = Justifications.SpecificToTargetProcess)]
     public class AbuseException : ForbiddenException
     {
         /// <summary>
@@ -32,11 +32,9 @@ namespace Sniper
         /// </summary>
         /// <param name="response">The HTTP payload from the server</param>
         /// <param name="innerException">The inner exception</param>
-        public AbuseException(IResponse response, Exception innerException)
-            : base(response, innerException)
+        public AbuseException(IResponse response, Exception innerException) : base(response, innerException)
         {
-            Debug.Assert(response != null && response.StatusCode == HttpStatusCode.Forbidden,
-                "AbuseException created with wrong status code");
+            Debug.Assert(response != null && response.StatusCode == HttpStatusCode.Forbidden, "AbuseException created with wrong status code"); //TODO:const
 
             RetryAfterSeconds = ParseRetryAfterSeconds(response);
         }
@@ -44,7 +42,7 @@ namespace Sniper
         private static int? ParseRetryAfterSeconds(IResponse response)
         {
             string secondsValue;
-            if (!response.Headers.TryGetValue("Retry-After", out secondsValue)) { return null; }
+            if (!response.Headers.TryGetValue("Retry-After", out secondsValue)) { return null; } //TODO:const
 
             int retrySeconds;
             if (!int.TryParse(secondsValue, out retrySeconds)) { return null; }
@@ -61,7 +59,7 @@ namespace Sniper
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue("RetryAfterSeconds", RetryAfterSeconds);
+            info.AddValue("RetryAfterSeconds", RetryAfterSeconds); //TODO:const
         }
     }
 }

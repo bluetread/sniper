@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using static Sniper.WarningsErrors.MessageSuppression;
 using System.Diagnostics.CodeAnalysis;
+
 using System.Net;
 using System.Runtime.Serialization;
 using System.Security;
@@ -14,8 +16,7 @@ namespace Sniper
     /// </summary>
     [Serializable]
 
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
-        Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
+    [SuppressMessage(Categories.Design, MessageAttributes.ImplementStandardExceptionConstructors, Justification = Justifications.SpecificToTargetProcess)]
     public abstract class TwoFactorAuthorizationException : AuthorizationException
     {
         protected TwoFactorAuthorizationException() { }
@@ -28,7 +29,7 @@ namespace Sniper
         protected TwoFactorAuthorizationException(IResponse response, TwoFactorType twoFactorType) : base(response)
         {
             Debug.Assert(response != null && response.StatusCode == HttpStatusCode.Unauthorized,
-                "TwoFactorRequiredException status code should be 401");
+                "TwoFactorRequiredException status code should be 401"); //TODO:const
 
             TwoFactorType = twoFactorType;
         }
@@ -77,7 +78,7 @@ namespace Sniper
         /// <summary>
         /// Receive via SMS
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Sms")]
+        [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldBeSpelledCorrectly, MessageId = "Sms")]
         Sms,
         /// <summary>
         /// Receive via application

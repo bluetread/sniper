@@ -10,7 +10,7 @@ namespace Sniper
     /// A client for GitHub's User Administration API (GitHub Enterprise)
     /// </summary>
     /// <remarks>
-    /// See the <a href="https://developer.github.com/v3/users/administration/">Administration API documentation</a> for more details.
+    /// See the <a href="https://developer.github.com/v3/users/administration/">Administration API documentation</a> for more details.  //TODO: Replace with TargetProcess if this is usable
     /// </remarks>
     public interface IUserAdministrationClient
     {
@@ -18,7 +18,7 @@ namespace Sniper
         /// Create a new user (must be Site Admin user).
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#create-a-new-user">API documentation</a>
+        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#create-a-new-user">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="newUser">The <see cref="NewUser"/> object describing the user to create</param>
@@ -29,7 +29,7 @@ namespace Sniper
         /// Rename an existing user (must be Site Admin user).
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#rename-an-existing-user">API documentation</a>
+        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#rename-an-existing-user">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// Note that this queues a request to rename a user, rather than execute it straight away
         /// </remarks>
@@ -42,7 +42,7 @@ namespace Sniper
         /// Create an impersonation OAuth token (must be Site Admin user).
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#create-an-impersonation-oauth-token">API documentation</a>
+        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#create-an-impersonation-oauth-token">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="login">The user to impersonate</param>
@@ -54,7 +54,7 @@ namespace Sniper
         /// Deletes an impersonation OAuth token (must be Site Admin user).
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#delete-an-impersonation-oauth-token">API documentation</a>
+        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#delete-an-impersonation-oauth-token">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="login">The user to remove impersonation token from</param>
@@ -65,7 +65,7 @@ namespace Sniper
         /// Promotes ordinary user to a site administrator (must be Site Admin user).
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/users/administration/#promote-an-ordinary-user-to-a-site-administrator">API documentation</a>
+        /// See the <a href="https://developer.github.com/v3/users/administration/#promote-an-ordinary-user-to-a-site-administrator">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="login">The user to promote to administrator.</param>
@@ -76,7 +76,7 @@ namespace Sniper
         /// Demotes a site administrator to an ordinary user (must be Site Admin user).
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/users/administration/#demote-a-site-administrator-to-an-ordinary-user">API documentation</a>
+        /// See the <a href="https://developer.github.com/v3/users/administration/#demote-a-site-administrator-to-an-ordinary-user">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="login">The user to demote from administrator.</param>
@@ -87,7 +87,7 @@ namespace Sniper
         /// Suspends a user (must be Site Admin user).
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/users/administration/#suspend-a-user">API documentation</a>
+        /// See the <a href="https://developer.github.com/v3/users/administration/#suspend-a-user">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="login">The user to suspend.</param>
@@ -98,7 +98,7 @@ namespace Sniper
         /// Unsuspends a user (must be Site Admin user).
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/users/administration/#unsuspend-a-user">API documentation</a>
+        /// See the <a href="https://developer.github.com/v3/users/administration/#unsuspend-a-user">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="login">The user to unsuspend.</param>
@@ -109,7 +109,7 @@ namespace Sniper
         /// List all public keys (must be Site Admin user).
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#list-all-public-keys">API documentation</a>
+        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#list-all-public-keys">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <returns></returns>
@@ -119,7 +119,7 @@ namespace Sniper
         /// Delete a user (must be Site Admin user).
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#delete-a-user">API documentation</a>
+        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#delete-a-user">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="login">The user to delete</param>
@@ -130,7 +130,7 @@ namespace Sniper
         /// Delete a public key (must be Site Admin user).
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#delete-a-public-key">API documentation</a>
+        /// See the <a href="https://developer.github.com/enterprise/2.5/v3/users/administration/#delete-a-public-key">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="keyId">The key to delete</param>

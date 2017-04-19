@@ -5,7 +5,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security;
-
+using Sniper.Application.Parameters;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
 {
@@ -53,14 +54,14 @@ namespace Sniper.Http
         /// <summary>
         /// The date and time at which the current rate limit window resets
         /// </summary>
-        [Parameter(Key = "ignoreThisField")]
+        [Parameter(Key = ParameterKeys.IgnoreField)]
         public DateTimeOffset Reset => ResetAsUtcEpochSeconds.FromUnixTime();
 
         /// <summary>
         /// The date and time at which the current rate limit window resets - in UTC epoch seconds
         /// </summary>
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        [Parameter(Key = "reset")]
+        [SuppressMessage(Categories.Performance, MessageAttributes.AvoidUncalledPrivateCode)]
+        [Parameter(Key = ParameterKeys.Reset)]
         public long ResetAsUtcEpochSeconds { get; private set; }
 
         private static long GetHeaderValueAsInt32Safe(IDictionary<string, string> responseHeaders, string key)
@@ -77,9 +78,9 @@ namespace Sniper.Http
         {
             Ensure.ArgumentNotNull(nameof(info), info);
 
-            Limit = info.GetInt32("Limit");
-            Remaining = info.GetInt32("Remaining");
-            ResetAsUtcEpochSeconds = info.GetInt64("ResetAsUtcEpochSeconds");
+            Limit = info.GetInt32(ParameterKeys.Limit);
+            Remaining = info.GetInt32(ParameterKeys.Remaining);
+            ResetAsUtcEpochSeconds = info.GetInt64(ParameterKeys.ResetAsUtcEpochSeconds);
         }
 
         [SecurityCritical]
@@ -87,9 +88,9 @@ namespace Sniper.Http
         {
             Ensure.ArgumentNotNull(nameof(info), info);
 
-            info.AddValue("Limit", Limit);
-            info.AddValue("Remaining", Remaining);
-            info.AddValue("ResetAsUtcEpochSeconds", ResetAsUtcEpochSeconds);
+            info.AddValue(ParameterKeys.Limit, Limit);
+            info.AddValue(ParameterKeys.Remaining, Remaining);
+            info.AddValue(ParameterKeys.ResetAsUtcEpochSeconds, ResetAsUtcEpochSeconds);
         }
 
 

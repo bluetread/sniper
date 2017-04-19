@@ -35,7 +35,7 @@ namespace Sniper.Response
         /// </summary>
         public bool Primary { get; protected set; }
 
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode",
+        [SuppressMessage(Categories.Performance, "CA1811:AvoidUncalledPrivateCode",
             Justification = "Used by DebuggerDisplayAttribute")]
         internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture,
             "EmailAddress: Email: {0}; Primary: {1}, Verified: {2}", Email, Primary, Verified);

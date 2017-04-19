@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using static Sniper.WarningsErrors.MessageSuppression;
 using System.Diagnostics.CodeAnalysis;
+
 using System.Net;
 using Sniper.Http;
 
@@ -12,8 +14,7 @@ namespace Sniper
 
     [Serializable]
 
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
-        Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
+    [SuppressMessage(Categories.Design, MessageAttributes.ImplementStandardExceptionConstructors, Justification = Justifications.SpecificToTargetProcess)]
     public class ForbiddenException : ApiException
     {
         /// <summary>
@@ -31,7 +32,7 @@ namespace Sniper
             : base(response, innerException)
         {
             Debug.Assert(response != null && response.StatusCode == HttpStatusCode.Forbidden,
-                "ForbiddenException created with wrong status code");
+                "ForbiddenException created with wrong status code"); //TODO: const
         }
 
         // public override string Message => ApiErrorMessageSafe ?? "Request Forbidden";

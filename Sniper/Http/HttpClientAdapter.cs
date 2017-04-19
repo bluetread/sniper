@@ -193,7 +193,7 @@ namespace Sniper.Http
             }
             if (redirectCount > 3)
             {
-                throw new InvalidOperationException("The redirect count for this request has been exceeded. Aborting.");
+                throw new InvalidOperationException("The redirect count for this request has been exceeded. Aborting."); //TODO:const
             }
 
             if (response.StatusCode == HttpStatusCode.MovedPermanently

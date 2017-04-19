@@ -6,7 +6,7 @@ namespace Sniper.Request
     /// <summary>
     /// Used to describe a permission level.
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
+    [SuppressMessage(Categories.Naming, "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
     public enum Permission
     {
         /// <summary>

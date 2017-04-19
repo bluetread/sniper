@@ -7,7 +7,7 @@ using Sniper.Request;
 namespace Sniper.Response
 {
     /// <summary>
-    /// organization teams
+    /// organization teams  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class Team
@@ -62,7 +62,7 @@ namespace Sniper.Response
         public Organization Organization { get; protected set; }
 
         /// <summary>
-        /// LDAP Binding (GitHub Enterprise only)
+        /// LDAP Binding (GitHub Enterprise only)  //TODO: Replace with TargetProcess if this is usable
         /// </summary>
         [Parameter(Key = "ldap_dn")]
         public string LdapDistinguishedName { get; protected set; }

@@ -1,3 +1,6 @@
+using static Sniper.WarningsErrors.MessageSuppression;
+using System.Diagnostics.CodeAnalysis;
+
 namespace Sniper.Http
 {
     /// <summary>
@@ -6,7 +9,7 @@ namespace Sniper.Http
     /// </summary>
     public static class RequestBody
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2211:NonConstantFieldsShouldNotBeVisible")]
+        [SuppressMessage(Categories.Usage, MessageAttributes.NonConstantFieldsShouldNotBeVisible)]
         public static object Empty = new object();
     }
 }

@@ -16,7 +16,7 @@ namespace Sniper
         ///<param name="request">The request to authenticate</param>
         ///<param name="credentials">The credentials to attach to the request</param>
         ///<remarks>
-        ///See the <a href="http://developer.github.com/v3/#basic-authentication">Basic Authentication documentation</a> for more information.
+        ///See the <a href="http://developer.github.com/v3/#basic-authentication">Basic Authentication documentation</a> for more information. //TODO: Replace with TargetProcess
         ///</remarks>
         public void Authenticate(IRequest request, ICredentials credentials)
         {

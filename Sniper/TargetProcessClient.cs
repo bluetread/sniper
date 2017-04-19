@@ -13,12 +13,12 @@ namespace Sniper
         /// <summary>
         /// The base address for the TargetProcess API
         /// </summary>
-        public static readonly Uri TargetProcessApiUrl = new Uri("https://api.github.com/");
-        internal static readonly Uri TargetProcessDotComUrl = new Uri("https://github.com/");
+        public static readonly Uri TargetProcessApiUrl = new Uri("https://api.github.com/");  //TODO: Replace with TargetProcess 
+        internal static readonly Uri TargetProcessDotComUrl = new Uri("https://github.com/");  //TODO: Replace with TargetProcess 
 
         /// <summary>
         /// Create a new instance of the GitHub API v3 client pointing to 
-        /// https://api.github.com/
+        /// https://api.github.com/ //TODO: Replace with TargetProcess 
         /// </summary>
         /// <param name="productInformation">
         /// The name (and optionally version) of the product using this library. This is sent to the server as part of
@@ -31,7 +31,7 @@ namespace Sniper
 
         /// <summary>
         /// Create a new instance of the GitHub API v3 client pointing to 
-        /// https://api.github.com/
+        /// https://api.github.com/ //TODO: Replace with TargetProcess 
         /// </summary>
         /// <param name="productInformation">
         /// The name (and optionally version) of the product using this library. This is sent to the server as part of
@@ -114,7 +114,7 @@ namespace Sniper
         /// </remarks>
         public Credentials Credentials
         {
-            get => Connection.Credentials;
+            get { return Connection.Credentials; }
             // Note this is for convenience. We probably shouldn't allow this to be mutable.
             set
             {
@@ -138,7 +138,7 @@ namespace Sniper
         /// Access GitHub's Authorization API.
         /// </summary>
         /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/oauth_authorizations/
+        /// Refer to the API documentation for more information: https://developer.github.com/v3/oauth_authorizations/ //TODO: Replace with TargetProcess 
         /// </remarks>
         public IAuthorizationsClient Authorization { get; }
 
@@ -146,7 +146,7 @@ namespace Sniper
         /// Access GitHub's Miscellaneous API.
         /// </summary>
         /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/misc/
+        /// Refer to the API documentation for more information: https://developer.github.com/v3/misc/ //TODO: Replace with TargetProcess 
         /// </remarks>
         public IMiscellaneousClient Miscellaneous { get; }
 
@@ -154,7 +154,7 @@ namespace Sniper
         /// Access GitHub's OAuth API.
         /// </summary>
         /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/oauth/
+        /// Refer to the API documentation for more information: https://developer.github.com/v3/oauth/ //TODO: Replace with TargetProcess 
         /// </remarks>
         public IOAuthClient Oauth { get; }
 
@@ -162,7 +162,7 @@ namespace Sniper
         /// Access GitHub's Repositories API.
         /// </summary>
         /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/repos/
+        /// Refer to the API documentation for more information: https://developer.github.com/v3/repos/ //TODO: Replace with TargetProcess 
         /// </remarks>
         public IRepositoriesClient Repository { get; }
     
@@ -170,20 +170,20 @@ namespace Sniper
         /// Access GitHub's Users API.
         /// </summary>
         /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/users/
+        /// Refer to the API documentation for more information: https://developer.github.com/v3/users/ //TODO: Replace with TargetProcess 
         /// </remarks>
         public IUsersClient User { get; }
 #endif
-     
+
         /// <summary>
         /// Access GitHub's Search API.
         /// </summary>
         /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/search/
+        /// Refer to the API documentation for more information: https://developer.github.com/v3/search/ //TODO: Replace with TargetProcess 
         /// </remarks>
         public ISearchClient Search { get; }
 
-        private static Uri FixUpBaseUri(Uri uri)
+        private static Uri FixUpBaseUri(Uri uri) //TODO: verify all this
         {
             Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
 
@@ -192,7 +192,7 @@ namespace Sniper
                 return TargetProcessApiUrl;
             }
 
-            return new Uri(uri, new Uri("/api/v1/", UriKind.Relative));
+            return new Uri(uri, new Uri("/api/v1/", UriKind.Relative)); 
         }
     }
 }

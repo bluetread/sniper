@@ -8,10 +8,10 @@ using System.Collections.Generic;
 namespace Sniper
 {
     /// <summary>
-    /// A client for GitHub's Organization Teams API.
+    /// A client for GitHub's Organization Teams API.  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     /// <remarks>
-    /// See the <a href="http://developer.github.com/v3/orgs/teams/">Organization Teams API documentation</a> for more information.
+    /// See the <a href="http://developer.github.com/v3/orgs/teams/">Organization Teams API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
     /// </remarks>
     public interface ITeamsClient
     {
@@ -19,11 +19,11 @@ namespace Sniper
         /// Gets a single <see cref="Team"/> by identifier.
         /// </summary>
         /// <remarks>
-        /// https://developer.github.com/v3/orgs/teams/#get-team
+        /// https://developer.github.com/v3/orgs/teams/#get-team  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="id">The team identifier.</param>
         /// <returns>The <see cref="Team"/> with the given identifier.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get",
+        [SuppressMessage(Categories.Naming, "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get",
             Justification = "Method makes a network request")]
         Task<Team> Get(int id);
 
@@ -49,7 +49,7 @@ namespace Sniper
         /// </summary>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>A list of the user's <see cref="Team"/>s.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        [SuppressMessage(Categories.Design, "CA1024:UsePropertiesWhereAppropriate")]
         Task<IReadOnlyList<Team>> GetAllForCurrent();
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Sniper
         /// <param name="options">Options to change API behaviour.</param>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>A list of the user's <see cref="Team"/>s.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        [SuppressMessage(Categories.Design, "CA1024:UsePropertiesWhereAppropriate")]
         Task<IReadOnlyList<Team>> GetAllForCurrent(ApiOptions options);
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Sniper
         /// </summary>
         /// <param name="id">The team identifier</param>
         /// <remarks>
-        /// https://developer.github.com/v3/orgs/teams/#list-team-members
+        /// https://developer.github.com/v3/orgs/teams/#list-team-members  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <returns>A list of the team's member <see cref="User"/>s.</returns>
         Task<IReadOnlyList<User>> GetAllMembers(int id);
@@ -77,7 +77,7 @@ namespace Sniper
         /// <param name="id">The team identifier</param>
         /// <param name="options">Options to change API behaviour.</param>
         /// <remarks>
-        /// https://developer.github.com/v3/orgs/teams/#list-team-members
+        /// https://developer.github.com/v3/orgs/teams/#list-team-members  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <returns>A list of the team's member <see cref="User"/>s.</returns>
         Task<IReadOnlyList<User>> GetAllMembers(int id, ApiOptions options);
@@ -101,7 +101,7 @@ namespace Sniper
         /// Adds a <see cref="User"/> to a <see cref="Team"/>.
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/orgs/teams/#add-team-member">API documentation</a> for more information.
+        /// See the <a href="https://developer.github.com/v3/orgs/teams/#add-team-member">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="id">The team identifier.</param>
         /// <param name="login">The user to add to the team.</param>
@@ -113,7 +113,7 @@ namespace Sniper
         /// Removes a <see cref="User"/> from a <see cref="Team"/>.
         /// </summary>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/orgs/teams/#remove-team-member">API documentation</a> for more information.
+        /// See the <a href="https://developer.github.com/v3/orgs/teams/#remove-team-member">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <param name="id">The team identifier.</param>
         /// <param name="login">The user to remove from the team.</param>
@@ -178,7 +178,7 @@ namespace Sniper
         /// <param name="owner">Owner of the org the team is associated with.</param>
         /// <param name="repository">Name of the repo.</param>
         /// <remarks>
-        /// See the <a href="https://developer.github.com/v3/orgs/teams/#get-team-repo">API documentation</a> for more information.
+        /// See the <a href="https://developer.github.com/v3/orgs/teams/#get-team-repo">API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <returns><see langword="true"/> if the repository is managed by the given team; <see langword="false"/> otherwise.</returns>
         Task<bool> IsRepositoryManagedByTeam(int id, string owner, string repository);

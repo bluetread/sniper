@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using Sniper.Http;
+using static Sniper.WarningsErrors.MessageSuppression;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Sniper
 {
@@ -12,10 +13,10 @@ namespace Sniper
 
     [Serializable]
 
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors",
-        Justification = "These exceptions are specific to the GitHub API and not general purpose exceptions")]
+    [SuppressMessage(Categories.Design, MessageAttributes.ImplementStandardExceptionConstructors, Justification = Justifications.SpecificToTargetProcess)]
     public class ApiValidationException : ApiException
     {
+        private const string apiValidationException = "ApiValidationException created with wrong status code";
 
         public ApiValidationException() {}
 
@@ -41,8 +42,7 @@ namespace Sniper
         public ApiValidationException(IResponse response, Exception innerException)
             : base(response, innerException)
         {
-            Debug.Assert(response != null && response.StatusCode == (HttpStatusCode)422,
-                "ApiValidationException created with wrong status code");
+            Debug.Assert(response != null && response.StatusCode == (HttpStatusCode)422, apiValidationException);
         }
 #if false
         /// <summary>

@@ -14,7 +14,7 @@ namespace Sniper
     /// A client for GitHub's miscellaneous APIs.
     /// </summary>
     /// <remarks>
-    /// See the <a href="http://developer.github.com/v3/misc/">Miscellaneous API documentation</a> for more details.
+    /// See the <a href="http://developer.github.com/v3/misc/">Miscellaneous API documentation</a> for more details.  //TODO: Replace with TargetProcess if this is usable
     /// </remarks>
     public class MiscellaneousClient : IMiscellaneousClient
     {
@@ -78,7 +78,7 @@ namespace Sniper
         /// </summary>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>An <see cref="MiscellaneousRateLimit"/> of Rate Limits.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        [SuppressMessage(Categories.Design, "CA1024:UsePropertiesWhereAppropriate")]
         public async Task<MiscellaneousRateLimit> GetRateLimits()
         {
             var endpoint = new Uri("rate_limit", UriKind.Relative);
@@ -91,7 +91,7 @@ namespace Sniper
         /// </summary>
         /// <exception cref="ApiException">Thrown when a general API error occurs.</exception>
         /// <returns>An <see cref="Meta"/> containing metadata about the GitHub instance.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
+        [SuppressMessage(Categories.Design, "CA1024:UsePropertiesWhereAppropriate")]
         public async Task<Meta> GetMetadata()
         {
             var endpoint = new Uri("meta", UriKind.Relative);

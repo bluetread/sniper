@@ -10,7 +10,7 @@ namespace Sniper.Response
     {
         public RepositoryTrafficReferrer() { }
 
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
+        [SuppressMessage(Categories.Naming, "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
         public RepositoryTrafficReferrer(string referrer, int count, int uniques)
         {
             Referrer = referrer;
@@ -22,7 +22,7 @@ namespace Sniper.Response
 
         public int Count { get; protected set; }
 
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
+        [SuppressMessage(Categories.Naming, "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "It's a property from the api.")]
         public int Uniques { get; protected set; }
 
         internal string DebuggerDisplay => string.Format(CultureInfo.InvariantCulture, "Referrer: {0}, Count: {1}", Referrer, Count);

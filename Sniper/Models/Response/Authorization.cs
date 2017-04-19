@@ -85,7 +85,7 @@ namespace Sniper.Response
         /// <summary>
         /// The scopes that this <see cref="Authorization"/> has. This is the kind of access that the token allows.
         /// </summary>
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "Special type of model object that only updates none-null fields.")]
+        [SuppressMessage(Categories.Performance, "CA1819:PropertiesShouldNotReturnArrays", Justification = "Special type of model object that only updates none-null fields.")]
         public string[] Scopes { get; protected set; }
 
         public string ScopesDelimited => string.Join(",", Scopes);

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using static Sniper.WarningsErrors.MessageSuppression;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Sniper.Http
 {
     /// <summary>
     /// A connection for making HTTP requests against URI endpoints.
     /// </summary>
-    public interface IConnection : IApiInfoProvider
+    public interface IConnection : IApiInfoProvider  //TODO: Replace with TargetProcess if this is usable
     {
         /// <summary>
         /// Performs an asynchronous HTTP GET request that expects a <seealso cref="IResponse"/> containing HTML.
@@ -28,7 +30,7 @@ namespace Sniper.Http
         /// <param name="parameters">Querystring parameters for the request</param>
         /// <param name="accepts">Specifies accepted response media types.</param>
         /// <returns><seealso cref="IResponse"/> representing the received HTTP response</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get")]
+        [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldNotMatchKeywords, MessageId = "Get")]
         Task<IApiResponse<T>> Get<T>(Uri uri, IDictionary<string, string> parameters, string accepts);
 
         /// <summary>
@@ -41,7 +43,7 @@ namespace Sniper.Http
         /// <param name="accepts">Specifies accepted response media types.</param>
         /// <param name="cancellationToken">A token used to cancel the Get request</param>
         /// <returns><seealso cref="IResponse"/> representing the received HTTP response</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get")]
+        [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldNotMatchKeywords, MessageId = "Get")]
         Task<IApiResponse<T>> Get<T>(Uri uri, IDictionary<string, string> parameters, string accepts, CancellationToken cancellationToken);
 
         /// <summary>
@@ -52,7 +54,7 @@ namespace Sniper.Http
         /// <param name="uri">URI endpoint to send request to</param>
         /// <param name="timeout">Expiration time of the request</param>
         /// <returns><seealso cref="IResponse"/> representing the received HTTP response</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get")]
+        [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldNotMatchKeywords, MessageId = "Get")]
         Task<IApiResponse<T>> Get<T>(Uri uri, TimeSpan timeout);
 
         /// <summary>
@@ -152,7 +154,7 @@ namespace Sniper.Http
         /// </summary>
         /// <remarks>
         /// We have one case where we need to override the BaseAddress. This overload is for that case.
-        /// https://developer.github.com/v3/oauth/#web-application-flow
+        /// https://developer.github.com/v3/oauth/#web-application-flow  //TODO: Replace with TargetProcess if this is usable
         /// </remarks>
         /// <typeparam name="T">The type to map the response to</typeparam>
         /// <param name="uri">URI endpoint to send request to</param>

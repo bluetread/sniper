@@ -9,6 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Sniper.Authentication;
 using Sniper.Types;
+using static Sniper.WarningsErrors.MessageSuppression;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Sniper.Http
 {
@@ -17,7 +19,7 @@ namespace Sniper.Http
     /// <summary>
     /// A connection for making HTTP requests against URI endpoints.
     /// </summary>
-    public class Connection : IConnection
+    public class Connection : IConnection  //TODO: Replace with TargetProcess if this is usable
     {
         private static readonly Uri _defaultTargetProcessApiUrl = TargetProcessClient.TargetProcessApiUrl;
         private static readonly ICredentialStore _anonymousCredentials = new InMemoryCredentialStore(Credentials.Anonymous);
@@ -27,7 +29,7 @@ namespace Sniper.Http
         private readonly IHttpClient _httpClient;
 
         /// <summary>
-        /// Creates a new connection instance used to make requests of the GitHub API.
+        /// Creates a new connection instance used to make requests of the GitHub API.  //TODO: Replace with TargetProcess if this is usable
         /// </summary>
         /// <param name="productInformation">
         /// The name (and optionally version) of the product using this library. This is sent to the server as part of
@@ -61,7 +63,7 @@ namespace Sniper.Http
         /// the user agent for analytics purposes.
         /// </param>
         /// <param name="baseAddress">
-        /// The address to point this client to such as https://api.github.com or the URL to a GitHub Enterprise 
+        /// The address to point this client to such as https://api.github.com or the URL to a GitHub Enterprise   //TODO: Replace with TargetProcess if this is usable
         /// instance</param>
         public Connection(ProductHeaderValue productInformation, Uri baseAddress)
             : this(productInformation, baseAddress, _anonymousCredentials)
@@ -89,10 +91,10 @@ namespace Sniper.Http
         /// the user agent for analytics purposes.
         /// </param>
         /// <param name="baseAddress">
-        /// The address to point this client to such as https://api.github.com or the URL to a GitHub Enterprise 
+        /// The address to point this client to such as https://api.github.com or the URL to a GitHub Enterprise   //TODO: Replace with TargetProcess if this is usable
         /// instance</param>
         /// <param name="credentialStore">Provides credentials to the client when making requests</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+        [SuppressMessage(Categories.Reliability, MessageAttributes.DisposeObjectsBeforeLosingScope)]
         public Connection(ProductHeaderValue productInformation, Uri baseAddress, ICredentialStore credentialStore)
             : this(productInformation, baseAddress, credentialStore, new HttpClientAdapter(HttpMessageHandlerFactory.CreateDefault), new SimpleJsonSerializer())
         {
@@ -106,7 +108,7 @@ namespace Sniper.Http
         /// the user agent for analytics purposes.
         /// </param>
         /// <param name="baseAddress">
-        /// The address to point this client to such as https://api.github.com or the URL to a GitHub Enterprise 
+        /// The address to point this client to such as https://api.github.com or the URL to a GitHub Enterprise   //TODO: Replace with TargetProcess if this is usable
         /// instance</param>
         /// <param name="credentialStore">Provides credentials to the client when making requests</param>
         /// <param name="httpClient">A raw <see cref="IHttpClient"/> used to make requests</param>
@@ -126,7 +128,7 @@ namespace Sniper.Http
             
             if (!baseAddress.IsAbsoluteUri)
             {
-                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "The base address '{0}' must be an absolute URI", baseAddress), nameof(baseAddress));
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "The base address '{0}' must be an absolute URI", baseAddress), nameof(baseAddress)); //TODO:const
             }
 
             UserAgent = FormatUserAgent(productInformation);
@@ -352,13 +354,13 @@ namespace Sniper.Http
 
             if (!string.IsNullOrEmpty(twoFactorAuthenticationCode))
             {
-                request.Headers["X-GitHub-OTP"] = twoFactorAuthenticationCode;
+                request.Headers["X-GitHub-OTP"] = twoFactorAuthenticationCode;  //TODO: Replace with TargetProcess if this is usable
             }
 
             if (body != null)
             {
                 request.Body = body;
-                // Default Content Type per: http://developer.github.com/v3/
+                // Default Content Type per: http://developer.github.com/v3/  //TODO: Replace with TargetProcess if this is usable
                 request.ContentType = contentType ?? MimeTypes.ApplicationFormUrlEncoded;
             }
 

@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Sniper.Reflection;
-
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
 {
@@ -50,7 +50,7 @@ namespace Sniper.Http
             }
 
             // This is overridden so that null values are omitted from serialized objects.
-            [SuppressMessage("Microsoft.Design", "CA1007:UseGenericsWhereAppropriate", Justification = "Need to support .NET 2")]
+            [SuppressMessage(Categories.Design, MessageAttributes.UseGenericsWhereAppropriate, Justification = Justifications.DotNet2Support)] //TODO: Is this still needed?
             protected override bool TrySerializeUnknownTypes(object input, out object output)
             {
                 Ensure.ArgumentNotNull(nameof(input), input);

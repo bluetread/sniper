@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {
@@ -14,8 +15,7 @@ namespace Sniper
         /// Returns the next page of items.
         /// </summary>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate",
-            Justification = "Makes a network request")]
+        [SuppressMessage(Categories.Design, MessageAttributes.UsePropertiesWhereAppropriate, Justification = Justifications.NetworkRequest)]
         Task<IReadOnlyPagedCollection<T>> GetNextPage();
     }
 }

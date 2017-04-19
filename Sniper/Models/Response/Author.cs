@@ -55,7 +55,7 @@ namespace Sniper.Response
 
         public string ReceivedEventsUrl { get; protected set; }
 
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "This is what is returned from the api")]
+        [SuppressMessage(Categories.Naming, "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "This is what is returned from the api")]
         public string Type { get; protected set; }
 
         public bool SiteAdmin { get; protected set; }

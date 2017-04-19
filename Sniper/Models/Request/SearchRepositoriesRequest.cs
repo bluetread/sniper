@@ -10,7 +10,7 @@ namespace Sniper.Request
 {
     /// <summary>
     /// Searching Repositories
-    /// http://developer.github.com/v3/search/#search-repositories
+    /// http://developer.github.com/v3/search/#search-repositories  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + ",nq}")]
     public class SearchRepositoriesRequest : BaseSearchRequest
@@ -20,7 +20,7 @@ namespace Sniper.Request
         /// <summary>
         /// The in qualifier limits what fields are searched. With this qualifier you can restrict the search to just the repository name, description, README, or any combination of these. 
         /// Without the qualifier, only the name and description are searched.
-        /// https://help.github.com/articles/searching-repositories#search-in
+        /// https://help.github.com/articles/searching-repositories#search-in  //TODO: Replace with TargetProcess if this is usable
         /// </summary>
         public IEnumerable<InQualifier> In
         {

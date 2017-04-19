@@ -7,10 +7,10 @@ using Sniper.Response;
 namespace Sniper
 {
     /// <summary>
-    /// A client for GitHub's Organization Members API.
+    /// A client for GitHub's Organization Members API.  //TODO: Replace with TargetProcess if this is usable
     /// </summary>
     /// <remarks>
-    /// See the <a href="http://developer.github.com/v3/orgs/members/">Orgs API documentation</a> for more information.
+    /// See the <a href="http://developer.github.com/v3/orgs/members/">Orgs API documentation</a> for more information.  //TODO: Replace with TargetProcess if this is usable
     /// </remarks>
     public interface IOrganizationMembersClient
     {
@@ -29,7 +29,7 @@ namespace Sniper
         /// </para>
         /// </summary>
         /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/orgs/members/#members-list">API documentation</a>
+        /// See the <a href="http://developer.github.com/v3/orgs/members/#members-list">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="org">The login for the organization</param>
@@ -51,7 +51,7 @@ namespace Sniper
         /// </para>
         /// </summary>
         /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/orgs/members/#members-list">API documentation</a>
+        /// See the <a href="http://developer.github.com/v3/orgs/members/#members-list">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="org">The login for the organization</param>
@@ -62,7 +62,7 @@ namespace Sniper
         /// <summary>
         /// List all users who have publicized their membership of the organization.
         /// </summary>
-        /// <remarks>http://developer.github.com/v3/orgs/members/#public-members-list</remarks>
+        /// <remarks>http://developer.github.com/v3/orgs/members/#public-members-list</remarks>  //TODO: Replace with TargetProcess if this is usable
         /// <param name="org">The login for the organization</param>
         /// <returns></returns>
         Task<IReadOnlyList<User>> GetAllPublic(string org);
@@ -70,7 +70,7 @@ namespace Sniper
         /// <summary>
         /// List all users who have publicized their membership of the organization.
         /// </summary>
-        /// <remarks>http://developer.github.com/v3/orgs/members/#public-members-list</remarks>
+        /// <remarks>http://developer.github.com/v3/orgs/members/#public-members-list</remarks>  //TODO: Replace with TargetProcess if this is usable
         /// <param name="org">The login for the organization</param>
         /// <param name="options">Options for changing the API response</param>
         /// <returns></returns>
@@ -80,7 +80,7 @@ namespace Sniper
         /// Check if a user is, publicly or privately, a member of the organization.
         /// </summary>
         /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/orgs/members/#check-membership">API documentation</a>
+        /// See the <a href="http://developer.github.com/v3/orgs/members/#check-membership">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="org">The login for the organization</param>
@@ -92,7 +92,7 @@ namespace Sniper
         /// Check is a user is publicly a member of the organization.
         /// </summary>
         /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/orgs/members/#check-public-membership">API documentation</a>
+        /// See the <a href="http://developer.github.com/v3/orgs/members/#check-public-membership">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="org">The login for the organization</param>
@@ -106,7 +106,7 @@ namespace Sniper
         /// repositories.
         /// </summary>
         /// <remarks>
-        /// See the <a href="http://developer.github.com/v3/orgs/members/#remove-a-member">API documentation</a>
+        /// See the <a href="http://developer.github.com/v3/orgs/members/#remove-a-member">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="org">The login for the organization</param>
@@ -119,7 +119,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requires AuthenticationKeys.
-        /// See the <a href="http://developer.github.com/v3/orgs/members/#publicize-a-users-membership">API documentation</a> 
+        /// See the <a href="http://developer.github.com/v3/orgs/members/#publicize-a-users-membership">API documentation</a>   //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="org">The login for the organization</param>
@@ -132,7 +132,7 @@ namespace Sniper
         /// </summary>
         /// <remarks>
         /// This method requries AuthenticationKeys.
-        /// See the <a href="http://developer.github.com/v3/orgs/members/#conceal-a-users-membership">API documentation</a>
+        /// See the <a href="http://developer.github.com/v3/orgs/members/#conceal-a-users-membership">API documentation</a>  //TODO: Replace with TargetProcess if this is usable
         /// for more information.
         /// </remarks>
         /// <param name="org">The login for the organization</param>

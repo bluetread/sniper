@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Sniper.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sniper.Http;
 
 namespace Sniper
 {

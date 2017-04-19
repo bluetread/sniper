@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -40,9 +40,8 @@
     <ApplicationIcon>sniper.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NSubstitute, Version=1.9.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
-      <HintPath>..\packages\NSubstitute.1.9.2.0\lib\net45\NSubstitute.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="NSubstitute, Version=2.0.2.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.2.0.2\lib\net45\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -68,149 +67,33 @@
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
+      <HintPath>..\packages\xunit.abstractions.2.0.1\lib\net35\xunit.abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.assert, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.assert.2.1.0\lib\dotnet\xunit.assert.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="xunit.assert, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.assert.2.2.0\lib\netstandard1.1\xunit.assert.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.core, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.extensibility.core.2.1.0\lib\dotnet\xunit.core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="xunit.core, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.core.2.2.0\lib\netstandard1.1\xunit.core.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.execution.desktop, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="xunit.execution.desktop, Version=2.2.0.3545, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.execution.2.2.0\lib\net452\xunit.execution.desktop.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\CredentialsTests.cs" />
-    <Compile Include="Clients\CommitCommentReactionsClientTests.cs" />
-    <Compile Include="Clients\IssueCommentReactionsClientTests.cs" />
-    <Compile Include="Clients\IssueReactionsClientTests.cs" />
-    <Compile Include="Clients\IssueTimelineClientTests.cs" />
-    <Compile Include="Clients\MigrationsClientTests.cs" />
-    <Compile Include="Clients\Enterprise\EnterpriseAdminStatsClientTests.cs" />
-    <Compile Include="Clients\Enterprise\EnterpriseLdapClientTests.cs" />
-    <Compile Include="Clients\Enterprise\EnterpriseOrganizationClientTests.cs" />
-    <Compile Include="Clients\Enterprise\EnterpriseLicenseClientTests.cs" />
-    <Compile Include="Clients\Enterprise\EnterpriseSearchIndexingClientTests.cs" />
-    <Compile Include="Clients\Enterprise\EnterpriseProbeTests.cs" />
-    <Compile Include="Clients\MergingClientTests.cs" />
-    <Compile Include="Clients\OauthClientTests.cs" />
-    <Compile Include="Clients\PullRequestReviewCommentReactionsClientTests.cs" />
-    <Compile Include="Clients\ReactionsClientTests.cs" />
-    <Compile Include="Clients\RepositoryBranchesClientTests.cs" />
-    <Compile Include="Clients\RepositoryCommentsClientTests.cs" />
-    <Compile Include="Clients\DeploymentsClientTests.cs" />
-    <Compile Include="Clients\DeploymentStatusClientTests.cs" />
-    <Compile Include="Clients\FeedsClientTests.cs" />
-    <Compile Include="Clients\RepositoryDeployKeysClientTests.cs" />
-    <Compile Include="Clients\RepositoryContentsClientTests.cs" />
-    <Compile Include="Clients\RepositoryInvitationsClientTests.cs" />
-    <Compile Include="Clients\RepositoryPagesClientTests.cs" />
-    <Compile Include="Clients\RepositoryTrafficClientTests.cs" />
-    <Compile Include="Clients\RespositoryCommitsClientTests.cs" />
-    <Compile Include="Clients\SearchClientTests.cs" />
-    <Compile Include="Clients\GistCommentsClientTests.cs" />
-    <Compile Include="Clients\GistsClientTests.cs" />
-    <Compile Include="Clients\BlobClientTests.cs" />
-    <Compile Include="Clients\IssuesLabelsClientTests.cs" />
-    <Compile Include="Clients\ReferencesClientTests.cs" />
-    <Compile Include="Clients\RepoCollaboratorsClientTests.cs" />
-    <Compile Include="Clients\EventsClientTests.cs" />
-    <Compile Include="Clients\AssigneesClientTests.cs" />
-    <Compile Include="Clients\CommitsClientTests.cs" />
-    <Compile Include="Clients\CommitStatusClientTests.cs" />
-    <Compile Include="Clients\StatisticsClientTests.cs" />
-    <Compile Include="Clients\PullRequestReviewCommentsClientTests.cs" />
-    <Compile Include="Clients\TeamsClientTests.cs" />
-    <Compile Include="Clients\GitDatabaseClientTests.cs" />
-    <Compile Include="Clients\OrganizationMembersClientTests.cs" />
-    <Compile Include="Clients\PullRequestsClientTests.cs" />
-    <Compile Include="Clients\TagsClientTests.cs" />
-    <Compile Include="Clients\IssuesEventsClientTests.cs" />
-    <Compile Include="Clients\IssueCommentsClientTests.cs" />
-    <Compile Include="Clients\MilestonesClientTests.cs" />
-    <Compile Include="Clients\IssuesClientTests.cs" />
-    <Compile Include="Clients\StarredClientTests.cs" />
-    <Compile Include="Clients\NotificationsClientTests.cs" />
-    <Compile Include="Clients\ReleasesClientTests.cs" />
-    <Compile Include="Clients\RepositoryForksClientTests.cs" />
-    <Compile Include="Clients\RepositoryHooksClientTest.cs" />
-    <Compile Include="Clients\TreesClientTests.cs" />
-    <Compile Include="Clients\UserAdministrationClientTests.cs" />
-    <Compile Include="Clients\UserGpgKeysClientTests.cs" />
-    <Compile Include="Clients\UserKeysClientTests.cs" />
-    <Compile Include="Clients\UserEmailsClientTests.cs" />
-    <Compile Include="Clients\WatchedClientTests.cs" />
-    <Compile Include="Clients\FollowersClientTests.cs" />
-    <Compile Include="Exceptions\AbuseExceptionTests.cs" />
-    <Compile Include="Exceptions\ApiErrorTests.cs" />
-    <Compile Include="Exceptions\ApiExceptionTests.cs" />
-    <Compile Include="Exceptions\ApiValidationExceptionTests.cs" />
-    <Compile Include="Exceptions\LegalRestrictionExceptionTests.cs" />
-    <Compile Include="Exceptions\RepositoryExistsExceptionTests.cs" />
-    <Compile Include="Exceptions\TwoFactorChallengeFailedException.cs" />
-    <Compile Include="Exceptions\ForbiddenExceptionTests.cs" />
-    <Compile Include="Exceptions\LoginAttemptsExceededExceptionTests.cs" />
-    <Compile Include="Exceptions\RateLimitExceededExceptionTests.cs" />
-    <Compile Include="Exceptions\TwoFactorRequiredExceptionTests.cs" />
     <Compile Include="Helpers\NSubstituteExtensions.cs" />
     <Compile Include="Helpers\ReflectionExtensions.cs" />
     <Compile Include="Helpers\UnixTimestampExtensionsTests.cs" />
     <Compile Include="Helpers\UriExtensionsTests.cs" />
-    <Compile Include="Http\ApiConnectionTests.cs" />
-    <Compile Include="Clients\AuthorizationsClientTests.cs" />
-    <Compile Include="Clients\MiscellaneousClientTests.cs" />
-    <Compile Include="Clients\OrganizationsClientTests.cs" />
-    <Compile Include="Helpers\Arg.cs" />
     <Compile Include="Helpers\AssertEx.cs" />
-    <Compile Include="Http\ApiInfoTests.cs" />
-    <Compile Include="Http\HttpClientAdapterTests.cs" />
-    <Compile Include="Http\ApiInfoParserTests.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Authentication\BasicAuthenticatorTests.cs" />
-    <Compile Include="Http\JsonHttpPipelineTests.cs" />
     <Compile Include="Fixtures\EmbeddedResource.cs" />
     <Compile Include="Fixtures\Fixtures.cs" />
     <Compile Include="Authentication\TokenAuthenticatorTests.cs" />
-    <Compile Include="Http\ConnectionTests.cs" />
-    <Compile Include="Http\RateLimitTests.cs" />
-    <Compile Include="Http\RedirectHandlerTests.cs" />
-    <Compile Include="Http\ReadOnlyPagedCollectionTests.cs" />
-    <Compile Include="Http\ResponseTests.cs" />
-    <Compile Include="Http\RequestTests.cs" />
-    <Compile Include="Models\DeploymentStatusTests.cs" />
-    <Compile Include="Models\DeploymentTests.cs" />
-    <Compile Include="Models\GistTests.cs" />
-    <Compile Include="Models\IssueEventTests.cs" />
-    <Compile Include="Models\OrganizationTests.cs" />
-    <Compile Include="Models\IssueTest.cs" />
-    <Compile Include="Models\MigrationTests.cs" />
-    <Compile Include="Models\NewReferenceTests.cs" />
-    <Compile Include="Models\MilestoneRequestTests.cs" />
-    <Compile Include="Models\IssueRequestTests.cs" />
-    <Compile Include="Models\NewRepositoryWebHookTests.cs" />
-    <Compile Include="Models\PullRequestRequestTests.cs" />
-    <Compile Include="Models\PunchCardTests.cs" />
-    <Compile Include="Models\ReadOnlyPagedCollectionTests.cs" />
-    <Compile Include="Models\RepositoryRequestTests.cs" />
-    <Compile Include="Models\RepositoryUpdateTests.cs" />
-    <Compile Include="Models\RequestParametersTests.cs" />
-    <Compile Include="Models\SearchCodeRequestTests.cs" />
-    <Compile Include="Models\SearchIssuesRequestExclusionsTests.cs" />
-    <Compile Include="Models\SearchRepositoryRequestTests.cs" />
-    <Compile Include="Models\SearchRepositoryResultTests.cs" />
-    <Compile Include="Models\SearchUsersRequestTests.cs" />
-    <Compile Include="Models\SearchIssuesRequestTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\StringExtensionsTests.cs" />
-    <Compile Include="Clients\RepositoriesClientTests.cs" />
     <Compile Include="SelfTests.cs" />
     <Compile Include="SimpleJsonSerializerTests.cs" />
-    <Compile Include="Clients\UsersClientTests.cs" />
     <Compile Include="TargetProcessClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +107,7 @@
     <EmbeddedResource Include="Fixtures\releases.json" />
     <None Include="app.config" />
     <EmbeddedResource Include="Fixtures\user.json" />
+    <None Include="packages.Sniper.Tests.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -231,13 +115,19 @@
   <ItemGroup>
     <Content Include="sniper.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sniper\Sniper.csproj">
+      <Project>{ADA30220-ADA3-0000-0220-ABCDEF123456}</Project>
+      <Name>Sniper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
-    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
+    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.2.0\build\net20\xunit.runner.visualstudio.props'))" />
   </Target>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

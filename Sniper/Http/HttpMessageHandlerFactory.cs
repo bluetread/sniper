@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
 {
@@ -11,8 +12,8 @@ namespace Sniper.Http
             return CreateDefault(null);
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "proxy")]
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+        [SuppressMessage(Categories.Usage, MessageAttributes.ReviewUnusedParameters, MessageId = "proxy")]
+        [SuppressMessage(Categories.Reliability, MessageAttributes.DisposeObjectsBeforeLosingScope)]
         public static HttpMessageHandler CreateDefault(IWebProxy proxy)
         {
             var handler = new HttpClientHandler

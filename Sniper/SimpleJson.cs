@@ -1365,7 +1365,7 @@ namespace Sniper
             return TrySerializeKnownTypes(input, out output) || TrySerializeUnknownTypes(input, out output);
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
+        [SuppressMessage(Categories.Maintainability, MessageAttributes.AvoidExcessiveComplexity)]
         public virtual object DeserializeObject(object value, Type type)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));

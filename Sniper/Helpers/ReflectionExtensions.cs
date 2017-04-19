@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Sniper.Reflection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Sniper.Reflection;
 
 namespace Sniper
 {

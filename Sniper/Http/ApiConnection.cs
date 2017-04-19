@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Threading.Tasks;
-using Sniper.ApiClients;
+﻿using Sniper.ApiClients;
 using Sniper.Authentication;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Sniper.Http
 {

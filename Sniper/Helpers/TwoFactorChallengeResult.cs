@@ -1,5 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Sniper.Authentication;
+﻿using Sniper.Authentication;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Sniper
 {

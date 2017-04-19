@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Request
 {
@@ -38,8 +39,7 @@ namespace Sniper.Request
                 .ToList();
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "GitHub API depends on lower case strings")]
+        [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase, Justification = Justifications.LowercaseValueExpected)]
         static Func<PropertyInfo, object, string> GetValueFunc(Type propertyType)
         {
             // get underlying type if nullable

@@ -1,12 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
 {
     public class Credentials : ICredentials
     {
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes"
-            , Justification = "Credentials is immutable")]
+        [SuppressMessage(Categories.Security, MessageAttributes.DoNotDeclareReadOnlyMutableReferenceTypes, Justification = Justifications.ObjectIsImmutable)]
         public static readonly Credentials Anonymous = new Credentials();
 
         private Credentials()

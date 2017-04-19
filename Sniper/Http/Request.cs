@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
 using static Sniper.WarningsErrors.MessageSuppression;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Sniper.Http
 {

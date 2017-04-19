@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Sniper.Application.Messages;
+using Sniper.Authentication;
+using Sniper.Http;
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
-using Sniper.Application.Messages;
-using Sniper.Authentication;
-using Sniper.Http;
 
 namespace Sniper
 {

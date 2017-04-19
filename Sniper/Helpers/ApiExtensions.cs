@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Sniper.ApiClients;
+using Sniper.Http;
+using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Sniper.Http;
-using Sniper.ApiClients;
 
 namespace Sniper
 {

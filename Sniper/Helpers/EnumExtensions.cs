@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {
     internal static class EnumExtensions
     {
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase)]
         internal static string ToParameter(this Enum prop)
         {
             if (prop == null) return null;

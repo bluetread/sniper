@@ -1,9 +1,9 @@
-﻿using System;
-using static Sniper.WarningsErrors.MessageSuppression;
+﻿using Sniper.Http;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Security;
-using Sniper.Http;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {

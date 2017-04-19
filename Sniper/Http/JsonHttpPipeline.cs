@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Sniper.Types;
+using System;
 using System.Collections;
 using System.IO;
 using System.Net.Http;
-
-using Sniper.Types;
 
 namespace Sniper.Http
 {

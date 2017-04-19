@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Sniper.Authentication;
+using Sniper.Types;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -7,10 +10,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Sniper.Authentication;
-using Sniper.Types;
 using static Sniper.WarningsErrors.MessageSuppression;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Sniper.Http
 {

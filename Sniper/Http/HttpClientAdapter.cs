@@ -7,7 +7,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-
+using Sniper.Types;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
 {
@@ -23,7 +24,7 @@ namespace Sniper.Http
 
         public const string RedirectCountKey = "RedirectCount";
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+        [SuppressMessage(Categories.Reliability, MessageAttributes.DisposeObjectsBeforeLosingScope)]
         public HttpClientAdapter(Func<HttpMessageHandler> getHandler)
         {
             Ensure.ArgumentNotNull(nameof(getHandler), getHandler);
@@ -56,7 +57,7 @@ namespace Sniper.Http
             }
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
+        [SuppressMessage(Categories.Reliability, MessageAttributes.DisposeObjectsBeforeLosingScope)]
         private static CancellationToken GetCancellationTokenForRequest(IRequest request, CancellationToken cancellationToken)
         {
             var cancellationTokenForRequest = cancellationToken;
@@ -81,9 +82,10 @@ namespace Sniper.Http
             // We added support for downloading images,zip-files and application/octet-stream. 
             // Let's constrain this appropriately.
             var binaryContentTypes = new[] {
-                "application/zip" ,
-                "application/x-gzip" ,
-                "application/octet-stream"};
+                MimeTypes.ApplicationZip,
+                MimeTypes.ApplicationXGzip,
+                MimeTypes.ApplicationOctetStream
+            };
 
             using (var content = responseMessage.Content)
             {

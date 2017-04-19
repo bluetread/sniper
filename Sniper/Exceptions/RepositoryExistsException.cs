@@ -1,9 +1,8 @@
 ﻿using System;
-using static Sniper.WarningsErrors.MessageSuppression;
 using System.Diagnostics.CodeAnalysis;
-
 using System.Runtime.Serialization;
 using System.Security;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 
 namespace Sniper

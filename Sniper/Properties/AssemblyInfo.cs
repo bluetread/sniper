@@ -1,6 +1,6 @@
-﻿using System.Runtime.InteropServices;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Sniper")]
 [assembly: AssemblyDescription("An async-based Target Process API client library for .NET")]

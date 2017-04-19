@@ -1,4 +1,5 @@
 ﻿using System;
+using Sniper.Http;
 using Xunit;
 
 namespace Sniper.Tests.Authentication

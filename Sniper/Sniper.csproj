@@ -87,6 +87,7 @@
     <Compile Include="Helpers\ApiErrorExtensions.cs" />
     <Compile Include="Helpers\ApiUrls.Authorizations.cs" />
     <Compile Include="Helpers\ExcludeFromPaginationConventionTest.cs" />
+    <Compile Include="Helpers\FileSystemHelpers.cs" />
     <Compile Include="Helpers\HttpClientExtensions.cs" />
     <Compile Include="Helpers\Pagination.cs" />
     <Compile Include="Helpers\PropertyOrField.cs" />
@@ -270,6 +271,7 @@
     <Compile Include="Clients\RepositoriesClient.cs" />
     <Compile Include="Helpers\SerializeAsBase64Attribute.cs" />
     <Compile Include="Clients\UsersClient.cs" />
+    <Compile Include="_configuration\ConfigurationData.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
@@ -278,6 +280,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="_configuration\sniper.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="sniper.ico" />

@@ -11,6 +11,7 @@ namespace Sniper.Application
 {
     public static class ApplicationKeys
     {
+        public const string ApplicationProjectName = "Sniper";
         public const string PropertyName = "propertyName";
     }
 }
@@ -78,8 +79,7 @@ namespace Sniper.Authentication
             public const string BasicAuthorizationMessageFormat = @"Basic {0}";
             public const string TokenAuthorizationMessageFormat = @"Basic {0}";
             public const string EmptyPassword = "Passwords should never be null/empty";
-            public const string TokenLoginFailed =
-                "The Login is not null for a token authentication request. You probably did something wrong.";
+            public const string TokenLoginFailed = "The Login is not null for a token authentication request. You probably did something wrong.";
         }
     }
 }
@@ -147,6 +147,12 @@ namespace Sniper.Http
             public const string ResponseHeaders = "responseHeaders";
             public const string ResponseMessage = "responseMessage";
         }
+    }
+
+    public static class Protocols
+    {
+        public const string HypertextSecure = "https";
+        public const string HypertextUnsecure = "http";
     }
 }
 

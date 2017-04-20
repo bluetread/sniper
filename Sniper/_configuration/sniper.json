@@ -1,0 +1,12 @@
+﻿{
+  "siteInfo": {
+    "baseUrl": "tpondemand.com",
+    "hostName": "adamm",
+    "isApiIncluded": true,
+    "isVersionIncluded": true,
+    "IsVersionLetterIncluded": true,
+    "version": 1,
+    "username": "apiaccess",
+    "password": "" // not checked in
+  }
+}

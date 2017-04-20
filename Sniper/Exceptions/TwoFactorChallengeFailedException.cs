@@ -1,6 +1,6 @@
 ﻿using System;
-using static Sniper.WarningsErrors.MessageSuppression;
 using System.Diagnostics.CodeAnalysis;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {

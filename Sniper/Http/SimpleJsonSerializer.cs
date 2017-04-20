@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Sniper.Reflection;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
-using Sniper.Reflection;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
@@ -76,8 +76,7 @@ namespace Sniper.Http
                 return true;
             }
 
-            [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-                Justification = "The API expects lowercase values")]
+            [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase, Justification = Justifications.LowercaseValueExpected)]
             protected override object SerializeEnum(Enum p)
             {
                 return p.ToParameter();

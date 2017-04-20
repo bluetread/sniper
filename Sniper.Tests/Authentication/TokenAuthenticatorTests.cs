@@ -1,5 +1,6 @@
 ﻿using System;
 using NSubstitute;
+using Sniper.Http;
 using Xunit;
 
 namespace Sniper.Tests.Authentication

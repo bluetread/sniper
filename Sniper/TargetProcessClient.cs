@@ -1,6 +1,6 @@
-﻿using System;
-using Sniper.ApiClients;
+﻿using Sniper.ApiClients;
 using Sniper.Http;
+using System;
 
 
 namespace Sniper

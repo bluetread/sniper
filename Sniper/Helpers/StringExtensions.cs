@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Sniper.Application;
+using Sniper.Http;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using Sniper.Application;
-using Sniper.Http;
-
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {
@@ -70,7 +70,7 @@ namespace Sniper
             return new Uri(template);
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Ruby don't care. Ruby don't play that.")]
+        [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase)]
         public static string ToRubyCase(this string propertyName)
         {
             Ensure.ArgumentNotNullOrEmptyString(ApplicationKeys.PropertyName, propertyName);

@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Sniper.Authentication;
+﻿using Sniper.Authentication;
+using System.Threading.Tasks;
 
 namespace Sniper.Http
 {

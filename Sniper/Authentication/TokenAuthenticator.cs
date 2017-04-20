@@ -1,8 +1,8 @@
-﻿using System;
-using System.Globalization;
-using Sniper.Authentication;
+﻿using Sniper.Authentication;
 using Sniper.Http;
-    
+using System;
+using System.Globalization;
+
 namespace Sniper
 {
     internal class TokenAuthenticator : IAuthenticationHandler

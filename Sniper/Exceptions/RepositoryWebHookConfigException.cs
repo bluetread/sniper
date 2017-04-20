@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using static Sniper.WarningsErrors.MessageSuppression;
 using System.Diagnostics.CodeAnalysis;
-
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Security;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {

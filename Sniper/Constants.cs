@@ -197,6 +197,15 @@ namespace Sniper.Types
         ///<summary>JavaScript Object Notation JSON; Defined in RFC 4627</summary>
         public const string ApplicationJson = "application/json";
         public const string ApplicationFormUrlEncoded = "application/x-www-form-urlencoded";
+
+        ///<summary>Arbitrary binary data.[5] Generally speaking this type identifies files that are not associated with a specific application. Contrary to past assumptions by software packages such as Apache this is not a type that should be applied to unknown files. In such a case, a server or application should not indicate a content type, as it may be incorrect, but rather, should omit the type in order to allow the recipient to guess the type.[6]</summary>
+        public const string ApplicationOctetStream = "application/octet-stream";
+
+        ///<summary>Gzip</summary>
+        public const string ApplicationXGzip = "application/x-gzip";
+
+        ///<summary>ZIP archive files; Registered[7]</summary>
+        public const string ApplicationZip = "application/zip";
     }
 
 }
@@ -216,8 +225,6 @@ namespace Sniper.Types
         ///<summary>Adobe Flash files for example with the extension .swf</summary>
         public const string ApplicationXShockwaveFlash = "application/x-shockwave-flash";
 
-        ///<summary>Arbitrary binary data.[5] Generally speaking this type identifies files that are not associated with a specific application. Contrary to past assumptions by software packages such as Apache this is not a type that should be applied to unknown files. In such a case, a server or application should not indicate a content type, as it may be incorrect, but rather, should omit the type in order to allow the recipient to guess the type.[6]</summary>
-        public const string ApplicationOctetStream = "application/octet-stream";
 
         ///<summary>Atom feeds</summary>
         public const string ApplicationAtomXml = "application/atom+xml";
@@ -284,9 +291,6 @@ namespace Sniper.Types
 
         ///<summary>GoogleWebToolkit data</summary>
         public const string TextXGwtRpc = "text/x-gwt-rpc";
-
-        ///<summary>Gzip</summary>
-        public const string ApplicationXGzip = "application/x-gzip";
 
         ///<summary>HTML; Defined in RFC 2854</summary>
         public const string TextHtml = "text/html";
@@ -503,8 +507,6 @@ namespace Sniper.Types
         ///<summary>XHTML; Defined by RFC 3236</summary>
         public const string ApplicationXhtmlXml = "application/xhtml+xml";
 
-        ///<summary>ZIP archive files; Registered[7]</summary>
-        public const string ApplicationZip = "application/zip";
     }
 }
 #endif
@@ -517,10 +519,12 @@ namespace Sniper.WarningsErrors
         internal static class Categories
         {
             public const string Design = "Microsoft.Design";
+            public const string Globalization = "Microsoft.Globalization";
             public const string Naming = "Microsoft.Naming";
             public const string Maintainability = "Microsoft.Maintainability";
             public const string Performance = "Microsoft.Performance";
             public const string Reliability = "Microsoft.Reliability";
+            public const string Security = "Microsoft.Security";
             public const string Usage = "Microsoft.Usage";
         }
 
@@ -529,12 +533,15 @@ namespace Sniper.WarningsErrors
             public const string AvoidExcessiveComplexity = "CA1502:AvoidExcessiveComplexity";
             public const string AvoidUncalledPrivateCode = "CA1811:AvoidUncalledPrivateCode";
             public const string DisposeObjectsBeforeLosingScope = "CA2000:DisposeObjectsBeforeLosingScope";
+            public const string DoNotDeclareReadOnlyMutableReferenceTypes = "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes";
             public const string IdentifiersShouldBeSpelledCorrectly = "CA1704:IdentifiersShouldBeSpelledCorrectly";
             public const string IdentifiersShouldHaveCorrectSuffix = "CA1710:IdentifiersShouldHaveCorrectSuffix";
             public const string IdentifiersShouldNotMatchKeywords = "CA1716:IdentifiersShouldNotMatchKeywords";
             public const string ImplementStandardExceptionConstructors = "CA1032:ImplementStandardExceptionConstructors";
             public const string NonConstantFieldsShouldNotBeVisible = "CA2211:NonConstantFieldsShouldNotBeVisible";
+            public const string NormalizeStringsToUppercase = "CA1308:NormalizeStringsToUppercase";
             public const string ReviewUnusedParameters = "CA1801:ReviewUnusedParameters";
+            public const string SpecifyIFormatProvider = "CA1305:SpecifyIFormatProvider";
             public const string TypeNamesShouldNotMatchNamespaces = "CA1724:TypeNamesShouldNotMatchNamespaces";
             public const string UseGenericsWhereAppropriate = "CA1007:UseGenericsWhereAppropriate";
             public const string UsePropertiesWhereAppropriate = "CA1024:UsePropertiesWhereAppropriate";
@@ -544,7 +551,9 @@ namespace Sniper.WarningsErrors
         {
             public const string DotNet2Support = "Need to support .NET 2";
             public const string NetworkRequest = "Makes a network request";
+            public const string ObjectIsImmutable = "This class/object is immutable";
             public const string SpecificToTargetProcess = "These exceptions are specific to the Target Process API and not general purpose exceptions";
+            public const string LowercaseValueExpected = "The API expects lowercase.";
         }
     }
 

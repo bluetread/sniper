@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Request
 {
@@ -115,7 +116,7 @@ namespace Sniper.Request
         /// <summary>
         /// Matches repositories that are <param name="size">size</param> MB exactly
         /// </summary>
-        [SuppressMessage("Microsoft.Globalization", "CA1305:SpecifyIFormatProvider", MessageId = "System.Int32.ToString")]
+        [SuppressMessage(Categories.Globalization, MessageAttributes.SpecifyIFormatProvider, MessageId = "System.Int32.ToString")]
         public Range(int size)
         {
             _query = size.ToString(CultureInfo.InvariantCulture);

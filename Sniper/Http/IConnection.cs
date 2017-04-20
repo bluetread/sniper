@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using static Sniper.WarningsErrors.MessageSuppression;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Sniper.Http
 {

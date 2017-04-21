@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -70,7 +70,10 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\AccessTokenAuthenticator.cs" />
+    <Compile Include="Authentication\AuthenticationTokenType.cs" />
     <Compile Include="Authentication\CookieAuthenticator.cs" />
+    <Compile Include="Authentication\ServiceTokenAuthenticator.cs" />
     <Compile Include="Clients\IOAuthClient.cs" />
     <Compile Include="Clients\IUserAdministrationClient.cs" />
     <Compile Include="Clients\OAuthClient.cs" />
@@ -92,6 +95,7 @@
     <Compile Include="Helpers\HttpClientExtensions.cs" />
     <Compile Include="Helpers\Pagination.cs" />
     <Compile Include="Helpers\PropertyOrField.cs" />
+    <Compile Include="Helpers\ReflectionUtils.cs" />
     <Compile Include="Helpers\SerializeNullAttribute.cs" />
     <Compile Include="Helpers\WebHookConfigComparer.cs" />
     <Compile Include="Http\HttpMessageHandlerFactory.cs" />
@@ -99,7 +103,6 @@
     <Compile Include="Http\ICredentials.cs" />
     <Compile Include="Http\ProductHeaderValue.cs" />
     <Compile Include="Http\RequestBody.cs" />
-    <Compile Include="Http\SimpleJsonSerializer.cs" />
     <Compile Include="Models\Authentication\IUser.cs" />
     <Compile Include="Models\Authentication\User.cs" />
     <Compile Include="Models\Request\ApiOptions.cs" />
@@ -244,11 +247,10 @@
     <Compile Include="Http\ApiResponse.cs" />
     <Compile Include="Http\IJsonSerializer.cs" />
     <Compile Include="Exceptions\AuthorizationException.cs" />
-    <Compile Include="Authentication\TokenAuthenticator.cs">
+    <Compile Include="Authentication\TokenAuthenticatorBase.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\Ensure.cs" />
-    <Compile Include="SimpleJson.cs" />
     <Compile Include="TargetProcessClient.cs" />
     <Compile Include="Authentication\AuthenticationType.cs" />
     <Compile Include="Http\Connection.cs">
@@ -272,6 +274,9 @@
     <Compile Include="Helpers\SerializeAsBase64Attribute.cs" />
     <Compile Include="Clients\UsersClient.cs" />
     <Compile Include="_configuration\ConfigurationData.cs" />
+    <Compile Include="_configuration\ConfigurationValues.cs" />
+    <Compile Include="_configuration\IConfigurationData.cs" />
+    <Compile Include="_configuration\SiteData.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
@@ -291,8 +296,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.0.1\build\Microsoft.Net.Compilers.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets. -->

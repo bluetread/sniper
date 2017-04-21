@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -141,7 +142,7 @@ namespace Sniper.Http
                 if (bodyStream != null)
                 {
                     requestMessage.Content = new StreamContent(bodyStream);
-                    requestMessage.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(request.ContentType);
+                    requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(request.ContentType);
                 }
             }
             catch (Exception)

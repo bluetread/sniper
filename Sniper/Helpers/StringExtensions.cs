@@ -1,11 +1,11 @@
-﻿using Sniper.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using Sniper.Http;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
@@ -92,12 +92,12 @@ namespace Sniper
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(source), source);
 
-            int wordStartIndex = 0;
+            var wordStartIndex = 0;
             var letters = source.ToCharArray();
             var previousChar = char.MinValue;
 
             // Skip the first letter. we don't care what case it is.
-            for (int i = 1; i < letters.Length; i++)
+            for (var i = 1; i < letters.Length; i++)
             {
                 if (char.IsUpper(letters[i]) && !char.IsWhiteSpace(previousChar))
                 {

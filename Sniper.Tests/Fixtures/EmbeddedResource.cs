@@ -15,8 +15,8 @@ namespace Sniper.Tests.Fixtures
             ResourceName = resourceName;
         }
 
-        public string ResourceName { get; private set; }
-        public Assembly Assembly { get; private set; }
+        public string ResourceName { get; }
+        public Assembly Assembly { get; }
 
         public string GetResourceAsString(Encoding encoding = null)
         {

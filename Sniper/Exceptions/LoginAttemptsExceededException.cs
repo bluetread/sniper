@@ -1,6 +1,6 @@
-﻿using Sniper.Http;
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Sniper.Http;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 

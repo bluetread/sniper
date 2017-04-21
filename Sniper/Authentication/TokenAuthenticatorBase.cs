@@ -1,32 +1,28 @@
-﻿using Sniper.Http;
-using System;
-using System.Globalization;
+﻿using System.Globalization;
+using Sniper.Http;
 using static Sniper.Authentication.AuthenticationKeys;
 
 namespace Sniper
 {
-    internal class TokenAuthenticator : IAuthenticationHandler
+    internal abstract class TokenAuthenticatorBase : IAuthenticationHandler
     {
 
         ///<summary>
-        ///Authenticate a request using the OAuth2 Token (sent in a header) authentication scheme
+        ///Authenticate a request using the Token (AccessToken or ServiceToken) authentication scheme
         ///</summary>
         ///<param name="request">The request to authenticate</param>
         ///<param name="credentials">The credentials to attach to the request</param>
         ///<remarks>
-        ///See the <a href="http://developer.github.com/v3/#oauth2-token-sent-in-a-header">OAuth2 Token (sent in a header) documentation</a> for more information. //TODO: Replace with TargetProcess
+        ///See the <a href="https://dev.targetprocess.com/docs/authentication#section-token-authentication">Token (sent in a header) documentation</a> for more information. 
         ///</remarks>
-        public void Authenticate(IRequest request, ICredentials credentials)
+        public virtual void Authenticate(IRequest request, ICredentials credentials)
         {
             Ensure.ArgumentNotNull(nameof(request), request);
             Ensure.ArgumentNotNull(nameof(credentials), credentials);
             Ensure.ArgumentNotNull(nameof(credentials.Password), credentials.Password);
 
             var token = credentials.GetToken();
-            if (credentials.Login != null)
-            {
-                throw new InvalidOperationException(Messages.TokenLoginFailed);
-            }
+
             if (token != null)
             {
                 request.Headers[Keys.Authorization] = string.Format(CultureInfo.InvariantCulture, Messages.TokenAuthorizationMessageFormat, token);

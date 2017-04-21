@@ -1,5 +1,4 @@
-﻿using Sniper.Types;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -9,6 +8,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using Sniper.Types;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
@@ -24,7 +24,6 @@ namespace Sniper.Http
         private static readonly ICredentialStore _anonymousCredentials = new InMemoryCredentialStore(Credentials.CookieCredentials);
 
         private readonly Authenticator _authenticator;
-        private readonly JsonHttpPipeline _jsonPipeline;
         private readonly IHttpClient _httpClient;
 
         /// <summary>
@@ -39,21 +38,7 @@ namespace Sniper.Http
         {
         }
 
-        /// <summary>
-        /// Creates a new connection instance used to make requests of the GitHub API.
-        /// </summary>
-        /// <param name="productInformation">
-        /// The name (and optionally version) of the product using this library. This is sent to the server as part of
-        /// the user agent for analytics purposes.
-        /// </param>
-        /// <param name="httpClient">
-        /// The client to use for executing requests
-        /// </param>
-        public Connection(ProductHeaderValue productInformation, IHttpClient httpClient)
-            : this(productInformation, _defaultTargetProcessApiUrl, _anonymousCredentials, httpClient, new SimpleJsonSerializer())
-        {
-        }
-
+      
         /// <summary>
         /// Creates a new connection instance used to make requests of the GitHub API.
         /// </summary>
@@ -95,7 +80,7 @@ namespace Sniper.Http
         /// <param name="credentialStore">Provides credentials to the client when making requests</param>
         [SuppressMessage(Categories.Reliability, MessageAttributes.DisposeObjectsBeforeLosingScope)]
         public Connection(ProductHeaderValue productInformation, Uri baseAddress, ICredentialStore credentialStore)
-            : this(productInformation, baseAddress, credentialStore, new HttpClientAdapter(HttpMessageHandlerFactory.CreateDefault), new SimpleJsonSerializer())
+            : this(productInformation, baseAddress, credentialStore, new HttpClientAdapter(HttpMessageHandlerFactory.CreateDefault))
         {
         }
 
@@ -111,19 +96,16 @@ namespace Sniper.Http
         /// instance</param>
         /// <param name="credentialStore">Provides credentials to the client when making requests</param>
         /// <param name="httpClient">A raw <see cref="IHttpClient"/> used to make requests</param>
-        /// <param name="serializer">Class used to serialize and deserialize JSON requests</param>
         public Connection(
             ProductHeaderValue productInformation,
             Uri baseAddress,
             ICredentialStore credentialStore,
-            IHttpClient httpClient,
-            IJsonSerializer serializer)
+            IHttpClient httpClient)
         {
             Ensure.ArgumentNotNull(nameof(productInformation), productInformation);
             Ensure.ArgumentNotNull(nameof(baseAddress), baseAddress);
             Ensure.ArgumentNotNull(nameof(credentialStore), credentialStore);
             Ensure.ArgumentNotNull(nameof(httpClient), httpClient);
-            Ensure.ArgumentNotNull(nameof(serializer), serializer);
             
             if (!baseAddress.IsAbsoluteUri)
             {
@@ -134,7 +116,6 @@ namespace Sniper.Http
             BaseAddress = baseAddress;
             _authenticator = new Authenticator(credentialStore);
             _httpClient = httpClient;
-            _jsonPipeline = new JsonHttpPipeline(serializer);
         }
 
         /// <summary>
@@ -567,9 +548,9 @@ namespace Sniper.Http
 
         private async Task<IApiResponse<T>> Run<T>(IRequest request, CancellationToken cancellationToken)
         {
-            _jsonPipeline.SerializeRequest(request);
+            JsonHttpPipeline.SerializeRequest(request);
             var response = await RunRequest(request, cancellationToken).ConfigureAwait(false);
-            return _jsonPipeline.DeserializeResponse<T>(response);
+            return JsonHttpPipeline.DeserializeResponse<T>(response);
         }
 
         // THIS IS THE METHOD THAT EVERY REQUEST MUST GO THROUGH!
@@ -622,7 +603,7 @@ namespace Sniper.Http
 
         private static Exception GetExceptionForForbidden(IResponse response)
         {
-            string body = response.Body as string ?? string.Empty;
+            var body = response.Body as string ?? string.Empty;
 
             if (body.Contains("rate limit exceeded"))
             {

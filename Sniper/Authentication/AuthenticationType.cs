@@ -1,10 +1,18 @@
 ﻿namespace Sniper
 {
     /// <summary>
-    /// Authentication protocols supported by the GitHub API
+    /// Authentication protocols supported by the TargetProcess API
     /// </summary>
     public enum AuthenticationType
     {
+        /// <summary>
+        /// Access Token
+        /// </summary>
+        AccessToken,
+        /// <summary>
+        /// Anonymous Authentication (Not Allowed)
+        /// </summary>
+        Anonymous,
         /// <summary>
         /// Cookie Authentication
         /// </summary>
@@ -14,8 +22,8 @@
         /// </summary>
         Basic,
         /// <summary>
-        /// Delegated access to a third party
+        /// Service Token
         /// </summary>
-        Oauth
+        ServiceToken
     }
 }

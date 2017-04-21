@@ -1,6 +1,6 @@
-﻿using Sniper.Http;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Sniper.Http;
 
 namespace Sniper
 {
@@ -9,9 +9,10 @@ namespace Sniper
         private readonly Dictionary<AuthenticationType, IAuthenticationHandler> _authenticators =
             new Dictionary<AuthenticationType, IAuthenticationHandler>
             {
+                { AuthenticationType.AccessToken, new AccessTokenAuthenticator() },
                 { AuthenticationType.Basic, new BasicAuthenticator() },
                 { AuthenticationType.Cookie, new CookieAuthenticator() },
-                { AuthenticationType.Oauth, new TokenAuthenticator() }
+                { AuthenticationType.ServiceToken, new ServiceTokenAuthenticator() }
             };
 
         public Authenticator(ICredentialStore credentialStore)

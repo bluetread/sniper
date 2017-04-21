@@ -13,13 +13,14 @@ namespace Sniper.Http
             AuthenticationType = AuthenticationType.Cookie;
         }
 
-        public Credentials(string token)
+        public Credentials(AuthenticationTokenType authenticationTokenType, string token)
         {
+            Ensure.ArgumentNotNull(nameof(authenticationTokenType), authenticationTokenType);
             Ensure.ArgumentNotNullOrEmptyString(nameof(token), token);
 
             Login = null;
             Password = token;
-            AuthenticationType = AuthenticationType.Oauth;
+            AuthenticationType = authenticationTokenType == AuthenticationTokenType.AccessToken ? AuthenticationType.AccessToken : AuthenticationType.ServiceToken;
         }
 
         public Credentials(string login, string password)

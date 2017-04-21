@@ -1,6 +1,5 @@
-﻿using Sniper.Http;
-using System;
-
+﻿using System;
+using Sniper.Http;
 
 namespace Sniper
 {
@@ -112,7 +111,7 @@ namespace Sniper
         /// </remarks>
         public Credentials Credentials
         {
-            get { return Connection.Credentials; }
+            get => Connection.Credentials;
             // Note this is for convenience. We probably shouldn't allow this to be mutable.
             set
             {

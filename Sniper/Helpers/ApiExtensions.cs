@@ -1,8 +1,8 @@
-﻿using Sniper.Http;
-using System;
+﻿using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Sniper.Http;
 
 namespace Sniper
 {

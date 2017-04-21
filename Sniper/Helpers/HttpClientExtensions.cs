@@ -10,7 +10,7 @@ namespace Sniper
         public static Task<IResponse> Send(this IHttpClient httpClient, IRequest request)
         {
             Ensure.ArgumentNotNull(nameof(httpClient), httpClient);
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(nameof(request), request);
 
             return httpClient.Send(request, CancellationToken.None);
         }

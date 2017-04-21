@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-
-namespace Sniper.Tests.Authentication
+﻿namespace Sniper.Tests.Authentication
 {
     public class BasicAuthenticatorTests
     {

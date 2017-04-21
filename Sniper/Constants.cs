@@ -1,18 +1,8 @@
-﻿namespace Sniper.ApiClients
-{
-    public static class ApiClientKeys
-    {
-        public const string Connection = "apiConnection";
-        public const string Options = "options";
-    }
-}
-
-namespace Sniper.Application
+﻿namespace Sniper.Application
 {
     public static class ApplicationKeys
     {
         public const string ApplicationProjectName = "Sniper";
-        public const string PropertyName = "propertyName";
     }
 }
 
@@ -49,35 +39,15 @@ namespace Sniper.Authentication
 {
     public static class AuthenticationKeys
     {
-        public const string AccessToken = "accessToken";
-        public const string AuthenticationCode = "authenticationCode";
-        public const string AuthorizationUpdate = "authorizationUpdate";
-        public const string ClientId = "clientId";
-        public const string ClientSecret = "clientSecret";
-        public const string Code = "code";
-        public const string CredentialStore = "credentialStore";
-        public const string Credentials = "credentials";
-        public const string CredentialsLogin = "credentials.Login";
-        public const string CredentialsPassword = "credentials.Password";
-        public const string NewAuthorization = "newAuthorization";
-        public const string TwoFactorAuthenticationCode = "twoFactorAuthenticationCode";
-        public const string UserName = "userName";
-
         internal static class Keys
         {
             public const string Authorization = "Authorization";
         }
 
-        internal static class LDAP
-        {
-            public const string NewLdapMapping = "newLdapMapping";
-            public const string TeamId = "teamId";
-        }
-
         internal static class Messages
         {
             public const string BasicAuthorizationMessageFormat = @"Basic {0}";
-            public const string TokenAuthorizationMessageFormat = @"Basic {0}";
+            public const string TokenAuthorizationMessageFormat = @"Token {0}";
             public const string EmptyPassword = "Passwords should never be null/empty";
             public const string TokenLoginFailed = "The Login is not null for a token authentication request. You probably did something wrong.";
         }
@@ -113,39 +83,18 @@ namespace Sniper.Http
     public static class HttpKeys
     {
         public const string First = "first";
-        public const string Key = "key";
         public const string Last = "last";
         public const string Next = "next";
         public const string Pattern = "pattern";
         public const string Previous = "prev";
-        public const string Uri = "uri";
         public const string Url = "url";
 
         internal static class HtmlKeys
         {
-            public const string Body = "body";
-
             internal static class HeaderKeys
             {
                 public const string Accept = "Accept";
-                public const string Accepts = "accepts";
-                public const string Content = "content";
-                public const string Headers = "headers";
             }
-        }
-
-        internal static class RequestParameters
-        {
-            public const string Request = "request";
-            public const string UpdateRequest = "updateRequest";
-        }
-
-        internal static class ResponseParameters
-        {
-            public const string Release = "release";
-            public const string Response = "response";
-            public const string ResponseHeaders = "responseHeaders";
-            public const string ResponseMessage = "responseMessage";
         }
     }
 
@@ -153,46 +102,6 @@ namespace Sniper.Http
     {
         public const string HypertextSecure = "https";
         public const string HypertextUnsecure = "http";
-    }
-}
-
-namespace Sniper.Licenses
-{
-    public static class LicenseKeys
-    {
-        public const string Category = "category";
-        public const string Description = "description";
-        public const string HtmlUrl = "htmlUrl";
-        public const string Implementation = "implementation";
-        public const string Key = "key";
-    }
-}
-
-namespace Sniper.Paginations
-{
-    public static class PaginationKeys
-    {
-        public const string FirstPage = "getFirstPage";
-        public const string Pagination = "pagination";
-    }
-}
-
-namespace Sniper.Permissions
-{
-    public static class PermissionKeys
-    {
-        public const string Forbidden = "forbidden";
-        public const string Permitted = "permitted";
-        public const string Required = "required";
-    }
-}
-
-namespace Sniper.Repositories
-{
-    public static class RepositoryKeys
-    {
-        public const string NewRepository = "newRepository";
-        public const string Repository = "repository";
     }
 }
 

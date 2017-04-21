@@ -20,9 +20,9 @@ namespace Sniper
         ///</remarks>
         public void Authenticate(IRequest request, ICredentials credentials)
         {
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
-            Ensure.ArgumentNotNull(AuthenticationKeys.Credentials, credentials);
-            Ensure.ArgumentNotNull(AuthenticationKeys.CredentialsLogin, credentials.Login);
+            Ensure.ArgumentNotNull(nameof(request), request);
+            Ensure.ArgumentNotNull(nameof(credentials), credentials);
+            Ensure.ArgumentNotNull(nameof(credentials.Login), credentials.Login);
 
             Debug.Assert(credentials.Password != null, AuthenticationKeys.Messages.EmptyPassword);
 

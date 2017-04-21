@@ -27,7 +27,7 @@ namespace Sniper.Http
 
         public void SerializeRequest(IRequest request)
         {
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(nameof(request), request);
 
             if (!request.Headers.ContainsKey(HttpKeys.HtmlKeys.HeaderKeys.Accept))
             {
@@ -42,7 +42,7 @@ namespace Sniper.Http
 
         public IApiResponse<T> DeserializeResponse<T>(IResponse response)
         {
-            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.Response, response);
+            Ensure.ArgumentNotNull(nameof(response), response);
 
             if (response.ContentType != null && response.ContentType.Equals(MimeTypes.ApplicationJson, StringComparison.Ordinal))
             {

@@ -35,7 +35,7 @@ namespace Sniper.Tests.Authentication
             public void EnsuresArgumentsNotNull()
             {
                 var authenticator = new TokenAuthenticator();
-                Assert.Throws<ArgumentNullException>(() => authenticator.Authenticate(null, Credentials.Anonymous));
+                Assert.Throws<ArgumentNullException>(() => authenticator.Authenticate(null, Credentials.CookieCredentials));
                 Assert.Throws<ArgumentNullException>(() =>
                     authenticator.Authenticate(Substitute.For<IRequest>(), null));
             }

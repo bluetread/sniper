@@ -26,7 +26,7 @@ namespace Sniper
         /// <param name="connection">An API connection</param>
         public MiscellaneousClient(IConnection connection)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
+            Ensure.ArgumentNotNull(nameof(connection), connection);
 
             _connection = connection;
         }

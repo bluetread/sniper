@@ -1,5 +1,4 @@
-﻿using Sniper.Authentication;
-using Sniper.Types;
+﻿using Sniper.Types;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -22,7 +21,7 @@ namespace Sniper.Http
     public class Connection : IConnection  //TODO: Replace with TargetProcess if this is usable
     {
         private static readonly Uri _defaultTargetProcessApiUrl = TargetProcessClient.TargetProcessApiUrl;
-        private static readonly ICredentialStore _anonymousCredentials = new InMemoryCredentialStore(Credentials.Anonymous);
+        private static readonly ICredentialStore _anonymousCredentials = new InMemoryCredentialStore(Credentials.CookieCredentials);
 
         private readonly Authenticator _authenticator;
         private readonly JsonHttpPipeline _jsonPipeline;
@@ -153,21 +152,21 @@ namespace Sniper.Http
 
         public Task<IApiResponse<T>> Get<T>(Uri uri, IDictionary<string, string> parameters, string accepts)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Get, null, accepts, null, CancellationToken.None);
         }
 
         public Task<IApiResponse<T>> Get<T>(Uri uri, IDictionary<string, string> parameters, string accepts, CancellationToken cancellationToken)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return SendData<T>(uri.ApplyParameters(parameters), HttpMethod.Get, null, accepts, null, cancellationToken);
         }
 
         public Task<IApiResponse<T>> Get<T>(Uri uri, TimeSpan timeout)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return SendData<T>(uri, HttpMethod.Get, null, null, null, timeout, CancellationToken.None);
         }
@@ -180,7 +179,7 @@ namespace Sniper.Http
         /// <returns><seealso cref="IResponse"/> representing the received HTTP response</returns>
         public Task<IApiResponse<string>> GetHtml(Uri uri, IDictionary<string, string> parameters)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return GetHtml(new Request
             {
@@ -192,17 +191,17 @@ namespace Sniper.Http
 
         public Task<IApiResponse<T>> Patch<T>(Uri uri, object body)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.Body, body);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
+            Ensure.ArgumentNotNull(nameof(body), body);
             
             return SendData<T>(uri, HttpVerb.Patch, body, null, null, CancellationToken.None);
         }
 
         public Task<IApiResponse<T>> Patch<T>(Uri uri, object body, string accepts)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.Body, body);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Accepts, accepts);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
+            Ensure.ArgumentNotNull(nameof(body), body);
+            Ensure.ArgumentNotNull(nameof(accepts), accepts);
 
             return SendData<T>(uri, HttpVerb.Patch, body, accepts, null, CancellationToken.None);
         }
@@ -214,7 +213,7 @@ namespace Sniper.Http
         /// <returns><seealso cref="IResponse"/> representing the received HTTP response</returns>
         public async Task<HttpStatusCode> Post(Uri uri)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             var response = await SendData<object>(uri, HttpMethod.Post, null, null, null, CancellationToken.None).ConfigureAwait(false);
             return response.HttpResponse.StatusCode;
@@ -222,15 +221,15 @@ namespace Sniper.Http
 
         public Task<IApiResponse<T>> Post<T>(Uri uri)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return SendData<T>(uri, HttpMethod.Post, null, null, null, CancellationToken.None);
         }
 
         public Task<IApiResponse<T>> Post<T>(Uri uri, object body, string accepts, string contentType)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.Body, body);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
+            Ensure.ArgumentNotNull(nameof(body), body);
 
             return SendData<T>(uri, HttpMethod.Post, body, accepts, contentType, CancellationToken.None);
         }
@@ -248,25 +247,25 @@ namespace Sniper.Http
         /// <returns><seealso cref="IResponse"/> representing the received HTTP response</returns>
         public Task<IApiResponse<T>> Post<T>(Uri uri, object body, string accepts, string contentType, string twoFactorAuthenticationCode)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.Body, body);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.TwoFactorAuthenticationCode, twoFactorAuthenticationCode);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
+            Ensure.ArgumentNotNull(nameof(body), body);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(twoFactorAuthenticationCode), twoFactorAuthenticationCode);
 
             return SendData<T>(uri, HttpMethod.Post, body, accepts, contentType, CancellationToken.None, twoFactorAuthenticationCode);
         }
 
         public Task<IApiResponse<T>> Post<T>(Uri uri, object body, string accepts, string contentType, TimeSpan timeout)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.Body, body);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
+            Ensure.ArgumentNotNull(nameof(body), body);
 
             return SendData<T>(uri, HttpMethod.Post, body, accepts, contentType, timeout, CancellationToken.None);
         }
 
         public Task<IApiResponse<T>> Post<T>(Uri uri, object body, string accepts, string contentType, Uri baseAddress)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.Body, body);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
+            Ensure.ArgumentNotNull(nameof(body), body);
 
             return SendData<T>(uri, HttpMethod.Post, body, accepts, contentType, CancellationToken.None, baseAddress: baseAddress);
         }
@@ -309,7 +308,7 @@ namespace Sniper.Http
             string twoFactorAuthenticationCode = null,
             Uri baseAddress = null)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.GreaterThanZero(nameof(timeout), timeout);
             
             var request = new Request
@@ -333,7 +332,7 @@ namespace Sniper.Http
             string twoFactorAuthenticationCode = null,
             Uri baseAddress = null)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             var request = new Request
             {
@@ -374,7 +373,7 @@ namespace Sniper.Http
         /// <returns><seealso cref="IResponse"/> representing the received HTTP response</returns>
         public async Task<HttpStatusCode> Patch(Uri uri)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             var request = new Request
             {
@@ -394,8 +393,8 @@ namespace Sniper.Http
         /// <returns><seealso cref="IResponse"/> representing the received HTTP response</returns>
         public async Task<HttpStatusCode> Patch(Uri uri, string accepts)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Accepts, accepts);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
+            Ensure.ArgumentNotNull(nameof(accepts), accepts);
 
             var response = await SendData<object>(uri, new HttpMethod("PATCH"), null, accepts, null, CancellationToken.None).ConfigureAwait(false);
             return response.HttpResponse.StatusCode;
@@ -408,7 +407,7 @@ namespace Sniper.Http
         /// <returns>The returned <seealso cref="HttpStatusCode"/></returns>
         public async Task<HttpStatusCode> Put(Uri uri)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             var request = new Request
             {
@@ -427,7 +426,7 @@ namespace Sniper.Http
         /// <returns>The returned <seealso cref="HttpStatusCode"/></returns>
         public async Task<HttpStatusCode> Delete(Uri uri)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             var request = new Request
             {
@@ -447,7 +446,7 @@ namespace Sniper.Http
         /// <returns>The returned <seealso cref="HttpStatusCode"/></returns>
         public async Task<HttpStatusCode> Delete(Uri uri, string twoFactorAuthenticationCode)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             var response = await SendData<object>(uri, HttpMethod.Delete, null, null, null, CancellationToken.None, twoFactorAuthenticationCode).ConfigureAwait(false);
             return response.HttpResponse.StatusCode;
@@ -461,7 +460,7 @@ namespace Sniper.Http
         /// <returns>The returned <seealso cref="HttpStatusCode"/></returns>
         public async Task<HttpStatusCode> Delete(Uri uri, object data)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
 
             var request = new Request
@@ -484,8 +483,8 @@ namespace Sniper.Http
         /// <returns>The returned <seealso cref="HttpStatusCode"/></returns>
         public async Task<HttpStatusCode> Delete(Uri uri, object data, string accepts)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Accepts, accepts);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
+            Ensure.ArgumentNotNull(nameof(accepts), accepts);
 
             var response = await SendData<object>(uri, HttpMethod.Delete, data, accepts, null, CancellationToken.None).ConfigureAwait(false);
             return response.HttpResponse.StatusCode;
@@ -499,7 +498,7 @@ namespace Sniper.Http
         /// <param name="data">The object to serialize as the body of the request</param>
         public Task<IApiResponse<T>> Delete<T>(Uri uri, object data)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
 
             return SendData<T>(uri, HttpMethod.Delete, data, null, null, CancellationToken.None);
@@ -515,8 +514,8 @@ namespace Sniper.Http
         /// <param name="accepts">Specifies accept response media type</param>
         public Task<IApiResponse<T>> Delete<T>(Uri uri, object data, string accepts)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Accepts, accepts);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
+            Ensure.ArgumentNotNull(nameof(accepts), accepts);
 
             return SendData<T>(uri, HttpMethod.Delete, data, accepts, null, CancellationToken.None);
         }
@@ -547,8 +546,8 @@ namespace Sniper.Http
             get
             {
                 var credentialTask = CredentialStore.GetCredentials();
-                if (credentialTask == null) return Credentials.Anonymous;
-                return credentialTask.Result ?? Credentials.Anonymous;
+                if (credentialTask == null) return Credentials.CookieCredentials;
+                return credentialTask.Result ?? Credentials.CookieCredentials;
             }
             // Note this is for convenience. We probably shouldn't allow this to be mutable.
             set

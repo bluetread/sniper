@@ -57,7 +57,7 @@ namespace Sniper
         /// <returns>A list of <see cref="Authorization"/>s for the authenticated user.</returns>
         public Task<IReadOnlyList<Authorization>> GetAll(ApiOptions options)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
+            Ensure.ArgumentNotNull(nameof(options), options);
 
             return ApiConnection.GetAll<Authorization>(ApiUrls.Authorizations(), options);
         }
@@ -99,7 +99,7 @@ namespace Sniper
         /// <returns>The created <see cref="Authorization"/>.</returns>
         public Task<ApplicationAuthorization> Create(NewAuthorization newAuthorization)
         {
-            Ensure.ArgumentNotNull(AuthenticationKeys.NewAuthorization, newAuthorization);
+            Ensure.ArgumentNotNull(nameof(newAuthorization), newAuthorization);
 
             var requestData = new
             {
@@ -133,8 +133,8 @@ namespace Sniper
         /// <returns>The created <see cref="Authorization"/>.</returns>
         public Task<ApplicationAuthorization> Create(NewAuthorization newAuthorization, string twoFactorAuthenticationCode)
         {
-            Ensure.ArgumentNotNull(AuthenticationKeys.NewAuthorization, newAuthorization);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.TwoFactorAuthenticationCode, twoFactorAuthenticationCode);
+            Ensure.ArgumentNotNull(nameof(newAuthorization), newAuthorization);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(twoFactorAuthenticationCode), twoFactorAuthenticationCode);
 
             var requestData = new
             {
@@ -172,9 +172,9 @@ namespace Sniper
             string clientSecret,
             NewAuthorization newAuthorization)
         {
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientSecret, clientSecret);
-            Ensure.ArgumentNotNull(AuthenticationKeys.NewAuthorization, newAuthorization);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientId), clientId);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientSecret), clientSecret);
+            Ensure.ArgumentNotNull(nameof(newAuthorization), newAuthorization);
 
             var requestData = new
             {
@@ -213,10 +213,10 @@ namespace Sniper
         /// <returns>The created <see cref="Authorization"/>.</returns>
         public Task<ApplicationAuthorization> Create(string clientId, string clientSecret, NewAuthorization newAuthorization, string twoFactorAuthenticationCode)
         {
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientSecret, clientSecret);
-            Ensure.ArgumentNotNull(AuthenticationKeys.NewAuthorization, newAuthorization);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.TwoFactorAuthenticationCode, twoFactorAuthenticationCode);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientId), clientId);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientSecret), clientSecret);
+            Ensure.ArgumentNotNull(nameof(newAuthorization), newAuthorization);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(twoFactorAuthenticationCode), twoFactorAuthenticationCode);
             
 
             var requestData = new
@@ -257,9 +257,9 @@ namespace Sniper
             string clientSecret,
             NewAuthorization newAuthorization)
         {
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientSecret, clientSecret);
-            Ensure.ArgumentNotNull(AuthenticationKeys.NewAuthorization, newAuthorization);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientId), clientId);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientSecret), clientSecret);
+            Ensure.ArgumentNotNull(nameof(newAuthorization), newAuthorization);
 
             var requestData = new
             {
@@ -300,10 +300,10 @@ namespace Sniper
             NewAuthorization newAuthorization,
             string twoFactorAuthenticationCode)
         {
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientSecret, clientSecret);
-            Ensure.ArgumentNotNull(AuthenticationKeys.NewAuthorization, newAuthorization);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.TwoFactorAuthenticationCode, twoFactorAuthenticationCode);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientId), clientId);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientSecret), clientSecret);
+            Ensure.ArgumentNotNull(nameof(newAuthorization), newAuthorization);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(twoFactorAuthenticationCode), twoFactorAuthenticationCode);
 
             var requestData = new
             {
@@ -338,8 +338,8 @@ namespace Sniper
         /// <returns>The valid <see cref="ApplicationAuthorization"/>.</returns>
         public Task<ApplicationAuthorization> CheckApplicationAuthentication(string clientId, string accessToken)
         {
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.AccessToken, accessToken);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientId), clientId);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(accessToken), accessToken);
 
             var endpoint = ApiUrls.ApplicationAuthorization(clientId, accessToken);
             return ApiConnection.Get<ApplicationAuthorization>(endpoint, null);
@@ -357,8 +357,8 @@ namespace Sniper
         /// <returns>The valid <see cref="ApplicationAuthorization"/> with a new OAuth token</returns>
         public Task<ApplicationAuthorization> ResetApplicationAuthentication(string clientId, string accessToken)
         {
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.AccessToken, accessToken);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientId), clientId);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(accessToken), accessToken);
 
             var requestData = new { };
 
@@ -377,8 +377,8 @@ namespace Sniper
         /// <returns>A <see cref="Task"/> for the request's execution.</returns>
         public Task RevokeApplicationAuthentication(string clientId, string accessToken)
         {
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.AccessToken, accessToken);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientId), clientId);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(accessToken), accessToken);
 
             return ApiConnection.Delete(
                 ApiUrls.ApplicationAuthorization(clientId, accessToken));
@@ -401,7 +401,7 @@ namespace Sniper
         /// <returns>The updated <see cref="Authorization"/>.</returns>
         public Task<Authorization> Update(int id, AuthorizationUpdate authorizationUpdate)
         {
-            Ensure.ArgumentNotNull(AuthenticationKeys.AuthorizationUpdate, authorizationUpdate);
+            Ensure.ArgumentNotNull(nameof(authorizationUpdate), authorizationUpdate);
             
             return ApiConnection.Patch<Authorization>(ApiUrls.Authorizations(id), authorizationUpdate);
         }

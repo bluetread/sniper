@@ -45,7 +45,7 @@ namespace Sniper.Http
         /// <returns>A <see cref="Task" /> of <see cref="IResponse"/></returns>
         public async Task<IResponse> Send(IRequest request, CancellationToken cancellationToken)
         {
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(nameof(request), request);
 
             var cancellationTokenForRequest = GetCancellationTokenForRequest(request, cancellationToken);
 
@@ -74,7 +74,7 @@ namespace Sniper.Http
 
         protected virtual async Task<IResponse> BuildResponse(HttpResponseMessage responseMessage)
         {
-            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.ResponseMessage, responseMessage);
+            Ensure.ArgumentNotNull(nameof(responseMessage), responseMessage);
             
             object responseBody = null;
             string contentType = null;
@@ -114,7 +114,7 @@ namespace Sniper.Http
 
         protected virtual HttpRequestMessage BuildRequestMessage(IRequest request)
         {
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(nameof(request), request);
             HttpRequestMessage requestMessage = null;
             try
             {

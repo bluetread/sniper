@@ -1,5 +1,4 @@
-﻿using Sniper.ApiClients;
-using Sniper.Http;
+﻿using Sniper.Http;
 using System;
 
 
@@ -24,8 +23,7 @@ namespace Sniper
         /// The name (and optionally version) of the product using this library. This is sent to the server as part of
         /// the user agent for analytics purposes.
         /// </param>
-        public TargetProcessClient(ProductHeaderValue productInformation)
-            : this(new Connection(productInformation, TargetProcessApiUrl))
+        public TargetProcessClient(ProductHeaderValue productInformation) : this(new Connection(productInformation, TargetProcessApiUrl))
         {
         }
 
@@ -80,7 +78,7 @@ namespace Sniper
         /// <param name="connection">The underlying <seealso cref="IConnection"/> used to make requests</param>
         public TargetProcessClient(IConnection connection)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
+            Ensure.ArgumentNotNull(nameof(connection), connection);
 
             Connection = connection;
             var apiConnection = new ApiConnection(connection);
@@ -185,7 +183,7 @@ namespace Sniper
 
         private static Uri FixUpBaseUri(Uri uri) //TODO: verify all this
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             if (uri.Host.Equals("targetprocess.com") || uri.Host.Equals("api.targetprocess.com"))
             {

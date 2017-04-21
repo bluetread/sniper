@@ -6,11 +6,11 @@
     public enum AuthenticationType
     {
         /// <summary>
-        /// No credentials provided
+        /// Cookie Authentication
         /// </summary>
-        Anonymous,
+        Cookie,
         /// <summary>
-        /// Username &amp; password
+        /// User name &amp; password
         /// </summary>
         Basic,
         /// <summary>

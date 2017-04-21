@@ -9,10 +9,10 @@ namespace Sniper.Tests.Authentication
         public class TheAuthenticationTypeProperty
         {
             [Fact]
-            public void ReturnsAnonymousForEmptyCtor()
+            public void ReturnsCookieForEmptyCtor()
             {
-                var credentials = Credentials.Anonymous;
-                Assert.Equal(AuthenticationType.Anonymous, credentials.AuthenticationType);
+                var credentials = Credentials.CookieCredentials;
+                Assert.Equal(AuthenticationType.Cookie, credentials.AuthenticationType);
             }
 
             [Fact]

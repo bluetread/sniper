@@ -31,7 +31,7 @@ namespace Sniper
             Ensure.ArgumentNotNullOrEmptyString(nameof(owner), owner);
             Ensure.ArgumentNotNullOrEmptyString(nameof(name), name);
             Ensure.ArgumentNotNullOrEmptyString(nameof(path), path);
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(nameof(request), request);
 
             var deleteUrl = ApiUrls.RepositoryContent(owner, name, path);
             return ApiConnection.Delete(deleteUrl, request);
@@ -46,7 +46,7 @@ namespace Sniper
         public Task DeleteFile(long repositoryId, string path, DeleteFileRequest request)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(path), path);
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(nameof(request), request);
 
             var deleteUrl = ApiUrls.RepositoryContent(repositoryId, path);
             return ApiConnection.Delete(deleteUrl, request);

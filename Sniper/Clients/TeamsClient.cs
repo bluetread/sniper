@@ -62,7 +62,7 @@ namespace Sniper
         public Task<IReadOnlyList<Team>> GetAll(string org, ApiOptions options)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(org), org);
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
+            Ensure.ArgumentNotNull(nameof(options), options);
 
             var endpoint = ApiUrls.OrganizationTeams(org);
             return ApiConnection.GetAll<Team>(endpoint, options);
@@ -86,7 +86,7 @@ namespace Sniper
         /// <returns>A list of the user's <see cref="Team"/>s.</returns>
         public Task<IReadOnlyList<Team>> GetAllForCurrent(ApiOptions options)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
+            Ensure.ArgumentNotNull(nameof(options), options);
 
             var endpoint = ApiUrls.UserTeams();
 
@@ -117,7 +117,7 @@ namespace Sniper
         /// <returns>A list of the team's member <see cref="User"/>s.</returns>
         public Task<IReadOnlyList<User>> GetAllMembers(int id, ApiOptions options)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
+            Ensure.ArgumentNotNull(nameof(options), options);
 
             var endpoint = ApiUrls.TeamMembers(id);
 
@@ -261,7 +261,7 @@ namespace Sniper
         /// <returns>The team's repositories</returns>
         public Task<IReadOnlyList<Repository>> GetAllRepositories(int id, ApiOptions options)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
+            Ensure.ArgumentNotNull(nameof(options), options);
 
             var endpoint = ApiUrls.TeamRepositories(id);
 
@@ -276,7 +276,7 @@ namespace Sniper
         public async Task<bool> AddRepository(int id, string organization, string repository)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(organization), organization);
-            Ensure.ArgumentNotNullOrEmptyString(RepositoryKeys.Repository, repository);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(repository), repository);
 
             var endpoint = ApiUrls.TeamRepository(id, organization, repository);
 
@@ -303,7 +303,7 @@ namespace Sniper
         public async Task<bool> AddRepository(int id, string organization, string repository, RepositoryPermissionRequest permission)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(organization), organization);
-            Ensure.ArgumentNotNullOrEmptyString(RepositoryKeys.Repository, repository);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(repository), repository);
 
             var endpoint = ApiUrls.TeamRepository(id, organization, repository);
 
@@ -326,7 +326,7 @@ namespace Sniper
         public async Task<bool> RemoveRepository(int id, string organization, string repository)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(organization), organization);
-            Ensure.ArgumentNotNullOrEmptyString(RepositoryKeys.Repository, repository);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(repository), repository);
 
             var endpoint = ApiUrls.TeamRepository(id, organization, repository);
 
@@ -355,7 +355,7 @@ namespace Sniper
         public async Task<bool> IsRepositoryManagedByTeam(int id, string owner, string repository)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(owner), owner);
-            Ensure.ArgumentNotNullOrEmptyString(RepositoryKeys.Repository, repository);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(repository), repository);
 
             var endpoint = ApiUrls.TeamRepository(id, owner, repository);
 

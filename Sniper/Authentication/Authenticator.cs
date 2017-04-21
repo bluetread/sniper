@@ -9,8 +9,8 @@ namespace Sniper
         private readonly Dictionary<AuthenticationType, IAuthenticationHandler> _authenticators =
             new Dictionary<AuthenticationType, IAuthenticationHandler>
             {
-                { AuthenticationType.Anonymous, new AnonymousAuthenticator() },
                 { AuthenticationType.Basic, new BasicAuthenticator() },
+                { AuthenticationType.Cookie, new CookieAuthenticator() },
                 { AuthenticationType.Oauth, new TokenAuthenticator() }
             };
 
@@ -23,9 +23,9 @@ namespace Sniper
 
         public async Task Apply(IRequest request)
         {
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(nameof(request), request);
 
-            var credentials = await CredentialStore.GetCredentials().ConfigureAwait(false) ?? Credentials.Anonymous;
+            var credentials = await CredentialStore.GetCredentials().ConfigureAwait(false) ?? Credentials.CookieCredentials;
             _authenticators[credentials.AuthenticationType].Authenticate(request, credentials);
         }
 

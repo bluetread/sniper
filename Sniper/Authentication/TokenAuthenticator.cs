@@ -1,13 +1,12 @@
-﻿using Sniper.Authentication;
-using Sniper.Http;
+﻿using Sniper.Http;
 using System;
 using System.Globalization;
+using static Sniper.Authentication.AuthenticationKeys;
 
 namespace Sniper
 {
     internal class TokenAuthenticator : IAuthenticationHandler
     {
-        private const string tokenFormat = "Token {0}";
 
         ///<summary>
         ///Authenticate a request using the OAuth2 Token (sent in a header) authentication scheme
@@ -19,18 +18,18 @@ namespace Sniper
         ///</remarks>
         public void Authenticate(IRequest request, ICredentials credentials)
         {
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
-            Ensure.ArgumentNotNull(AuthenticationKeys.Credentials, credentials);
-            Ensure.ArgumentNotNull(AuthenticationKeys.CredentialsPassword, credentials.Password);
+            Ensure.ArgumentNotNull(nameof(request), request);
+            Ensure.ArgumentNotNull(nameof(credentials), credentials);
+            Ensure.ArgumentNotNull(nameof(credentials.Password), credentials.Password);
 
             var token = credentials.GetToken();
             if (credentials.Login != null)
             {
-                throw new InvalidOperationException(AuthenticationKeys.Messages.TokenLoginFailed);
+                throw new InvalidOperationException(Messages.TokenLoginFailed);
             }
             if (token != null)
             {
-                request.Headers[AuthenticationKeys.Keys.Authorization] = string.Format(CultureInfo.InvariantCulture, tokenFormat, token);
+                request.Headers[Keys.Authorization] = string.Format(CultureInfo.InvariantCulture, Messages.TokenAuthorizationMessageFormat, token);
             }
         }
     }

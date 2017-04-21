@@ -14,7 +14,7 @@ namespace Sniper.Http
         public ReadOnlyPagedCollection(IApiResponse<List<T>> response, Func<Uri, Task<IApiResponse<List<T>>>> nextPageFunc)
             : base(response != null ? response.Body ?? new List<T>() : new List<T>())
         {
-            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.Response, response);
+            Ensure.ArgumentNotNull(nameof(response), response);
             Ensure.ArgumentNotNull(nameof(nextPageFunc), nextPageFunc);
 
             _nextPageFunc = nextPageFunc;

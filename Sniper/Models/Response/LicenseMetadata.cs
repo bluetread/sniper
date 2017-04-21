@@ -12,7 +12,7 @@ namespace Sniper.Response
     {
         public LicenseMetadata(string key, string name, Uri url)
         {
-            Ensure.ArgumentNotNullOrEmptyString(HttpKeys.Key, key);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(key), key);
             Ensure.ArgumentNotNullOrEmptyString(nameof(name), name);
             Ensure.ArgumentNotNull(HttpKeys.Url, url);
             

@@ -6,11 +6,11 @@ namespace Sniper.Http
     public class Credentials : ICredentials
     {
         [SuppressMessage(Categories.Security, MessageAttributes.DoNotDeclareReadOnlyMutableReferenceTypes, Justification = Justifications.ObjectIsImmutable)]
-        public static readonly Credentials Anonymous = new Credentials();
+        public static readonly Credentials CookieCredentials = new Credentials();
 
         private Credentials()
         {
-            AuthenticationType = AuthenticationType.Anonymous;
+            AuthenticationType = AuthenticationType.Cookie;
         }
 
         public Credentials(string token)

@@ -1,5 +1,4 @@
-﻿using Sniper.Application;
-using Sniper.Http;
+﻿using Sniper.Http;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -73,13 +72,13 @@ namespace Sniper
         [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase)]
         public static string ToRubyCase(this string propertyName)
         {
-            Ensure.ArgumentNotNullOrEmptyString(ApplicationKeys.PropertyName, propertyName);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(propertyName), propertyName);
             return string.Join("_", propertyName.SplitUpperCase()).ToLowerInvariant();
         }
 
         public static string FromRubyCase(this string propertyName)
         {
-            Ensure.ArgumentNotNullOrEmptyString(ApplicationKeys.PropertyName, propertyName);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(propertyName), propertyName);
             return string.Join(string.Empty, propertyName.Split('_')).ToCapitalizedInvariant();
         }
 

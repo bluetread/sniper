@@ -48,7 +48,7 @@ namespace Sniper
         /// <returns>The <see cref="EmailAddress"/>es for the authenticated user.</returns>
         public Task<IReadOnlyList<EmailAddress>> GetAll(ApiOptions options)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
+            Ensure.ArgumentNotNull(nameof(options), options);
 
             return ApiConnection.GetAll<EmailAddress>(ApiUrls.Emails(), options);
         }

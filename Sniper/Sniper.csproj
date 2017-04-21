@@ -70,6 +70,7 @@
     <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\CookieAuthenticator.cs" />
     <Compile Include="Clients\IOAuthClient.cs" />
     <Compile Include="Clients\IUserAdministrationClient.cs" />
     <Compile Include="Clients\OAuthClient.cs" />
@@ -207,7 +208,6 @@
     <Compile Include="Clients\ApiClient.cs" />
     <Compile Include="Clients\AuthorizationsClient.cs" />
     <Compile Include="Clients\ApiPagination.cs" />
-    <Compile Include="Authentication\AnonymousAuthenticator.cs" />
     <Compile Include="Authentication\Authenticator.cs" />
     <Compile Include="Exceptions\ApiValidationException.cs" />
     <Compile Include="Exceptions\ForbiddenException.cs" />

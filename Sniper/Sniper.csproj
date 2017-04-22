@@ -276,6 +276,7 @@
     <Compile Include="_configuration\ConfigurationData.cs" />
     <Compile Include="_configuration\ConfigurationValues.cs" />
     <Compile Include="_configuration\IConfigurationData.cs" />
+    <Compile Include="_configuration\IRestfulData.cs" />
     <Compile Include="_configuration\SiteData.cs" />
   </ItemGroup>
   <ItemGroup>

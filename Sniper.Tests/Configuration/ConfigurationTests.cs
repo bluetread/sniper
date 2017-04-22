@@ -34,7 +34,7 @@ namespace Sniper.Tests.Configuration
             Assert.NotNull(configData.SiteInfo);
             Assert.NotEmpty(configData.SiteInfo.BaseUrl);
             Assert.NotEmpty(configData.SiteInfo.HostName);
-            Assert.NotEmpty(configData.SiteInfo.SiteUrl);
+            Assert.NotEmpty(configData.SiteInfo.ApiUrl);
             Assert.NotEmpty(configData.SiteInfo.UserName);
             Assert.True(configData.SiteInfo.Version > 0);
         }

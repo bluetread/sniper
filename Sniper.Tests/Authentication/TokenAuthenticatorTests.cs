@@ -1,5 +1,6 @@
 ﻿using System;
 using NSubstitute;
+using Sniper.Configuration;
 using Sniper.Http;
 using Xunit;
 using static Sniper.Authentication.AuthenticationKeys;
@@ -62,6 +63,7 @@ namespace Sniper.Tests.Authentication
                 Assert.Throws<ArgumentNullException>(() =>
                     authenticator.Authenticate(Substitute.For<IRequest>(), null));
             }
+
             [Fact]
             public void EnsuresArgumentsNotNullForServiceToken()
             {
@@ -69,6 +71,13 @@ namespace Sniper.Tests.Authentication
                 Assert.Throws<ArgumentNullException>(() => authenticator.Authenticate(null, Credentials.CookieCredentials));
                 Assert.Throws<ArgumentNullException>(() =>
                     authenticator.Authenticate(Substitute.For<IRequest>(), null));
+            }
+
+            [Fact]
+            public void BasicAccessTokenAuthenticatorTest()
+            {
+                var configData = ConfigurationData.Instance.SiteInfo;
+                var authenticator = new AccessTokenAuthenticator(configData);
             }
         }
     }

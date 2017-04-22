@@ -1,4 +1,6 @@
-﻿namespace Sniper.Application
+﻿using System.Collections.Generic;
+
+namespace Sniper.Application
 {
     public static class ApplicationKeys
     {
@@ -102,6 +104,267 @@ namespace Sniper.Http
     {
         public const string HypertextSecure = "https";
         public const string HypertextUnsecure = "http";
+    }
+}
+
+namespace Sniper.TargetProcess
+{
+    using static Sniper.WarningsErrors.MessageSuppression;
+
+    public static class Aggregates
+    {
+        public const string Average = "Avg";
+        public const string Count = "Count";
+        public const string Maximum = "Max";
+        public const string Minimum = "Min";
+        public const string Sum = "Sum";
+    }
+
+    public static class Entity
+    {
+        public const string Assignable = "Assignables";
+        public const string AssignableInbound = "InboundAssignable";
+        public const string AssignableOutbound = "OutboundAssignable";
+        public const string Bug = "Bugs";
+        public const string Build = "Builds";
+        public const string Epic = "Epics";
+        public const string Feature = "Features";
+        public const string General = "Generals";
+        public const string Impediment = "Impediments";
+        public const string Iteration = "Iterations";
+        public const string Program = "Programs";
+        public const string Project = "Projects";
+        public const string Release = "Releases";
+        public const string Request = "Requests";
+        public const string Requester = "Requesters";
+        public const string Task = "Tasks";
+        public const string TeamIteration = "Team Iterations";
+        public const string Team = "Teams";
+        public const string TestCase = "Test Cases";
+        public const string TestPlan = "Test Plans";
+        public const string TestPlanRun = "Test Plan Runs";
+        public const string User = "Users";
+        public const string UserStory = "UserStories";
+    }
+
+    public static class FilterOperators
+    {
+        public const string Contains = "contains";
+        public const string Equality = "eq";
+        public const string GreaterThan = "gt";
+        public const string GreaterThanOrEqual = "gte";
+        public const string InList = "in";
+        public const string IsNull = "is null";
+        public const string IsNotNull = "is not null";
+        public const string LessThan = "lt";
+        public const string LessThanOrEqual = "lte";
+        public const string NotEquality = "neq";
+    }
+
+    public static class QueryParameters
+    {
+        public const string AccessToken = "access_token";
+        public const string Append = "append";
+        public const string Exclude = "exclude";
+        public const string Format = "format";
+        public const string Include = "include";
+        public const string InnerTake = "innertake";
+        public const string Skip = "skip";
+        public const string Take = "take";
+        public const string Token = "token"; //service token
+        public const string OrderBy = "orderby";
+        public const string OrderByDescending = "orderbydesc";
+        public const string Where = "where";
+
+    }
+
+    public static class TargetProcessResources
+    {
+        public const string Assignable = "Assignable";
+        public const string AssignedEffort = "AssignedEffort";
+        public const string Assignment = "Assignment";
+        public const string Attachment = "Attachment";
+        public const string Bug = "Bug";
+        public const string Build = "Build";
+        public const string Company = "Company";
+        public const string Context = "Context";
+        public const string CustomActivity = "CustomActivity";
+        public const string CustomField = "CustomField";
+        public const string CustomRule = "CustomRule";
+        public const string EntityState = "EntityState";
+        public const string EntityType = "EntityType";
+        public const string Epic = "Epic";
+        public const string ExtendedContext = "ExtendedContext";
+        public const string Feature = "Feature";
+        public const string General = "General";
+        public const string GeneralFollower = "GeneralFollower";
+        public const string GeneralUser = "GeneralUser";
+        public const string GlobalSettings = "GlobalSettings";
+        public const string Impediment = "Impediment";
+        public const string InboundAssignable = "InboundAssignable";
+        public const string Iteration = "Iteration";
+        public const string Message = "Message";
+        public const string MessageUniqueId = "MessageUid";
+        public const string Milestone = "Milestone";
+        public const string OutboundAssignable = "OutboundAssignable";
+        public const string Priority = "Priority";
+        public const string Process = "Process";
+        public const string Program = "Program";
+        public const string Project = "Project";
+        public const string ProjectAllocation = "ProjectAllocation";
+        public const string ProjectMember = "ProjectMember";
+        public const string Relation = "Relation";
+        public const string RelationType = "RelationType";
+        public const string Release = "Release";
+        public const string ReleaseProject = "ReleaseProject";
+        public const string Request = "Request";
+        public const string Requester = "Requester";
+        public const string RequestType = "RequestType";
+        public const string Revision = "Revision";
+        public const string RevisionFile = "RevisionFile";
+        public const string Role = "Role";
+        public const string RoleEffort = "RoleEffort";
+        public const string Severity = "Severity";
+        public const string Tag = "Tag";
+        public const string Task = "Task";
+        public const string Team = "Team";
+        public const string TeamAssignment = "TeamAssignment";
+        public const string TeamIteration = "TeamIteration";
+        public const string TeamMember = "TeamMember";
+        public const string TeamProject = "TeamProject";
+        public const string TeamProjectAllocation = "TeamProjectAllocation";
+        public const string Term = "Term";
+        public const string TestCase = "TestCase";
+        public const string TestCaseRun = "TestCaseRun";
+        public const string TestPlan = "TestPlan";
+        public const string TestPlanRun = "TestPlanRun";
+        public const string TestRunItemHierarchyLink = "TestRunItemHierarchyLink";
+        public const string TestStep = "TestStep";
+        public const string TestStepRun = "TestStepRun";
+        public const string Time = "Time";
+        public const string User = "User";
+        public const string UserProjectAllocation = "UserProjectAllocation";
+        public const string UserStory = "UserStory";
+        public const string Workflow = "Workflow";
+
+        // List of resources and routes. Example: https://md5.tpondemand.com/api/v1/Assignables
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(Categories.Security, MessageAttributes.DoNotDeclareReadOnlyMutableReferenceTypes)]
+        public static readonly Dictionary<string, string> ResourceRoutes = new Dictionary<string, string>
+        {
+            {Assignable,  "Assignables"},
+            {AssignedEffort, "AssignedEfforts"},
+            {Assignment, "Assignments"},
+            {Attachment, "Attachments"},
+            {Bug, "Bugs"},
+            {Build, "Build"},
+            {Company, "Companies"},
+            {Context, "Context"}, //singular - Do not change
+            {CustomActivity, "CustomActivities"},
+            {CustomField, "CustomFields"},
+            {CustomRule, "CustomRules"},
+            {EntityState, "EntityStates"},
+            {EntityType, "EntityTypes"},
+            {Epic, "Epics"},
+            {ExtendedContext, "ExtendedContexts"}, //TODO: link is bad. Need to verify
+            {Feature, "Features"},
+            {General, "Generals"},
+            {GeneralFollower, "GeneralFollowers"},
+            {GeneralUser, "GeneralUsers"},
+            {GlobalSettings, "GlobalSettings"},
+            {Impediment, "Impediments"},
+            {InboundAssignable, "InboundAssignables"},
+            {Iteration, "Iterations"},
+            {Message, "Messages"},
+            {MessageUniqueId, "MessageUniqueIds"},
+            {Milestone, "Milestones"},
+            {OutboundAssignable, "OutboundAssignables"},
+            {Priority, "Priorities"},
+            {Process, "Processes"},
+            {Program, "Programs"},
+            {Project, "Projects"},
+            {ProjectAllocation, "ProjectAllocations"},
+            {ProjectMember, "ProjectMembers"},
+            {Relation, "Relations"},
+            {RelationType, "RelationTypes"},
+            {Release, "Releases"},
+            {ReleaseProject, "ReleaseProjects"},
+            {Request, "Requests"},
+            {Requester, "Requesters"},
+            {RequestType, "RequestTypes"},
+            {Revision, "Revisions"},
+            {RevisionFile, "RevisionFiles"},
+            {Role, "Roles"},
+            {RoleEffort, "RoleEfforts"},
+            {Severity, "Severities"},
+            {Tag, "Tags"},
+            {Task, "Tasks"},
+            {Team, "Teams"},
+            {TeamAssignment, "TeamAssignments"},
+            {TeamIteration, "TeamIterations"},
+            {TeamMember, "TeamMembers"},
+            {TeamProject, "TeamProjects"},
+            {TeamProjectAllocation, "TeamProjectAllocations"},
+            {Term, "Terms"},
+            {TestCase, "TestCases"},
+            {TestCaseRun, "TestCaseRuns"},
+            {TestPlan, "TestPlans"},
+            {TestPlanRun, "TestPlanRuns"},
+            {TestRunItemHierarchyLink, "TestRunItemHierarchyLinks"},
+            {TestStep, "TestSteps"},
+            {TestStepRun, "TestStepRuns"},
+            {Time, "Times"},
+            {User, "Users"},
+            {UserProjectAllocation, "UserProjectAllocations"},
+            {UserStory, "UserStories"},
+            {Workflow, "Workflows"}
+        };
+    }
+
+    public static class ResourceHistory
+    {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(Categories.Security, MessageAttributes.DoNotDeclareReadOnlyMutableReferenceTypes)]
+        public static readonly Dictionary<string, string> ResourceHistoryRoutes = new Dictionary<string, string>
+        {
+            {TargetProcessResources.Bug, "BugSimpleHistories"},
+            {TargetProcessResources.Epic, "EpicSimpleHistories"},
+            {TargetProcessResources.Feature, "FeatureSimpleHistories"},
+            {TargetProcessResources.Impediment, "ImpedimentSimpleHistories"},
+            {TargetProcessResources.Request, "RequestSimpleHistories"},
+            {TargetProcessResources.Task, "TaskSimpleHistories"},
+            {TargetProcessResources.UserStory, "UserStorySimpleHistories"}
+        };
+    }
+
+    public enum ResponseFormat
+    {
+        Json, Xml, Default = Xml
+    }
+
+    public static class StatusCodes
+    {
+        public enum StatusCode
+        {
+            None = 0,
+            Success = 200,
+            BadFormat = 400,
+            Unauthorized = 401,
+            Forbidden = 403,
+            RequestedEntityNotFound = 404,
+            InternalServerError = 500,
+            NotImplemented = 501
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(Categories.Security, MessageAttributes.DoNotDeclareReadOnlyMutableReferenceTypes)]
+        public static readonly Dictionary<StatusCode, KeyValuePair<string, string>> StatusCodeMessages = new Dictionary<StatusCode, KeyValuePair<string, string>>
+        {
+            { StatusCode.Success, new KeyValuePair<string, string>("Success", "Request was handled correctly") },
+            { StatusCode.BadFormat, new KeyValuePair<string, string>("Bad format", "Incorrect parameter or query string") },
+            { StatusCode.Unauthorized, new KeyValuePair<string, string>("Unauthorized", "Wrong or missed credentials") },
+            { StatusCode.Forbidden, new KeyValuePair<string, string>("Forbidden", "A user has insufficient rights to perform an action") },
+            { StatusCode.RequestedEntityNotFound, new KeyValuePair<string, string>("Requested Entity not found", string.Empty) },
+            { StatusCode.InternalServerError, new KeyValuePair<string, string>("Internal server error", "Targetprocess messed up") },
+            { StatusCode.NotImplemented, new KeyValuePair<string, string>("Not implemented", "The requested action is either not supported or not implemented yet") }
+        };
     }
 }
 

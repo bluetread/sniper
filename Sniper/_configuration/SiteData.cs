@@ -1,10 +1,11 @@
 ﻿using System.Globalization;
 using Sniper.Http;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 // ReSharper disable once CheckNamespace
 namespace Sniper.Configuration
 {
-    public sealed class SiteData
+    public sealed class SiteData : IRestfulData
     {
         public string BaseUrl { get; set; }
         public string HostName { get; set; }
@@ -15,7 +16,8 @@ namespace Sniper.Configuration
         public string UserName { get; set; }
         public int Version { get; set; }
 
-        public string SiteUrl => $@"{Protocols.HypertextSecure}://{HostName}.{BaseUrl}{(IsApiIncluded ?
-            "/api" : string.Empty)}/{(IsVersionLetterIncluded ? "v" : string.Empty)}{(IsVersionIncluded ? Version.ToString(CultureInfo.CurrentCulture) : string.Empty)}/";
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(Categories.Globalization, MessageAttributes.SpecifyIFormatProvider)]
+        public string ApiUrl => $@"{Protocols.HypertextSecure}://{HostName}.{BaseUrl}{(IsApiIncluded ?
+            "/api" : string.Empty)}/{(IsVersionLetterIncluded ? "v" : string.Empty)}{(IsVersionIncluded ? Version.ToString(CultureInfo.CurrentCulture) : string.Empty)}";
     }
 }

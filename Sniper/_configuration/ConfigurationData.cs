@@ -15,7 +15,7 @@ namespace Sniper.Configuration
 
         private ConfigurationData()
         {
-            Data = JsonConvert.DeserializeObject<IConfigurationData>(File.ReadAllText(ConfigurationFilePath));
+            Data = JsonConvert.DeserializeObject<ConfigurationValues>(File.ReadAllText(ConfigurationFilePath));
         }
 
         public static string ConfigurationFilePath => Path.Combine(FileSystemHelpers.RootSolutionPath,

@@ -3,10 +3,11 @@
     "baseUrl": "tpondemand.com",
     "hostName": "adamm",
     "isApiIncluded": true,
+    "IsJsonFormat": true, // True = JSON, False = XML (default)
     "isVersionIncluded": true,
     "IsVersionLetterIncluded": true,
-    "version": 1,
+    "password": "", // not checked in
     "username": "apiaccess",
-    "password": "" // not checked in
+    "version": 1
   }
 }

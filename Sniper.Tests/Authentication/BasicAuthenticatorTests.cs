@@ -1,9 +1,23 @@
-﻿namespace Sniper.Tests.Authentication
+﻿using System.Net.Http;
+using Xunit;
+
+namespace Sniper.Tests.Authentication
 {
     public class BasicAuthenticatorTests
     {
         public class TheAuthenticateMethod
         {
+            [Fact]
+            public void VerifyBasicAuthenticationInvalidPassword()
+            {
+                var authenticator = new BasicAuthenticator();
+                authenticator.ApiSiteInfo.Route = "UserStories";
+                authenticator.ApiSiteInfo.Parameters.Add("format","json");
+                authenticator.ApiSiteInfo.Method = HttpMethod.Get;
+
+                authenticator.Authenticate(authenticator.ApiSiteInfo, authenticator.Credentials);
+            }
+
 #if false
             [Fact]
             public void SetsRequestHeaderForToken()

@@ -23,7 +23,7 @@ namespace Sniper.Http
         private static readonly Uri _defaultTargetProcessApiUrl = TargetProcessClient.TargetProcessApiUrl;
         private static readonly ICredentialStore _anonymousCredentials = new InMemoryCredentialStore(Credentials.CookieCredentials);
 
-        private readonly Authenticator _authenticator;
+        //private readonly Authenticator _authenticator;
         private readonly IHttpClient _httpClient;
 
         /// <summary>
@@ -511,33 +511,33 @@ namespace Sniper.Http
         /// <summary>
         /// Gets the <seealso cref="ICredentialStore"/> used to provide credentials for the connection.
         /// </summary>
-        public ICredentialStore CredentialStore => _authenticator.CredentialStore;
+        //public ICredentialStore CredentialStore => _authenticator.CredentialStore;
 
-        /// <summary>
-        /// Gets or sets the credentials used by the connection.
-        /// </summary>
-        /// <remarks>
-        /// You can use this property if you only have a single hard-coded credential. Otherwise, pass in an 
-        /// <see cref="ICredentialStore"/> to the constructor. 
-        /// Setting this property will change the <see cref="ICredentialStore"/> to use 
-        /// the default <see cref="InMemoryCredentialStore"/> with just these credentials.
-        /// </remarks>
-        public Credentials Credentials
-        {
-            get
-            {
-                var credentialTask = CredentialStore.GetCredentials();
-                if (credentialTask == null) return Credentials.CookieCredentials;
-                return credentialTask.Result ?? Credentials.CookieCredentials;
-            }
-            // Note this is for convenience. We probably shouldn't allow this to be mutable.
-            set
-            {
-                Ensure.ArgumentNotNull(nameof(value), value);
+        ///// <summary>
+        ///// Gets or sets the credentials used by the connection.
+        ///// </summary>
+        ///// <remarks>
+        ///// You can use this property if you only have a single hard-coded credential. Otherwise, pass in an 
+        ///// <see cref="ICredentialStore"/> to the constructor. 
+        ///// Setting this property will change the <see cref="ICredentialStore"/> to use 
+        ///// the default <see cref="InMemoryCredentialStore"/> with just these credentials.
+        ///// </remarks>
+        //public Credentials Credentials
+        //{
+        //    get
+        //    {
+        //        var credentialTask = CredentialStore.GetCredentials();
+        //        if (credentialTask == null) return Credentials.CookieCredentials;
+        //        return credentialTask.Result ?? Credentials.CookieCredentials;
+        //    }
+        //    // Note this is for convenience. We probably shouldn't allow this to be mutable.
+        //    set
+        //    {
+        //        Ensure.ArgumentNotNull(nameof(value), value);
                 
-                _authenticator.CredentialStore = new InMemoryCredentialStore(value);
-            }
-        }
+        //        _authenticator.CredentialStore = new InMemoryCredentialStore(value);
+        //    }
+        //}
 
         private async Task<IApiResponse<string>> GetHtml(IRequest request)
         {
@@ -553,20 +553,20 @@ namespace Sniper.Http
             return JsonHttpPipeline.DeserializeResponse<T>(response);
         }
 
-        // THIS IS THE METHOD THAT EVERY REQUEST MUST GO THROUGH!
-        private async Task<IResponse> RunRequest(IRequest request, CancellationToken cancellationToken)
-        {
-            request.Headers.Add("User-Agent", UserAgent);
-            await _authenticator.Apply(request).ConfigureAwait(false);
-            var response = await _httpClient.Send(request, cancellationToken).ConfigureAwait(false);
-            if (response != null)
-            {
-                // Use the clone method to avoid keeping hold of the original (just in case it effect the lifetime of the whole response
-                _lastApiInfo = response.ApiInfo.Clone();
-            }
-            HandleErrors(response);
-            return response;
-        }
+        //// THIS IS THE METHOD THAT EVERY REQUEST MUST GO THROUGH!
+        //private async Task<IResponse> RunRequest(IRequest request, CancellationToken cancellationToken)
+        //{
+        //    request.Headers.Add("User-Agent", UserAgent);
+        //    await _authenticator.Apply(request).ConfigureAwait(false);
+        //    var response = await _httpClient.Send(request, cancellationToken).ConfigureAwait(false);
+        //    if (response != null)
+        //    {
+        //        // Use the clone method to avoid keeping hold of the original (just in case it effect the lifetime of the whole response
+        //        _lastApiInfo = response.ApiInfo.Clone();
+        //    }
+        //    HandleErrors(response);
+        //    return response;
+        //}
 
         private static readonly Dictionary<HttpStatusCode, Func<IResponse, Exception>> _httpExceptionMap =
             new Dictionary<HttpStatusCode, Func<IResponse, Exception>>

@@ -12,17 +12,8 @@ namespace Sniper
 {
     internal static class StringExtensions
     {
-        public static bool IsBlank(this string value)
-        {
-            return string.IsNullOrWhiteSpace(value);
-        }
-
-        public static bool IsNotBlank(this string value)
-        {
-            return !string.IsNullOrWhiteSpace(value);
-        }
-
-        public static Uri FormatUri(this string pattern, params object[] args)
+       
+      public static Uri FormatUri(this string pattern, params object[] args)
         {
             Ensure.ArgumentNotNullOrEmptyString(HttpKeys.Pattern, pattern);
 

@@ -2,5 +2,6 @@
 {
     internal class ServiceTokenAuthenticator : TokenAuthenticatorBase
     {
+
     }
 }

@@ -72,6 +72,7 @@
   <ItemGroup>
     <Compile Include="Authentication\AccessTokenAuthenticator.cs" />
     <Compile Include="Authentication\AuthenticationTokenType.cs" />
+    <Compile Include="Authentication\BaseAuthenticator.cs" />
     <Compile Include="Authentication\CookieAuthenticator.cs" />
     <Compile Include="Authentication\ServiceTokenAuthenticator.cs" />
     <Compile Include="Clients\IOAuthClient.cs" />
@@ -80,28 +81,27 @@
     <Compile Include="Clients\UserAdministrationClient.cs" />
     <Compile Include="Clients\RepositoryContentsClient.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Exceptions\AbuseException.cs" />
-    <Compile Include="Exceptions\LegalRestrictionException.cs" />
-    <Compile Include="Exceptions\RepositoryExistsException.cs" />
-    <Compile Include="Exceptions\RepositoryFormatException.cs" />
-    <Compile Include="Exceptions\RepositoryWebHookConfigException.cs" />
-    <Compile Include="Exceptions\TwoFactorAuthorizationException.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Helpers\AcceptHeaders.cs" />
     <Compile Include="Helpers\ApiErrorExtensions.cs" />
+    <Compile Include="Helpers\ApiSiteHelpers.cs" />
     <Compile Include="Helpers\ApiUrls.Authorizations.cs" />
     <Compile Include="Helpers\ExcludeFromPaginationConventionTest.cs" />
     <Compile Include="Helpers\FileSystemHelpers.cs" />
-    <Compile Include="Helpers\HttpClientExtensions.cs" />
+    <Compile Include="Helpers\JsonHelpers.cs" />
     <Compile Include="Helpers\Pagination.cs" />
     <Compile Include="Helpers\PropertyOrField.cs" />
     <Compile Include="Helpers\ReflectionUtils.cs" />
     <Compile Include="Helpers\SerializeNullAttribute.cs" />
     <Compile Include="Helpers\WebHookConfigComparer.cs" />
+    <Compile Include="Http\ApiResponse.cs" />
+    <Compile Include="Http\ApiSiteInfo.cs" />
     <Compile Include="Http\HttpMessageHandlerFactory.cs" />
-    <Compile Include="Http\IApiInfoProvider.cs" />
+    <Compile Include="Http\IApiResponse.cs" />
+    <Compile Include="Http\IApiSiteInfo.cs" />
     <Compile Include="Http\ICredentials.cs" />
-    <Compile Include="Http\ProductHeaderValue.cs" />
+    <Compile Include="Http\ICredentialStore.cs" />
+    <Compile Include="Http\IResponse.cs" />
+    <Compile Include="Http\ISiteInfo.cs" />
     <Compile Include="Http\RequestBody.cs" />
     <Compile Include="Models\Authentication\IUser.cs" />
     <Compile Include="Models\Authentication\User.cs" />
@@ -114,7 +114,6 @@
     <Compile Include="Models\Request\RepositoryTrafficRequest.cs" />
     <Compile Include="Models\Request\Signature.cs" />
     <Compile Include="Models\Request\CreateFileRequest.cs" />
-    <Compile Include="Http\Response.cs" />
     <Compile Include="Models\Request\NotificationsRequest.cs" />
     <Compile Include="Models\Request\RepositoryPermissionRequest.cs" />
     <Compile Include="Models\Request\UserRename.cs" />
@@ -153,7 +152,6 @@
     <Compile Include="Models\Request\OAuthTokenRequest.cs" />
     <Compile Include="Clients\IUserEmailsClient.cs" />
     <Compile Include="Clients\UserEmailsClient.cs" />
-    <Compile Include="Clients\SearchClient.cs" />
     <Compile Include="Clients\ISearchClient.cs" />
     <Compile Include="Helpers\UnixTimeStampExtensions.cs" />
     <Compile Include="Models\Request\BaseSearchRequest.cs" />
@@ -180,11 +178,9 @@
     <Compile Include="Models\Response\SearchUsersResult.cs" />
     <Compile Include="Models\Response\TeamMembership.cs" />
     <Compile Include="Models\Response\Activity.cs" />
-    <Compile Include="Clients\AssigneesClient.cs" />
     <Compile Include="Clients\TeamsClient.cs" />
     <Compile Include="Clients\ITeamsClient.cs" />
     <Compile Include="Clients\IOrganizationMembersClient.cs" />
-    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="Helpers\ParameterAttribute.cs" />
     <Compile Include="Helpers\ReflectionExtensions.cs" />
     <Compile Include="Models\Request\UpdateTeam.cs" />
@@ -196,71 +192,35 @@
     <Compile Include="Models\Response\AccountType.cs" />
     <Compile Include="Models\Response\Verification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Exceptions\TwoFactorChallengeFailedException.cs" />
-    <Compile Include="Exceptions\TwoFactorRequiredException.cs" />
     <Compile Include="Helpers\ApiUrls.cs" />
     <Compile Include="Helpers\AuthorizationExtensions.cs" />
     <Compile Include="Helpers\TwoFactorChallengeResult.cs" />
-    <Compile Include="Http\RateLimit.cs" />
     <Compile Include="Models\Response\Account.cs" />
     <Compile Include="Models\Response\ApiError.cs" />
     <Compile Include="Models\Response\ApiErrorDetail.cs" />
     <Compile Include="Clients\MiscellaneousClient.cs" />
-    <Compile Include="Exceptions\ApiException.cs" />
-    <Compile Include="Helpers\ApiExtensions.cs" />
-    <Compile Include="Clients\ApiClient.cs" />
     <Compile Include="Clients\AuthorizationsClient.cs" />
     <Compile Include="Clients\ApiPagination.cs" />
-    <Compile Include="Authentication\Authenticator.cs" />
-    <Compile Include="Exceptions\ApiValidationException.cs" />
-    <Compile Include="Exceptions\ForbiddenException.cs" />
-    <Compile Include="Exceptions\LoginAttemptsExceededException.cs" />
-    <Compile Include="Exceptions\RateLimitExceededException.cs" />
     <Compile Include="Helpers\CollectionExtensions.cs" />
     <Compile Include="Helpers\UriExtensions.cs" />
-    <Compile Include="Http\ApiConnection.cs" />
-    <Compile Include="Http\IApiConnection.cs" />
-    <Compile Include="Http\IHttpClient.cs" />
-    <Compile Include="Http\JsonHttpPipeline.cs" />
-    <Compile Include="Http\ReadOnlyPagedCollection.cs" />
     <Compile Include="Http\Credentials.cs" />
     <Compile Include="Http\CredentialsExtensions.cs" />
-    <Compile Include="Http\HttpVerb.cs" />
     <Compile Include="Authentication\IAuthenticationHandler.cs" />
-    <Compile Include="Http\ICredentialStore.cs" />
-    <Compile Include="Http\InMemoryCredentialStore.cs" />
     <Compile Include="Helpers\IApiPagination.cs" />
     <Compile Include="Clients\IAuthorizationsClient.cs" />
-    <Compile Include="ITargetProcessClient.cs" />
     <Compile Include="Clients\IMiscellaneousClient.cs" />
     <Compile Include="Helpers\IReadOnlyPagedCollection.cs" />
     <Compile Include="Clients\IRepositoriesClient.cs" />
     <Compile Include="Clients\IUsersClient.cs" />
-    <Compile Include="Http\ApiInfoExtensions.cs" />
-    <Compile Include="Http\ApiInfoParser.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Http\ApiInfo.cs" />
     <Compile Include="Authentication\BasicAuthenticator.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Http\ApiResponse.cs" />
-    <Compile Include="Http\IJsonSerializer.cs" />
-    <Compile Include="Exceptions\AuthorizationException.cs" />
     <Compile Include="Authentication\TokenAuthenticatorBase.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\Ensure.cs" />
     <Compile Include="TargetProcessClient.cs" />
     <Compile Include="Authentication\AuthenticationType.cs" />
-    <Compile Include="Http\Connection.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Http\HttpClientAdapter.cs" />
-    <Compile Include="Http\IConnection.cs" />
-    <Compile Include="Http\IRequest.cs" />
-    <Compile Include="Http\IResponse.cs" />
-    <Compile Include="Http\Request.cs" />
     <Compile Include="Models\Response\Authorization.cs" />
     <Compile Include="Models\Request\AuthorizationUpdate.cs" />
     <Compile Include="Models\Request\NewAuthorization.cs" />
@@ -273,11 +233,10 @@
     <Compile Include="Clients\RepositoriesClient.cs" />
     <Compile Include="Helpers\SerializeAsBase64Attribute.cs" />
     <Compile Include="Clients\UsersClient.cs" />
-    <Compile Include="_configuration\ConfigurationData.cs" />
-    <Compile Include="_configuration\ConfigurationValues.cs" />
-    <Compile Include="_configuration\IConfigurationData.cs" />
-    <Compile Include="_configuration\IRestfulData.cs" />
-    <Compile Include="_configuration\SiteData.cs" />
+    <Compile Include="Configuration\ConfigurationData.cs" />
+    <Compile Include="Configuration\ConfigurationValues.cs" />
+    <Compile Include="Configuration\IConfigurationData.cs" />
+    <Compile Include="Http\SiteInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">

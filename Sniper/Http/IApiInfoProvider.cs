@@ -8,11 +8,13 @@ namespace Sniper.Http
     /// </summary>
     public interface IApiInfoProvider
     {
+#if false
         /// <summary>
         /// Gets the latest API Info - this will be null if no API calls have been made
         /// </summary>
         /// <returns><seealso cref="ApiInfo"/> representing the information returned as part of an Api call</returns>
         [SuppressMessage(Categories.Design, MessageAttributes.UsePropertiesWhereAppropriate)]
         ApiInfo GetLastApiInfo();
+#endif
     }
 }

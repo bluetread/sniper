@@ -4,22 +4,6 @@ using System.Net;
 namespace Sniper.Http
 {
     /// <summary>
-    /// A response from an API call that includes the deserialized object instance.
-    /// </summary>
-    public interface IApiResponse<out T>
-    {
-        /// <summary>
-        /// Object deserialized from the JSON response body.
-        /// </summary>
-        T Body { get; }
-
-        /// <summary>
-        /// The original non-deserialized http response.
-        /// </summary>
-        IResponse HttpResponse { get; }
-    }
-
-    /// <summary>
     /// Represents a generic HTTP response
     /// </summary>
     public interface IResponse
@@ -33,11 +17,6 @@ namespace Sniper.Http
         /// Information about the API.
         /// </summary>
         IReadOnlyDictionary<string, string> Headers { get; }
-
-        /// <summary>
-        /// Information about the API response parsed from the response headers.
-        /// </summary>
-        ApiInfo ApiInfo { get; }
 
         /// <summary>
         /// The response status code.

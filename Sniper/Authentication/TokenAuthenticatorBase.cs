@@ -1,32 +1,25 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
 using Sniper.Http;
-using static Sniper.Authentication.AuthenticationKeys;
+using Sniper.TargetProcess;
 
 namespace Sniper
 {
-    internal abstract class TokenAuthenticatorBase : IAuthenticationHandler
+    internal abstract class TokenAuthenticatorBase : BaseAuthenticator
     {
+        protected virtual AuthenticationTokenType TokenType { get; set; } = AuthenticationTokenType.ServiceToken;
+        protected virtual KeyValuePair<string, string> TokenParameter { get; set; }
 
-        ///<summary>
-        ///Authenticate a request using the Token (AccessToken or ServiceToken) authentication scheme
-        ///</summary>
-        ///<param name="request">The request to authenticate</param>
-        ///<param name="credentials">The credentials to attach to the request</param>
-        ///<remarks>
-        ///See the <a href="https://dev.targetprocess.com/docs/authentication#section-token-authentication">Token (sent in a header) documentation</a> for more information. 
-        ///</remarks>
-        public virtual void Authenticate(IRequest request, ICredentials credentials)
+        protected TokenAuthenticatorBase() {}
+
+        protected TokenAuthenticatorBase(IApiSiteInfo apiSiteInfo, ICredentials credentials) : base(apiSiteInfo, credentials) { }
+
+        public override void Authenticate(IApiSiteInfo apiSiteInfo, ICredentials credentials)
         {
-            Ensure.ArgumentNotNull(nameof(request), request);
+            Ensure.ArgumentNotNull(nameof(apiSiteInfo), apiSiteInfo);
             Ensure.ArgumentNotNull(nameof(credentials), credentials);
-            Ensure.ArgumentNotNull(nameof(credentials.Password), credentials.Password);
 
-            var token = credentials.GetToken();
-
-            if (token != null)
-            {
-                request.Headers[Keys.Authorization] = string.Format(CultureInfo.InvariantCulture, Messages.TokenAuthorizationMessageFormat, token);
-            }
+            base.Authenticate(apiSiteInfo, credentials);
+            TokenParameter = new KeyValuePair<string, string>(QueryParameters.Token, credentials.Password);
         }
     }
 }

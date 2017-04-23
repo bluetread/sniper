@@ -30,13 +30,20 @@ namespace Sniper.Tests.Configuration
         public void ConfigurationFileHasAllValues()
         {
             var configData = ConfigurationData.Instance;
+
             Assert.NotNull(configData);
             Assert.NotNull(configData.SiteInfo);
+            Assert.NotEmpty(configData.SiteInfo.ApiUrl);
             Assert.NotEmpty(configData.SiteInfo.BaseUrl);
             Assert.NotEmpty(configData.SiteInfo.HostName);
-            Assert.NotEmpty(configData.SiteInfo.ApiUrl);
-            Assert.NotEmpty(configData.SiteInfo.UserName);
+            Assert.NotNull(configData.SiteInfo.IsApiIncluded);
+            Assert.NotNull(configData.SiteInfo.IsVersionIncluded);
+            Assert.NotNull(configData.SiteInfo.IsVersionLetterIncluded);
             Assert.True(configData.SiteInfo.Version > 0);
+
+            Assert.NotEmpty(configData.Credentials.Login);
+            Assert.NotEmpty(configData.Credentials.Password);
+            Assert.NotNull(configData.Credentials.AuthenticationType);
         }
     }
 }

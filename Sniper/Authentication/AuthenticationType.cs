@@ -1,4 +1,6 @@
-﻿namespace Sniper
+﻿using System;
+
+namespace Sniper
 {
     /// <summary>
     /// Authentication protocols supported by the TargetProcess API
@@ -22,8 +24,20 @@
         /// </summary>
         Basic,
         /// <summary>
+        /// Service Token (Keyword is "token")
+        /// </summary>
+        ServiceToken,
+        /// <summary>
         /// Service Token
         /// </summary>
-        ServiceToken
+        Token = ServiceToken
+    }
+
+    public static class AuthenticationTypeExtensions
+    {
+        public static AuthenticationType AuthenticationTypeFromString(string type)
+        {
+            return Enum.TryParse(type, true, out AuthenticationType authenticationType) ? authenticationType : AuthenticationType.Cookie;
+        }
     }
 }

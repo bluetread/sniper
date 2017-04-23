@@ -1,13 +1,16 @@
 ﻿{
+  "credentials": {
+    "authenticationType": "Basic", //anonymous (not allowed for TP), basic, cookie, accessToken, serviceToken or token (Service Token)
+    "login": "apiaccess", //login, username, etc.
+    "password": "" // not checked in
+  },
   "siteInfo": {
     "baseUrl": "tpondemand.com",
     "hostName": "adamm",
     "isApiIncluded": true,
     "IsJsonFormat": true, // True = JSON, False = XML (default)
-    "isVersionIncluded": true,
-    "IsVersionLetterIncluded": true,
-    "password": "", // not checked in
-    "username": "apiaccess",
+    "isVersionIncluded": true, //include /n
+    "IsVersionLetterIncluded": true, //include "v" in version. /vn instead of /n (/v1, /v2)
     "version": 1
   }
 }

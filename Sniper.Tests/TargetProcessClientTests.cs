@@ -8,6 +8,7 @@ namespace Sniper.Tests
 {
     public class TargetProcessClientTests
     {
+#if false
         public class TheCtor
         {
             [Fact]
@@ -195,5 +196,6 @@ namespace Sniper.Tests
             //    var temp = connection.Received(1).GetLastApiInfo();
             //}
         }
+#endif
     }
 }

@@ -109,7 +109,7 @@ namespace Sniper.Http
 
 namespace Sniper.TargetProcess
 {
-    using static Sniper.WarningsErrors.MessageSuppression;
+    using static WarningsErrors.MessageSuppression;
 
     public static class Aggregates
     {
@@ -720,6 +720,7 @@ namespace Sniper.WarningsErrors
             public const string NonConstantFieldsShouldNotBeVisible = "CA2211:NonConstantFieldsShouldNotBeVisible";
             public const string NormalizeStringsToUppercase = "CA1308:NormalizeStringsToUppercase";
             public const string ReviewUnusedParameters = "CA1801:ReviewUnusedParameters";
+            public const string SealMethodsThatSatisfyPrivateInterfaces = "CA2119:SealMethodsThatSatisfyPrivateInterfaces";
             public const string SpecifyIFormatProvider = "CA1305:SpecifyIFormatProvider";
             public const string TypeNamesShouldNotMatchNamespaces = "CA1724:TypeNamesShouldNotMatchNamespaces";
             public const string UseGenericsWhereAppropriate = "CA1007:UseGenericsWhereAppropriate";

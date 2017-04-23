@@ -6,8 +6,9 @@ namespace Sniper
     /// <summary>
     /// A Client for the Target Process API. 
     /// </summary>
-    public class TargetProcessClient : ITargetProcessClient
+    public class TargetProcessClient // : ITargetProcessClient
     {
+#if false
         /// <summary>
         /// The base address for the TargetProcess API
         /// </summary>
@@ -82,13 +83,12 @@ namespace Sniper
             Connection = connection;
             var apiConnection = new ApiConnection(connection);
             Search = new SearchClient(apiConnection);
-#if false
+
             Authorization = new AuthorizationsClient(apiConnection);
             Miscellaneous = new MiscellaneousClient(connection);
             Oauth = new OAuthClient(connection);
             Repository = new RepositoriesClient(apiConnection);
             User = new UsersClient(apiConnection);
-#endif
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Sniper
         /// Provides a client connection to make rest requests to HTTP endpoints.
         /// </summary>
         public IConnection Connection { get; }
-#if false
+
         /// <summary>
         /// Access GitHub's Authorization API.
         /// </summary>
@@ -170,7 +170,7 @@ namespace Sniper
         /// Refer to the API documentation for more information: https://developer.github.com/v3/users/ //TODO: Replace with TargetProcess 
         /// </remarks>
         public IUsersClient User { get; }
-#endif
+
 
         /// <summary>
         /// Access GitHub's Search API.
@@ -191,5 +191,6 @@ namespace Sniper
 
             return new Uri(uri, new Uri("/api/v1/", UriKind.Relative)); 
         }
+#endif
     }
 }

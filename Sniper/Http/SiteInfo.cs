@@ -8,6 +8,7 @@ namespace Sniper.Http
         public string BaseUrl { get; set; }
         public string HostName { get; set; }
         public bool IsApiIncluded { get; set; } //include "/api" in route
+        public bool IsJsonFormat { get; set; } // True = JSON, False = XML (default)
         public bool IsVersionIncluded { get; set; } //include version number "/1"
         public bool IsVersionLetterIncluded { get; set; } //include "v", as in "/v1" or "/v2" instead of "/1"
         public int Port { get; set; }

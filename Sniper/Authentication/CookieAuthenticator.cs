@@ -8,7 +8,8 @@ namespace Sniper
         protected CookieAuthenticator() {}
 
         protected CookieAuthenticator(IApiSiteInfo apiSiteInfo, ICredentials credentials) : base(apiSiteInfo, credentials) { }
-
+        
+#if false
         ///<summary>
         ///Authenticate a request using cookies. This should work as long as
         ///you are already logged into a TargetProcess account.
@@ -22,5 +23,6 @@ namespace Sniper
         {
             // Do nothing
         }
+#endif
     }
 }

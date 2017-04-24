@@ -1,5 +1,4 @@
-﻿using System.Net.Http;
-using Xunit;
+﻿using Xunit;
 
 namespace Sniper.Tests.Authentication
 {
@@ -12,10 +11,11 @@ namespace Sniper.Tests.Authentication
             {
                 var authenticator = new BasicAuthenticator();
                 authenticator.ApiSiteInfo.Route = "UserStories";
-                authenticator.ApiSiteInfo.Parameters.Add("format","json");
-                authenticator.ApiSiteInfo.Method = HttpMethod.Get;
+                var result = ApiSiteHelpers.GetSiteData(authenticator);
+                var error = result.HttpResponse.IsError;
+                var data = result.Body;
 
-                authenticator.Authenticate(authenticator.ApiSiteInfo, authenticator.Credentials);
+                //authenticator.Authenticate(authenticator.ApiSiteInfo, authenticator.Credentials);
             }
 
 #if false

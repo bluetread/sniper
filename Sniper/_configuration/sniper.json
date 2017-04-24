@@ -8,7 +8,7 @@
     "baseUrl": "tpondemand.com",
     "hostName": "adamm",
     "isApiIncluded": true,
-    "IsJsonFormat": true, // True = JSON, False = XML (default)
+    "isJsonFormat": true, // True = JSON, False = XML (default)
     "isVersionIncluded": true, //include /n
     "IsVersionLetterIncluded": true, //include "v" in version. /vn instead of /n (/v1, /v2)
     "version": 1

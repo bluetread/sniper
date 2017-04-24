@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -112,6 +114,13 @@ namespace Sniper
         internal static bool IsNameWithOwnerFormat(this string input)
         {
             return _nameWithOwner.IsMatch(input);
+        }
+
+        internal static IReadOnlyDictionary<string, string> GetHeaders(this WebHeaderCollection webHeaderCollection)
+        {
+            Ensure.ArgumentNotNull(nameof(webHeaderCollection), webHeaderCollection);
+            var dict = webHeaderCollection.AllKeys.ToDictionary(λ => λ, λ => webHeaderCollection[λ]);
+            return new ReadOnlyDictionary<string, string>(dict);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Sniper.Http
     {
         HttpMethod Method { get; set; }
         Dictionary<string, string> Parameters { get;  }
-        string Route { get; set; }
+        string Route { get; set; } 
 
         //object Body { get; set; }
         //Dictionary<string, string> Headers { get; }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Net;
-using System.Text;
+﻿using System.Collections.Generic;
 using Sniper.Http;
 using ICredentials = Sniper.Http.ICredentials;
 
@@ -10,11 +6,16 @@ namespace Sniper
 {
     internal class BasicAuthenticator : BaseAuthenticator
     {
+        protected override Dictionary<string, string> DefaultQueryParameters => new Dictionary<string, string>
+        {
+            { ResponseFormatParameter.Key, ResponseFormatParameter.Value } 
+        };
 
         public BasicAuthenticator() {}
 
         public BasicAuthenticator(IApiSiteInfo apiSiteInfo, ICredentials credentials) : base(apiSiteInfo, credentials) {}
 
+#if false
         ///<summary>
         ///Authenticate a request using the basic access authentication scheme
         ///</summary>
@@ -56,5 +57,6 @@ namespace Sniper
                 }
             }
         }
+#endif
     }
 }

@@ -2,11 +2,11 @@
 
 namespace Sniper
 {
-    internal interface IAuthenticationHandler
+    public interface IAuthenticationHandler
     {
         IApiSiteInfo ApiSiteInfo { get; }
         ICredentials Credentials { get; }
 
-        void Authenticate(IApiSiteInfo apiSiteInfo, ICredentials credentials);
+        //void Authenticate(IApiSiteInfo apiSiteInfo, ICredentials credentials);
     }
 }

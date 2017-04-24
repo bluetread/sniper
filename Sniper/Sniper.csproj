@@ -93,6 +93,8 @@
     <Compile Include="Helpers\ReflectionUtils.cs" />
     <Compile Include="Helpers\SerializeNullAttribute.cs" />
     <Compile Include="Helpers\WebHookConfigComparer.cs" />
+    <Compile Include="Http\ApiInfo.cs" />
+    <Compile Include="Http\ApiInfoParser.cs" />
     <Compile Include="Http\ApiResponse.cs" />
     <Compile Include="Http\ApiSiteInfo.cs" />
     <Compile Include="Http\HttpMessageHandlerFactory.cs" />
@@ -100,9 +102,10 @@
     <Compile Include="Http\IApiSiteInfo.cs" />
     <Compile Include="Http\ICredentials.cs" />
     <Compile Include="Http\ICredentialStore.cs" />
-    <Compile Include="Http\IResponse.cs" />
+    <Compile Include="Http\IHttpResponse.cs" />
     <Compile Include="Http\ISiteInfo.cs" />
     <Compile Include="Http\RequestBody.cs" />
+    <Compile Include="Http\HttpResponse.cs" />
     <Compile Include="Models\Authentication\IUser.cs" />
     <Compile Include="Models\Authentication\User.cs" />
     <Compile Include="Models\Request\ApiOptions.cs" />

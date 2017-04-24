@@ -10,6 +10,6 @@
         /// <summary>
         /// The original non-deserialized http response.
         /// </summary>
-        IResponse HttpResponse { get; }
+        IHttpResponse HttpResponse { get; }
     }
 }

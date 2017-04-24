@@ -723,6 +723,7 @@ namespace Sniper.WarningsErrors
             public const string SealMethodsThatSatisfyPrivateInterfaces = "CA2119:SealMethodsThatSatisfyPrivateInterfaces";
             public const string SpecifyIFormatProvider = "CA1305:SpecifyIFormatProvider";
             public const string TypeNamesShouldNotMatchNamespaces = "CA1724:TypeNamesShouldNotMatchNamespaces";
+            public const string UriReturnValuesShouldNotBeStrings = "CA1055:UriReturnValuesShouldNotBeStrings";
             public const string UseGenericsWhereAppropriate = "CA1007:UseGenericsWhereAppropriate";
             public const string UsePropertiesWhereAppropriate = "CA1024:UsePropertiesWhereAppropriate";
         }

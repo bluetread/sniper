@@ -10,7 +10,7 @@
         /// Create a ApiResponse from an existing request
         /// </summary>
         /// <param name="response">An existing request to wrap</param>
-        public ApiResponse(IResponse response) : this(response, GetBodyAsObject(response))
+        public ApiResponse(IHttpResponse response) : this(response, GetBodyAsObject(response))
         {
         }
 
@@ -19,7 +19,7 @@
         /// </summary>
         /// <param name="response">An existing request to wrap</param>
         /// <param name="bodyAsObject">The payload from an existing request</param>
-        public ApiResponse(IResponse response, T bodyAsObject)
+        public ApiResponse(IHttpResponse response, T bodyAsObject)
         {
             Ensure.ArgumentNotNull(nameof(response), response);
 
@@ -35,9 +35,9 @@
         /// <summary>
         /// The context of the response
         /// </summary>
-        public IResponse HttpResponse { get; }
+        public IHttpResponse HttpResponse { get; }
 
-        private static T GetBodyAsObject(IResponse response)
+        private static T GetBodyAsObject(IHttpResponse response)
         {
             var body = response.Body;
             if (body is T) return (T)body;

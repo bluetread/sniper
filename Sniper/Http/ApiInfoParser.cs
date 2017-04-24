@@ -48,7 +48,7 @@ namespace Sniper.Http
                 }
             }
 
-            return new ApiInfo(httpLinks, oauthScopes, acceptedOauthScopes, new RateLimit(responseHeaders));
+            return new ApiInfo(httpLinks, oauthScopes, acceptedOauthScopes);
         }
     }
 }

@@ -569,6 +569,7 @@ namespace Sniper.WarningsErrors
             public const string IdentifiersShouldNotHaveIncorrectSuffix = "CA1711:IdentifiersShouldNotHaveIncorrectSuffix";
             public const string IdentifiersShouldNotMatchKeywords = "CA1716:IdentifiersShouldNotMatchKeywords";
             public const string ImplementStandardExceptionConstructors = "CA1032:ImplementStandardExceptionConstructors";
+            public const string MarkEnumsWithFlags = "CA1027:MarkEnumsWithFlags";
             public const string NonConstantFieldsShouldNotBeVisible = "CA2211:NonConstantFieldsShouldNotBeVisible";
             public const string NormalizeStringsToUppercase = "CA1308:NormalizeStringsToUppercase";
             public const string ReviewUnusedParameters = "CA1801:ReviewUnusedParameters";

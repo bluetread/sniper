@@ -1,10 +1,12 @@
 ﻿using System;
-
+using System.Diagnostics.CodeAnalysis;
+using static Sniper.WarningsErrors.MessageSuppression; 
 namespace Sniper
 {
     /// <summary>
     /// Authentication protocols supported by the TargetProcess API
     /// </summary>
+    [SuppressMessage(Categories.Design, MessageAttributes.MarkEnumsWithFlags)]
     public enum AuthenticationType
     {
         /// <summary>

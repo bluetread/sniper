@@ -197,7 +197,6 @@
     <Compile Include="Models\Response\SearchCode.cs" />
     <Compile Include="Models\Request\Permission.cs" />
     <Compile Include="Models\Response\Team.cs" />
-    <Compile Include="Models\Common\Committer.cs" />
     <Compile Include="Models\Response\AccountType.cs" />
     <Compile Include="Models\Response\Verification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -266,6 +265,9 @@
   <ItemGroup>
     <Content Include="sniper.ico" />
     <Content Include="Sniper.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\Common\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

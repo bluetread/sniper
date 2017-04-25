@@ -83,6 +83,11 @@
     <Compile Include="Clients\UserAdministrationClient.cs" />
     <Compile Include="Clients\RepositoryContentsClient.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Contracts\IHasCreateDate.cs" />
+    <Compile Include="Contracts\IHasDate.cs" />
+    <Compile Include="Contracts\IHasDescription.cs" />
+    <Compile Include="Contracts\IHasId.cs" />
+    <Compile Include="Contracts\IHasWorkEffort.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\ApiErrorExtensions.cs" />
     <Compile Include="Helpers\ApiSiteHelpers.cs" />
@@ -114,6 +119,7 @@
     <Compile Include="ITargetProcessClient.cs" />
     <Compile Include="Models\Authentication\IUser.cs" />
     <Compile Include="Models\Authentication\User.cs" />
+    <Compile Include="Models\Common\Time.cs" />
     <Compile Include="Models\Request\ApiOptions.cs" />
     <Compile Include="Models\Request\AssigneesUpdate.cs" />
     <Compile Include="Models\Request\NewImpersonationToken.cs" />
@@ -266,9 +272,7 @@
     <Content Include="sniper.ico" />
     <Content Include="Sniper.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -561,6 +561,7 @@ namespace Sniper.WarningsErrors
             public const string AvoidExcessiveComplexity = "CA1502:AvoidExcessiveComplexity";
             public const string AvoidUncalledPrivateCode = "CA1811:AvoidUncalledPrivateCode";
             public const string CollectionPropertiesShouldBeReadOnly = "CA2227:CollectionPropertiesShouldBeReadOnly";
+            public const string CompoundWordsShouldBeCasedCorrectly = "CA1702:CompoundWordsShouldBeCasedCorrectly";
             public const string DisposeObjectsBeforeLosingScope = "CA2000:DisposeObjectsBeforeLosingScope";
             public const string DoNotCatchGeneralExceptionTypes = "CA1031:DoNotCatchGeneralExceptionTypes";
             public const string DoNotDeclareReadOnlyMutableReferenceTypes = "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes";
@@ -589,6 +590,16 @@ namespace Sniper.WarningsErrors
             public const string ObjectIsImmutable = "This class/object is immutable";
             public const string SpecificToTargetProcess = "These exceptions are specific to the Target Process API and not general purpose exceptions";
             public const string LowercaseValueExpected = "The API expects lowercase.";
+        }
+
+        internal static class Scopes
+        {
+            public const string Member = "member";
+            public const string Module = "module";
+            public const string Method = "method";
+            public const string Namespace = "namespace";
+            public const string Resource = "resource";
+            public const string Type = "type";
         }
     }
 

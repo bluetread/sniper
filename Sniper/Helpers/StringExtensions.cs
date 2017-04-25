@@ -63,6 +63,13 @@ namespace Sniper
         }
 
         [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase)]
+        public static string ToLowerCase(this string input)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(nameof(input), input);
+            return input.ToLowerInvariant();
+        }
+
+        [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase)]
         public static string ToRubyCase(this string propertyName)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(propertyName), propertyName);

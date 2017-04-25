@@ -35,8 +35,9 @@ namespace Sniper.Http
         HttpStatusCode StatusCode { get; }
 
         /// <summary>
-        /// Optional additional information
+        /// Optional exception information
         /// </summary>
-        Dictionary<Type, object> AdditionalInformation { get; }
+        Exception Exception { get; }
+
     }
 }

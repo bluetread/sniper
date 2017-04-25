@@ -1,33 +1,70 @@
-﻿using System.Collections.Generic;
+﻿using Sniper.TargetProcess.Routes;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
+using Sniper.Configuration;
+using static Sniper.Http.HttpResponseFormats;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
 {
-    public class ApiSiteInfo : SiteInfo, IApiSiteInfo
+    public class ApiSiteInfo : IApiSiteInfo
     {
-        public HttpMethod Method { get; set; } 
-        public Dictionary<string, string> Parameters { get; } 
-        public string Route { get; set; }
-
-        public ApiSiteInfo(ISiteInfo siteInfo) : this(siteInfo, null) {}
-        public ApiSiteInfo(ISiteInfo siteInfo, string route) : this(siteInfo, route, new Dictionary<string, string>()) {}
-        public ApiSiteInfo(ISiteInfo siteInfo, string route, Dictionary<string, string> parameters) : this(siteInfo, route, parameters, HttpMethod.Get) {}
-
-        public ApiSiteInfo(ISiteInfo siteInfo, string route, Dictionary<string, string> parameters, HttpMethod method)
+        public HttpMethod Method { get; set; } = HttpMethod.Get;
+        [SuppressMessage(Categories.Usage, MessageAttributes.CollectionPropertiesShouldBeReadOnly)]
+        public IDictionary<string, string> Parameters { get; set; } = new Dictionary<string, string>();
+        private ResponseFormat _responseFormat;
+        public ResponseFormat ResponseFormat
         {
-            Ensure.ArgumentNotNull(nameof(siteInfo), siteInfo);
-            Ensure.ArgumentNotNull(nameof(method), method);
-
-            BaseUrl = siteInfo.BaseUrl;
-            HostName = siteInfo.HostName;
-            IsApiIncluded = siteInfo.IsApiIncluded;
-            IsVersionIncluded = siteInfo.IsVersionIncluded;
-            IsVersionLetterIncluded = siteInfo.IsVersionLetterIncluded;
-            Method = method;
-            Parameters = parameters;
-            Port = siteInfo.Port;
-            Route = route;
-            Version = siteInfo.Version;
+            get => _responseFormat;
+            set
+            {
+                _responseFormat = value;
+                Parameters[ResponseFormatKeys.Format] = (value.ToLowerCase());
+            }
         }
+
+        public string Route { get; }
+
+        [SuppressMessage(Categories.Usage, MessageAttributes.CollectionPropertiesShouldBeReadOnly)]
+        public ICollection<string> Includes { get; set; } = new Collection<string>();
+        [SuppressMessage(Categories.Usage, MessageAttributes.CollectionPropertiesShouldBeReadOnly)]
+        public ICollection<string> Excludes { get; set; } = new Collection<string>();
+
+        public ApiSiteInfo() {}
+
+        private ApiSiteInfo(string route)
+        {
+            Ensure.ArgumentNotNull(nameof(route), route);
+            Route = route;
+        }
+
+        private ApiSiteInfo(string route, HttpMethod httpMethod) : this(route)
+        {
+            Ensure.ArgumentNotNull(nameof(httpMethod), httpMethod);
+            Method = httpMethod;
+        }
+
+        private ApiSiteInfo(string route, ResponseFormat responseFormat) : this(route)
+        {
+            Ensure.ArgumentNotNull(nameof(responseFormat), responseFormat);
+            ResponseFormat = responseFormat;
+        }
+
+        private ApiSiteInfo(string route, bool useConfigFormat) : this(route)
+        {
+            ResponseFormat = useConfigFormat ? ConfigurationData.Instance.SiteInfo.DefaultResponseFormat : ResponseFormat.Default;
+        }
+
+        public ApiSiteInfo(TargetProcessRoutes.Route route) : this(route.ToString()) {}
+        public ApiSiteInfo(TargetProcessRoutes.Route route, ResponseFormat responseFormat) : this(route.ToString(), responseFormat) {}
+        public ApiSiteInfo(TargetProcessRoutes.Route route, bool useConfigFormat) : this(route.ToString(), useConfigFormat) {}
+        public ApiSiteInfo(TargetProcessRoutes.Route route, HttpMethod httpMethod) : this(route.ToString(), httpMethod) { }
+
+        public ApiSiteInfo(TargetProcessHistoryRoutes.HistoryRoute route) : this(route.ToString()) { }
+        public ApiSiteInfo(TargetProcessHistoryRoutes.HistoryRoute route, ResponseFormat responseFormat) : this(route.ToString(), responseFormat) { }
+        public ApiSiteInfo(TargetProcessHistoryRoutes.HistoryRoute route, bool useConfigFormat) : this(route.ToString(), useConfigFormat) { }
+        public ApiSiteInfo(TargetProcessHistoryRoutes.HistoryRoute route, HttpMethod httpMethod) : this(route.ToString(), httpMethod) {}
     }
 }

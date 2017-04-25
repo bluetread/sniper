@@ -7,24 +7,15 @@ namespace Sniper
     internal abstract class TokenAuthenticatorBase : BaseAuthenticator
     {
         protected virtual AuthenticationTokenType TokenType { get; set; } = AuthenticationTokenType.ServiceToken;
-        protected virtual KeyValuePair<string, string> TokenParameter { get;  }
+        public override Dictionary<string, string> AuthenticationParameters => new Dictionary<string, string> { { AuthenticationTokenParameters.ServiceToken, Credentials.Password } };
 
         protected TokenAuthenticatorBase() {}
 
-        protected TokenAuthenticatorBase(IApiSiteInfo apiSiteInfo, ICredentials credentials) : base(apiSiteInfo, credentials)
+        protected TokenAuthenticatorBase(string token)
         {
-            TokenParameter = new KeyValuePair<string, string>(QueryParameters.Token, credentials.Password);
+            Credentials.Password = token;
         }
 
-#if false
-        public override void Authenticate(IApiSiteInfo apiSiteInfo, ICredentials credentials)
-        {
-            Ensure.ArgumentNotNull(nameof(apiSiteInfo), apiSiteInfo);
-            Ensure.ArgumentNotNull(nameof(credentials), credentials);
-
-            base.Authenticate(apiSiteInfo, credentials);
-            TokenParameter = new KeyValuePair<string, string>(QueryParameters.Token, credentials.Password);
-        }
-#endif
+        protected TokenAuthenticatorBase(ISiteInfo siteInfo, ICredentials credentials) : base(siteInfo, credentials) {}
     }
 }

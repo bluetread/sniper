@@ -1,4 +1,8 @@
-﻿using Xunit;
+﻿using System.Net;
+using Sniper.Configuration;
+using Sniper.Http;
+using Sniper.TargetProcess.Routes;
+using Xunit;
 
 namespace Sniper.Tests.Authentication
 {
@@ -6,19 +10,52 @@ namespace Sniper.Tests.Authentication
     {
         public class TheAuthenticateMethod
         {
+
             [Fact]
             public void VerifyBasicAuthenticationInvalidPassword()
             {
-                var authenticator = new BasicAuthenticator();
-                authenticator.ApiSiteInfo.Route = "UserStories";
-                var result = ApiSiteHelpers.GetSiteData(authenticator);
-                var error = result.HttpResponse.IsError;
-                var data = result.Body;
+                var configData = ConfigurationData.Instance;
+                configData.Credentials.Password = "This is not the correct password";
+
+                var client = new TargetProcessClient(new BasicAuthenticator(configData.SiteInfo, configData.Credentials))
+                {
+                    ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories, true) 
+                };
+                var data = client.GetSiteData();
+                var error = data.HttpResponse.IsError;
+                Assert.True(error);
+                Assert.True(data.HttpResponse.StatusCode == HttpStatusCode.Unauthorized);
+            }
+
+            [Fact]
+            public void VerifyBasicAuthenticationValidPasswordFromConfigurationFile()
+            {
+                var client = new TargetProcessClient(new BasicAuthenticator())
+                {
+                    ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories, true)
+                };
+                var data = client.GetSiteData();
+                var error = data.HttpResponse.IsError;
+                Assert.False(error);
+                Assert.True(data.HttpResponse.StatusCode == HttpStatusCode.OK);
+            }
+#if false
+             [Fact]
+            public void VerifyBasicAuthenticationInvalidPassword()
+            {
+                var client = new TargetProcessClient(new BasicAuthenticator())
+                {
+                    ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories, true) 
+                };
+                var data = client.GetSiteData();
+                //authenticator.SiteInfo.Route = "UserStories";
+                //var result = ApiSiteHelpers.GetSiteData(authenticator);
+                var error = data.HttpResponse.IsError;
+                //var data = result.Body;
 
                 //authenticator.Authenticate(authenticator.ApiSiteInfo, authenticator.Credentials);
             }
 
-#if false
             [Fact]
             public void SetsRequestHeaderForToken()
             {

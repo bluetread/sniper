@@ -10,27 +10,31 @@ namespace Sniper
         /// <summary>
         /// Access Token
         /// </summary>
-        AccessToken,
+        AccessToken = 4,
         /// <summary>
         /// Anonymous Authentication (Not Allowed)
         /// </summary>
-        Anonymous,
+        Anonymous = 2,
         /// <summary>
         /// Cookie Authentication
         /// </summary>
-        Cookie,
+        Cookie = 32,
         /// <summary>
         /// User name &amp; password
         /// </summary>
-        Basic,
+        Basic = 16,
         /// <summary>
         /// Service Token (Keyword is "token")
         /// </summary>
-        ServiceToken,
+        ServiceToken = 8,
         /// <summary>
         /// Service Token
         /// </summary>
-        Token = ServiceToken
+        Token = ServiceToken,
+        /// <summary>
+        /// Uknown/None/Default/Use config value
+        /// </summary>
+        Unknown = 0
     }
 
     public static class AuthenticationTypeExtensions

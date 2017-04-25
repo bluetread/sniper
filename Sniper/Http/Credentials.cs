@@ -11,7 +11,7 @@ namespace Sniper.Http
 
         public AuthenticationType AuthenticationType { get; }
         public string Login { get; }
-        public string Password { get; }
+        public string Password { get; set; }
 
         public Credentials(AuthenticationType authenticationType) : this(authenticationType, null, null) {}
 

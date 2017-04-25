@@ -71,7 +71,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\AccessTokenAuthenticator.cs" />
+    <Compile Include="Authentication\AnonymousAuthenticator.cs" />
     <Compile Include="Authentication\AuthenticationTokenType.cs" />
+    <Compile Include="Authentication\AuthenticatorFactory.cs" />
     <Compile Include="Authentication\BaseAuthenticator.cs" />
     <Compile Include="Authentication\CookieAuthenticator.cs" />
     <Compile Include="Authentication\ServiceTokenAuthenticator.cs" />
@@ -98,6 +100,8 @@
     <Compile Include="Http\ApiResponse.cs" />
     <Compile Include="Http\ApiSiteInfo.cs" />
     <Compile Include="Http\HttpMessageHandlerFactory.cs" />
+    <Compile Include="Http\HttpProtocols.cs" />
+    <Compile Include="Http\HttpResponseFormats.cs" />
     <Compile Include="Http\IApiResponse.cs" />
     <Compile Include="Http\IApiSiteInfo.cs" />
     <Compile Include="Http\ICredentials.cs" />
@@ -106,6 +110,8 @@
     <Compile Include="Http\ISiteInfo.cs" />
     <Compile Include="Http\RequestBody.cs" />
     <Compile Include="Http\HttpResponse.cs" />
+    <Compile Include="Http\StatusCodes.cs" />
+    <Compile Include="ITargetProcessClient.cs" />
     <Compile Include="Models\Authentication\IUser.cs" />
     <Compile Include="Models\Authentication\User.cs" />
     <Compile Include="Models\Request\ApiOptions.cs" />
@@ -240,6 +246,13 @@
     <Compile Include="Configuration\ConfigurationValues.cs" />
     <Compile Include="Configuration\IConfigurationData.cs" />
     <Compile Include="Http\SiteInfo.cs" />
+    <Compile Include="TargetProcess\Api\Aggregates.cs" />
+    <Compile Include="TargetProcess\Api\Filtering.cs" />
+    <Compile Include="TargetProcess\Api\Ordering.cs" />
+    <Compile Include="TargetProcess\Helpers\TargetProcessHelpers.cs" />
+    <Compile Include="TargetProcess\Resources\TargetProcessResources.cs" />
+    <Compile Include="TargetProcess\Routes\TargetProcessHistoryRoutes.cs" />
+    <Compile Include="TargetProcess\Routes\TargetProcessRoutes.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="..\CustomDictionary.xml">

@@ -9,11 +9,20 @@ namespace Sniper.Http
     /// </summary>
     internal class HttpResponse : IHttpResponse
     {
-        public HttpResponse() : this(new WebHeaderCollection()) {}
-      
+        public HttpResponse() : this(HttpStatusCode.InternalServerError) {}
+
+        public HttpResponse(Exception exception = null) : this(HttpStatusCode.InternalServerError, exception) { }
+
         public HttpResponse(WebHeaderCollection responseHeaders)
         {
             ResponseHeaders = responseHeaders?.GetHeaders();
+        }
+
+        public HttpResponse(HttpStatusCode statusCode, Exception exception = null)
+        {
+            Ensure.ArgumentNotNull(nameof(statusCode), statusCode);
+            StatusCode = statusCode;
+            Exception = exception;
         }
 
         public HttpResponse(HttpStatusCode statusCode, WebHeaderCollection responseHeaders) : this(responseHeaders)
@@ -44,11 +53,14 @@ namespace Sniper.Http
         /// The content type of the response.
         /// </summary>
         public string ContentType { get; }
-
         /// <summary>
         /// Quick way to identify that something went wrong.
         /// </summary>
         public bool IsError { get; set; } = true; // Default to True unless proven otherwise
+        /// <summary>
+        /// Optional Exception info if an error occurred
+        /// </summary>
+        public Exception Exception { get; set; }
         /// <summary>
         /// Information about the Response Headers.
         /// </summary>

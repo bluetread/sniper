@@ -84,9 +84,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\AccessTokenAuthenticationTests.cs" />
+    <Compile Include="Authentication\AnonymousAuthenticationTests.cs" />
+    <Compile Include="Authentication\CookieAuthenticationTests.cs" />
     <Compile Include="Authentication\CredentialsTests.cs" />
+    <Compile Include="Authentication\ServiceTokenAuthenticationTests.cs" />
     <Compile Include="Configuration\ConfigurationTests.cs" />
-    <Compile Include="Fixtures\AuthenticationFixture.cs" />
     <Compile Include="Helpers\NSubstituteExtensions.cs" />
     <Compile Include="Helpers\ReflectionExtensions.cs" />
     <Compile Include="Helpers\UnixTimestampExtensionsTests.cs" />

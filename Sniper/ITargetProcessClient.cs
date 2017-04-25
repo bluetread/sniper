@@ -1,26 +1,15 @@
-﻿using Sniper.Http;
+﻿using System.Collections.Generic;
+using Sniper.Http;
 
 namespace Sniper
 {
     /// <summary>
-    /// A Client for the TargetProcess API. You can read more about the api here: http://developer.github.com.   //TODO: Replace with TargetProcess if this is usable
+    /// A Client for the TargetProcess API. You can read more about the api here: https://dev.targetprocess.com/docs/rest-getting-started.   
     /// </summary>
-    public interface ITargetProcessClient // : IApiInfoProvider
+    public interface ITargetProcessClient 
     {
-#if false
-        /// <summary>
-        /// Provides a client connection to make rest requests to HTTP endpoints.
-        /// </summary>
-        IConnection Connection { get; }
-
-
-        /// <summary>
-        /// Access GitHub's Search API.
-        /// </summary>
-        /// <remarks>
-        /// Refer to the API documentation for more information: https://developer.github.com/v3/search/   //TODO: Replace with TargetProcess if this is usable
-        /// </remarks>
-        ISearchClient Search { get; }
-#endif
+        //KeyValuePair<string, string> ResponseFormatParameter { get; }
+        IDictionary<string, string> DefaultQueryParameters { get; }
+        IApiSiteInfo ApiSiteInfo { get; }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using NSubstitute;
-using Sniper.Http;
-using Xunit;
-
-namespace Sniper.Tests
+﻿namespace Sniper.Tests
 {
     public class TargetProcessClientTests
     {

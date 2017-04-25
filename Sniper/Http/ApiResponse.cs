@@ -10,9 +10,7 @@
         /// Create a ApiResponse from an existing request
         /// </summary>
         /// <param name="response">An existing request to wrap</param>
-        public ApiResponse(IHttpResponse response) : this(response, GetBodyAsObject(response))
-        {
-        }
+        public ApiResponse(IHttpResponse response) : this(response, GetBodyAsObject(response)) {}
 
         /// <summary>
         /// Create a ApiResponse from an existing request and object

@@ -1,13 +1,85 @@
-﻿using System;
-using Sniper.Http;
+﻿using Sniper.Http;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Net;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {
     /// <summary>
     /// A Client for the Target Process API. 
     /// </summary>
-    public class TargetProcessClient // : ITargetProcessClient
+    public class TargetProcessClient  : ITargetProcessClient
     {
+        public IDictionary<string, string> DefaultQueryParameters { get; } = new Dictionary<string, string>();
+        public IAuthenticationHandler AuthenticationHandler { get; } = new AnonymousAuthenticator();
+        public IApiSiteInfo ApiSiteInfo { get; set; } = new ApiSiteInfo();
+
+        public TargetProcessClient() {}
+
+        public TargetProcessClient(IAuthenticationHandler authenticationHandler) : this()
+        {
+            Ensure.ArgumentNotNull(nameof(authenticationHandler), authenticationHandler);
+            AuthenticationHandler = authenticationHandler;
+        }
+
+        public TargetProcessClient(IAuthenticationHandler authenticationHandler, IApiSiteInfo apiSiteInfo) : this(authenticationHandler)
+        {
+            Ensure.ArgumentNotNull(nameof(apiSiteInfo), apiSiteInfo);
+        }
+
+        [SuppressMessage(Categories.Design, MessageAttributes.DoNotCatchGeneralExceptionTypes)]
+        [SuppressMessage(Categories.Design, MessageAttributes.UsePropertiesWhereAppropriate)]
+        [SuppressMessage(Categories.Performance, "CA1804:RemoveUnusedLocals")]
+        public IApiResponse<string> GetSiteData()
+        {
+            try
+            {
+                var fullPath = ApiSiteHelpers.CombineUrlPaths(AuthenticationHandler.SiteInfo.ApiUrl, ApiSiteInfo.Route);
+                var excludeList = ApiSiteInfo.Excludes;
+                var includeList = ApiSiteInfo.Includes;
+                var dictList = new[] { DefaultQueryParameters, AuthenticationHandler.AuthenticationParameters, ApiSiteInfo.Parameters };
+                
+                var queryParameters = GetParameters(dictList);
+
+                var fullPathAndQueryParameters = fullPath + queryParameters;
+
+                using (var client = new WebClient())
+                {
+                    client.BaseAddress = fullPathAndQueryParameters; 
+                    client.Credentials = AuthenticationHandler.NetworkCredentials;
+                    var result = client.DownloadString(client.BaseAddress);
+                    //TODO: content type
+                    return new ApiResponse<string>(new HttpResponse(HttpStatusCode.OK, result, client.ResponseHeaders, string.Empty) { IsError = false });
+                }
+
+            }
+            catch (WebException webException)
+            {
+                var code = (webException.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
+                return new ApiResponse<string>(new HttpResponse(code, webException));
+            }
+            catch (Exception e)
+            {
+                return new ApiResponse<string>(new HttpResponse(e));
+            }
+        }
+
+        private static string GetParameters(IDictionary<string, string>[] orderedList)
+        {
+            var finalList = new Dictionary<string, string>();
+            foreach (var dict in orderedList)
+            {
+                //Add (or replace) entries into one combined dictionary
+                foreach (var kvp in dict)
+                {
+                    finalList[kvp.Key] = kvp.Value;
+                }
+            }
+            return finalList.ToQueryString();
+        }
+
 #if false
         /// <summary>
         /// The base address for the TargetProcess API

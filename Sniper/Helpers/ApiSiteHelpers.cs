@@ -2,80 +2,73 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
-using static Sniper.WarningsErrors.MessageSuppression;
 using System.Linq;
-using Sniper.Http;
-using Sniper.TargetProcess;
 using System.Net;
 using System.Text;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {
     public static class ApiSiteHelpers
     {
-        public static string GetRouteByResourceName(string entityName)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(nameof(entityName), entityName);
+      
 
-            return TargetProcessResources.ResourceRoutes.TryGetValue(entityName, out string result) ? result : null;
-        }
+        //public static IApiResponse<string> GetSiteData(IAuthenticationHandler authenticationHandler)
+        //{
+        //    Ensure.ArgumentNotNull(nameof(authenticationHandler), authenticationHandler);
+        //    Ensure.ArgumentNotNull(nameof(authenticationHandler.SiteInfo), authenticationHandler.SiteInfo);
+        //    Ensure.ArgumentNotNull(nameof(authenticationHandler.Credentials), authenticationHandler.Credentials);
 
-        public static IApiResponse<string> GetSiteData(IAuthenticationHandler authenticationHandler)
-        {
-            Ensure.ArgumentNotNull(nameof(authenticationHandler), authenticationHandler);
-            Ensure.ArgumentNotNull(nameof(authenticationHandler.ApiSiteInfo), authenticationHandler.ApiSiteInfo);
-            Ensure.ArgumentNotNull(nameof(authenticationHandler.Credentials), authenticationHandler.Credentials);
+        //    return GetSiteData(authenticationHandler.SiteInfo, authenticationHandler.Credentials);
 
-            return GetSiteData(authenticationHandler.ApiSiteInfo, authenticationHandler.Credentials);
+        //}
 
-        }
+        //public static IApiResponse<string> GetSiteData(IApiSiteInfo apiSiteInfo, Http.ICredentials credentials)
+        //{
+        //    return GetSiteData(apiSiteInfo, credentials, Encoding.UTF8);
+        //}
 
-        public static IApiResponse<string> GetSiteData(IApiSiteInfo apiSiteInfo, Http.ICredentials credentials)
-        {
-            return GetSiteData(apiSiteInfo, credentials, Encoding.UTF8);
-        }
+        ////TODO: rework this so the code is not dependent on a switch/conditional based on authentication type
+        //public static IApiResponse<string> GetSiteData(IApiSiteInfo apiSiteInfo, Http.ICredentials credentials, Encoding encoding)
+        //{
+        //    Ensure.ArgumentNotNull(nameof(apiSiteInfo), apiSiteInfo);
+        //    Ensure.ArgumentNotNull(nameof(credentials), credentials);
+        //    Ensure.ArgumentNotNull(nameof(encoding), encoding);
+        //    Ensure.ArgumentNotNull(nameof(apiSiteInfo.Route), apiSiteInfo.Route);
 
-        //TODO: rework this so the code is not dependent on a switch/conditional based on authentication type
-        public static IApiResponse<string> GetSiteData(IApiSiteInfo apiSiteInfo, Http.ICredentials credentials, Encoding encoding)
-        {
-            Ensure.ArgumentNotNull(nameof(apiSiteInfo), apiSiteInfo);
-            Ensure.ArgumentNotNull(nameof(credentials), credentials);
-            Ensure.ArgumentNotNull(nameof(encoding), encoding);
-            Ensure.ArgumentNotNull(nameof(apiSiteInfo.Route), apiSiteInfo.Route);
+        //    var fullPath = CombineUrlPaths(apiSiteInfo.ApiUrl, apiSiteInfo.Route);
 
-            var fullPath = CombineUrlPaths(apiSiteInfo.ApiUrl, apiSiteInfo.Route);
+        //    using (var client = new WebClient())
+        //    {
+        //        client.BaseAddress = fullPath;
+        //        client.Encoding = encoding;
 
-            using (var client = new WebClient())
-            {
-                client.BaseAddress = fullPath;
-                client.Encoding = encoding;
+        //        if (credentials.AuthenticationType == AuthenticationType.Basic)
+        //        {
+        //            client.Credentials = new NetworkCredential(credentials.Login, credentials.Password);
+        //        }
 
-                if (credentials.AuthenticationType == AuthenticationType.Basic)
-                {
-                    client.Credentials = new NetworkCredential(credentials.Login, credentials.Password);
-                }
+        //        //TODO: get default parameters, actual parameters, credentials for non-basic (token, etc).
 
-                //TODO: get default parameters, actual parameters, credentials for non-basic (token, etc).
-
-                try
-                {
-                    var result = client.DownloadString(client.BaseAddress);
-                    return new ApiResponse<string>(new HttpResponse(HttpStatusCode.OK, result, client.ResponseHeaders, String.Empty) { IsError = false });
-                }
-                catch (WebException e)
-                {
-                    var code = (e.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
-                    return new ApiResponse<string>(new HttpResponse(code, e.Response.Headers)
-                    {
-                        AdditionalInformation = new Dictionary<Type, object>
-                        {
-                            {e.Status.GetType(), e.Status},
-                            {e.GetType(), e}
-                        }
-                    });
-                }
-            }
-        }
+        //        try
+        //        {
+        //            var result = client.DownloadString(client.BaseAddress);
+        //            return new ApiResponse<string>(new HttpResponse(HttpStatusCode.OK, result, client.ResponseHeaders, String.Empty) { IsError = false });
+        //        }
+        //        catch (WebException e)
+        //        {
+        //            var code = (e.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
+        //            return new ApiResponse<string>(new HttpResponse(code, e.Response.Headers)
+        //            {
+        //                AdditionalInformation = new Dictionary<Type, object>
+        //                {
+        //                    {e.Status.GetType(), e.Status},
+        //                    {e.GetType(), e}
+        //                }
+        //            });
+        //        }
+        //    }
+        //}
 
         public static Dictionary<string, string> CombineDictionaries(Dictionary<string, string> source, KeyValuePair<string, string> overrideItem)
         {
@@ -106,9 +99,8 @@ namespace Sniper
         public static string ToQueryString(this Dictionary<string, string> dictionary)
         {
             Ensure.ArgumentNotNull(nameof(dictionary), dictionary);
-            var array = (dictionary.Keys.SelectMany(key => dictionary.Values, (key, value) => 
-                $"{WebUtility.UrlEncode(key)}={WebUtility.UrlEncode(value)}")).ToArray();
-
+            if (dictionary.Count == 0) return string.Empty;
+            var array = (dictionary.Select(kvp => $"{WebUtility.UrlEncode(kvp.Key)}={WebUtility.UrlEncode(kvp.Value)}")).ToArray();
             return "?" + string.Join("&", array);
         }
 

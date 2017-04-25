@@ -1,18 +1,8 @@
-﻿namespace Sniper.ApiClients
-{
-    public static class ApiClientKeys
-    {
-        public const string Connection = "apiConnection";
-        public const string Options = "options";
-    }
-}
-
-namespace Sniper.Application
+﻿namespace Sniper.Application
 {
     public static class ApplicationKeys
     {
         public const string ApplicationProjectName = "Sniper";
-        public const string PropertyName = "propertyName";
     }
 }
 
@@ -49,35 +39,15 @@ namespace Sniper.Authentication
 {
     public static class AuthenticationKeys
     {
-        public const string AccessToken = "accessToken";
-        public const string AuthenticationCode = "authenticationCode";
-        public const string AuthorizationUpdate = "authorizationUpdate";
-        public const string ClientId = "clientId";
-        public const string ClientSecret = "clientSecret";
-        public const string Code = "code";
-        public const string CredentialStore = "credentialStore";
-        public const string Credentials = "credentials";
-        public const string CredentialsLogin = "credentials.Login";
-        public const string CredentialsPassword = "credentials.Password";
-        public const string NewAuthorization = "newAuthorization";
-        public const string TwoFactorAuthenticationCode = "twoFactorAuthenticationCode";
-        public const string UserName = "userName";
-
         internal static class Keys
         {
             public const string Authorization = "Authorization";
         }
 
-        internal static class LDAP
-        {
-            public const string NewLdapMapping = "newLdapMapping";
-            public const string TeamId = "teamId";
-        }
-
         internal static class Messages
         {
             public const string BasicAuthorizationMessageFormat = @"Basic {0}";
-            public const string TokenAuthorizationMessageFormat = @"Basic {0}";
+            public const string TokenAuthorizationMessageFormat = @"Token {0}";
             public const string EmptyPassword = "Passwords should never be null/empty";
             public const string TokenLoginFailed = "The Login is not null for a token authentication request. You probably did something wrong.";
         }
@@ -113,39 +83,18 @@ namespace Sniper.Http
     public static class HttpKeys
     {
         public const string First = "first";
-        public const string Key = "key";
         public const string Last = "last";
         public const string Next = "next";
         public const string Pattern = "pattern";
         public const string Previous = "prev";
-        public const string Uri = "uri";
         public const string Url = "url";
 
         internal static class HtmlKeys
         {
-            public const string Body = "body";
-
             internal static class HeaderKeys
             {
                 public const string Accept = "Accept";
-                public const string Accepts = "accepts";
-                public const string Content = "content";
-                public const string Headers = "headers";
             }
-        }
-
-        internal static class RequestParameters
-        {
-            public const string Request = "request";
-            public const string UpdateRequest = "updateRequest";
-        }
-
-        internal static class ResponseParameters
-        {
-            public const string Release = "release";
-            public const string Response = "response";
-            public const string ResponseHeaders = "responseHeaders";
-            public const string ResponseMessage = "responseMessage";
         }
     }
 
@@ -153,46 +102,119 @@ namespace Sniper.Http
     {
         public const string HypertextSecure = "https";
         public const string HypertextUnsecure = "http";
+
+        public const int DefaultPortHypertextSecure = 443;
+        public const int DefaultPortHypertextUnsecure = 80;
+    }
+
+    public static class ResponseFormatKeys
+    {
+        public const string Default = "xml";
+        public const string Format = "format";
+        public const string None = "";
+        public const string Json = "json";
+        public const string Xml = "xml";
     }
 }
 
-namespace Sniper.Licenses
+namespace Sniper.TargetProcess
 {
-    public static class LicenseKeys
+    public static class Aggregates
     {
-        public const string Category = "category";
-        public const string Description = "description";
-        public const string HtmlUrl = "htmlUrl";
-        public const string Implementation = "implementation";
-        public const string Key = "key";
+        public const string Average = "Avg";
+        public const string Count = "Count";
+        public const string Maximum = "Max";
+        public const string Minimum = "Min";
+        public const string Sum = "Sum";
     }
-}
 
-namespace Sniper.Paginations
-{
-    public static class PaginationKeys
+    public static class AuthenticationTokenParameters
     {
-        public const string FirstPage = "getFirstPage";
-        public const string Pagination = "pagination";
+        public const string AccessToken = "access_token";
+        public const string ServiceToken = "token"; //service token
     }
-}
 
-namespace Sniper.Permissions
-{
-    public static class PermissionKeys
+    public static class DataFilters
     {
-        public const string Forbidden = "forbidden";
-        public const string Permitted = "permitted";
-        public const string Required = "required";
+        public const string Append = "append";
+        public const string Exclude = "exclude";
+        public const string Include = "include";
+        public const string InnerTake = "innertake";
+        public const string Skip = "skip";
+        public const string Take = "take";
+        public const string Where = "where";
     }
-}
 
-namespace Sniper.Repositories
-{
-    public static class RepositoryKeys
+    public static class Entity
     {
-        public const string NewRepository = "newRepository";
-        public const string Repository = "repository";
+        public const string Assignable = "Assignables";
+        public const string AssignableInbound = "InboundAssignable";
+        public const string AssignableOutbound = "OutboundAssignable";
+        public const string Bug = "Bugs";
+        public const string Build = "Builds";
+        public const string Epic = "Epics";
+        public const string Feature = "Features";
+        public const string General = "Generals";
+        public const string Impediment = "Impediments";
+        public const string Iteration = "Iterations";
+        public const string Program = "Programs";
+        public const string Project = "Projects";
+        public const string Release = "Releases";
+        public const string Request = "Requests";
+        public const string Requester = "Requesters";
+        public const string Task = "Tasks";
+        public const string TeamIteration = "Team Iterations";
+        public const string Team = "Teams";
+        public const string TestCase = "Test Cases";
+        public const string TestPlan = "Test Plans";
+        public const string TestPlanRun = "Test Plan Runs";
+        public const string User = "Users";
+        public const string UserStory = "UserStories";
+    }
+
+    public static class FilterOperators
+    {
+        public const string Contains = "contains";
+        public const string Equality = "eq";
+        public const string GreaterThan = "gt";
+        public const string GreaterThanOrEqual = "gte";
+        public const string InList = "in";
+        public const string IsNull = "is null";
+        public const string IsNotNull = "is not null";
+        public const string LessThan = "lt";
+        public const string LessThanOrEqual = "lte";
+        public const string NotEquality = "neq";
+    }
+
+    public static class SortOrders
+    {
+        public const string Ascending = "orderby";
+        public const string Descending = "orderbydesc";
+    }
+
+    public static class StatusCodes
+    {
+
+        internal static class StatusCodeTitles
+        {
+            public const string Success = "Success";
+            public const string BadFormat = "Bad format";
+            public const string Unauthorized = "Unauthorized";
+            public const string Forbidden = "Forbidden";
+            public const string RequestedEntityNotFound = "Requested Entity not found";
+            public const string InternalServerError = "Internal server error";
+            public const string NotImplemented = "Not implemented";
+        }
+
+        internal static class StatusCodeDetails
+        {
+            public const string Success = "Request was handled correctly";
+            public const string BadFormat = "Incorrect parameter or query string";
+            public const string Unauthorized = "Wrong or missed credentials";
+            public const string Forbidden = "A user has insufficient rights to perform an action";
+            public const string InternalServerError = "Targetprocess messed up";
+            public const string NotImplemented = "The requested action is either not supported or not implemented yet";
+        }
     }
 }
 
@@ -538,18 +560,24 @@ namespace Sniper.WarningsErrors
         {
             public const string AvoidExcessiveComplexity = "CA1502:AvoidExcessiveComplexity";
             public const string AvoidUncalledPrivateCode = "CA1811:AvoidUncalledPrivateCode";
+            public const string CollectionPropertiesShouldBeReadOnly = "CA2227:CollectionPropertiesShouldBeReadOnly";
             public const string DisposeObjectsBeforeLosingScope = "CA2000:DisposeObjectsBeforeLosingScope";
+            public const string DoNotCatchGeneralExceptionTypes = "CA1031:DoNotCatchGeneralExceptionTypes";
             public const string DoNotDeclareReadOnlyMutableReferenceTypes = "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes";
             public const string IdentifiersShouldBeSpelledCorrectly = "CA1704:IdentifiersShouldBeSpelledCorrectly";
             public const string IdentifiersShouldHaveCorrectSuffix = "CA1710:IdentifiersShouldHaveCorrectSuffix";
+            public const string IdentifiersShouldNotHaveIncorrectSuffix = "CA1711:IdentifiersShouldNotHaveIncorrectSuffix";
             public const string IdentifiersShouldNotMatchKeywords = "CA1716:IdentifiersShouldNotMatchKeywords";
             public const string ImplementStandardExceptionConstructors = "CA1032:ImplementStandardExceptionConstructors";
             public const string NonConstantFieldsShouldNotBeVisible = "CA2211:NonConstantFieldsShouldNotBeVisible";
             public const string NormalizeStringsToUppercase = "CA1308:NormalizeStringsToUppercase";
             public const string ReviewUnusedParameters = "CA1801:ReviewUnusedParameters";
+            public const string SealMethodsThatSatisfyPrivateInterfaces = "CA2119:SealMethodsThatSatisfyPrivateInterfaces";
             public const string SpecifyIFormatProvider = "CA1305:SpecifyIFormatProvider";
             public const string TypeNamesShouldNotMatchNamespaces = "CA1724:TypeNamesShouldNotMatchNamespaces";
+            public const string UriReturnValuesShouldNotBeStrings = "CA1055:UriReturnValuesShouldNotBeStrings";
             public const string UseGenericsWhereAppropriate = "CA1007:UseGenericsWhereAppropriate";
+            public const string UseOrdinalStringComparison = "CA1309:UseOrdinalStringComparison";
             public const string UsePropertiesWhereAppropriate = "CA1024:UsePropertiesWhereAppropriate";
         }
 

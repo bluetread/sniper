@@ -145,7 +145,7 @@ namespace Sniper
         /// <returns>A <see cref="IReadOnlyPagedCollection{Repository}"/> of <see cref="Repository"/>.</returns>
         public Task<IReadOnlyList<Repository>> GetAllPublic(PublicRepositoryRequest request)
         {
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(nameof(request), request);
 
             var url = ApiUrls.AllPublicRepositories(request.Since);
 
@@ -179,7 +179,7 @@ namespace Sniper
         /// <returns>A <see cref="IReadOnlyPagedCollection{Repository}"/> of <see cref="Repository"/>.</returns>
         public Task<IReadOnlyList<Repository>> GetAllForCurrent(ApiOptions options)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
+            Ensure.ArgumentNotNull(nameof(options), options);
 
             return ApiConnection.GetAll<Repository>(ApiUrls.Repositories(), options);
         }
@@ -197,15 +197,15 @@ namespace Sniper
         /// <returns>A <see cref="IReadOnlyPagedCollection{Repository}"/> of <see cref="Repository"/>.</returns>
         public Task<IReadOnlyList<Repository>> GetAllForCurrent(RepositoryRequest request)
         {
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(nameof(request), request);
 
             return GetAllForCurrent(request, ApiOptions.None);
         }
 
         public Task<IReadOnlyList<Repository>> GetAllForCurrent(RepositoryRequest request, ApiOptions options)
         {
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
+            Ensure.ArgumentNotNull(nameof(request), request);
+            Ensure.ArgumentNotNull(nameof(options), options);
 
             return ApiConnection.GetAll<Repository>(ApiUrls.Repositories(), request.ToParametersDictionary(), options);
         }
@@ -240,7 +240,7 @@ namespace Sniper
         public Task<IReadOnlyList<Repository>> GetAllForUser(string login, ApiOptions options)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(login), login);
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
+            Ensure.ArgumentNotNull(nameof(options), options);
 
             return ApiConnection.GetAll<Repository>(ApiUrls.Repositories(login), options);
         }
@@ -274,7 +274,7 @@ namespace Sniper
         public Task<IReadOnlyList<Repository>> GetAllForOrg(string organization, ApiOptions options)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(organization), organization);
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
+            Ensure.ArgumentNotNull(nameof(options), options);
 
             return ApiConnection.GetAll<Repository>(ApiUrls.OrganizationRepositories(organization), options);
         }
@@ -324,7 +324,7 @@ namespace Sniper
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(owner), owner);
             Ensure.ArgumentNotNullOrEmptyString(nameof(name), name);
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
+            Ensure.ArgumentNotNull(nameof(options), options);
 
             return ApiConnection.GetAll<Team>(ApiUrls.RepositoryTeams(owner, name), options);
         }
@@ -340,7 +340,7 @@ namespace Sniper
         /// <returns>All <see cref="T:Sniper.Team"/>s associated with the repository</returns>
         public Task<IReadOnlyList<Team>> GetAllTeams(long repositoryId, ApiOptions options)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Options, options);
+            Ensure.ArgumentNotNull(nameof(options), options);
 
             return ApiConnection.GetAll<Team>(ApiUrls.RepositoryTeams(repositoryId), options);
         }

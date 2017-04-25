@@ -1,11 +1,11 @@
-﻿using Sniper.Application.Parameters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.Serialization;
 using System.Security;
+using Sniper.Application.Parameters;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
@@ -23,7 +23,7 @@ namespace Sniper.Http
 
         public RateLimit(IDictionary<string, string> responseHeaders)
         {
-            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.ResponseHeaders, responseHeaders);
+            Ensure.ArgumentNotNull(nameof(responseHeaders), responseHeaders);
             
             Limit = (int)GetHeaderValueAsInt32Safe(responseHeaders, "X-RateLimit-Limit");
             Remaining = (int)GetHeaderValueAsInt32Safe(responseHeaders, "X-RateLimit-Remaining");

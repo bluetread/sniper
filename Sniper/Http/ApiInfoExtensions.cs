@@ -1,6 +1,5 @@
 using System;
 
-
 namespace Sniper.Http
 {
     public static class ApiInfoExtensions

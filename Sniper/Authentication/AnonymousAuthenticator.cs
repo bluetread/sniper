@@ -1,12 +1,7 @@
-﻿using Sniper.Http;
-
-namespace Sniper
+﻿namespace Sniper
 {
-    internal class AnonymousAuthenticator : IAuthenticationHandler
+    //Target Process does not allow Anonymous authentication.
+    public class AnonymousAuthenticator : BaseAuthenticator
     {
-        public void Authenticate(IRequest request, ICredentials credentials)
-        {
-            // Do nothing. Retain your anonymity.
-        }
     }
 }

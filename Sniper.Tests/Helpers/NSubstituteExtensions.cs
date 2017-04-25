@@ -16,7 +16,7 @@ namespace Sniper.Tests.Helpers
 
         public static ConfiguredCall ThrowsAsync<T>(this Task<T> value, Exception exception)
         {
-            return value.ReturnsAsync<Task<T>, T>(callInfo => { throw exception; });
+            return value.ReturnsAsync<Task<T>, T>(callInfo => throw exception);
         }
     }
 }

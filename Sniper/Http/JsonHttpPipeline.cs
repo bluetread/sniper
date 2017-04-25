@@ -1,8 +1,9 @@
-﻿using Sniper.Types;
-using System;
+﻿using System;
 using System.Collections;
 using System.IO;
 using System.Net.Http;
+using Newtonsoft.Json;
+using Sniper.Types;
 
 namespace Sniper.Http
 {
@@ -10,24 +11,12 @@ namespace Sniper.Http
     ///     Responsible for serializing the request and response as JSON and
     ///     adding the proper JSON response header.
     /// </summary>
-    public class JsonHttpPipeline
+    public static class JsonHttpPipeline
     {
-        private readonly IJsonSerializer _serializer;
 
-        public JsonHttpPipeline() : this(new SimpleJsonSerializer())
+        public static void SerializeRequest(IRequest request)
         {
-        }
-
-        public JsonHttpPipeline(IJsonSerializer serializer)
-        {
-            Ensure.ArgumentNotNull(nameof(serializer), serializer);
-            
-            _serializer = serializer;
-        }
-
-        public void SerializeRequest(IRequest request)
-        {
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(nameof(request), request);
 
             if (!request.Headers.ContainsKey(HttpKeys.HtmlKeys.HeaderKeys.Accept))
             {
@@ -37,12 +26,13 @@ namespace Sniper.Http
             if (request.Method == HttpMethod.Get || request.Body == null) return;
             if (request.Body is string || request.Body is Stream || request.Body is HttpContent) return;
 
-            request.Body = _serializer.Serialize(request.Body);
+
+            request.Body = JsonConvert.SerializeObject(request.Body);
         }
 
-        public IApiResponse<T> DeserializeResponse<T>(IResponse response)
+        public static IApiResponse<T> DeserializeResponse<T>(IResponse response)
         {
-            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.Response, response);
+            Ensure.ArgumentNotNull(nameof(response), response);
 
             if (response.ContentType != null && response.ContentType.Equals(MimeTypes.ApplicationJson, StringComparison.Ordinal))
             {
@@ -60,7 +50,7 @@ namespace Sniper.Http
                     {
                         body = "[" + body + "]";
                     }
-                    var json = _serializer.Deserialize<T>(body);
+                    var json = JsonConvert.DeserializeObject<T>(body);
                     return new ApiResponse<T>(response, json);
                 }
             }

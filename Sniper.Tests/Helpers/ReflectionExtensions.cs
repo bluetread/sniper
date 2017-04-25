@@ -16,9 +16,7 @@ namespace Sniper.Tests.Helpers
                     .Where(HasAttribute<AsyncStateMachineAttribute>)
                     .Where(method => method.ReturnType == typeof(void))
                     .Select(method =>
-                        string.Format("Method '{0}' of '{1}' has an async void return type and that's bad",
-                            method.Name,
-                            method.DeclaringType.Name))
+                        $"Method '{method.Name}' of '{method.DeclaringType.Name}' has an async void return type and that's bad")
                     .ToList());
         }
 

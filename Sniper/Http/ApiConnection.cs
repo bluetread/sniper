@@ -1,7 +1,6 @@
-﻿using Sniper.ApiClients;
-using Sniper.Authentication;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Sniper.Http
@@ -12,22 +11,15 @@ namespace Sniper.Http
     /// </summary>
     public class ApiConnection : IApiConnection
     {
-        //private readonly IApiPagination _pagination;
-
-      
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ApiConnection"/> class.
         /// </summary>
         /// <param name="connection">A connection for making HTTP requests</param>
-        ///// <param name="pagination">A paginator for paging API responses</param>
         public ApiConnection(IConnection connection)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
-            //Ensure.ArgumentNotNull(PaginationKeys.Pagination, pagination);
+            Ensure.ArgumentNotNull(nameof(connection), connection);
             
             Connection = connection;
-            //_pagination = pagination;
         }
 
         /// <summary>
@@ -44,7 +36,7 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public Task<T> Get<T>(Uri uri)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             
             return Get<T>(uri, null);
         }
@@ -59,7 +51,7 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public async Task<T> Get<T>(Uri uri, IDictionary<string, string> parameters)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             var response = await Connection.Get<T>(uri, parameters, null).ConfigureAwait(false);
             return response.Body;
@@ -76,8 +68,8 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public async Task<T> Get<T>(Uri uri, IDictionary<string, string> parameters, string accepts)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Accepts, accepts);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
+            Ensure.ArgumentNotNull(nameof(accepts), accepts);
 
             var response = await Connection.Get<T>(uri, parameters, accepts).ConfigureAwait(false);
             return response.Body;
@@ -92,7 +84,7 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public async Task<string> GetHtml(Uri uri, IDictionary<string, string> parameters)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             var response = await Connection.GetHtml(uri, parameters).ConfigureAwait(false);
             return response.Body;
@@ -107,7 +99,7 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public Task Post(Uri uri)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return Connection.Post(uri);
         }
@@ -121,7 +113,7 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public async Task<T> Post<T>(Uri uri)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             var response = await Connection.Post<T>(uri).ConfigureAwait(false);
             return response.Body;
@@ -137,7 +129,7 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public Task<T> Post<T>(Uri uri, object data)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
 
             return Post<T>(uri, data, null, null);
@@ -169,7 +161,7 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public async Task<T> Post<T>(Uri uri, object data, string accepts, string contentType)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
 
             var response = await Connection.Post<T>(uri, data, accepts, contentType).ConfigureAwait(false);
@@ -189,9 +181,9 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public async Task<T> Post<T>(Uri uri, object data, string accepts, string contentType, string twoFactorAuthenticationCode)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
-            Ensure.ArgumentNotNull(AuthenticationKeys.TwoFactorAuthenticationCode, twoFactorAuthenticationCode);
+            Ensure.ArgumentNotNull(nameof(twoFactorAuthenticationCode), twoFactorAuthenticationCode);
 
             var response = await Connection.Post<T>(uri, data, accepts, contentType, twoFactorAuthenticationCode).ConfigureAwait(false);
             return response.Body;
@@ -200,7 +192,7 @@ namespace Sniper.Http
 
         public async Task<T> Post<T>(Uri uri, object data, string accepts, string contentType, TimeSpan timeout)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
 
             var response = await Connection.Post<T>(uri, data, accepts, contentType, timeout).ConfigureAwait(false);
@@ -214,7 +206,7 @@ namespace Sniper.Http
         /// <returns>A <see cref="Task"/> for the request's execution.</returns>
         public Task Put(Uri uri)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return Connection.Put(uri);
         }
@@ -229,7 +221,7 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public async Task<T> Put<T>(Uri uri, object data)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
 
             var response = await Connection.Put<T>(uri, data).ConfigureAwait(false);
@@ -248,10 +240,10 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public async Task<T> Put<T>(Uri uri, object data, string twoFactorAuthenticationCode)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
             
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.TwoFactorAuthenticationCode, twoFactorAuthenticationCode);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(twoFactorAuthenticationCode), twoFactorAuthenticationCode);
 
             var response = await Connection.Put<T>(uri, data, twoFactorAuthenticationCode).ConfigureAwait(false);
 
@@ -270,7 +262,7 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public async Task<T> Put<T>(Uri uri, object data, string twoFactorAuthenticationCode, string accepts)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
 
             var response = await Connection.Put<T>(uri, data, twoFactorAuthenticationCode, accepts).ConfigureAwait(false);
@@ -285,7 +277,7 @@ namespace Sniper.Http
         /// <returns>A <see cref="Task"/> for the request's execution.</returns>
         public Task Patch(Uri uri)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return Connection.Patch(uri);
         }
@@ -298,8 +290,8 @@ namespace Sniper.Http
         /// <returns>A <see cref="Task"/> for the request's execution.</returns>
         public Task Patch(Uri uri, string accepts)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Accepts, accepts);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
+            Ensure.ArgumentNotNull(nameof(accepts), accepts);
 
             return Connection.Patch(uri, accepts);
         }
@@ -314,7 +306,7 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public async Task<T> Patch<T>(Uri uri, object data)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
 
             var response = await Connection.Patch<T>(uri, data).ConfigureAwait(false);
@@ -333,9 +325,9 @@ namespace Sniper.Http
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public async Task<T> Patch<T>(Uri uri, object data, string accepts)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Accepts, accepts);
+            Ensure.ArgumentNotNull(nameof(accepts), accepts);
 
             var response = await Connection.Patch<T>(uri, data, accepts).ConfigureAwait(false);
 
@@ -349,7 +341,7 @@ namespace Sniper.Http
         /// <returns>A <see cref="Task"/> for the request's execution.</returns>
         public Task Delete(Uri uri)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return Connection.Delete(uri);
         }
@@ -362,7 +354,7 @@ namespace Sniper.Http
         /// <returns>A <see cref="Task"/> for the request's execution.</returns>
         public Task Delete(Uri uri, string twoFactorAuthenticationCode)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return Connection.Delete(uri, twoFactorAuthenticationCode);
         }
@@ -375,7 +367,7 @@ namespace Sniper.Http
         /// <returns>A <see cref="Task"/> for the request's execution.</returns>
         public Task Delete(Uri uri, object data)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
 
             return Connection.Delete(uri, data);
@@ -390,9 +382,9 @@ namespace Sniper.Http
         /// <returns>The returned <seealso cref="HttpStatusCode"/></returns>
         public Task Delete(Uri uri, object data, string accepts)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Accepts, accepts);
+            Ensure.ArgumentNotNull(nameof(accepts), accepts);
 
             return Connection.Delete(uri, data, accepts);
         }
@@ -405,7 +397,7 @@ namespace Sniper.Http
         /// <param name="data">The object to serialize as the body of the request</param>
         public async Task<T> Delete<T>(Uri uri, object data)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
 
             var response = await Connection.Delete<T>(uri, data).ConfigureAwait(false);
@@ -423,9 +415,9 @@ namespace Sniper.Http
         /// <param name="accepts">Specifies accept response media type</param>
         public async Task<T> Delete<T>(Uri uri, object data, string accepts)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
             Ensure.ArgumentNotNull(nameof(data), data);
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Accepts, accepts);
+            Ensure.ArgumentNotNull(nameof(accepts), accepts);
 
             var response = await Connection.Delete<T>(uri, data, accepts).ConfigureAwait(false);
 
@@ -447,7 +439,7 @@ namespace Sniper.Http
         {
             while (true)
             {
-                Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+                Ensure.ArgumentNotNull(nameof(uri), uri);
 
                 var response = await Connection.GetResponse<IReadOnlyList<T>>(uri, cancellationToken).ConfigureAwait(false);
 
@@ -471,7 +463,7 @@ namespace Sniper.Http
             IDictionary<string, string> parameters,
             string accepts)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             var response = await Connection.Get<List<T>>(uri, parameters, accepts).ConfigureAwait(false);
             return new ReadOnlyPagedCollection<T>(

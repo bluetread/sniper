@@ -1,5 +1,4 @@
-﻿using Sniper.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,7 +17,7 @@ namespace Sniper
         /// <returns>Updated request Uri</returns>
         public static Uri ApplyParameters(this Uri uri, IDictionary<string, string> parameters)
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             if (parameters == null || !parameters.Any()) return uri;
 
@@ -55,7 +54,7 @@ namespace Sniper
 
             string MapValueFunc(string key, string value) => key == "q" ? value : Uri.EscapeDataString(value);
 
-            string query = string.Join("&", p.Select(kvp => kvp.Key + "=" + MapValueFunc(kvp.Key, kvp.Value)));
+            var query = string.Join("&", p.Select(kvp => kvp.Key + "=" + MapValueFunc(kvp.Key, kvp.Value)));
             if (uri.IsAbsoluteUri)
             {
                 var uriBuilder = new UriBuilder(uri)

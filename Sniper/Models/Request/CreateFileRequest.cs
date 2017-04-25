@@ -86,7 +86,7 @@ namespace Sniper.Request
         /// <param name="convertContentToBase64">True to convert content to base64.</param>
         public CreateFileRequest(string message, string content, bool convertContentToBase64) : base(message)
         {
-            Ensure.ArgumentNotNull(HttpKeys.HtmlKeys.HeaderKeys.Content, content);
+            Ensure.ArgumentNotNull(nameof(content), content);
 
             if (convertContentToBase64)
             {

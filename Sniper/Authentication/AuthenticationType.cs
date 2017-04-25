@@ -1,21 +1,47 @@
-﻿namespace Sniper
+﻿using System;
+
+namespace Sniper
 {
     /// <summary>
-    /// Authentication protocols supported by the GitHub API
+    /// Authentication protocols supported by the TargetProcess API
     /// </summary>
     public enum AuthenticationType
     {
         /// <summary>
-        /// No credentials provided
+        /// Access Token
         /// </summary>
-        Anonymous,
+        AccessToken = 4,
         /// <summary>
-        /// Username &amp; password
+        /// Anonymous Authentication (Not Allowed)
         /// </summary>
-        Basic,
+        Anonymous = 2,
         /// <summary>
-        /// Delegated access to a third party
+        /// Cookie Authentication
         /// </summary>
-        Oauth
+        Cookie = 32,
+        /// <summary>
+        /// User name &amp; password
+        /// </summary>
+        Basic = 16,
+        /// <summary>
+        /// Service Token (Keyword is "token")
+        /// </summary>
+        ServiceToken = 8,
+        /// <summary>
+        /// Service Token
+        /// </summary>
+        Token = ServiceToken,
+        /// <summary>
+        /// Uknown/None/Default/Use config value
+        /// </summary>
+        Unknown = 0
+    }
+
+    public static class AuthenticationTypeExtensions
+    {
+        public static AuthenticationType AuthenticationTypeFromString(string type)
+        {
+            return Enum.TryParse(type, true, out AuthenticationType authenticationType) ? authenticationType : AuthenticationType.Cookie;
+        }
     }
 }

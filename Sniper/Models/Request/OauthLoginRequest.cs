@@ -19,7 +19,7 @@ namespace Sniper.Request
         /// <param name="clientId">The client Id you received from GitHub when you registered the application.</param>
         public OAuthLoginRequest(string clientId)
         {
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientId), clientId);
 
             ClientId = clientId;
             Scopes = new Collection<string>();

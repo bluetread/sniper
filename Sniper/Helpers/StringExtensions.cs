@@ -1,29 +1,21 @@
-﻿using Sniper.Application;
-using Sniper.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using Sniper.Http;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {
     internal static class StringExtensions
     {
-        public static bool IsBlank(this string value)
-        {
-            return string.IsNullOrWhiteSpace(value);
-        }
-
-        public static bool IsNotBlank(this string value)
-        {
-            return !string.IsNullOrWhiteSpace(value);
-        }
-
-        public static Uri FormatUri(this string pattern, params object[] args)
+       
+      public static Uri FormatUri(this string pattern, params object[] args)
         {
             Ensure.ArgumentNotNullOrEmptyString(HttpKeys.Pattern, pattern);
 
@@ -71,15 +63,22 @@ namespace Sniper
         }
 
         [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase)]
+        public static string ToLowerCase(this string input)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(nameof(input), input);
+            return input.ToLowerInvariant();
+        }
+
+        [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase)]
         public static string ToRubyCase(this string propertyName)
         {
-            Ensure.ArgumentNotNullOrEmptyString(ApplicationKeys.PropertyName, propertyName);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(propertyName), propertyName);
             return string.Join("_", propertyName.SplitUpperCase()).ToLowerInvariant();
         }
 
         public static string FromRubyCase(this string propertyName)
         {
-            Ensure.ArgumentNotNullOrEmptyString(ApplicationKeys.PropertyName, propertyName);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(propertyName), propertyName);
             return string.Join(string.Empty, propertyName.Split('_')).ToCapitalizedInvariant();
         }
 
@@ -93,12 +92,12 @@ namespace Sniper
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(source), source);
 
-            int wordStartIndex = 0;
+            var wordStartIndex = 0;
             var letters = source.ToCharArray();
             var previousChar = char.MinValue;
 
             // Skip the first letter. we don't care what case it is.
-            for (int i = 1; i < letters.Length; i++)
+            for (var i = 1; i < letters.Length; i++)
             {
                 if (char.IsUpper(letters[i]) && !char.IsWhiteSpace(previousChar))
                 {
@@ -122,6 +121,13 @@ namespace Sniper
         internal static bool IsNameWithOwnerFormat(this string input)
         {
             return _nameWithOwner.IsMatch(input);
+        }
+
+        internal static IReadOnlyDictionary<string, string> GetHeaders(this WebHeaderCollection webHeaderCollection)
+        {
+            Ensure.ArgumentNotNull(nameof(webHeaderCollection), webHeaderCollection);
+            var dict = webHeaderCollection.AllKeys.ToDictionary(λ => λ, λ => webHeaderCollection[λ]);
+            return new ReadOnlyDictionary<string, string>(dict);
         }
     }
 }

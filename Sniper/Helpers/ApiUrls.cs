@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Sniper
 {
     /// <summary>
@@ -938,7 +937,7 @@ namespace Sniper
         /// <returns></returns>
         public static Uri ReceivedEvents(string user, bool isPublic)
         {
-            string usersReceivedEvents = "users/{0}/received_events";
+            var usersReceivedEvents = "users/{0}/received_events";
             if (isPublic)
             {
                 usersReceivedEvents += "/public";
@@ -964,7 +963,7 @@ namespace Sniper
         /// <returns></returns>
         public static Uri PerformedEvents(string user, bool isPublic)
         {
-            string usersEvents = "users/{0}/events";
+            var usersEvents = "users/{0}/events";
             if (isPublic)
             {
                 usersEvents += "/public";
@@ -1061,7 +1060,7 @@ namespace Sniper
         /// <returns></returns>
         public static Uri Blob(string owner, string name, string reference)
         {
-            string blob = "repos/{0}/{1}/git/blobs";
+            var blob = "repos/{0}/{1}/git/blobs";
             if (!string.IsNullOrEmpty(reference))
             {
                 blob += "/{2}";
@@ -1970,7 +1969,7 @@ namespace Sniper
         /// <returns>The <see cref="Uri"/> for a specific blob.</returns>
         public static Uri Blob(long repositoryId, string reference)
         {
-            string blob = "repositories/{0}/git/blobs";
+            var blob = "repositories/{0}/git/blobs";
             if (!string.IsNullOrEmpty(reference))
             {
                 blob += "/{1}";

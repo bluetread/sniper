@@ -24,7 +24,7 @@ namespace Sniper
         /// <param name="connection">The underlying connection to use</param>
         public OAuthClient(IConnection connection)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
+            Ensure.ArgumentNotNull(nameof(connection), connection);
 
             _connection = connection;
             var baseAddress = connection.BaseAddress ?? TargetProcessClient.TargetProcessDotComUrl;
@@ -42,7 +42,7 @@ namespace Sniper
         /// <returns></returns>
         public Uri GetGitHubLoginUrl(OAuthLoginRequest request)
         {
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(nameof(request), request);
 
             return new Uri(_hostAddress, ApiUrls.OauthAuthorize())
                 .ApplyParameters(request.ToParametersDictionary());
@@ -62,7 +62,7 @@ namespace Sniper
         /// <returns></returns>
         public async Task<OAuthToken> CreateAccessToken(OAuthTokenRequest request)
         {
-            Ensure.ArgumentNotNull(HttpKeys.RequestParameters.Request, request);
+            Ensure.ArgumentNotNull(nameof(request), request);
 
             var endPoint = ApiUrls.OauthAccessToken();
 

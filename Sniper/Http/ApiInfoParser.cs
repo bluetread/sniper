@@ -13,7 +13,7 @@ namespace Sniper.Http
 
         public static ApiInfo ParseResponseHeaders(IDictionary<string, string> responseHeaders)
         {
-            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.ResponseHeaders, responseHeaders);
+            Ensure.ArgumentNotNull(nameof(responseHeaders), responseHeaders);
 
             var httpLinks = new Dictionary<string, Uri>();
             var oauthScopes = new List<string>();
@@ -48,7 +48,7 @@ namespace Sniper.Http
                 }
             }
 
-            return new ApiInfo(httpLinks, oauthScopes, acceptedOauthScopes, new RateLimit(responseHeaders));
+            return new ApiInfo(httpLinks, oauthScopes, acceptedOauthScopes);
         }
     }
 }

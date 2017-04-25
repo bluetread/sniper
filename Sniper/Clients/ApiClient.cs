@@ -1,5 +1,4 @@
-﻿using Sniper.ApiClients;
-using Sniper.Http;
+﻿using Sniper.Http;
 
 namespace Sniper
 {
@@ -14,7 +13,7 @@ namespace Sniper
         /// <param name="apiConnection">The client's connection</param>
         protected ApiClient(IApiConnection apiConnection)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Connection, apiConnection);
+            Ensure.ArgumentNotNull(nameof(apiConnection), apiConnection);
 
             ApiConnection = apiConnection;
             Connection = apiConnection.Connection;

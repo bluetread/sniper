@@ -20,9 +20,9 @@ namespace Sniper.Request
         /// <param name="code">The code you received as a response to making the OAuth login request</param>
         public OAuthTokenRequest(string clientId, string clientSecret, string code)
         {
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientId, clientId);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.ClientSecret, clientSecret);
-            Ensure.ArgumentNotNullOrEmptyString(AuthenticationKeys.Code, code);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientId), clientId);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(clientSecret), clientSecret);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(code), code);
 
             ClientId = clientId;
             ClientSecret = clientSecret;

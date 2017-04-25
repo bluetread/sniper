@@ -9,7 +9,7 @@ namespace Sniper.Http
     /// </summary>
     public class ApiInfo
     {
-        public ApiInfo(IDictionary<string, Uri> links, IList<string> oauthScopes, IList<string> acceptedOAuthScopes, RateLimit rateLimit)
+        public ApiInfo(IDictionary<string, Uri> links, IList<string> oauthScopes, IList<string> acceptedOAuthScopes)
         {
             Ensure.ArgumentNotNull(nameof(links), links);
             Ensure.ArgumentNotNull(nameof(oauthScopes), oauthScopes);
@@ -17,7 +17,6 @@ namespace Sniper.Http
             Links = new ReadOnlyDictionary<string, Uri>(links);
             OauthScopes = new ReadOnlyCollection<string>(oauthScopes);
             AcceptedOAuthScopes = new ReadOnlyCollection<string>(acceptedOAuthScopes);
-            RateLimit = rateLimit;
         }
 
         /// <summary>
@@ -35,10 +34,10 @@ namespace Sniper.Http
         /// </summary>
         public IReadOnlyDictionary<string, Uri> Links { get; }
 
-        /// <summary>
-        /// Information about the API rate limit
-        /// </summary>
-        public RateLimit RateLimit { get; }
+        ///// <summary>
+        ///// Information about the API rate limit
+        ///// </summary>
+        //public RateLimit RateLimit { get; }
 
         /// <summary>
         /// Allows you to clone ApiInfo 
@@ -48,10 +47,10 @@ namespace Sniper.Http
         {
             // Seem to have to do this to pass a whole bunch of tests (for example Sniper.Tests.Clients.EventsClientTests.DeserializesCommitCommentEventCorrectly)
             // I believe this has something to do with the Mocking framework.
-            if (Links == null || OauthScopes == null || RateLimit == null)
+            if (Links == null || OauthScopes == null/* || RateLimit == null*/)
                 return null;
 
-            return new ApiInfo(Links.Clone(), OauthScopes.Clone(), AcceptedOAuthScopes.Clone(), RateLimit.Clone());
+            return new ApiInfo(Links.Clone(), OauthScopes.Clone(), AcceptedOAuthScopes.Clone()/*, RateLimit.Clone()*/);
         }
     }
 }

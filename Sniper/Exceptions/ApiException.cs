@@ -1,9 +1,9 @@
-﻿using Sniper.Http;
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Runtime.Serialization;
 using System.Security;
+using Sniper.Http;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
@@ -38,7 +38,7 @@ namespace Sniper
         /// <param name="innerException">The inner exception</param>
         public ApiException(IResponse response, Exception innerException) : base(null, innerException)
         {
-            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.Response, response);
+            Ensure.ArgumentNotNull(nameof(response), response);
             StatusCode = response.StatusCode;
             HttpResponse = response;
         }
@@ -50,7 +50,7 @@ namespace Sniper
 
 
         /// <summary>
-        /// The HTTP status code associated with the repsonse
+        /// The HTTP status code associated with the response
         /// </summary>
         public HttpStatusCode StatusCode { get; }
 

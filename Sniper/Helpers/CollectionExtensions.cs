@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
 namespace Sniper
 {
     internal static class CollectionExtensions

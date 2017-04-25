@@ -1,5 +1,4 @@
-﻿using Sniper.Reflection;
-using System;
+﻿using System;
 using System.Reflection;
 using static Sniper.Application.Messages.MessageKeys;
 

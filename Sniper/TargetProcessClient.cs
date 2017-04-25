@@ -1,15 +1,86 @@
-﻿using Sniper.ApiClients;
-using Sniper.Http;
+﻿using Sniper.Http;
 using System;
-
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Net;
+using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
 {
     /// <summary>
     /// A Client for the Target Process API. 
     /// </summary>
-    public class TargetProcessClient : ITargetProcessClient
+    public class TargetProcessClient  : ITargetProcessClient
     {
+        public IDictionary<string, string> DefaultQueryParameters { get; } = new Dictionary<string, string>();
+        public IAuthenticationHandler AuthenticationHandler { get; } = new AnonymousAuthenticator();
+        public IApiSiteInfo ApiSiteInfo { get; set; } = new ApiSiteInfo();
+
+        public TargetProcessClient() {}
+
+        public TargetProcessClient(IAuthenticationHandler authenticationHandler) : this()
+        {
+            Ensure.ArgumentNotNull(nameof(authenticationHandler), authenticationHandler);
+            AuthenticationHandler = authenticationHandler;
+        }
+
+        public TargetProcessClient(IAuthenticationHandler authenticationHandler, IApiSiteInfo apiSiteInfo) : this(authenticationHandler)
+        {
+            Ensure.ArgumentNotNull(nameof(apiSiteInfo), apiSiteInfo);
+        }
+
+        [SuppressMessage(Categories.Design, MessageAttributes.DoNotCatchGeneralExceptionTypes)]
+        [SuppressMessage(Categories.Design, MessageAttributes.UsePropertiesWhereAppropriate)]
+        [SuppressMessage(Categories.Performance, "CA1804:RemoveUnusedLocals")]
+        public IApiResponse<string> GetSiteData()
+        {
+            try
+            {
+                var fullPath = ApiSiteHelpers.CombineUrlPaths(AuthenticationHandler.SiteInfo.ApiUrl, ApiSiteInfo.Route);
+                var excludeList = ApiSiteInfo.Excludes;
+                var includeList = ApiSiteInfo.Includes;
+                var dictList = new[] { DefaultQueryParameters, AuthenticationHandler.AuthenticationParameters, ApiSiteInfo.Parameters };
+                
+                var queryParameters = GetParameters(dictList);
+
+                var fullPathAndQueryParameters = fullPath + queryParameters;
+
+                using (var client = new WebClient())
+                {
+                    client.BaseAddress = fullPathAndQueryParameters; 
+                    client.Credentials = AuthenticationHandler.NetworkCredentials;
+                    var result = client.DownloadString(client.BaseAddress);
+                    //TODO: content type
+                    return new ApiResponse<string>(new HttpResponse(HttpStatusCode.OK, result, client.ResponseHeaders, string.Empty) { IsError = false });
+                }
+
+            }
+            catch (WebException webException)
+            {
+                var code = (webException.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
+                return new ApiResponse<string>(new HttpResponse(code, webException));
+            }
+            catch (Exception e)
+            {
+                return new ApiResponse<string>(new HttpResponse(e));
+            }
+        }
+
+        private static string GetParameters(IDictionary<string, string>[] orderedList)
+        {
+            var finalList = new Dictionary<string, string>();
+            foreach (var dict in orderedList)
+            {
+                //Add (or replace) entries into one combined dictionary
+                foreach (var kvp in dict)
+                {
+                    finalList[kvp.Key] = kvp.Value;
+                }
+            }
+            return finalList.ToQueryString();
+        }
+
+#if false
         /// <summary>
         /// The base address for the TargetProcess API
         /// </summary>
@@ -24,8 +95,7 @@ namespace Sniper
         /// The name (and optionally version) of the product using this library. This is sent to the server as part of
         /// the user agent for analytics purposes.
         /// </param>
-        public TargetProcessClient(ProductHeaderValue productInformation)
-            : this(new Connection(productInformation, TargetProcessApiUrl))
+        public TargetProcessClient(ProductHeaderValue productInformation) : this(new Connection(productInformation, TargetProcessApiUrl))
         {
         }
 
@@ -80,18 +150,17 @@ namespace Sniper
         /// <param name="connection">The underlying <seealso cref="IConnection"/> used to make requests</param>
         public TargetProcessClient(IConnection connection)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
+            Ensure.ArgumentNotNull(nameof(connection), connection);
 
             Connection = connection;
             var apiConnection = new ApiConnection(connection);
             Search = new SearchClient(apiConnection);
-#if false
+
             Authorization = new AuthorizationsClient(apiConnection);
             Miscellaneous = new MiscellaneousClient(connection);
             Oauth = new OAuthClient(connection);
             Repository = new RepositoriesClient(apiConnection);
             User = new UsersClient(apiConnection);
-#endif
         }
 
         /// <summary>
@@ -114,7 +183,7 @@ namespace Sniper
         /// </remarks>
         public Credentials Credentials
         {
-            get { return Connection.Credentials; }
+            get => Connection.Credentials;
             // Note this is for convenience. We probably shouldn't allow this to be mutable.
             set
             {
@@ -133,7 +202,7 @@ namespace Sniper
         /// Provides a client connection to make rest requests to HTTP endpoints.
         /// </summary>
         public IConnection Connection { get; }
-#if false
+
         /// <summary>
         /// Access GitHub's Authorization API.
         /// </summary>
@@ -173,7 +242,7 @@ namespace Sniper
         /// Refer to the API documentation for more information: https://developer.github.com/v3/users/ //TODO: Replace with TargetProcess 
         /// </remarks>
         public IUsersClient User { get; }
-#endif
+
 
         /// <summary>
         /// Access GitHub's Search API.
@@ -185,7 +254,7 @@ namespace Sniper
 
         private static Uri FixUpBaseUri(Uri uri) //TODO: verify all this
         {
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             if (uri.Host.Equals("targetprocess.com") || uri.Host.Equals("api.targetprocess.com"))
             {
@@ -194,5 +263,6 @@ namespace Sniper
 
             return new Uri(uri, new Uri("/api/v1/", UriKind.Relative)); 
         }
+#endif
     }
 }

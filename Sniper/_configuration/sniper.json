@@ -1,0 +1,17 @@
+﻿{
+  "credentials": {
+    "authenticationType": "ServiceToken", //anonymous (not allowed for TP), basic, cookie, accessToken, serviceToken or token (Service Token). Do not use "Unknown"
+    "login": "apiaccess", //login, username, etc.
+    "password": "" // not checked in
+  },
+  "siteInfo": {
+    "baseUrl": "tpondemand.com",
+    "defaultResponseFormat": "json",
+    "hostName": "adamm",
+    "isApiIncluded": true,
+    "isVersionIncluded": true, //include /n
+    "IsVersionLetterIncluded": true, //include "v" in version. /vn instead of /n (/v1, /v2)
+    "protocol": "https", //http, https, tcp, ftp, etc. 
+    "version": 1
+  }
+}

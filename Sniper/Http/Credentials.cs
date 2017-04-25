@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
@@ -6,22 +7,24 @@ namespace Sniper.Http
     public class Credentials : ICredentials
     {
         [SuppressMessage(Categories.Security, MessageAttributes.DoNotDeclareReadOnlyMutableReferenceTypes, Justification = Justifications.ObjectIsImmutable)]
-        public static readonly Credentials Anonymous = new Credentials();
+        public static readonly Credentials CookieCredentials = new Credentials(AuthenticationType.Cookie);
 
-        private Credentials()
-        {
-            AuthenticationType = AuthenticationType.Anonymous;
-        }
+        public AuthenticationType AuthenticationType { get; }
+        public string Login { get; }
+        public string Password { get; set; }
 
-        public Credentials(string token)
+        public Credentials(AuthenticationType authenticationType) : this(authenticationType, null, null) {}
+
+        public Credentials(AuthenticationTokenType authenticationTokenType, string token) 
         {
+            Ensure.ArgumentNotNull(nameof(authenticationTokenType), authenticationTokenType);
             Ensure.ArgumentNotNullOrEmptyString(nameof(token), token);
 
             Login = null;
             Password = token;
-            AuthenticationType = AuthenticationType.Oauth;
+            AuthenticationType = authenticationTokenType == AuthenticationTokenType.AccessToken ? AuthenticationType.AccessToken : AuthenticationType.ServiceToken;
         }
-
+        
         public Credentials(string login, string password)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(login), login);
@@ -32,19 +35,17 @@ namespace Sniper.Http
             AuthenticationType = AuthenticationType.Basic;
         }
 
-        public string Login
+        public Credentials(AuthenticationType authenticationType, string login, string password)
         {
-            get;
+            Ensure.ArgumentNotNull(nameof(authenticationType), authenticationType);
+
+            AuthenticationType = authenticationType;
+            Login = login;
+            Password = password;
         }
 
-        public string Password
-        {
-            get;
-        }
-
-        public AuthenticationType AuthenticationType
-        {
-            get;
-        }
+        [JsonConstructor]
+        public Credentials(string authenticationType, string login, string password) : 
+            this(AuthenticationTypeExtensions.AuthenticationTypeFromString(authenticationType), login, password) {}
     }
 }

@@ -13,11 +13,11 @@ namespace Sniper.Tests.Helpers
             assert();
         }
 
-        private static readonly string[] whitespaceArguments = { " ", "\t", "\n", "\n\r", "  " };
+        private static readonly string[] _whitespaceArguments = { " ", "\t", "\n", "\n\r", "  " };
 
         public static async Task ThrowsWhenGivenWhitespaceArgument(Func<string, Task> action)
         {
-            foreach (var argument in whitespaceArguments)
+            foreach (var argument in _whitespaceArguments)
             {
                 await Assert.ThrowsAsync<ArgumentException>(async () => await action(argument));
             }

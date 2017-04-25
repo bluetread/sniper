@@ -1,9 +1,8 @@
-﻿using Sniper.ApiClients;
-using Sniper.Http;
-using System;
+﻿using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Sniper.Http;
 
 namespace Sniper
 {
@@ -20,8 +19,8 @@ namespace Sniper
         /// <returns><seealso cref="IResponse"/> representing the received HTTP response</returns>
         public static Task<IApiResponse<string>> GetHtml(this IConnection connection, Uri uri)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(connection), connection);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return connection.GetHtml(uri, null);
         }
@@ -36,8 +35,8 @@ namespace Sniper
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public static Task<IApiResponse<T>> GetResponse<T>(this IConnection connection, Uri uri)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(connection), connection);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return connection.Get<T>(uri, null, null);
         }
@@ -53,8 +52,8 @@ namespace Sniper
         /// <exception cref="ApiException">Thrown when an API error occurs.</exception>
         public static Task<IApiResponse<T>> GetResponse<T>(this IConnection connection, Uri uri, CancellationToken cancellationToken)
         {
-            Ensure.ArgumentNotNull(ApiClientKeys.Connection, connection);
-            Ensure.ArgumentNotNull(HttpKeys.Uri, uri);
+            Ensure.ArgumentNotNull(nameof(connection), connection);
+            Ensure.ArgumentNotNull(nameof(uri), uri);
 
             return connection.Get<T>(uri, null, null, cancellationToken);
         }
@@ -72,7 +71,7 @@ namespace Sniper
         /// <returns></returns>
         public static bool IsTrue(this IResponse response)
         {
-            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.Response, response);
+            Ensure.ArgumentNotNull(nameof(response), response);
             
             if (response.StatusCode != HttpStatusCode.NotFound && response.StatusCode != HttpStatusCode.NoContent)
             {

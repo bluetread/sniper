@@ -1,9 +1,13 @@
-﻿using Sniper.Http;
+﻿using System.Collections.Generic;
+using Sniper.Http;
 
 namespace Sniper
 {
-    internal interface IAuthenticationHandler
+    public interface IAuthenticationHandler
     {
-        void Authenticate(IRequest request, ICredentials credentials);
+        ISiteInfo SiteInfo { get; }
+        ICredentials Credentials { get; }
+        System.Net.ICredentials NetworkCredentials { get; }
+        Dictionary<string, string> AuthenticationParameters { get; }
     }
 }

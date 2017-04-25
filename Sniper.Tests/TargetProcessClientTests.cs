@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using NSubstitute;
-using Sniper.Http;
-using Xunit;
-
-namespace Sniper.Tests
+﻿namespace Sniper.Tests
 {
     public class TargetProcessClientTests
     {
+#if false
         public class TheCtor
         {
             [Fact]
@@ -196,5 +190,6 @@ namespace Sniper.Tests
             //    var temp = connection.Received(1).GetLastApiInfo();
             //}
         }
+#endif
     }
 }

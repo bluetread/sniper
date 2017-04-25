@@ -1,8 +1,8 @@
-﻿using Sniper.Http;
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 using System.Security;
+using Sniper.Http;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
@@ -40,7 +40,7 @@ namespace Sniper
         /// <param name="innerException">The inner exception</param>
         public RateLimitExceededException(IResponse response, Exception innerException) : base(response, innerException)
         {
-            Ensure.ArgumentNotNull(HttpKeys.ResponseParameters.Response, response);
+            Ensure.ArgumentNotNull(nameof(response), response);
 
             _rateLimit = response.ApiInfo.RateLimit;
         }

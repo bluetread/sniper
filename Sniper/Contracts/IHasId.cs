@@ -6,6 +6,6 @@ namespace Sniper.Contracts
     [SuppressMessage(Categories.Naming, MessageAttributes.CompoundWordsShouldBeCasedCorrectly)]
     public interface IHasId
     {
-        int Id { get; }
+        int Id { get; set; }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using System;
+using Newtonsoft.Json;
+using Sniper.Application;
 
 namespace Sniper.Contracts
 {
     public interface IHasDate
     {
-        DateTime? EntryDate { get; }
+        [JsonProperty(JsonProperties.Date)]
+        DateTime? EntryDate { get; set; }
     }
 }

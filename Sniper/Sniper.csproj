@@ -87,6 +87,7 @@
     <Compile Include="Contracts\History\IHasEpicHistory.cs" />
     <Compile Include="Contracts\History\IHasFeatureHistory.cs" />
     <Compile Include="Contracts\History\IHasImpedimentHistory.cs" />
+    <Compile Include="Contracts\History\IHasModifier.cs" />
     <Compile Include="Contracts\History\IHasRequestHistory.cs" />
     <Compile Include="Contracts\History\IHasTaskHistory.cs" />
     <Compile Include="Contracts\History\IHasUserHistory.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Contracts\IHasGenerals.cs" />
     <Compile Include="Contracts\IHasGeneralUser.cs" />
     <Compile Include="Contracts\IHasId.cs" />
+    <Compile Include="Contracts\IHasImpediment.cs" />
     <Compile Include="Contracts\IHasImpediments.cs" />
     <Compile Include="Contracts\IHasInitialEstimate.cs" />
     <Compile Include="Contracts\IHasIteration.cs" />
@@ -313,6 +315,8 @@
     <Compile Include="Models\History\EpicSimpleHistory.cs" />
     <Compile Include="Models\History\ImpedimentSimpleHistory.cs" />
     <Compile Include="Models\History\RequestSimpleHistory.cs" />
+    <Compile Include="Models\History\SimpleHistoryBase.cs" />
+    <Compile Include="Models\History\SimpleHistoryExtendedBase.cs" />
     <Compile Include="Models\History\TaskSimpleHistory.cs" />
     <Compile Include="Models\History\UserStorySimpleHistory.cs" />
     <Compile Include="Models\Request\ApiOptions.cs" />

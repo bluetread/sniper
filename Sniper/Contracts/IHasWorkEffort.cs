@@ -2,8 +2,8 @@
 {
     public interface IHasWorkEffort
     {
-        decimal Remain { get; }
-        decimal Spent { get; }
-        bool IsEstimation { get; }
+        decimal Remain { get; set; }
+        decimal Spent { get; set; }
+        bool IsEstimation { get; set; }
     }
 }

@@ -1,7 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using Sniper.Contracts;
+﻿using Sniper.Contracts;
 using Sniper.Contracts.History;
 using Sniper.History;
+using System.Collections.ObjectModel;
 
 namespace Sniper.Common
 {

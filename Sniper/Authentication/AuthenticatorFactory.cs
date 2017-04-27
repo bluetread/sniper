@@ -4,6 +4,11 @@ namespace Sniper
 {
     public static class AuthenticatorFactory
     {
+        public static IAuthenticationHandler GetAuthenticationHandlerFromConfig()
+        {
+            return GetAuthenticationHandler(ConfigurationData.Instance.Credentials.AuthenticationType);
+        }
+
         public static IAuthenticationHandler GetAuthenticationHandler(AuthenticationType authenticationType)
         {
             switch (authenticationType)
@@ -20,7 +25,6 @@ namespace Sniper
                     : ConfigurationData.Instance.Credentials.AuthenticationType);
                 default: return new AnonymousAuthenticator();
             }
-
         }
     }
 }

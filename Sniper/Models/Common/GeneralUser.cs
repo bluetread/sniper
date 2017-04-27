@@ -1,7 +1,7 @@
 ﻿using Sniper.Contracts;
 using System;
 using System.Collections.ObjectModel;
-using static Sniper.TargetProcess.Enumerations;
+using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
 {
@@ -15,7 +15,7 @@ namespace Sniper.Common
         IHasCustomFields, IHasAssignables, IHasComments, IHasRequests
     {
         public int Id { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
         public DateTime? DeleteDate { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }

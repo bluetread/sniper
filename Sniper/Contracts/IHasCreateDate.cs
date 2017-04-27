@@ -4,6 +4,6 @@ namespace Sniper.Contracts
 {
     public interface IHasCreateDate
     {
-        DateTime CreateDate { get; set; }
+        DateTime? CreateDate { get; set; }
     }
 }

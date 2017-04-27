@@ -1,6 +1,6 @@
-﻿using System;
-using Sniper.Contracts;
-using static Sniper.TargetProcess.Enumerations;
+﻿using Sniper.Contracts;
+using System;
+using static Sniper.TargetProcess.Common.Enumerations;
 namespace Sniper.Common
 {
     /// <summary>
@@ -13,11 +13,11 @@ namespace Sniper.Common
     {
         public int Id { get; set; }
         public string Body { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
         public bool IsProcessed { get; set; }
         public bool IsRead { get; set; }
         public string Recipients { get; set; }
-        public DateTime SendDate { get; set; }
+        public DateTime? SendDate { get; set; }
         public string Subject { get; set; }
 
         public ContentType ContentType { get; set; }

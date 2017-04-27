@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using static Sniper.TargetProcess.Enumerations;
+using static Sniper.TargetProcess.Common.Enumerations;
 using static Sniper.TargetProcess.Resources.TargetProcessResources;
 using static Sniper.TargetProcess.Resources.TargetProcessResources.TargetProcessResource;
 using static Sniper.TargetProcess.Routes.TargetProcessHistoryRoutes;

@@ -21,7 +21,7 @@ namespace Sniper.Tests.Authentication
                 {
                     ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories, true) 
                 };
-                var data = client.GetSiteData();
+                var data = client.GetSiteData<string>();
                 var error = data.HttpResponse.IsError;
                 Assert.True(error);
                 Assert.True(data.HttpResponse.StatusCode == HttpStatusCode.Unauthorized);
@@ -34,7 +34,7 @@ namespace Sniper.Tests.Authentication
                 {
                     ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories, true)
                 };
-                var data = client.GetSiteData();
+                var data = client.GetSiteData<string>();
                 var error = data.HttpResponse.IsError;
                 Assert.False(error);
                 Assert.True(data.HttpResponse.StatusCode == HttpStatusCode.OK);

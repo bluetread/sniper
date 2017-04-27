@@ -1,9 +1,9 @@
-﻿using Sniper.TargetProcess.Routes;
+﻿using Sniper.Configuration;
+using Sniper.TargetProcess.Routes;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Net.Http;
-using Sniper.Configuration;
 using static Sniper.Http.HttpResponseFormats;
 using static Sniper.WarningsErrors.MessageSuppression;
 
@@ -14,6 +14,10 @@ namespace Sniper.Http
         public HttpMethod Method { get; set; } = HttpMethod.Get;
         [SuppressMessage(Categories.Usage, MessageAttributes.CollectionPropertiesShouldBeReadOnly)]
         public IDictionary<string, string> Parameters { get; set; } = new Dictionary<string, string>();
+        public ICollection<string> FieldList { get; set; } = new Collection<string>();
+        public bool IsInclude { get; set; } = true;
+        public string CustomFilter { get; set; }
+
         private ResponseFormat _responseFormat;
         public ResponseFormat ResponseFormat
         {

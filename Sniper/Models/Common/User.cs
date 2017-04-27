@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Sniper.Contracts;
+using System;
 using System.Collections.ObjectModel;
-using Sniper.Contracts;
 
 namespace Sniper.Common
 {

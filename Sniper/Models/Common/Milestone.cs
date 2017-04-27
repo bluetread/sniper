@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Sniper.Application;
 using Sniper.Contracts;
+using System;
+using System.Collections.ObjectModel;
 
 namespace Sniper.Common
 {

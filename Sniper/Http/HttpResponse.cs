@@ -18,6 +18,11 @@ namespace Sniper.Http
             ResponseHeaders = responseHeaders?.GetHeaders();
         }
 
+        public HttpResponse(object obj) : this(HttpStatusCode.OK)
+        {
+            Data = obj;
+        }
+
         public HttpResponse(HttpStatusCode statusCode, Exception exception = null)
         {
             Ensure.ArgumentNotNull(nameof(statusCode), statusCode);
@@ -31,12 +36,11 @@ namespace Sniper.Http
             StatusCode = statusCode;
         }
 
-        public HttpResponse(HttpStatusCode statusCode, object body, WebHeaderCollection responseHeaders, string contentType)
+        public HttpResponse(HttpStatusCode statusCode, object data, WebHeaderCollection responseHeaders)
         {
             Ensure.ArgumentNotNull(nameof(statusCode), statusCode);
 
-            Body = body;
-            ContentType = contentType;
+            Data = data;
             ResponseHeaders = responseHeaders?.GetHeaders();
             StatusCode = statusCode;
         }
@@ -46,13 +50,10 @@ namespace Sniper.Http
         /// </summary>
         public Dictionary<Type, object> AdditionalInformation { get; set; } = new Dictionary<Type, object>();
         /// <summary>
-        /// Raw response body. Typically a string, but when requesting images, it will be a byte array.
+        /// Raw response data. Typically a string, but when requesting images, it will be a byte array.
         /// </summary>
-        public object Body { get; }
-        /// <summary>
-        /// The content type of the response.
-        /// </summary>
-        public string ContentType { get; }
+        public object Data { get; }
+        
         /// <summary>
         /// Quick way to identify that something went wrong.
         /// </summary>

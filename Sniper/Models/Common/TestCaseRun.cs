@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Sniper.Contracts;
+using System;
 using System.Collections.ObjectModel;
-using Sniper.Contracts;
-using static Sniper.TargetProcess.Enumerations;
+using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
 {

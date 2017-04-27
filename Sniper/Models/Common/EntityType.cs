@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using Sniper.Contracts;
-using static Sniper.TargetProcess.Enumerations;
+﻿using Sniper.Contracts;
+using System.Collections.ObjectModel;
+using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
 {

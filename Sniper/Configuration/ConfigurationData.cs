@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Sniper.FileAndDirectory;
 using Sniper.Http;
-using ICredentials = Sniper.Http.ICredentials;
+using System;
+using System.IO;
 using static Sniper.WarningsErrors.MessageSuppression;
+using ICredentials = Sniper.Http.ICredentials;
 
 namespace Sniper.Configuration
 {

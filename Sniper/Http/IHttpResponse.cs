@@ -10,14 +10,10 @@ namespace Sniper.Http
     public interface IHttpResponse
     {
         /// <summary>
-        /// Raw response body. Typically a string, but when requesting images, it will be a byte array.
+        /// Raw response data. Typically a string, but when requesting images, it will be a byte array.
         /// </summary>
-        object Body { get; }
+        object Data { get; }
 
-        /// <summary>
-        /// The content type of the response.
-        /// </summary>
-        string ContentType { get; }
 
         /// <summary>
         /// Quick way to identify that something went wrong.

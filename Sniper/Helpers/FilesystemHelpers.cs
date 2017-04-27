@@ -5,7 +5,7 @@ using static Sniper.Application.ApplicationKeys;
 
 namespace Sniper
 {
-   public static class FileSystemHelpers
+    public static class FileSystemHelpers
     {
         public static string AssemblyDirectory => GetPartialPath(GetCodeBase(typeof(FileSystemHelpers)), CurrentAssemblyName);
         public static string CurrentAssemblyName => GetAssemblyName(Assembly.GetExecutingAssembly());

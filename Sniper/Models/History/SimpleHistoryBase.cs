@@ -1,9 +1,9 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Sniper.Application;
 using Sniper.Common;
 using Sniper.Contracts;
 using Sniper.Contracts.History;
+using System;
 
 namespace Sniper.History
 {

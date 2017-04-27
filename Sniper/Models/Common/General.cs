@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Sniper.Contracts;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Sniper.Contracts;
 
 namespace Sniper.Common
 {
@@ -10,7 +10,7 @@ namespace Sniper.Common
         IHasAttachments, IHasComments, IHasFollowers, IHasMessages, IHasTags
     {
         public int Id { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
         public string Description { get; set; }
         public DateTime? EndDate { get; set; }
         public bool IsNext { get; set; }

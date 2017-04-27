@@ -1,6 +1,6 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Sniper.Application;
+using System;
 
 namespace Sniper.Contracts
 {

@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using static Sniper.Http.HttpResponseFormats;
 using static Sniper.Http.HttpProtocols;
+using static Sniper.Http.HttpResponseFormats;
 
 namespace Sniper.Http
 {
-  
+
     public interface ISiteInfo
     {
         string ApiUrl { get; } // Base API url for all commands for the site

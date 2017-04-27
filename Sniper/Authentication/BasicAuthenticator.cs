@@ -1,5 +1,5 @@
-﻿using System.Net;
-using Sniper.Http;
+﻿using Sniper.Http;
+using System.Net;
 using ICredentials = Sniper.Http.ICredentials;
 
 namespace Sniper

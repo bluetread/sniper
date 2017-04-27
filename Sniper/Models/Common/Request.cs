@@ -1,7 +1,7 @@
 ﻿using Sniper.Contracts.History;
 using Sniper.History;
 using System.Collections.ObjectModel;
-using static Sniper.TargetProcess.Enumerations;
+using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
 {

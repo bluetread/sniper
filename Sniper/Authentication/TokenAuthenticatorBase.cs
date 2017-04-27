@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Sniper.Http;
+﻿using Sniper.Http;
 using Sniper.TargetProcess;
+using System.Collections.Generic;
 
 namespace Sniper
 {

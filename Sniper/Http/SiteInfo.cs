@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using System.Text;
+using static Sniper.Http.HttpProtocols;
 using static Sniper.Http.HttpResponseFormats;
 using static Sniper.WarningsErrors.MessageSuppression;
-using static Sniper.Http.HttpProtocols;
 
 namespace Sniper.Http
 {

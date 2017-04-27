@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sniper.Http;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
@@ -7,7 +8,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using Sniper.Http;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper

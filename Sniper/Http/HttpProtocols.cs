@@ -13,6 +13,7 @@ namespace Sniper.Http
         {
             [EnumMember(Value = Protocols.HypertextSecure)]
             HypertextSecure,
+
             [EnumMember(Value = Protocols.HypertextUnsecure)]
             HypertextUnsecure
         }

@@ -10,7 +10,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Teams/meta">API documentation - Team</a>
     /// </remarks>
-    public class Team : General, IHasActive, IHasCommonEntityCollections, 
+    public class Team : General, IHasActive, IHasCommonEntityCollections,
         IHasTeamIterations, IHasTeamMembers, IHasTeamProjects
     {
         public string Abbreviation { get; set; }

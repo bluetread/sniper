@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using NSubstitute;
+﻿using NSubstitute;
 using NSubstitute.Core;
+using System;
+using System.Threading.Tasks;
 
 namespace Sniper.Tests.Helpers
 {

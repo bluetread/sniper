@@ -14,7 +14,6 @@ namespace Sniper.Http
         /// </summary>
         object Data { get; }
 
-
         /// <summary>
         /// Quick way to identify that something went wrong.
         /// </summary>
@@ -34,6 +33,5 @@ namespace Sniper.Http
         /// Optional exception information
         /// </summary>
         Exception Exception { get; }
-
     }
 }

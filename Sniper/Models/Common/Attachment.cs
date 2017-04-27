@@ -15,8 +15,10 @@ namespace Sniper.Common
     {
         public int Id { get; set; }
         public string Description { get; set; }
+
         [JsonProperty(JsonProperties.Date)]
         public DateTime? EntryDate { get; set; }
+
         public string Name { get; set; }
         public string UniqueFileName { get; set; }
 

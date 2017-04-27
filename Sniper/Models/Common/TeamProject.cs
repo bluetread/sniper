@@ -19,7 +19,7 @@ namespace Sniper.Common
 
         public Project Project { get; set; }
         public Team Team { get; set; }
-        
+
         public Collection<ProjectAllocation> Allocations { get; set; }
         public Collection<Workflow> Workflows { get; set; }
     }

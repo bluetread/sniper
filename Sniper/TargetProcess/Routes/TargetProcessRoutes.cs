@@ -3,13 +3,15 @@ using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.TargetProcess.Routes
 {
-    public static class TargetProcessRoutes 
+    public static class TargetProcessRoutes
     {
         public enum Route
         {
             None = 0,
+
             [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldBeSpelledCorrectly)]
             Assignables,
+
             AssignedEfforts,
             Assignments,
             Attachments,
@@ -30,14 +32,18 @@ namespace Sniper.TargetProcess.Routes
             GeneralUsers,
             GlobalSettings,
             Impediments,
+
             [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldBeSpelledCorrectly)]
             InboundAssignables,
+
             Iterations,
             Messages,
             MessageUniqueIds,
             Milestones,
+
             [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldBeSpelledCorrectly)]
             OutboundAssignables,
+
             Priorities,
             Processes,
             Programs,

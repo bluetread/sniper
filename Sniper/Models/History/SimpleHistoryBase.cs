@@ -10,6 +10,7 @@ namespace Sniper.History
     public abstract class SimpleHistoryBase : IHasId, IHasDate, IHasEntityState, IHasModifier, IHasProject
     {
         public int Id { get; set; }
+
         [JsonProperty(JsonProperties.Date)]
         public DateTime? EntryDate { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿namespace Sniper.Common
 {
     ///<summary>
-    /// A single iteration results in an increment(s) of product functionality. 
+    /// A single iteration results in an increment(s) of product functionality.
     /// Team iteration should relate to a Team.
     /// </summary>
     /// <remarks>

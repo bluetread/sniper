@@ -3,7 +3,7 @@
 namespace Sniper.Common
 {
     ///<summary>
-    /// Effort for Assignable by Role. For example, User Story can have 5 hours of Developer effort 
+    /// Effort for Assignable by Role. For example, User Story can have 5 hours of Developer effort
     /// + 3 hours of Tester effort. The total effort will be 8 hours.
     /// </summary>
     /// <remarks>

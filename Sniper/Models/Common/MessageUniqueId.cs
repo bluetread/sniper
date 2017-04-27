@@ -14,6 +14,5 @@ namespace Sniper.Common
         public string MailLogin { get; set; }
         public string MailServer { get; set; }
         public string Uid { get; set; }
-
     }
 }

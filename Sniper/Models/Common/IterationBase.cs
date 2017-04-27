@@ -20,6 +20,5 @@ namespace Sniper.Common
         public Collection<Task> Tasks { get; set; }
         public Collection<TestPlanRun> TestPlanRuns { get; set; }
         public Collection<UserStory> UserStories { get; set; }
-        
     }
 }

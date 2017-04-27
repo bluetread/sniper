@@ -9,7 +9,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TestPlanRuns/meta">API documentation - TestPlanRun</a>
     /// </remarks>
-    public class TestPlanRun : Assignable, IHasBuild, IHasTestPlan, IHasTestCaseRuns, IHasTestPlanRuns, 
+    public class TestPlanRun : Assignable, IHasBuild, IHasTestPlan, IHasTestCaseRuns, IHasTestPlanRuns,
         IHasBugs, IHasTestCaseRunLinks
     {
         public int BlockedCount { get; set; }

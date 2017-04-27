@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 namespace Sniper.Common
 {
     /// <summary>
-    /// A single iteration results in an increment(s) of product functionality. 
+    /// A single iteration results in an increment(s) of product functionality.
     /// Iteration should relate to a Release.
     /// </summary>
     /// <remarks>

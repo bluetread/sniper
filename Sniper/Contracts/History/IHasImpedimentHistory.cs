@@ -5,6 +5,6 @@ namespace Sniper.Contracts.History
 {
     public interface IHasImpedimentHistory
     {
-       Collection<ImpedimentSimpleHistory> History { get; set; }
+        Collection<ImpedimentSimpleHistory> History { get; set; }
     }
 }

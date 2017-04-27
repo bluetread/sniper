@@ -9,7 +9,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/RequestTypes/meta">API documentation - RequestType</a>
     /// </remarks>
-    public class RequestType :IHasId, IHasName, IHasRequests
+    public class RequestType : IHasId, IHasName, IHasRequests
     {
         public int Id { get; set; }
         public string Icon { get; set; }

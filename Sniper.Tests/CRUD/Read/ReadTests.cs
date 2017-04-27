@@ -1,23 +1,21 @@
-﻿using Xunit;
-using Sniper.Common;
+﻿using Sniper.Common;
 using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
-
+using Xunit;
 
 namespace Sniper.Tests.CRUD.Read
 {
     public class ReadTests
     {
-
         [Fact]
         public void ReadTimeReturnsData()
         {
             var client = new TargetProcessClient(true)
             {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Times, true) 
+                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Times, true)
             };
             var data = client.GetSiteData<Time>();
             var error = data.HttpResponse.IsError;

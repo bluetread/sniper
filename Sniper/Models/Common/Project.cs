@@ -12,9 +12,9 @@ namespace Sniper.Common
     /// </remarks>
     public class Project : General, IHasActive, IHasAllocations, IHasBugs, IHasBuilds,
         IHasCompany, IHasCustomActivities, IHasEffort, IHasEntityState, IHasEpics,
-        IHasFeatures, IHasForecastEndDate, IHasGenerals, IHasIterations, IHasLeadCycleTimes, 
-        IHasMilestones, IHasPlannedDates, IHasPrivate, IHasProgress, IHasProjectMembers, 
-        IHasReleases, IHasRequests, IHasRevisions, IHasTasks, IHasTeamProjects, 
+        IHasFeatures, IHasForecastEndDate, IHasGenerals, IHasIterations, IHasLeadCycleTimes,
+        IHasMilestones, IHasPlannedDates, IHasPrivate, IHasProgress, IHasProjectMembers,
+        IHasReleases, IHasRequests, IHasRevisions, IHasTasks, IHasTeamProjects,
         IHasTestCases, IHasTestPlanRuns, IHasTestPlans, IHasTimes, IHasUnits, IHasUserStories
     {
         public string Abbreviation { get; set; }

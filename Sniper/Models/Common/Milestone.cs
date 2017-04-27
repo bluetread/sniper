@@ -17,8 +17,10 @@ namespace Sniper.Common
         public int Id { get; set; }
         public string CssClass { get; set; }
         public string Description { get; set; }
+
         [JsonProperty(JsonProperties.Date)]
         public DateTime? EntryDate { get; set; }
+
         public string Name { get; set; }
         public User Owner { get; set; }
         public Collection<Project> Projects { get; set; }

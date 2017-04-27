@@ -14,8 +14,7 @@ namespace Sniper
 {
     internal static class StringExtensions
     {
-       
-      public static Uri FormatUri(this string pattern, params object[] args)
+        public static Uri FormatUri(this string pattern, params object[] args)
         {
             Ensure.ArgumentNotNullOrEmptyString(HttpKeys.Pattern, pattern);
 
@@ -39,6 +38,7 @@ namespace Sniper
         }
 
         private static readonly Regex _optionalQueryStringRegex = new Regex("\\{\\?([^}]+)\\}");
+
         public static Uri ExpandUriTemplate(this string template, object values)
         {
             var optionalQueryStringMatch = _optionalQueryStringRegex.Match(template);

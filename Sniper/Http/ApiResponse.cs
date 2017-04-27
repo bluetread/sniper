@@ -13,7 +13,7 @@ namespace Sniper.Http
         /// Create a ApiResponse from an existing request
         /// </summary>
         /// <param name="response">An existing request to wrap</param>
-        public ApiResponse(IHttpResponse response) : this(response, (ICollection<T>)response?.Data) {}
+        public ApiResponse(IHttpResponse response) : this(response, (ICollection<T>)response?.Data) { }
 
         /// <summary>
         /// Create a ApiResponse from an existing request and object

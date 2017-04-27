@@ -37,7 +37,6 @@ namespace Sniper.Application.Parameters
         public const string Reset = "reset";
         public const string ResetAsUtcEpochSeconds = "ResetAsUtcEpochSeconds";
     }
-
 }
 
 namespace Sniper.Authentication
@@ -80,7 +79,6 @@ namespace Sniper.FileAndDirectory
         public const string Text = "txt";
         public const string Xml = "xml";
     }
-
 }
 
 namespace Sniper.Http
@@ -199,7 +197,6 @@ namespace Sniper.TargetProcess
 
     public static class StatusCodes
     {
-
         internal static class StatusCodeTitles
         {
             public const string Success = "Success";
@@ -229,6 +226,7 @@ namespace Sniper.Types
     {
         ///<summary>JavaScript Object Notation JSON; Defined in RFC 4627</summary>
         public const string ApplicationJson = "application/json";
+
         public const string ApplicationFormUrlEncoded = "application/x-www-form-urlencoded";
 
         ///<summary>Arbitrary binary data.[5] Generally speaking this type identifies files that are not associated with a specific application. Contrary to past assumptions by software packages such as Apache this is not a type that should be applied to unknown files. In such a case, a server or application should not indicate a content type, as it may be incorrect, but rather, should omit the type in order to allow the recipient to guess the type.[6]</summary>
@@ -240,7 +238,6 @@ namespace Sniper.Types
         ///<summary>ZIP archive files; Registered[7]</summary>
         public const string ApplicationZip = "application/zip";
     }
-
 }
 
 #if false
@@ -257,7 +254,6 @@ namespace Sniper.Types
 
         ///<summary>Adobe Flash files for example with the extension .swf</summary>
         public const string ApplicationXShockwaveFlash = "application/x-shockwave-flash";
-
 
         ///<summary>Atom feeds</summary>
         public const string ApplicationAtomXml = "application/atom+xml";
@@ -336,7 +332,6 @@ namespace Sniper.Types
 
         ///<summary>IMDN Instant Message Disposition Notification; Defined in RFC 5438</summary>
         public const string MessageImdnXml = "message/imdn+xml";
-
 
         ///<summary>JavaScript Object Notation (JSON) Patch; Defined in RFC 6902</summary>
         public const string ApplicationJsonPatch = "application/json-patch+json";
@@ -539,11 +534,9 @@ namespace Sniper.Types
 
         ///<summary>XHTML; Defined by RFC 3236</summary>
         public const string ApplicationXhtmlXml = "application/xhtml+xml";
-
     }
 }
 #endif
-
 
 namespace Sniper.WarningsErrors
 {
@@ -607,5 +600,4 @@ namespace Sniper.WarningsErrors
             public const string Type = "type";
         }
     }
-
 }

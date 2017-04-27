@@ -38,10 +38,12 @@ namespace Sniper
         }
 
 #if !NETFX_CORE
+
         public static Type GetTypeInfo(this Type type)
         {
             return type;
         }
+
 #endif
 
 #if NETFX_CORE
@@ -55,6 +57,7 @@ namespace Sniper
             return type.GetTypeInfo().IsAssignableFrom(otherType.GetTypeInfo());
         }
 #endif
+
         public static IEnumerable<PropertyInfo> GetAllProperties(this Type type)
         {
 #if NETFX_CORE

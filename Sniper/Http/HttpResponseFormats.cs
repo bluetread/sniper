@@ -8,10 +8,13 @@ namespace Sniper.Http
         {
             [EnumMember(Value = ResponseFormatKeys.None)]
             None,
+
             [EnumMember(Value = ResponseFormatKeys.Json)]
             Json,
+
             [EnumMember(Value = ResponseFormatKeys.Xml)]
             Xml,
+
             Default = Xml
         }
     }

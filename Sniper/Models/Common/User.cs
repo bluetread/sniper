@@ -36,6 +36,5 @@ namespace Sniper.Common
         public Collection<Revision> Revisions { get; set; }
         public Collection<TeamMember> TeamMember { get; set; }
         public Collection<Time> Times { get; set; }
-        
     }
 }

@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;
 using static Sniper.WarningsErrors.MessageSuppression;
+
 // ReSharper disable AssignNullToNotNullAttribute
 //This file was copied from SinpleJson (from Octokit) and modified for Sniper
 namespace Sniper
@@ -17,8 +18,10 @@ namespace Sniper
 
         [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldNotHaveIncorrectSuffix)]
         public delegate object GetDelegate(object source);
+
         [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldNotHaveIncorrectSuffix)]
         public delegate void SetDelegate(object source, object value);
+
         [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldNotHaveIncorrectSuffix)]
         public delegate object ConstructorDelegate(params object[] args);
 
@@ -420,4 +423,3 @@ namespace Sniper
         }
     }
 }
-

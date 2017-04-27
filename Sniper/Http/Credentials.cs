@@ -13,9 +13,9 @@ namespace Sniper.Http
         public string Login { get; }
         public string Password { get; set; }
 
-        public Credentials(AuthenticationType authenticationType) : this(authenticationType, null, null) {}
+        public Credentials(AuthenticationType authenticationType) : this(authenticationType, null, null) { }
 
-        public Credentials(AuthenticationTokenType authenticationTokenType, string token) 
+        public Credentials(AuthenticationTokenType authenticationTokenType, string token)
         {
             Ensure.ArgumentNotNull(nameof(authenticationTokenType), authenticationTokenType);
             Ensure.ArgumentNotNullOrEmptyString(nameof(token), token);
@@ -24,7 +24,7 @@ namespace Sniper.Http
             Password = token;
             AuthenticationType = authenticationTokenType == AuthenticationTokenType.AccessToken ? AuthenticationType.AccessToken : AuthenticationType.ServiceToken;
         }
-        
+
         public Credentials(string login, string password)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(login), login);
@@ -45,7 +45,8 @@ namespace Sniper.Http
         }
 
         [JsonConstructor]
-        public Credentials(string authenticationType, string login, string password) : 
-            this(AuthenticationTypeExtensions.AuthenticationTypeFromString(authenticationType), login, password) {}
+        public Credentials(string authenticationType, string login, string password) :
+            this(AuthenticationTypeExtensions.AuthenticationTypeFromString(authenticationType), login, password)
+        { }
     }
 }

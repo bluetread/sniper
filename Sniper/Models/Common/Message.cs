@@ -1,6 +1,7 @@
 ﻿using Sniper.Contracts;
 using System;
 using static Sniper.TargetProcess.Common.Enumerations;
+
 namespace Sniper.Common
 {
     /// <summary>

@@ -9,13 +9,13 @@ namespace Sniper
         protected virtual AuthenticationTokenType TokenType { get; set; } = AuthenticationTokenType.ServiceToken;
         public override Dictionary<string, string> AuthenticationParameters => new Dictionary<string, string> { { AuthenticationTokenParameters.ServiceToken, Credentials.Password } };
 
-        protected TokenAuthenticatorBase() {}
+        protected TokenAuthenticatorBase() { }
 
         protected TokenAuthenticatorBase(string token)
         {
             Credentials.Password = token;
         }
 
-        protected TokenAuthenticatorBase(ISiteInfo siteInfo, ICredentials credentials) : base(siteInfo, credentials) {}
+        protected TokenAuthenticatorBase(ISiteInfo siteInfo, ICredentials credentials) : base(siteInfo, credentials) { }
     }
 }

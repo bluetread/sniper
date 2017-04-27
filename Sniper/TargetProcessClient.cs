@@ -9,15 +9,15 @@ using static Sniper.WarningsErrors.MessageSuppression;
 namespace Sniper
 {
     /// <summary>
-    /// A Client for the Target Process API. 
+    /// A Client for the Target Process API.
     /// </summary>
-    public class TargetProcessClient  : ITargetProcessClient
+    public class TargetProcessClient : ITargetProcessClient
     {
         public IDictionary<string, string> DefaultQueryParameters { get; } = new Dictionary<string, string>();
         public IAuthenticationHandler AuthenticationHandler { get; } = new AnonymousAuthenticator();
         public IApiSiteInfo ApiSiteInfo { get; set; } = new ApiSiteInfo();
 
-        public TargetProcessClient() {}
+        public TargetProcessClient() { }
 
         public TargetProcessClient(bool useConfigHandler)
         {
@@ -49,7 +49,7 @@ namespace Sniper
                 var customFilter = ApiSiteInfo.CustomFilter;
 
                 var dictList = new[] { DefaultQueryParameters, AuthenticationHandler.AuthenticationParameters, ApiSiteInfo.Parameters };
-                
+
                 var queryParameters = GetParameters(dictList);
                 if (!string.IsNullOrWhiteSpace(customFilter))
                 {
@@ -60,7 +60,7 @@ namespace Sniper
 
                 using (var client = new WebClient())
                 {
-                    client.BaseAddress = fullPathAndQueryParameters; 
+                    client.BaseAddress = fullPathAndQueryParameters;
                     client.Credentials = AuthenticationHandler.NetworkCredentials;
                     var result = client.DownloadString(client.BaseAddress);
 
@@ -72,7 +72,6 @@ namespace Sniper
                     var items = JsonConvert.DeserializeObject<TargetProcessResponseWrapper<T>>(result).Items;
                     return new ApiResponse<T>(new HttpResponse(HttpStatusCode.OK, items, client.ResponseHeaders) { IsError = false });
                 }
-
             }
             catch (WebException webException)
             {
@@ -84,8 +83,6 @@ namespace Sniper
                 return new ApiResponse<T>(new HttpResponse(e));
             }
         }
-
-      
 
         private static string GetParameters(IDictionary<string, string>[] orderedList)
         {

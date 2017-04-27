@@ -12,7 +12,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Impediments/meta">API documentation - Impediment</a>
     /// </remarks>
-    public class Impediment : General, IHasPrivate, IHasPlannedDates, 
+    public class Impediment : General, IHasPrivate, IHasPlannedDates,
         IHasAssignable, IHasEntityState, IHasImpedimentHistory, IHasPriority, IHasResponsibleUser
     {
         public bool IsPrivate { get; set; }

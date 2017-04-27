@@ -1,6 +1,6 @@
-﻿using System.Net;
-using Sniper.Http;
+﻿using Sniper.Http;
 using Sniper.TargetProcess.Routes;
+using System.Net;
 using Xunit;
 
 namespace Sniper.Tests.Authentication

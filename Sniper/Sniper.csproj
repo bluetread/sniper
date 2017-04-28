@@ -211,6 +211,7 @@
     <Compile Include="Helpers\PropertyOrField.cs" />
     <Compile Include="Helpers\ReflectionUtils.cs" />
     <Compile Include="Helpers\SerializeNullAttribute.cs" />
+    <Compile Include="Helpers\TargetProcessClient.cs" />
     <Compile Include="Helpers\WebHookConfigComparer.cs" />
     <Compile Include="Http\ApiResponse.cs" />
     <Compile Include="Http\ApiSiteInfo.cs" />

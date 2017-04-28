@@ -11,7 +11,7 @@ namespace Sniper
     /// <summary>
     /// A Client for the Target Process API.
     /// </summary>
-    public class TargetProcessClient : ITargetProcessClient
+    public partial class TargetProcessClient : ITargetProcessClient
     {
         public IDictionary<string, string> DefaultQueryParameters { get; } = new Dictionary<string, string>();
         public IAuthenticationHandler AuthenticationHandler { get; } = new AnonymousAuthenticator();
@@ -39,7 +39,7 @@ namespace Sniper
         [SuppressMessage(Categories.Design, MessageAttributes.DoNotCatchGeneralExceptionTypes)]
         [SuppressMessage(Categories.Design, MessageAttributes.UsePropertiesWhereAppropriate)]
         [SuppressMessage(Categories.Performance, "CA1804:RemoveUnusedLocals")]
-        public IApiResponse<T> GetSiteData<T>()
+        public IApiResponse<T> GetData<T>()
         {
             try
             {

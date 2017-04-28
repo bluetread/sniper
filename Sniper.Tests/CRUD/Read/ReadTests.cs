@@ -17,7 +17,7 @@ namespace Sniper.Tests.CRUD.Read
             {
                 ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Times, true)
             };
-            var data = client.GetSiteData<Time>();
+            var data = client.GetData<Time>();
             var error = data.HttpResponse.IsError;
             Assert.False(error);
             Assert.True(data.HttpResponse.StatusCode == HttpStatusCode.OK);
@@ -32,7 +32,7 @@ namespace Sniper.Tests.CRUD.Read
             {
                 ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories, true) { CustomFilter = "&where=id eq 205" }
             };
-            var data = client.GetSiteData<UserStory>();
+            var data = client.GetData<UserStory>();
             var error = data.HttpResponse.IsError;
             Assert.False(error);
             Assert.True(data.HttpResponse.StatusCode == HttpStatusCode.OK);
@@ -51,7 +51,7 @@ namespace Sniper.Tests.CRUD.Read
             {
                 ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories, true)
             };
-            var data = client.GetSiteData<Collection<UserStory>>();
+            var data = client.GetData<Collection<UserStory>>();
             var error = data.HttpResponse.IsError;
             Assert.False(error);
             Assert.True(data.HttpResponse.StatusCode == HttpStatusCode.OK);

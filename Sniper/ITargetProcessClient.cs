@@ -12,5 +12,7 @@ namespace Sniper
         IDictionary<string, string> DefaultQueryParameters { get; }
 
         IApiSiteInfo ApiSiteInfo { get; }
+
+        IApiResponse<T> GetData<T>();
     }
 }

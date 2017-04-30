@@ -93,7 +93,6 @@ namespace Sniper
                     getDelegate = ReflectionUtils.GetGetMethod(_fieldInfo);
                 }
 
-
                 if (getDelegate == null)
                 {
                     throw new InvalidOperationException(FieldAndPropertyBothNull);
@@ -112,6 +111,7 @@ namespace Sniper
                 return getDelegate;
             }
         }
+
         public ReflectionUtils.SetDelegate SetDelegate
         {
             get

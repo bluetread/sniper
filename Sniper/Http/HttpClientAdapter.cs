@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sniper.Types;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Sniper.Types;
+using static Sniper.Authentication.AuthenticationKeys;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
@@ -21,16 +22,27 @@ namespace Sniper.Http
     /// </remarks>
     public class HttpClientAdapter : IHttpClient
     {
-        private readonly HttpClient _http;
+        private readonly HttpClient _httpClient;
 
         public const string RedirectCountKey = "RedirectCount";
+        public const int MaxRedirects = 3;
+        public const int PermanentRedirect = 308;
+
+        private static string[] DefaultBinaryContentTypes => new[]
+        {
+            MimeTypes.ApplicationZip,
+            MimeTypes.ApplicationXGzip,
+            MimeTypes.ApplicationOctetStream
+        };
+        
+        public HttpClientAdapter() : this(HttpMessageHandlerFactory.CreateDefault) {}
 
         [SuppressMessage(Categories.Reliability, MessageAttributes.DisposeObjectsBeforeLosingScope)]
         public HttpClientAdapter(Func<HttpMessageHandler> getHandler)
         {
             Ensure.ArgumentNotNull(nameof(getHandler), getHandler);
-            
-            _http = new HttpClient(new RedirectHandler { InnerHandler = getHandler() });
+
+            _httpClient = new HttpClient(new RedirectHandler { InnerHandler = getHandler() });
         }
 
         ~HttpClientAdapter()
@@ -41,10 +53,42 @@ namespace Sniper.Http
         /// <summary>
         /// Sends the specified request and returns a response.
         /// </summary>
-        /// <param name="request">A <see cref="IRequest"/> that represents the HTTP request</param>
+        /// <param name="request">A <see cref="IApiRequest"/> that represents the HTTP request</param>
+        /// <returns>A <see cref="Task" /> of <see cref="IHttpResponse"/></returns>
+        public IHttpResponse Send(IApiRequest request)
+        {
+            Ensure.ArgumentNotNull(nameof(request), request);
+
+            using (var client = new WebClient())
+            {
+                client.BaseAddress = request.BaseAddress.ToString();
+                client.Credentials = request.AuthenticationHandler.NetworkCredentials;
+                try
+                {
+                    var result = client.DownloadString(client.BaseAddress);
+                    return new HttpResponse(HttpStatusCode.OK, result);
+                }
+                catch (Exception e)
+                {
+                    return new HttpResponse(e);
+                }
+            }
+        }
+
+        //private async Task<HttpResponseMessage> GetResponseMessageAsync(HttpRequestMessage requestMessage)
+        //{
+        //    Ensure.ArgumentNotNull(nameof(requestMessage), requestMessage);
+        //    var responseMessage = await _httpClient.SendAsync(requestMessage);
+        //    return responseMessage;
+        //}
+
+        /// <summary>
+        /// Sends the specified request and returns a response.
+        /// </summary>
+        /// <param name="request">A <see cref="IApiRequest"/> that represents the HTTP request</param>
         /// <param name="cancellationToken">Used to cancel the request</param>
-        /// <returns>A <see cref="Task" /> of <see cref="IResponse"/></returns>
-        public async Task<IResponse> Send(IRequest request, CancellationToken cancellationToken)
+        /// <returns>A <see cref="Task" /> of <see cref="IHttpResponse"/></returns>
+        public async Task<IHttpResponse> SendAsync(IApiRequest request, CancellationToken cancellationToken)
         {
             Ensure.ArgumentNotNull(nameof(request), request);
 
@@ -54,12 +98,13 @@ namespace Sniper.Http
             {
                 var responseMessage = await SendAsync(requestMessage, cancellationTokenForRequest).ConfigureAwait(false);
 
-                return await BuildResponse(responseMessage).ConfigureAwait(false);
+                return await BuildResponseAsync(responseMessage).ConfigureAwait(false);
             }
         }
 
+
         [SuppressMessage(Categories.Reliability, MessageAttributes.DisposeObjectsBeforeLosingScope)]
-        private static CancellationToken GetCancellationTokenForRequest(IRequest request, CancellationToken cancellationToken)
+        private static CancellationToken GetCancellationTokenForRequest(IApiRequest request, CancellationToken cancellationToken)
         {
             var cancellationTokenForRequest = cancellationToken;
 
@@ -73,76 +118,110 @@ namespace Sniper.Http
             return cancellationTokenForRequest;
         }
 
-        protected virtual async Task<IResponse> BuildResponse(HttpResponseMessage responseMessage)
+        protected virtual IHttpResponse BuildResponse(HttpResponseMessage responseMessage)
         {
             Ensure.ArgumentNotNull(nameof(responseMessage), responseMessage);
-            
-            object responseBody = null;
-            string contentType = null;
 
-            // We added support for downloading images,zip-files and application/octet-stream. 
-            // Let's constrain this appropriately.
-            var binaryContentTypes = new[] {
-                MimeTypes.ApplicationZip,
-                MimeTypes.ApplicationXGzip,
-                MimeTypes.ApplicationOctetStream
-            };
+            object responseBody;
+            string contentType;
 
             using (var content = responseMessage.Content)
             {
-                if (content != null)
-                {
-                    contentType = GetContentMediaType(responseMessage.Content);
+                if (content == null) return new HttpResponse(responseMessage.StatusCode, null, responseMessage.Headers, null);
 
-                    if (contentType != null && (contentType.StartsWith("image/") || binaryContentTypes
-                        .Any(item => item.Equals(contentType, StringComparison.OrdinalIgnoreCase))))
-                    {
-                        responseBody = await responseMessage.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
-                    }
-                    else
-                    {
-                        responseBody = await responseMessage.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    }
-                }
+                contentType = GetContentMediaType(content);
+                responseBody = IsBinaryContent(contentType) ? (object)GetContentBytes(content) : GetContentString(content);
             }
-
-            return new Response(
-                responseMessage.StatusCode,
-                responseBody,
-                responseMessage.Headers.ToDictionary(h => h.Key, h => h.Value.First()),
-                contentType);
+            return new HttpResponse(responseMessage.StatusCode, responseBody, responseMessage.Headers, contentType);
         }
 
-        protected virtual HttpRequestMessage BuildRequestMessage(IRequest request)
+        protected virtual async Task<IHttpResponse> BuildResponseAsync(HttpResponseMessage responseMessage)
+        {
+            Ensure.ArgumentNotNull(nameof(responseMessage), responseMessage);
+
+            object responseBody;
+            string contentType;
+
+            using (var content = responseMessage.Content)
+            {
+                if (content == null) return new HttpResponse(responseMessage.StatusCode, null, responseMessage.Headers, null);
+
+                contentType = GetContentMediaType(content);
+                responseBody = IsBinaryContent(contentType) ? (object)await GetContentBytesAsync(content) : await GetContentStringAsync(content);
+            }
+            return new HttpResponse(responseMessage.StatusCode, responseBody, responseMessage.Headers, contentType);
+        }
+
+        private static bool IsBinaryContent(string contentType)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(nameof(contentType), contentType);
+            
+            return contentType != null && (contentType.StartsWith(MimeTypes.ImagePrefix) || 
+                DefaultBinaryContentTypes.Any(λ => λ.Equals(contentType, StringComparison.OrdinalIgnoreCase)));
+        }
+
+       
+
+        private byte[] GetContentBytes(HttpContent content)
+        {
+            Ensure.ArgumentNotNull(nameof(content), content);
+            return content.ReadAsByteArrayAsync().Result;
+        }
+
+        private async Task<byte[]> GetContentBytesAsync(HttpContent content)
+        {
+            Ensure.ArgumentNotNull(nameof(content), content);
+            return await content.ReadAsByteArrayAsync().ConfigureAwait(false);
+        }
+
+        private string GetContentString(HttpContent content)
+        {
+            Ensure.ArgumentNotNull(nameof(content), content);
+            return content.ReadAsStringAsync().Result;
+        }
+
+        private async Task<string> GetContentStringAsync(HttpContent content)
+        {
+            Ensure.ArgumentNotNull(nameof(content), content);
+            return await content.ReadAsStringAsync().ConfigureAwait(false);
+        }
+
+        protected virtual HttpRequestMessage BuildRequestMessage(IApiRequest request)
         {
             Ensure.ArgumentNotNull(nameof(request), request);
             HttpRequestMessage requestMessage = null;
             try
             {
-                var fullUri = new Uri(request.BaseAddress, request.Endpoint);
+                var fullUri = request.BaseAddress;
                 requestMessage = new HttpRequestMessage(request.Method, fullUri);
 
                 foreach (var header in request.Headers)
                 {
                     requestMessage.Headers.Add(header.Key, header.Value);
                 }
-                var httpContent = request.Body as HttpContent;
+
+                var httpContent = request.Data as HttpContent;
                 if (httpContent != null)
                 {
                     requestMessage.Content = httpContent;
                 }
 
-                var body = request.Body as string;
+                var body = request.Data as string;
                 if (body != null)
                 {
                     requestMessage.Content = new StringContent(body, Encoding.UTF8, request.ContentType);
                 }
 
-                var bodyStream = request.Body as Stream;
+                var bodyStream = request.Data as Stream;
                 if (bodyStream != null)
                 {
                     requestMessage.Content = new StreamContent(bodyStream);
                     requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(request.ContentType);
+                }
+
+                if (request.AuthenticationHandler != null && request.AuthenticationHandler.GetType() == typeof(BasicAuthenticator))
+                {
+                    requestMessage.Headers.Authorization = new AuthenticationHeaderValue(Keys.Basic, ApiSiteHelpers.GetBasicCredentials((BasicAuthenticator)request.AuthenticationHandler));
                 }
             }
             catch (Exception)
@@ -168,9 +247,9 @@ namespace Sniper.Http
         protected virtual void Dispose(bool disposing)
         {
             // ReSharper disable once UseNullPropagation // Causes error when using  _http?.Dispose();
-            if (disposing && _http != null)
+            if (disposing && _httpClient != null)
             {
-                _http.Dispose();
+                _httpClient.Dispose();
             }
         }
 
@@ -180,7 +259,7 @@ namespace Sniper.Http
             var clonedRequest = await CloneHttpRequestMessageAsync(request).ConfigureAwait(false);
 
             // Send initial response
-            var response = await _http.SendAsync(request, HttpCompletionOption.ResponseContentRead, cancellationToken).ConfigureAwait(false);
+            var response = await _httpClient.SendAsync(request, HttpCompletionOption.ResponseContentRead, cancellationToken).ConfigureAwait(false);
 
             // Can't redirect without somewhere to redirect to.
             if (response.Headers.Location == null)
@@ -194,7 +273,7 @@ namespace Sniper.Http
             {
                 redirectCount = (int)request.Properties[RedirectCountKey];
             }
-            if (redirectCount > 3)
+            if (redirectCount > MaxRedirects)
             {
                 throw new InvalidOperationException("The redirect count for this request has been exceeded. Aborting."); //TODO:const
             }
@@ -204,7 +283,7 @@ namespace Sniper.Http
                         || response.StatusCode == HttpStatusCode.Found
                         || response.StatusCode == HttpStatusCode.SeeOther
                         || response.StatusCode == HttpStatusCode.TemporaryRedirect
-                        || (int)response.StatusCode == 308)
+                        || (int)response.StatusCode == PermanentRedirect)
             {
                 if (response.StatusCode == HttpStatusCode.SeeOther)
                 {

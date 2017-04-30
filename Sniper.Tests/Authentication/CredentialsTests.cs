@@ -1,5 +1,5 @@
-﻿using System;
-using Sniper.Http;
+﻿using Sniper.Http;
+using System;
 using Xunit;
 
 namespace Sniper.Tests.Authentication
@@ -28,6 +28,7 @@ namespace Sniper.Tests.Authentication
                 var credentials = new Credentials(AuthenticationTokenType.AccessToken, "token");
                 Assert.Equal(AuthenticationType.AccessToken, credentials.AuthenticationType);
             }
+
             [Fact]
             public void ReturnsServiceTokenWhenProvidedTokenForServiceToken()
             {
@@ -55,6 +56,7 @@ namespace Sniper.Tests.Authentication
                 Assert.Equal("password", credentials.Password);
             }
         }
+
         public class TheCtor
         {
             [Fact]

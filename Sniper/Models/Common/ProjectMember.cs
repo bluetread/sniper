@@ -26,4 +26,3 @@ namespace Sniper.Common
         public Collection<UserProjectAllocation> Allocations { get; set; }
     }
 }
-

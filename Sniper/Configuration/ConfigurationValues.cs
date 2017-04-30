@@ -7,6 +7,7 @@ namespace Sniper.Configuration
     {
         [JsonConverter(typeof(JsonHelpers.ConcreteConverter<Credentials>))]
         public ICredentials Credentials { get; set; }
+
         [JsonConverter(typeof(JsonHelpers.ConcreteConverter<SiteInfo>))]
         public ISiteInfo SiteInfo { get; set; }
     }

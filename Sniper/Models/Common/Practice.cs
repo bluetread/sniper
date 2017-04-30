@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using Sniper.Contracts;
+﻿using Sniper.Contracts;
+using System.Collections.ObjectModel;
 
 namespace Sniper.Common
 {
     ///<summary>
-    /// 
+    ///
     /// </summary>
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Practices/meta">API documentation - Practice</a>

@@ -5,6 +5,6 @@ namespace Sniper.Contracts
 {
     public interface IHasTasks
     {
-        Collection<Task> Tasks{ get; set; }
+        Collection<Task> Tasks { get; set; }
     }
 }

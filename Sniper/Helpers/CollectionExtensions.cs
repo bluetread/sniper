@@ -9,7 +9,7 @@ namespace Sniper
         public static TValue SafeGet<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key)
         {
             Ensure.ArgumentNotNull(nameof(dictionary), dictionary);
-            
+
             TValue value;
             return dictionary.TryGetValue(key, out value) ? value : default(TValue);
         }

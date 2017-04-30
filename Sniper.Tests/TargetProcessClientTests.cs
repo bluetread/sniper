@@ -63,7 +63,6 @@
             //    Assert.Equal(AuthenticationType.Oauth, client.Credentials.AuthenticationType);
             //}
 
-
             //[Theory]
             //[InlineData("http://github.com", "https://api.github.com/")]
             //[InlineData("http://github.com/", "https://api.github.com/")]

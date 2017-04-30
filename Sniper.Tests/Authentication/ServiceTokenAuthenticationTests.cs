@@ -12,9 +12,9 @@ namespace Sniper.Tests.Authentication
         {
             var client = new TargetProcessClient(new ServiceTokenAuthenticator("This is not the correct password or token"))
             {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories, true)
+                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
             };
-            var data = client.GetSiteData();
+            var data = client.GetData<string>();
             var error = data.HttpResponse.IsError;
             Assert.True(error);
             Assert.True(data.HttpResponse.StatusCode == HttpStatusCode.Unauthorized);
@@ -25,9 +25,9 @@ namespace Sniper.Tests.Authentication
         {
             var client = new TargetProcessClient(new ServiceTokenAuthenticator())
             {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories, true)
+                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
             };
-            var data = client.GetSiteData();
+            var data = client.GetData<string>();
             var error = data.HttpResponse.IsError;
             Assert.False(error);
             Assert.True(data.HttpResponse.StatusCode == HttpStatusCode.OK);

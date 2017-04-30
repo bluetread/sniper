@@ -11,7 +11,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Features/meta">API documentation - Feature</a>
     /// </remarks>
-    public class Feature : Assignable, IHasInitialEstimate, IHasEpic, 
+    public class Feature : Assignable, IHasInitialEstimate, IHasEpic,
         IHasBugs, IHasFeatureHistory, IHasUserStories
     {
         public decimal InitialEstimate { get; set; }

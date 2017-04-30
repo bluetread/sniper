@@ -1,7 +1,7 @@
 ﻿using Sniper.Contracts;
 using System;
 using System.Collections.ObjectModel;
-using static Sniper.TargetProcess.Enumerations;
+using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
 {
@@ -11,11 +11,11 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/GeneralUsers/meta">API documentation - GeneralUser</a>
     /// </remarks>
-    public class GeneralUser : IHasId, IHasActive, IHasCreateDate, IHasModifyDate, 
+    public class GeneralUser : IHasId, IHasActive, IHasCreateDate, IHasModifyDate,
         IHasCustomFields, IHasAssignables, IHasComments, IHasRequests
     {
         public int Id { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
         public DateTime? DeleteDate { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }

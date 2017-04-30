@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Sniper.Contracts;
+using System;
 using System.Collections.ObjectModel;
-using Sniper.Contracts;
 
 namespace Sniper.Common
 {
@@ -20,6 +20,5 @@ namespace Sniper.Common
         public Collection<Task> Tasks { get; set; }
         public Collection<TestPlanRun> TestPlanRuns { get; set; }
         public Collection<UserStory> UserStories { get; set; }
-        
     }
 }

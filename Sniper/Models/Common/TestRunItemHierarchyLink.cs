@@ -1,10 +1,9 @@
 ﻿using Sniper.Contracts;
-using System.Collections.ObjectModel;
 
 namespace Sniper.Common
 {
     ///<summary>
-    /// Link between test plan run and test case run. 
+    /// Link between test plan run and test case run.
     /// In hierarchical test plan runs each test case run is linked to all parent test plan runs
     /// </summary>
     /// <remarks>

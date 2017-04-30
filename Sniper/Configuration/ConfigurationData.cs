@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Sniper.FileAndDirectory;
 using Sniper.Http;
-using ICredentials = Sniper.Http.ICredentials;
+using System;
+using System.IO;
 using static Sniper.WarningsErrors.MessageSuppression;
+using ICredentials = Sniper.Http.ICredentials;
 
 namespace Sniper.Configuration
 {
@@ -12,8 +12,10 @@ namespace Sniper.Configuration
     {
         private static readonly Lazy<ConfigurationData> _configurationData = new Lazy<ConfigurationData>(() => new ConfigurationData());
         public static ConfigurationData Instance => _configurationData.Value;
+
         //private IConfigurationData ConfigurationInfo { get; }
         public ICredentials Credentials { get; }
+
         public ISiteInfo SiteInfo { get; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage(Categories.Design, MessageAttributes.DoNotCatchGeneralExceptionTypes)]
@@ -38,8 +40,4 @@ namespace Sniper.Configuration
         public static string ConfigurationFilePath => Path.Combine(FileSystemHelpers.RootSolutionPath,
             ConfigurationFiles.ConfigurationDirectory, ConfigurationFiles.ApplicationConfigurationFile);
     }
-
-   
-
-    
 }

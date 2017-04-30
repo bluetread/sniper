@@ -1,5 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using Sniper.Contracts;
+﻿using Sniper.Contracts;
+using System.Collections.ObjectModel;
 
 namespace Sniper.Common
 {
@@ -9,7 +9,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Processes/meta">API documentation - Process</a>
     /// </remarks>
-    public class Process : IHasId, IHasName, IHasDescription, IHasProjects, 
+    public class Process : IHasId, IHasName, IHasDescription, IHasProjects,
         IHasPractices, IHasCustomFields, IHasProcessAdmins, IHasTerms, IHasWorkFlows
     {
         public int Id { get; set; }

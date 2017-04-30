@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Sniper.Contracts;
+using System;
 using System.Collections.ObjectModel;
-using Sniper.Contracts;
 
 namespace Sniper.Common
 {
@@ -10,8 +10,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Releases/meta">API documentation - Release</a>
     /// </remarks>
-    public class Release : General, IHasCurrent, IHasForecastEndDate, IHasProcess, IHasProgress, IHasUnits, 
-        IHasCommonEntityCollections, IHasBuilds, IHasIterations,  IHasProjects, IHasTestPlanRuns
+    public class Release : General, IHasCurrent, IHasForecastEndDate, IHasProcess, IHasProgress, IHasUnits,
+        IHasCommonEntityCollections, IHasBuilds, IHasIterations, IHasProjects, IHasTestPlanRuns
     {
         public bool IsCurrent { get; set; }
         public DateTime? ForecastEndDate { get; set; }

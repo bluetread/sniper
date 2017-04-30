@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Sniper.Http
 {
@@ -13,6 +13,7 @@ namespace Sniper.Http
         {
             [EnumMember(Value = Protocols.HypertextSecure)]
             HypertextSecure,
+
             [EnumMember(Value = Protocols.HypertextUnsecure)]
             HypertextUnsecure
         }

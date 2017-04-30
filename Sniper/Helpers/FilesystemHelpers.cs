@@ -5,7 +5,7 @@ using static Sniper.Application.ApplicationKeys;
 
 namespace Sniper
 {
-   public static class FileSystemHelpers
+    public static class FileSystemHelpers
     {
         public static string AssemblyDirectory => GetPartialPath(GetCodeBase(typeof(FileSystemHelpers)), CurrentAssemblyName);
         public static string CurrentAssemblyName => GetAssemblyName(Assembly.GetExecutingAssembly());
@@ -17,7 +17,7 @@ namespace Sniper
         }
 
         public static string RootSolutionPath => AppDomain.CurrentDomain.BaseDirectory
-            .Substring(0, AppDomain.CurrentDomain.BaseDirectory.LastIndexOf(ApplicationProjectName, 
+            .Substring(0, AppDomain.CurrentDomain.BaseDirectory.LastIndexOf(ApplicationProjectName,
                 StringComparison.CurrentCultureIgnoreCase) + ApplicationProjectName.Length);
 
         public static string RootSourcePath => AppDomain.CurrentDomain.BaseDirectory

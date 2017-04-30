@@ -4,6 +4,6 @@ namespace Sniper.Contracts
 {
     public interface IHasRelationType
     {
-        RelationType RelationType{ get; set; }
-}
+        RelationType RelationType { get; set; }
+    }
 }

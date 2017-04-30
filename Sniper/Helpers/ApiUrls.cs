@@ -542,7 +542,7 @@ namespace Sniper
         }
 
         /// <summary>
-        /// Returns the <see cref="Uri"/> to add and remove assignees for an issue.        
+        /// Returns the <see cref="Uri"/> to add and remove assignees for an issue.
         /// </summary>
         /// <param name="owner">The owner of the repository</param>
         /// <param name="name">The name of the repository</param>
@@ -563,7 +563,6 @@ namespace Sniper
             return "orgs/{0}/members".FormatUri(org);
         }
 
-   
         /// <summary>
         /// Returns the <see cref="Uri"/> that returns all of the public members of the organization
         /// </summary>
@@ -601,7 +600,7 @@ namespace Sniper
         }
 
         /// <summary>
-        /// Returns the <see cref="Uri"/> that returns a 204 if the user is a public member of the 
+        /// Returns the <see cref="Uri"/> that returns a 204 if the user is a public member of the
         /// organization.
         /// Otherwise returns a 404.
         /// </summary>
@@ -887,8 +886,6 @@ namespace Sniper
             return "repos/{0}/{1}/subscription".FormatUri(owner, name);
         }
 
-    
-
         /// <summary>
         /// Returns the <see cref="Uri"/> that returns the list of public events.
         /// </summary>
@@ -1104,7 +1101,7 @@ namespace Sniper
         }
 
         /// <summary>
-        /// returns the <see cref="Uri"/> for org teams 
+        /// returns the <see cref="Uri"/> for org teams
         /// use for both Get and Create methods
         /// </summary>
         /// <param name="organization"></param>
@@ -1115,7 +1112,7 @@ namespace Sniper
         }
 
         /// <summary>
-        /// Returns the <see cref="Uri"/> to discover teams 
+        /// Returns the <see cref="Uri"/> to discover teams
         /// for the current user
         /// </summary>
         /// <returns></returns>
@@ -1549,7 +1546,7 @@ namespace Sniper
         }
 
         /// <summary>
-        /// Creates the relative <see cref="Uri"/> for retrieving the 
+        /// Creates the relative <see cref="Uri"/> for retrieving the
         /// current users followers
         /// </summary>
         /// <returns>The <see cref="Uri"/> for retrieving the current users followers</returns>
@@ -1671,8 +1668,6 @@ namespace Sniper
         {
             return "repos/{0}/{1}/contents/{2}".FormatUri(owner, name, path);
         }
-
-      
 
         /// <summary>
         /// Creates the relative <see cref="Uri"/> for getting the contents of the specified repository and path
@@ -1814,7 +1809,7 @@ namespace Sniper
         {
             return EnterpriseAdminStats("users");
         }
-      
+
         public static Uri EnterpriseAdminStatsPulls()
         {
             return EnterpriseAdminStats("pulls");
@@ -2168,7 +2163,6 @@ namespace Sniper
             return "repositories/{0}/issues/{1}/comments".FormatUri(repositoryId, number);
         }
 
-     
         /// <summary>
         /// Returns the <see cref="Uri"/> that returns all of the issues for the currently logged in user specific to the repository.
         /// </summary>
@@ -2211,7 +2205,6 @@ namespace Sniper
             return "repositories/{0}/issues/events".FormatUri(repositoryId);
         }
 
-
         /// <summary>
         /// Returns the <see cref="Uri"/> that returns all of the notifications for the currently logged in user specific to the repository.
         /// </summary>
@@ -2222,8 +2215,6 @@ namespace Sniper
             return "repositories/{0}/notifications".FormatUri(repositoryId);
         }
 
-    
-
         /// <summary>
         /// Returns the <see cref="Uri"/> for a repository.
         /// </summary>
@@ -2233,8 +2224,6 @@ namespace Sniper
         {
             return "repositories/{0}".FormatUri(repositoryId);
         }
-
-       
 
         /// <summary>
         /// Returns the <see cref="Uri"/> for getting the contents of the specified repository and path
@@ -2259,7 +2248,6 @@ namespace Sniper
             return "repositories/{0}/contents/{1}?ref={2}".FormatUri(repositoryId, path, reference);
         }
 
-    
         /// <summary>
         /// Returns the <see cref="Uri"/> for getting the page metadata for a given repository
         /// </summary>
@@ -2270,7 +2258,6 @@ namespace Sniper
             return "repositories/{0}/pages".FormatUri(repositoryId);
         }
 
-   
         /// <summary>
         /// Returns the <see cref="Uri"/> for getting the README of the specified repository
         /// </summary>
@@ -2281,8 +2268,6 @@ namespace Sniper
             return "repositories/{0}/readme".FormatUri(repositoryId);
         }
 
-      
-
         /// <summary>
         /// Returns the <see cref="Uri"/> for repository teams.
         /// </summary>
@@ -2292,7 +2277,5 @@ namespace Sniper
         {
             return "repositories/{0}/teams".FormatUri(repositoryId);
         }
-
-   
     }
 }

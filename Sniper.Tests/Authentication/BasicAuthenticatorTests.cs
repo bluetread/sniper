@@ -18,7 +18,7 @@ namespace Sniper.Tests.Authentication
 
                 var client = new TargetProcessClient(new BasicAuthenticator(configData.SiteInfo, configData.Credentials))
                 {
-                    ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories, true)
+                    ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
                 };
                 var data = client.GetData<string>();
                 var error = data.HttpResponse.IsError;
@@ -31,7 +31,7 @@ namespace Sniper.Tests.Authentication
             {
                 var client = new TargetProcessClient(new BasicAuthenticator())
                 {
-                    ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories, true)
+                    ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
                 };
                 var data = client.GetData<string>();
                 var error = data.HttpResponse.IsError;

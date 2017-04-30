@@ -1,7 +1,6 @@
 ﻿using Sniper.Contracts;
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace Sniper.Common
 {
@@ -40,10 +39,11 @@ namespace Sniper.Common
         public Collection<OutboundAssignable> OutboundAssignables { get; set; }
         public Collection<Relation> SlaveRelations { get; set; }
         public Collection<Tag> TagObjects { get; set; }
-
+#if false
         //TODO: May not need since there is a TagObjects Collection
         public Collection<string> TagList => string.IsNullOrWhiteSpace(Tags)
             ? new Collection<string>()
             : new Collection<string>((Tags.Split(',').ToList()));
+#endif
     }
 }

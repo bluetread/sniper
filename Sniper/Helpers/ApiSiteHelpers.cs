@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sniper.Application.Messages;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
@@ -11,7 +12,7 @@ namespace Sniper
 {
     public static class ApiSiteHelpers
     {
-        public static Dictionary<string, string> CombineDictionaries(Dictionary<string, string> source, KeyValuePair<string, string> overrideItem)
+        public static IDictionary<string, string> CombineDictionaries(IDictionary<string, string> source, KeyValuePair<string, string> overrideItem)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(overrideItem.Key), overrideItem.Key);
 
@@ -24,7 +25,7 @@ namespace Sniper
             return source;
         }
 
-        public static Dictionary<string, string> CombineDictionaries(Dictionary<string, string> source, Dictionary<string, string> overrides)
+        public static IDictionary<string, string> CombineDictionaries(IDictionary<string, string> source, IDictionary<string, string> overrides)
         {
             if (source == null && overrides == null) return new Dictionary<string, string>();
             if (source == null) return overrides;
@@ -83,5 +84,11 @@ namespace Sniper
             var path = BuildUriPath(pathList);
             return new Uri(path + parameters.ToQueryString());
         }
+
+        public static string GetBasicCredentials(BasicAuthenticator authenticator)
+        {
+            return Convert.ToBase64String(Encoding.ASCII.GetBytes(string.Format(MessageKeys.StandardKeyValueFormat, authenticator.Credentials.Login, authenticator.Credentials.Password)));
+        }
+    
     }
 }

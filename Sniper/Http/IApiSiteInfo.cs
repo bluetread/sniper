@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
-using static Sniper.Http.HttpResponseFormats;
 
 namespace Sniper.Http
 {
@@ -9,7 +8,7 @@ namespace Sniper.Http
         HttpMethod Method { get; }
         IDictionary<string, string> Parameters { get; }
         string Route { get; }
-        ResponseFormat ResponseFormat { get; }
+        //ResponseFormat ResponseFormat { get; }
         ICollection<string> FieldList { get; } // Include or Exclude List (Mutually Exclusive)
         bool IsInclude { get; } // Include or Exclude List (Mutually Exclusive). This flag indicates which
 

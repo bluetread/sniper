@@ -17,5 +17,7 @@ namespace Sniper
         public BasicAuthenticator() { }
 
         public BasicAuthenticator(ISiteInfo siteInfo, ICredentials credentials) : base(siteInfo, credentials) { }
+
+        
     }
 }

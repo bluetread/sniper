@@ -25,7 +25,6 @@ namespace Sniper.TargetProcess.Routes
             EntityStates,
             EntityTypes,
             Epics,
-            ExtendedContexts, //TODO: link is bad. Need to verify
             Features,
             Generals,
             GeneralFollowers,

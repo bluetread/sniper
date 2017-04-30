@@ -15,7 +15,7 @@ namespace Sniper.Http
             [EnumMember(Value = ResponseFormatKeys.Xml)]
             Xml,
 
-            Default = Xml
+            Default = Json
         }
     }
 }

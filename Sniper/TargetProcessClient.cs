@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper
@@ -13,11 +15,15 @@ namespace Sniper
     /// </summary>
     public partial class TargetProcessClient : ITargetProcessClient
     {
-        public IDictionary<string, string> DefaultQueryParameters { get; } = new Dictionary<string, string>();
+        public IDictionary<string, string> DefaultQueryParameters { get; } = new Dictionary<string, string>
+        {
+            {ResponseFormatKeys.Format, ResponseFormatKeys.Json },
+            {ResponseFormatKeys.ResultFormat, ResponseFormatKeys.Json }
+        };
         public IAuthenticationHandler AuthenticationHandler { get; } = new AnonymousAuthenticator();
         public IApiSiteInfo ApiSiteInfo { get; set; } = new ApiSiteInfo();
 
-        public TargetProcessClient() { }
+        public TargetProcessClient() : this(true) {} 
 
         public TargetProcessClient(bool useConfigHandler)
         {
@@ -43,46 +49,122 @@ namespace Sniper
         {
             try
             {
-                var fullPath = ApiSiteHelpers.CombineUrlPaths(AuthenticationHandler.SiteInfo.ApiUrl, ApiSiteInfo.Route);
-                var excludeList = ApiSiteInfo.IsInclude ? new List<string>() : ApiSiteInfo.FieldList;
-                var includeList = ApiSiteInfo.IsInclude ? ApiSiteInfo.FieldList : new List<string>();
-                var customFilter = ApiSiteInfo.CustomFilter;
-
-                var dictList = new[] { DefaultQueryParameters, AuthenticationHandler.AuthenticationParameters, ApiSiteInfo.Parameters };
-
-                var queryParameters = GetParameters(dictList);
-                if (!string.IsNullOrWhiteSpace(customFilter))
-                {
-                    queryParameters += customFilter;
-                }
-
-                var fullPathAndQueryParameters = fullPath + queryParameters;
-
-                using (var client = new WebClient())
-                {
-                    client.BaseAddress = fullPathAndQueryParameters;
-                    client.Credentials = AuthenticationHandler.NetworkCredentials;
-                    var result = client.DownloadString(client.BaseAddress);
-
-                    //To handle the return of raw data without throwing exception
-                    if (typeof(T) == typeof(string))
-                    {
-                        return new ApiResponse<T>(new HttpResponse(HttpStatusCode.OK, result, client.ResponseHeaders) { IsError = false });
-                    }
-                    var items = JsonConvert.DeserializeObject<TargetProcessResponseWrapper<T>>(result).Items;
-                    return new ApiResponse<T>(new HttpResponse(HttpStatusCode.OK, items, client.ResponseHeaders) { IsError = false });
-                }
+                var request = new ApiRequest { BaseAddress = GetFullPath(), AuthenticationHandler = AuthenticationHandler };
+                var response = ExecuteRequest<T>(request);
+                return new ApiResponse<T>(new HttpResponse(response.StatusCode, response.Data));
             }
-            catch (WebException webException)
+
+            catch (Exception exception)
             {
-                var code = (webException.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
-                return new ApiResponse<T>(new HttpResponse(code, webException));
+                return HandleExceptions<T>(exception);
+            }
+        }
+
+        public async Task<IApiResponse<T>> GetDataAsync<T>()
+        {
+            try
+            {
+                var request = new ApiRequest { BaseAddress = GetFullPath(), AuthenticationHandler = AuthenticationHandler };
+                var response = await ExecuteRequestAsync<T>(request);
+                return new ApiResponse<T>(new HttpResponse(response.StatusCode, response.Data));
+            }
+            catch (Exception exception)
+            {
+                return HandleExceptions<T>(exception);
+            }
+        }
+
+        private static ApiResponse<T> HandleExceptions<T>(Exception ex)
+        {
+            var exception = ex as WebException;
+            if (exception != null)
+            {
+                var code = (exception.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
+                return new ApiResponse<T>(new HttpResponse(code, ex));
+            }
+            if (ex is JsonSerializationException)
+            {
+                return new ApiResponse<T>(new HttpResponse(ex));
+
+            }
+            return new ApiResponse<T>(new HttpResponse(ex));
+        }
+
+        private Uri GetFullPath(bool isGet = true)
+        {
+            if (!isGet) return new Uri(AuthenticationHandler.SiteInfo.ApiUrl);
+
+            var fullPath = ApiSiteHelpers.CombineUrlPaths(AuthenticationHandler.SiteInfo.ApiUrl, ApiSiteInfo.Route);
+            var excludeList = ApiSiteInfo.IsInclude ? new List<string>() : ApiSiteInfo.FieldList;
+            var includeList = ApiSiteInfo.IsInclude ? ApiSiteInfo.FieldList : new List<string>();
+            var customFilter = ApiSiteInfo.CustomFilter;
+            //var formats = new Dictionary<string, string> { { setResultFormat ? ResponseFormatKeys.ResultFormat : ResponseFormatKeys.Json, ResponseFormat.Json.ToString() } };
+
+
+            var dictList = new[] { DefaultQueryParameters, AuthenticationHandler.AuthenticationParameters, ApiSiteInfo.Parameters };
+
+            var queryParameters = GetParameters(dictList);
+            if (!string.IsNullOrWhiteSpace(customFilter))
+            {
+                queryParameters += customFilter;
+            }
+
+            return new Uri(fullPath + queryParameters);
+        }
+
+        protected IHttpResponse ExecuteRequest<T>(IApiRequest apiRequest)
+        {
+            Ensure.ArgumentNotNull(nameof(apiRequest), apiRequest);
+            try
+            {
+                using (var client = new HttpClientAdapter())
+                {
+                    var response = client.Send(apiRequest);
+                    return GetResponseData<T>(response);
+                }
             }
             catch (Exception e)
             {
-                return new ApiResponse<T>(new HttpResponse(e));
+                return new HttpResponse(e);
             }
         }
+
+        protected async Task<IHttpResponse> ExecuteRequestAsync<T>(IApiRequest apiRequest)
+        {
+            Ensure.ArgumentNotNull(nameof(apiRequest), apiRequest);
+            try
+            {
+                using (var client = new HttpClientAdapter())
+                {
+                    var response = await client.SendAsync(apiRequest, CancellationToken.None);
+                    return GetResponseData<T>(response);
+                }
+            }
+            catch (Exception e)
+            {
+                return new HttpResponse(e);
+            }
+        }
+
+        protected ICollection<T> Convert<T>(string data)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(nameof(data), data);
+            return JsonConvert.DeserializeObject<TargetProcessResponseWrapper<T>>(data).Items;
+        }
+
+        protected IHttpResponse GetResponseData<T>(IHttpResponse response)
+        {
+            Ensure.ArgumentNotNull(nameof(response), response);
+            Ensure.ArgumentNotNull(nameof(response.Data), response.Data);
+
+            string data = (string)response.Data;
+
+            //To handle the return of raw data without throwing exception
+            return typeof(T) == typeof(string) ? 
+                new HttpResponse(HttpStatusCode.OK, data, response.ResponseHeaders) : 
+                new HttpResponse(HttpStatusCode.OK, Convert<T>(data), response.ResponseHeaders);
+        }
+
 
         private static string GetParameters(IDictionary<string, string>[] orderedList)
         {

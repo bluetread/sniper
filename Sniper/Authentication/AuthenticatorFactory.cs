@@ -21,9 +21,9 @@ namespace Sniper
                 // Check config value for "Unknown", otherwise could get caught in a recursive loop
                 case AuthenticationType.Unknown:
                     return GetAuthenticationHandler(
-ConfigurationData.Instance.Credentials.AuthenticationType == AuthenticationType.Unknown
-? AuthenticationType.Anonymous
-: ConfigurationData.Instance.Credentials.AuthenticationType);
+                        ConfigurationData.Instance.Credentials.AuthenticationType == AuthenticationType.Unknown
+                        ? AuthenticationType.Anonymous
+                        : ConfigurationData.Instance.Credentials.AuthenticationType);
 
                 default: return new AnonymousAuthenticator();
             }

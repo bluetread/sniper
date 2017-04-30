@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
+using System.Net.Http.Headers;
 
 namespace Sniper.Http
 {
@@ -22,7 +22,7 @@ namespace Sniper.Http
         /// <summary>
         /// Information about the Response
         /// </summary>
-        IReadOnlyDictionary<string, string> ResponseHeaders { get; }
+        HttpResponseHeaders ResponseHeaders { get; }
 
         /// <summary>
         /// The response status code.
@@ -33,5 +33,10 @@ namespace Sniper.Http
         /// Optional exception information
         /// </summary>
         Exception Exception { get; }
+
+        /// <summary>
+        /// The content type of the response.
+        /// </summary>
+        string ContentType { get; }
     }
 }

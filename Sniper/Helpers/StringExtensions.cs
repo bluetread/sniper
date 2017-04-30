@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
@@ -54,7 +55,7 @@ namespace Sniper
                     {
                         expansion += string.IsNullOrWhiteSpace(expansion) ? "?" : "&";
                         expansion += parameter + "=" +
-                            Uri.EscapeDataString("" + parameterProperty.GetValue(values, new object[0]));
+                                     Uri.EscapeDataString("" + parameterProperty.GetValue(values, new object[0]));
                     }
                 }
                 template = _optionalQueryStringRegex.Replace(template, expansion);
@@ -68,6 +69,23 @@ namespace Sniper
             Ensure.ArgumentNotNullOrEmptyString(nameof(input), input);
             return input.ToLowerInvariant();
         }
+
+        public static NameValueCollection ToNameValueCollection<TKey, TValue>(this IDictionary<TKey, TValue> dict)
+        {
+            var nameValueCollection = new NameValueCollection();
+
+            foreach (var kvp in dict)
+            {
+                string value = null;
+                if (kvp.Value != null)
+                    value = kvp.Value.ToString();
+
+                nameValueCollection.Add(kvp.Key.ToString(), value);
+            }
+
+            return nameValueCollection;
+        }
+
 
         [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase)]
         public static string ToRubyCase(this string propertyName)

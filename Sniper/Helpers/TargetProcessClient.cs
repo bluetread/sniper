@@ -1,11 +1,14 @@
 ﻿using Sniper.Common;
 using Sniper.Http;
+using System.Threading.Tasks;
+using Task = Sniper.Common.Task;
 
 namespace Sniper
 {
     public partial class TargetProcessClient
     {
-        // GETs / Read
+        #region GET/Read 
+
         public IApiResponse<Assignable> GetAssignables() => GetData<Assignable>();
         public IApiResponse<AssignedEffort> GetAssignedEfforts() => GetData<AssignedEffort>();
         public IApiResponse<Assignment> GetAssignments() => GetData<Assignment>();
@@ -71,5 +74,78 @@ namespace Sniper
         public IApiResponse<UserProjectAllocation> GetUserProjectAllocations() => GetData<UserProjectAllocation>();
         public IApiResponse<UserStory> GetUserStories() => GetData<UserStory>();
         public IApiResponse<Workflow> GetWorkflows() => GetData<Workflow>();
+
+        #endregion
+
+        #region GET / Read Async
+
+        public Task<IApiResponse<Assignable>> GetAssignablesAsync() => GetDataAsync<Assignable>();
+        public Task<IApiResponse<AssignedEffort>> GetAssignedEffortsAsync() => GetDataAsync<AssignedEffort>();
+        public Task<IApiResponse<Assignment>> GetAssignmentsAsync() => GetDataAsync<Assignment>();
+        public Task<IApiResponse<Attachment>> GetAttachmentsAsync() => GetDataAsync<Attachment>();
+        public Task<IApiResponse<Bug>> GetBugsAsync() => GetDataAsync<Bug>();
+        public Task<IApiResponse<Build>> GetBuildsAsync() => GetDataAsync<Build>();
+        public Task<IApiResponse<Company>> GetCompaniesAsync() => GetDataAsync<Company>();
+        public Task<IApiResponse<Context>> GetContextAsync() => GetDataAsync<Context>();
+        public Task<IApiResponse<CustomActivity>> GetCustomActivitiesAsync() => GetDataAsync<CustomActivity>();
+        public Task<IApiResponse<CustomField>> GetCustomFieldsAsync() => GetDataAsync<CustomField>();
+        public Task<IApiResponse<CustomRule>> GetCustomRulesAsync() => GetDataAsync<CustomRule>();
+        public Task<IApiResponse<EntityState>> GetEntityStatesAsync() => GetDataAsync<EntityState>();
+        public Task<IApiResponse<EntityType>> GetEntityTypesAsync() => GetDataAsync<EntityType>();
+        public Task<IApiResponse<Epic>> GetEpicsAsync() => GetDataAsync<Epic>();
+        public Task<IApiResponse<Feature>> GetFeaturesAsync() => GetDataAsync<Feature>();
+        public Task<IApiResponse<General>> GetGeneralsAsync() => GetDataAsync<General>();
+        public Task<IApiResponse<GeneralFollower>> GetGeneralFollowersAsync() => GetDataAsync<GeneralFollower>();
+        public Task<IApiResponse<GeneralUser>> GetGeneralUsersAsync() => GetDataAsync<GeneralUser>();
+        public Task<IApiResponse<GlobalSettings>> GetGlobalSettingsAsync() => GetDataAsync<GlobalSettings>();
+        public Task<IApiResponse<Impediment>> GetImpedimentsAsync() => GetDataAsync<Impediment>();
+        public Task<IApiResponse<InboundAssignable>> GetInboundAssignablesAsync() => GetDataAsync<InboundAssignable>();
+        public Task<IApiResponse<Iteration>> GetIterationsAsync() => GetDataAsync<Iteration>();
+        public Task<IApiResponse<Message>> GetMessagesAsync() => GetDataAsync<Message>();
+        public Task<IApiResponse<MessageUniqueId>> GetMessageUniqueIdsAsync() => GetDataAsync<MessageUniqueId>();
+        public Task<IApiResponse<Milestone>> GetMilestonesAsync() => GetDataAsync<Milestone>();
+        public Task<IApiResponse<OutboundAssignable>> GetOutboundAssignablesAsync() => GetDataAsync<OutboundAssignable>();
+        public Task<IApiResponse<Priority>> GetPrioritiesAsync() => GetDataAsync<Priority>();
+        public Task<IApiResponse<Process>> GetProcessesAsync() => GetDataAsync<Process>();
+        public Task<IApiResponse<Program>> GetProgramsAsync() => GetDataAsync<Program>();
+        public Task<IApiResponse<Project>> GetProjectsAsync() => GetDataAsync<Project>();
+        public Task<IApiResponse<ProjectAllocation>> GetProjectAllocationsAsync() => GetDataAsync<ProjectAllocation>();
+        public Task<IApiResponse<ProjectMember>> GetProjectMembersAsync() => GetDataAsync<ProjectMember>();
+        public Task<IApiResponse<Relation>> GetRelationsAsync() => GetDataAsync<Relation>();
+        public Task<IApiResponse<RelationType>> GetRelationTypesAsync() => GetDataAsync<RelationType>();
+        public Task<IApiResponse<Release>> GetReleasesAsync() => GetDataAsync<Release>();
+        public Task<IApiResponse<ReleaseProject>> GetReleaseProjectsAsync() => GetDataAsync<ReleaseProject>();
+        public Task<IApiResponse<Request>> GetRequestsAsync() => GetDataAsync<Request>();
+        public Task<IApiResponse<Requester>> GetRequestersAsync() => GetDataAsync<Requester>();
+        public Task<IApiResponse<RequestType>> GetRequestTypesAsync() => GetDataAsync<RequestType>();
+        public Task<IApiResponse<Revision>> GetRevisionsAsync() => GetDataAsync<Revision>();
+        public Task<IApiResponse<RevisionFile>> GetRevisionFilesAsync() => GetDataAsync<RevisionFile>();
+        public Task<IApiResponse<Role>> GetRolesAsync() => GetDataAsync<Role>();
+        public Task<IApiResponse<RoleEffort>> GetRoleEffortsAsync() => GetDataAsync<RoleEffort>();
+        public Task<IApiResponse<Severity>> GetSeveritiesAsync() => GetDataAsync<Severity>();
+        public Task<IApiResponse<Tag>> GetTagsAsync() => GetDataAsync<Tag>();
+        public Task<IApiResponse<Task>> GetTasksAsync() => GetDataAsync<Task>();
+        public Task<IApiResponse<Team>> GetTeamsAsync() => GetDataAsync<Team>();
+        public Task<IApiResponse<TeamAssignment>> GetTeamAssignmentsAsync() => GetDataAsync<TeamAssignment>();
+        public Task<IApiResponse<TeamIteration>> GetTeamIterationsAsync() => GetDataAsync<TeamIteration>();
+        public Task<IApiResponse<TeamMember>> GetTeamMembersAsync() => GetDataAsync<TeamMember>();
+        public Task<IApiResponse<TeamProject>> GetTeamProjectsAsync() => GetDataAsync<TeamProject>();
+        public Task<IApiResponse<TeamProjectAllocation>> GetTeamProjectAllocationsAsync() => GetDataAsync<TeamProjectAllocation>();
+        public Task<IApiResponse<Term>> GetTermsAsync() => GetDataAsync<Term>();
+        public Task<IApiResponse<TestCase>> GetTestCasesAsync() => GetDataAsync<TestCase>();
+        public Task<IApiResponse<TestCaseRun>> GetTestCaseRunsAsync() => GetDataAsync<TestCaseRun>();
+        public Task<IApiResponse<TestPlan>> GetTestPlansAsync() => GetDataAsync<TestPlan>();
+        public Task<IApiResponse<TestPlanRun>> GetTestPlanRunsAsync() => GetDataAsync<TestPlanRun>();
+        public Task<IApiResponse<TestRunItemHierarchyLink>> GetTestRunItemHierarchyLinksAsync() => GetDataAsync<TestRunItemHierarchyLink>();
+        public Task<IApiResponse<TestStep>> GetTestStepsAsync() => GetDataAsync<TestStep>();
+        public Task<IApiResponse<TestStepRun>> GetTestStepRunsAsync() => GetDataAsync<TestStepRun>();
+        public Task<IApiResponse<Time>> GetTimesAsync() => GetDataAsync<Time>();
+        public Task<IApiResponse<User>> GetUsersAsync() => GetDataAsync<User>();
+        public Task<IApiResponse<UserProjectAllocation>> GetUserProjectAllocationsAsync() => GetDataAsync<UserProjectAllocation>();
+        public Task<IApiResponse<UserStory>> GetUserStoriesAsync() => GetDataAsync<UserStory>();
+        public Task<IApiResponse<Workflow>> GetWorkflowsAsync() => GetDataAsync<Workflow>();
+
+
+        #endregion
     }
 }

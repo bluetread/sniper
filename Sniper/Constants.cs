@@ -4,6 +4,11 @@
     {
         public const string ApplicationProjectName = "Sniper";
     }
+
+    public static class JsonProperties
+    {
+        public const string Date = "Date";
+    }
 }
 
 namespace Sniper.Application.Messages

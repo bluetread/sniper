@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using static Sniper.TargetProcess.Api.Aggregates;
-using static Sniper.TargetProcess.Api.Filtering;
-using static Sniper.TargetProcess.Api.Ordering;
+using static Sniper.TargetProcess.Enumerations;
 using static Sniper.TargetProcess.Resources.TargetProcessResources;
 using static Sniper.TargetProcess.Resources.TargetProcessResources.TargetProcessResource;
 using static Sniper.TargetProcess.Routes.TargetProcessHistoryRoutes;

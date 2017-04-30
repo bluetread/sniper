@@ -202,6 +202,8 @@
     <Compile Include="Contracts\IHasVelocity.cs" />
     <Compile Include="Contracts\IHasWorkEffort.cs" />
     <Compile Include="Contracts\IHasWorkFlows.cs" />
+    <Compile Include="CustomAttributes\CustomAttributes.cs" />
+    <Compile Include="Exceptions\SniperExceptions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\ApiSiteHelpers.cs" />
     <Compile Include="Helpers\ApiUrls.Authorizations.cs" />

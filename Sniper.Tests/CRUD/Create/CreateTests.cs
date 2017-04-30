@@ -1,7 +1,6 @@
 ﻿using Sniper.Common;
 using Sniper.Http;
 using Sniper.TargetProcess.Routes;
-using System.Net.Http;
 using Xunit;
 
 namespace Sniper.Tests.CRUD.Create
@@ -11,11 +10,11 @@ namespace Sniper.Tests.CRUD.Create
         [Fact]
         public void CreateUserStoryAddsData()
         {
-            var client = new TargetProcessClient(true)
+            var client = new TargetProcessClient()
             {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories) { Method = HttpMethod.Post }
+                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories) 
             };
-            var story = new UserStory { Name = "Sample Create From Code Story", Project = new Project { Id = 205 } };
+            var story = new UserStory { Name = "Sample Create From Code Story", Feature = new Feature { Id = 203 } };
 
             var data = client.CreateData<UserStory>(story);
 

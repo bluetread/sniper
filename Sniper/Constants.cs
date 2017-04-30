@@ -1,4 +1,6 @@
-﻿namespace Sniper.Application
+﻿using System.Net;
+
+namespace Sniper.Application
 {
     public static class ApplicationKeys
     {
@@ -8,6 +10,7 @@
     public static class JsonProperties
     {
         public const string Date = "Date";
+        public const string Id = "Id";
     }
 }
 
@@ -119,6 +122,16 @@ namespace Sniper.Http
         public const string None = "";
         public const string Json = "json";
         public const string Xml = "xml";
+    }
+}
+
+namespace Sniper.Net
+{
+
+    public static class Security
+    {
+        public static SecurityProtocolType DefaultSecurityProtocolType = 
+            SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
     }
 }
 

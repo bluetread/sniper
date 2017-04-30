@@ -2,6 +2,7 @@
 using Sniper.Http;
 using System.Collections.Generic;
 using System.Net;
+using Sniper.Net;
 using ICredentials = Sniper.Http.ICredentials;
 
 namespace Sniper
@@ -15,7 +16,7 @@ namespace Sniper
 
         protected BaseAuthenticator() : this(ConfigurationData.Instance)
         {
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
+            ServicePointManager.SecurityProtocol = Security.DefaultSecurityProtocolType; ;
         }
 
         protected BaseAuthenticator(IConfigurationData configurationData)

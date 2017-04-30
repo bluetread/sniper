@@ -16,7 +16,7 @@ namespace Sniper.Common
         public bool IsNow { get; set; }
         public bool IsPrevious { get; set; }
         public DateTime? LastCommentDate { get; set; }
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
         public double NumericPriority { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? ModifyDate { get; set; }
@@ -27,7 +27,7 @@ namespace Sniper.Common
         public GeneralUser LastEditor { get; set; }
         public TestPlan LinkedTestPlan { get; set; }
         public GeneralUser Owner { get; set; }
-        public Project Project { get; set; }
+        public virtual Project Project { get; set; }
 
         public Collection<Attachment> Attachments { get; set; }
         public Collection<Comment> Comments { get; set; }

@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Net.Http;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper.Http
 {
     public class ApiSiteInfo : IApiSiteInfo
     {
-        public HttpMethod Method { get; set; } = HttpMethod.Get;
+        //public HttpMethod Method { get; set; } = HttpMethod.Get;
 
         [SuppressMessage(Categories.Usage, MessageAttributes.CollectionPropertiesShouldBeReadOnly)]
         public IDictionary<string, string> Parameters { get; set; } = new Dictionary<string, string>();
@@ -46,11 +45,11 @@ namespace Sniper.Http
             Route = route;
         }
 
-        private ApiSiteInfo(string route, HttpMethod httpMethod) : this(route)
-        {
-            Ensure.ArgumentNotNull(nameof(httpMethod), httpMethod);
-            Method = httpMethod;
-        }
+        //private ApiSiteInfo(string route, HttpMethod httpMethod) : this(route)
+        //{
+        //    Ensure.ArgumentNotNull(nameof(httpMethod), httpMethod);
+        //    Method = httpMethod;
+        //}
 
         //private ApiSiteInfo(string route, ResponseFormat responseFormat) : this(route)
         //{
@@ -69,7 +68,7 @@ namespace Sniper.Http
 
         //public ApiSiteInfo(TargetProcessRoutes.Route route, bool useConfigFormat) : this(route.ToString(), useConfigFormat) { }
 
-        public ApiSiteInfo(TargetProcessRoutes.Route route, HttpMethod httpMethod) : this(route.ToString(), httpMethod) { }
+        //public ApiSiteInfo(TargetProcessRoutes.Route route, HttpMethod httpMethod) : this(route.ToString(), httpMethod) { }
 
         public ApiSiteInfo(TargetProcessHistoryRoutes.HistoryRoute route) : this(route.ToString()) { }
 
@@ -77,6 +76,6 @@ namespace Sniper.Http
 
         //public ApiSiteInfo(TargetProcessHistoryRoutes.HistoryRoute route, bool useConfigFormat) : this(route.ToString(), useConfigFormat) { }
 
-        public ApiSiteInfo(TargetProcessHistoryRoutes.HistoryRoute route, HttpMethod httpMethod) : this(route.ToString(), httpMethod) { }
+        //public ApiSiteInfo(TargetProcessHistoryRoutes.HistoryRoute route, HttpMethod httpMethod) : this(route.ToString(), httpMethod) { }
     }
 }

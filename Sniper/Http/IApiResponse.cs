@@ -1,11 +1,18 @@
-﻿namespace Sniper.Http
+﻿using System.Collections.Generic;
+
+namespace Sniper.Http
 {
-    public interface IApiResponse<out T>
+    public interface IApiResponse<T>
     {
         /// <summary>
         /// Object deserialized from the JSON response body.
         /// </summary>
-        T Body { get; }
+        ICollection<T> DataCollection { get; }
+
+        /// <summary>
+        /// Get individual item if list/collection has one result
+        /// </summary>
+        T Data { get; }
 
         /// <summary>
         /// The original non-deserialized http response.

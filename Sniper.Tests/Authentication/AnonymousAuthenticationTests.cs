@@ -1,6 +1,6 @@
-﻿using System.Net;
-using Sniper.Http;
+﻿using Sniper.Http;
 using Sniper.TargetProcess.Routes;
+using System.Net;
 using Xunit;
 
 namespace Sniper.Tests.Authentication
@@ -14,9 +14,9 @@ namespace Sniper.Tests.Authentication
             {
                 var client = new TargetProcessClient(new AnonymousAuthenticator())
                 {
-                    ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories, true)
+                    ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
                 };
-                var data = client.GetSiteData();
+                var data = client.GetData<string>();
                 var error = data.HttpResponse.IsError;
                 Assert.True(error);
                 Assert.True(data.HttpResponse.StatusCode == HttpStatusCode.Unauthorized);

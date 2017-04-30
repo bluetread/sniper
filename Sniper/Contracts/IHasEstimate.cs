@@ -3,5 +3,5 @@
     public interface IHasEstimate
     {
         decimal Estimate { get; set; }
-}
+    }
 }

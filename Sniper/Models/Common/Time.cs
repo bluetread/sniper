@@ -18,9 +18,11 @@ namespace Sniper.Common
         IHasTestPlanRun, IHasUser, IHasUserStory, IHasWorkEffort, IHasCustomFields
     {
         public int Id { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
+
         [JsonProperty(JsonProperties.Date)]
         public DateTime? EntryDate { get; set; }
+
         public string Description { get; set; }
         public bool IsEstimation { get; set; }
         public decimal Remain { get; set; }

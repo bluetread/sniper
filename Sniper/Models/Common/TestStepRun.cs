@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using Sniper.Contracts;
+﻿using Sniper.Contracts;
 
 namespace Sniper.Common
 {

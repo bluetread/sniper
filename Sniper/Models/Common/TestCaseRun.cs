@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Sniper.Contracts;
+using System;
 using System.Collections.ObjectModel;
-using Sniper.Contracts;
-using static Sniper.TargetProcess.Enumerations;
+using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
 {
     ///<summary>
-    /// A single Test Case Run. TestCase can be run many times. 
+    /// A single Test Case Run. TestCase can be run many times.
     /// It is impossible to create a Test Case Run, instead Add Test Case to Test Plan to create a Test Case Run
     /// </summary>
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TestCaseRuns/meta">API documentation - TestCaseRun</a>
     /// </remarks>
-    public class TestCaseRun : IHasId, IHasName, IHasDescription, IHasTestPlanRun, IHasTestCase, 
+    public class TestCaseRun : IHasId, IHasName, IHasDescription, IHasTestPlanRun, IHasTestCase,
         IHasEntityType, IHasPriority, IHasTestStepRuns, IHasBugs, IHasTestPlanRunLinks
     {
         public int Id { get; set; }

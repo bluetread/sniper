@@ -1,12 +1,12 @@
-﻿using System.Collections.ObjectModel;
-using Sniper.Contracts;
+﻿using Sniper.Contracts;
 using Sniper.Contracts.History;
 using Sniper.History;
+using System.Collections.ObjectModel;
 
 namespace Sniper.Common
 {
     ///<summary>
-    /// A high-level scope of work which contains Features. 
+    /// A high-level scope of work which contains Features.
     /// Can be assigned to Release. Can't be assigned to Iteration.
     /// </summary>
     /// <remarks>

@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using Sniper.Contracts;
-using static Sniper.TargetProcess.Enumerations;
+﻿using Sniper.Contracts;
+using System.Collections.ObjectModel;
+using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
 {
@@ -13,7 +13,7 @@ namespace Sniper.Common
     public class EntityType : IHasId, IHasName, IAssignable, IExtendable
     {
         public int Id { get; set; }
-        CustomFieldScope CustomFieldScope { get; set; }
+        private CustomFieldScope CustomFieldScope { get; set; }
         public bool IsAssignable { get; set; }
         public bool IsExtendable { get; set; }
         public bool IsSearchable { get; set; }

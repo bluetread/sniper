@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
+using System.Net.Http.Headers;
 
 namespace Sniper.Http
 {
@@ -10,14 +10,9 @@ namespace Sniper.Http
     public interface IHttpResponse
     {
         /// <summary>
-        /// Raw response body. Typically a string, but when requesting images, it will be a byte array.
+        /// Raw response data. Typically a string, but when requesting images, it will be a byte array.
         /// </summary>
-        object Body { get; }
-
-        /// <summary>
-        /// The content type of the response.
-        /// </summary>
-        string ContentType { get; }
+        object Data { get; }
 
         /// <summary>
         /// Quick way to identify that something went wrong.
@@ -27,7 +22,7 @@ namespace Sniper.Http
         /// <summary>
         /// Information about the Response
         /// </summary>
-        IReadOnlyDictionary<string, string> ResponseHeaders { get; }
+        HttpResponseHeaders ResponseHeaders { get; }
 
         /// <summary>
         /// The response status code.
@@ -39,5 +34,9 @@ namespace Sniper.Http
         /// </summary>
         Exception Exception { get; }
 
+        /// <summary>
+        /// The content type of the response.
+        /// </summary>
+        string ContentType { get; }
     }
 }

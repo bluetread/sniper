@@ -9,6 +9,6 @@ namespace Sniper.Common
     public class AppContext : IHasId
     {
         public int Id { get; set; }
-        SimpleContext TeamContext { get; set; }
+        private SimpleContext TeamContext { get; set; }
     }
 }

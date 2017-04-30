@@ -1,4 +1,4 @@
 ﻿namespace Sniper.Contracts
 {
-    public interface IHasCommonCollections : IHasAssignables, IHasBugs, IHasTasks, IHasUserStories {}
+    public interface IHasCommonCollections : IHasAssignables, IHasBugs, IHasTasks, IHasUserStories { }
 }

@@ -9,7 +9,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TestPlans/meta">API documentation - TestPlan</a>
     /// </remarks>
-    public class TestPlan : Assignable, IHasInitialEstimate, IHasRevisions, IHasTestCases, 
+    public class TestPlan : Assignable, IHasInitialEstimate, IHasRevisions, IHasTestCases,
         IHasTestPlanRuns, IHasRoleEfforts, IHasUserStories
     {
         public decimal CalculatedEstimate { get; set; }

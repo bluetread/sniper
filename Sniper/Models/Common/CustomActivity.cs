@@ -10,7 +10,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/CustomActivities/meta">API documentation - CustomActivity</a>
     /// </remarks>
-    public class CustomActivity :IHasId, IHasName, IHasCreated, IHasEstimate, IHasProject, IHasTimes, IHasUser
+    public class CustomActivity : IHasId, IHasName, IHasCreated, IHasEstimate, IHasProject, IHasTimes, IHasUser
     {
         public int Id { get; set; }
         public DateTime Created { get; set; }
@@ -21,7 +21,5 @@ namespace Sniper.Common
         public User User { get; set; }
 
         public Collection<Time> Times { get; set; }
-
     }
 }
-

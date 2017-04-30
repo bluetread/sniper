@@ -1,4 +1,7 @@
-﻿namespace Sniper.Http
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Sniper.Http
 {
     /// <summary>
     /// Wrapper for a response from the API
@@ -10,36 +13,34 @@
         /// Create a ApiResponse from an existing request
         /// </summary>
         /// <param name="response">An existing request to wrap</param>
-        public ApiResponse(IHttpResponse response) : this(response, GetBodyAsObject(response)) {}
+        public ApiResponse(IHttpResponse response) : this(response, (ICollection<T>)response?.Data) { }
 
         /// <summary>
         /// Create a ApiResponse from an existing request and object
         /// </summary>
         /// <param name="response">An existing request to wrap</param>
-        /// <param name="bodyAsObject">The payload from an existing request</param>
-        public ApiResponse(IHttpResponse response, T bodyAsObject)
+        /// <param name="dataAsObject">The payload from an existing request</param>
+        public ApiResponse(IHttpResponse response, ICollection<T> dataAsObject)
         {
             Ensure.ArgumentNotNull(nameof(response), response);
 
             HttpResponse = response;
-            Body = bodyAsObject;
+            DataCollection = dataAsObject;
         }
 
         /// <summary>
         /// The payload of the response
         /// </summary>
-        public T Body { get; }
+        public ICollection<T> DataCollection { get; }
+
+        /// <summary>
+        /// Get individual item if list/collection has one result
+        /// </summary>
+        public T Data => (DataCollection != null && DataCollection.Count == 1) ? DataCollection.First() : default(T);
 
         /// <summary>
         /// The context of the response
         /// </summary>
         public IHttpResponse HttpResponse { get; }
-
-        private static T GetBodyAsObject(IHttpResponse response)
-        {
-            var body = response.Body;
-            if (body is T) return (T)body;
-            return default(T);
-        }
     }
 }

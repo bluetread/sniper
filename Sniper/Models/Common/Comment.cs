@@ -1,5 +1,5 @@
-﻿using System;
-using Sniper.Contracts;
+﻿using Sniper.Contracts;
+using System;
 
 namespace Sniper.Common
 {
@@ -12,7 +12,7 @@ namespace Sniper.Common
     public class Comment : IHasId, IHasDescription, IHasCreateDate, IHasGeneral, IHasOwner
     {
         public int Id { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; }
         public string Description { get; set; }
         public int? ParentId { get; set; }
 

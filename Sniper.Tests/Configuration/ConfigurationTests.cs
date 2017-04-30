@@ -1,6 +1,6 @@
-﻿using System.IO;
-using Sniper.Configuration;
+﻿using Sniper.Configuration;
 using Sniper.FileAndDirectory;
+using System.IO;
 using Xunit;
 
 namespace Sniper.Tests.Configuration
@@ -24,7 +24,6 @@ namespace Sniper.Tests.Configuration
             Assert.NotNull(configData.SiteInfo);
             Assert.NotNull(configData.SiteInfo.BaseUrl);
         }
-
 
         [Fact]
         public void ConfigurationFileHasAllValues()

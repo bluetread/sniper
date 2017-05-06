@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System;
 using static Sniper.TargetProcess.Common.Enumerations;
 
@@ -10,9 +10,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Messages/meta">API documentation - Message</a>
     /// </remarks>
-    public class Message : IHasId, IHasCreateDate
+    public class Message : Entity, IHasCreateDate
     {
-        public int Id { get; set; }
         public string Body { get; set; }
         public DateTime? CreateDate { get; set; }
         public bool IsProcessed { get; set; }

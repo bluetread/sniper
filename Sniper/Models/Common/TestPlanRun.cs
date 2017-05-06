@@ -1,5 +1,7 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -19,8 +21,20 @@ namespace Sniper.Common
         public int OnHoldCount { get; set; }
         public int PassedCount { get; set; }
 
-        public Build Build { get; set; }
+        #region Required for Create
+
+        [RequiredForCreate]
+        public override string Name { get; set; }
+
+        [RequiredForCreate(JsonProperties.Id)]
+        public override Project Project { get; set; }
+
+        [RequiredForCreate(JsonProperties.Id)]
         public TestPlan TestPlan { get; set; }
+
+        #endregion
+
+        public Build Build { get; set; }
         public TestPlanRun ParentTestPlanRun { get; set; }
 
         public Collection<Bug> Bugs { get; set; }

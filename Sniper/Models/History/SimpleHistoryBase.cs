@@ -1,16 +1,14 @@
 ﻿using Newtonsoft.Json;
 using Sniper.Application;
 using Sniper.Common;
-using Sniper.Contracts;
-using Sniper.Contracts.History;
+using Sniper.Contracts.Entities.Common;
+using Sniper.Contracts.Entities.History;
 using System;
 
 namespace Sniper.History
 {
-    public abstract class SimpleHistoryBase : IHasId, IHasDate, IHasEntityState, IHasModifier, IHasProject
+    public abstract class SimpleHistoryBase : Entity, IHasDate, IHasEntityState, IHasModifier, IHasProject
     {
-        public int Id { get; set; }
-
         [JsonProperty(JsonProperties.Date)]
         public DateTime? EntryDate { get; set; }
 

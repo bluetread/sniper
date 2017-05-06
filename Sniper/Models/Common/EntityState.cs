@@ -1,5 +1,6 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -9,15 +10,20 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/EntityStates/meta">API documentation - EntityState</a>
     /// </remarks>
-    public class EntityState : IHasId, IHasName, IHasRole, IHasProjects, IHasAssignables
+    public class EntityState : Entity, IHasName, IHasRole, IHasProjects, IHasAssignables
     {
-        public int Id { get; set; }
         public bool IsCommentRequired { get; set; }
         public bool IsFinal { get; set; }
         public bool IsInitial { get; set; }
         public bool IsPlanned { get; set; }
-        public string Name { get; set; }
         public double NumericPriority { get; set; }
+
+        #region Required for Create
+
+        [RequiredForCreate]
+        public string Name { get; set; }
+
+        #endregion
 
         public EntityState ParentEntityState { get; set; }
         public Role Role { get; set; }

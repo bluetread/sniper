@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System;
 
 namespace Sniper.Common
@@ -9,9 +9,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TeamMembers/meta">API documentation - TeamMember</a>
     /// </remarks>
-    public class TeamMember : IHasId, IHasDateRange, IHasRole, IHasTeam, IHasUser
+    public class TeamMember : Entity, IHasDateRange, IHasRole, IHasTeam, IHasUser
     {
-        public int Id { get; set; }
         public DateTime? EndDate { get; set; }
         public DateTime? StartDate { get; set; }
 

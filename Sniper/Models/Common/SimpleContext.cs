@@ -1,10 +1,7 @@
-﻿using Sniper.Contracts;
-
-namespace Sniper.Common
+﻿namespace Sniper.Common
 {
-    public class SimpleContext : IHasId
+    public class SimpleContext : Entity
     {
-        public int Id { get; set; }
         public bool No { get; set; }
     }
 }

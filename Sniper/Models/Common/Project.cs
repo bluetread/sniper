@@ -1,6 +1,7 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -17,6 +18,13 @@ namespace Sniper.Common
         IHasReleases, IHasRequests, IHasRevisions, IHasTasks, IHasTeamProjects,
         IHasTestCases, IHasTestPlanRuns, IHasTestPlans, IHasTimes, IHasUnits, IHasUserStories
     {
+        #region Required for Create
+
+        [RequiredForCreate]
+        public override string Name { get; set; }
+
+        #endregion
+
         public string Abbreviation { get; set; }
         public DateTime? AnticipatedEndDate { get; set; }
         public string Color { get; set; }

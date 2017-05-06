@@ -1,6 +1,8 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -12,6 +14,16 @@ namespace Sniper.Common
     /// </remarks>
     public class Build : General, IHasBugs, IHasTestPlanRuns
     {
+        #region Required for Create
+
+        [RequiredForCreate]
+        public override string Name { get; set; }
+        
+        [RequiredForCreate(JsonProperties.Id)]
+        public override Project Project { get; set; }
+
+        #endregion
+
         public DateTime BuildDate { get; set; }
         public Iteration Iteration { get; set; }
         public Release Release { get; set; }

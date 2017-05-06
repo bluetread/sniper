@@ -1,5 +1,6 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -9,12 +10,17 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Companies/meta">API documentation - Company</a>
     /// </remarks>
-    public class Company : IHasId, IHasDescription, IHasName, IHasUrl, IHasProjects, IHasRequesters
+    public class Company : Entity, IHasDescription, IHasName, IHasUrl, IHasProjects, IHasRequesters
     {
-        public int Id { get; set; }
         public string Description { get; set; }
-        public string Name { get; set; }
         public string Url { get; set; }
+
+        #region Required for Create
+
+        [RequiredForCreate]
+        public string Name { get; set; }
+
+        #endregion
 
         public Collection<Project> Projects { get; set; }
         public Collection<Requester> Requesters { get; set; }

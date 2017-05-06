@@ -1,6 +1,8 @@
-﻿using Sniper.Contracts.History;
+﻿using Sniper.Application;
+using Sniper.Contracts.Entities.History;
 using Sniper.History;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
@@ -16,6 +18,19 @@ namespace Sniper.Common
         public bool IsPrivate { get; set; }
         public bool IsReplied { get; set; }
         public int VotesCount { get; set; }
+
+        #region Required for Create
+
+        [RequiredForCreate]
+        public override string Name { get; set; }
+
+        [RequiredForCreate(JsonProperties.Id)]
+        public override EntityState EntityState { get; set; }
+
+        [RequiredForCreate(JsonProperties.Id)]
+        public override Project Project { get; set; }
+
+        #endregion
 
         public RequestSource SourceType { get; set; }
         public RequestType RequestType { get; set; }

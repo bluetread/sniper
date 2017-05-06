@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
@@ -12,9 +12,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/CustomFields/meta">API documentation - CustomField</a>
     /// </remarks>
-    public class CustomField : IHasId, IHasName, IHasEntityType, IHasProcess
+    public class CustomField : Entity, IHasName, IHasEntityType, IHasProcess
     {
-        public int Id { get; set; }
         public bool EnabledForFilter { get; set; }
         public string EntityFieldName { get; set; }
         public string Name { get; set; }

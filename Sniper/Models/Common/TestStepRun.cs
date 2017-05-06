@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 
 namespace Sniper.Common
 {
@@ -8,9 +8,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TestStepRuns/meta">API documentation - TestStepRun</a>
     /// </remarks>
-    public class TestStepRun : IHasId, IHasDescription, IHasTestCaseRun, IHasTestStep
+    public class TestStepRun : Entity, IHasDescription, IHasTestCaseRun, IHasTestStep
     {
-        public int Id { get; set; }
         public string Description { get; set; }
         public bool Passed { get; set; }
         public string Result { get; set; }

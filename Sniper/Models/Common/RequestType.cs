@@ -1,5 +1,6 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -9,9 +10,9 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/RequestTypes/meta">API documentation - RequestType</a>
     /// </remarks>
-    public class RequestType : IHasId, IHasName, IHasRequests
+    [CannotCreateReadUpdateDelete]
+    public class RequestType : Entity, IHasName, IHasRequests
     {
-        public int Id { get; set; }
         public string Icon { get; set; }
         public string Name { get; set; }
 

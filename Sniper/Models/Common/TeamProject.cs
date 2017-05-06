@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
 
@@ -10,9 +10,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TeamProjects/meta">API documentation - TeamProject</a>
     /// </remarks>
-    public class TeamProject : IHasId, IHasDateRange, IHasTeam, IHasProject, IHasAllocations, IHasWorkFlows
+    public class TeamProject : Entity, IHasDateRange, IHasTeam, IHasProject, IHasAllocations, IHasWorkFlows
     {
-        public int Id { get; set; }
         public DateTime? EndDate { get; set; }
         public bool IsProjectAccessed { get; set; }
         public DateTime? StartDate { get; set; }

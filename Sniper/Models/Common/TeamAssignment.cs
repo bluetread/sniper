@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System;
 
 namespace Sniper.Common
@@ -9,9 +9,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TeamAssignments/meta">API documentation - TeamAssignment</a>
     /// </remarks>
-    public class TeamAssignment : IHasId, IHasDateRange, IHasAssignable, IHasEntityState, IHasTeam
+    public class TeamAssignment : Entity, IHasDateRange, IHasAssignable, IHasEntityState, IHasTeam
     {
-        public int Id { get; set; }
         public DateTime? EndDate { get; set; }
         public DateTime? StartDate { get; set; }
 

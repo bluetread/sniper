@@ -1,8 +1,10 @@
-﻿using Sniper.Contracts;
-using Sniper.Contracts.History;
+﻿using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
+using Sniper.Contracts.Entities.History;
 using Sniper.History;
 using System;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -15,6 +17,17 @@ namespace Sniper.Common
     public class Impediment : General, IHasPrivate, IHasPlannedDates,
         IHasAssignable, IHasEntityState, IHasImpedimentHistory, IHasPriority, IHasResponsibleUser
     {
+
+        #region Required for Create
+
+        [RequiredForCreate]
+        public override string Name { get; set; }
+
+        [RequiredForCreate(JsonProperties.Id)]
+        public override Project Project { get; set; }
+
+        #endregion
+
         public bool IsPrivate { get; set; }
         public DateTime? PlannedEndDate { get; set; }
         public DateTime? PlannedStartDate { get; set; }

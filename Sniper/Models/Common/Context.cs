@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
 
 namespace Sniper.Common
@@ -9,9 +9,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Context/meta">API documentation - Context</a>
     /// </remarks>
-    public class Context : IHasId, IHasCustomFields
+    public class Context : Entity, IHasCustomFields
     {
-        public int Id { get; set; }
         public string Acid { get; set; }
         public bool AnyProject { get; set; }
         public bool AnyTeam { get; set; }

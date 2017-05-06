@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
 
 namespace Sniper.Common
@@ -9,9 +9,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Workflows/meta">API documentation - Workflow</a>
     /// </remarks>
-    public class Workflow : IHasId, IHasName, IHasEntityType, IHasProcess, IHasEntityStates, IHasTeamProjects
+    public class Workflow : Entity, IHasName, IHasEntityType, IHasProcess, IHasEntityStates, IHasTeamProjects
     {
-        public int Id { get; set; }
         public string Name { get; set; }
 
         public EntityType EntityType { get; set; }

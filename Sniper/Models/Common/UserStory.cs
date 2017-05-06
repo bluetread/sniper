@@ -1,9 +1,10 @@
 ﻿using Sniper.Application;
-using Sniper.Contracts;
-using Sniper.Contracts.History;
+using Sniper.Contracts.Entities.Common;
+using Sniper.Contracts.Entities.History;
 using Sniper.History;
 using System.Collections.ObjectModel;
 using static Sniper.CustomAttributes.CustomAttributes;
+
 
 namespace Sniper.Common
 {
@@ -15,12 +16,20 @@ namespace Sniper.Common
     /// </remarks>
     public class UserStory : Assignable, IHasInitialEstimate, IHasFeature, IHasBugs, IHasTasks, IHasUserHistory
     {
-        #region Required
+        #region Required for Create
+
         [RequiredForCreate]
         public override string Name { get; set; }
 
+
+        [RequiredForCreate(IsEnabled = false)] // Override setting from Assignable. Only required for create there.
+        public override EntityState EntityState { get; set; }
+
         [RequiredForCreate(JsonProperties.Id)]
         public override Project Project { get; set; }
+
+        [RequiredForCreate(IsEnabled = false)] // Override setting from Assignable. Only required for create there.
+        public override Priority Priority { get; set; }
 
         #endregion
 

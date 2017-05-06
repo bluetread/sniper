@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 
 namespace Sniper.Common
 {
@@ -8,9 +8,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/GeneralFollowers/meta">API documentation - GeneralFollower</a>
     /// </remarks>
-    public class GeneralFollower : IHasId, IHasGeneral, IHasUser
+    public class GeneralFollower : Entity, IHasGeneral, IHasUser
     {
-        public int Id { get; set; }
         public General General { get; set; }
         public User User { get; set; }
     }

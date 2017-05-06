@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 
 namespace Sniper.Common
 {
@@ -8,9 +8,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Terms/meta">API documentation - Term</a>
     /// </remarks>
-    public class Term : IHasId, IHasProcess, IHasEntityType
+    public class Term : Entity, IHasProcess, IHasEntityType
     {
-        public int Id { get; set; }
         public string WordKey { get; set; }
         public string Value { get; set; }
         public Process Process { get; set; }

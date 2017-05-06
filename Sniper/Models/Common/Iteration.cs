@@ -1,5 +1,8 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
+using System;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -12,7 +15,24 @@ namespace Sniper.Common
     /// </remarks>
     public class Iteration : IterationBase, IHasRelease, IHasBuilds, IHasRequests
     {
+        #region Required for Create
+
+        [RequiredForCreate]
+        public override DateTime? EndDate { get; set; }
+
+        [RequiredForCreate]
+        public override string Name { get; set; }
+
+        [RequiredForCreate]
+        public override DateTime? StartDate { get; set; }
+
+        [RequiredForCreate(JsonProperties.Id)]
+        public override Project Project { get; set; }
+
+        [RequiredForCreate(JsonProperties.Id)]
         public Release Release { get; set; }
+
+        #endregion
 
         public Collection<Build> Builds { get; set; }
         public Collection<Request> Requests { get; set; }

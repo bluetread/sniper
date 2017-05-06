@@ -1,7 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Sniper.Application;
-using Sniper.Contracts;
+using Sniper.Contracts.Entities.Common;
 using System;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -11,9 +12,9 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Attachments/meta">API documentation - Attachment</a>
     /// </remarks>
-    public class Attachment : IHasId, IHasDescription, IHasDate, IHasGeneral, IHasMessage, IHasName, IHasOwner
+    [CannotCreateReadUpdateDelete]
+    public class Attachment : Entity, IHasDescription, IHasDate, IHasGeneral, IHasMessage, IHasName, IHasOwner
     {
-        public int Id { get; set; }
         public string Description { get; set; }
 
         [JsonProperty(JsonProperties.Date)]

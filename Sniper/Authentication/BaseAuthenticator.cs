@@ -1,8 +1,8 @@
 ﻿using Sniper.Configuration;
 using Sniper.Http;
+using Sniper.Net;
 using System.Collections.Generic;
 using System.Net;
-using Sniper.Net;
 using ICredentials = Sniper.Http.ICredentials;
 
 namespace Sniper

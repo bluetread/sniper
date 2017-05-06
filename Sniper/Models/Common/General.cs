@@ -1,24 +1,25 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
-    public class General : IHasId, IHasName, IHasDescription, IHasCreateDate, IHasDateRange,
+    [CannotCreateReadUpdateDelete]
+    public class General : Entity, IHasName, IHasDescription, IHasCreateDate, IHasDateRange,
         IHasEntityType, IHasModifyDate, IHasOwner, IHasProject, IHasCustomFields,
         IHasAttachments, IHasComments, IHasFollowers, IHasMessages, IHasTags
     {
-        public int Id { get; set; }
         public DateTime? CreateDate { get; set; }
         public string Description { get; set; }
-        public DateTime? EndDate { get; set; }
+        public virtual DateTime? EndDate { get; set; }
         public bool IsNext { get; set; }
         public bool IsNow { get; set; }
         public bool IsPrevious { get; set; }
         public DateTime? LastCommentDate { get; set; }
         public virtual string Name { get; set; }
         public double NumericPriority { get; set; }
-        public DateTime? StartDate { get; set; }
+        public virtual DateTime? StartDate { get; set; }
         public DateTime? ModifyDate { get; set; }
         public string Tags { get; set; }
 

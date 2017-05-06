@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System;
 
 namespace Sniper.Common
@@ -9,9 +9,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/ProjectAllocations/meta">API documentation - ProjectAllocation</a>
     /// </remarks>
-    public class ProjectAllocation : IHasId, IHasDateRange, IHasEntityType, IHasProject, IHasEffectiveDates
+    public class ProjectAllocation : Entity, IHasDateRange, IHasEntityType, IHasProject, IHasEffectiveDates
     {
-        public int Id { get; set; }
         public DateTime? EffectiveEndDate { get; set; }
         public DateTime? EffectiveStartDate { get; set; }
         public DateTime? EndDate { get; set; }

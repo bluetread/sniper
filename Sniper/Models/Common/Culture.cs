@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 
 namespace Sniper.Common
 {
@@ -8,9 +8,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Cultures/meta">API documentation - Culture</a>
     /// </remarks>
-    public class Culture : IHasId, IHasName
+    public class Culture : Entity, IHasName
     {
-        public int Id { get; set; }
         public string CurrencyDecimalDigits { get; set; }
         public string CurrencyDecimalSeparator { get; set; }
         public string CurrencyGroupSeparator { get; set; }

@@ -1,5 +1,4 @@
-﻿using Sniper.Contracts;
-using static Sniper.TargetProcess.Common.Enumerations;
+﻿using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
 {
@@ -9,9 +8,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/GlobalSettings/meta">API documentation - GlobalSettings</a>
     /// </remarks>
-    public class GlobalSettings : IHasId
+    public class GlobalSettings : Entity
     {
-        public int Id { get; set; }
         public string AppHostAndPath { get; set; }
         public string CompanyName { get; set; }
         public string CsvExportDelimiter { get; set; }

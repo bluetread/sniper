@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 
 namespace Sniper.Common
 {
@@ -9,10 +9,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TestRunItemHierarchyLinks/meta">API documentation - TestRunItemHierarchyLink</a>
     /// </remarks>
-    public class TestRunItemHierarchyLink : IHasId, IHasTestCaseRun, IHasTestPlanRun
+    public class TestRunItemHierarchyLink : Entity, IHasTestCaseRun, IHasTestPlanRun
     {
-        public int Id { get; set; }
-
         public TestCaseRun TestCaseRun { get; set; }
         public TestPlanRun TestPlanRun { get; set; }
     }

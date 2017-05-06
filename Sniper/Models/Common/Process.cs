@@ -1,5 +1,6 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -9,12 +10,17 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Processes/meta">API documentation - Process</a>
     /// </remarks>
-    public class Process : IHasId, IHasName, IHasDescription, IHasProjects,
+    public class Process : Entity, IHasName, IHasDescription, IHasProjects,
         IHasPractices, IHasCustomFields, IHasProcessAdmins, IHasTerms, IHasWorkFlows
     {
-        public int Id { get; set; }
         public string Description { get; set; }
+
+        #region Required for Create
+
+        [RequiredForCreate]
         public string Name { get; set; }
+
+        #endregion
 
         public Collection<CustomField> CustomFields { get; set; }
         public Collection<Practice> Practices { get; set; }

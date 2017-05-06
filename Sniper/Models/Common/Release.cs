@@ -1,6 +1,8 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -17,6 +19,16 @@ namespace Sniper.Common
         public DateTime? ForecastEndDate { get; set; }
         public decimal Progress { get; set; }
         public string Units { get; set; }
+
+        #region Required for Create
+
+        [RequiredForCreate]
+        public override string Name { get; set; }
+
+        [RequiredForCreate(JsonProperties.Id)]
+        public override Project Project { get; set; }
+
+        #endregion
 
         public Process Process { get; set; }
 

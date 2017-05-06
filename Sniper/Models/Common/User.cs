@@ -1,6 +1,7 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -24,6 +25,21 @@ namespace Sniper.Common
         public string Locale { get; set; }
         public string Skills { get; set; }
         public decimal WeeklyAvailableHours { get; set; }
+
+        #region Required for Create
+
+        [RequiredForCreate]
+        public override string Email { get; set; }
+        [RequiredForCreate]
+        public override string FirstName { get; set; }
+        [RequiredForCreate]
+        public override string LastName { get; set; }
+        [RequiredForCreate]
+        public override string Login { get; set; }
+        [RequiredForCreate]
+        public override string Password { get; set; }
+
+        #endregion
 
         public Role Role { get; set; }
 

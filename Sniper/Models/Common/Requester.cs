@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common

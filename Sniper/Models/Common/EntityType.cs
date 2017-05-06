@@ -1,5 +1,6 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
@@ -10,9 +11,9 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/EntityTypes/meta">API documentation - EntityType</a>
     /// </remarks>
-    public class EntityType : IHasId, IHasName, IAssignable, IExtendable
+    [CannotCreateReadUpdateDelete]
+    public class EntityType : Entity, IHasName, IAssignable, IExtendable
     {
-        public int Id { get; set; }
         private CustomFieldScope CustomFieldScope { get; set; }
         public bool IsAssignable { get; set; }
         public bool IsExtendable { get; set; }

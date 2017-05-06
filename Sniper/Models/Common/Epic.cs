@@ -1,5 +1,5 @@
-﻿using Sniper.Contracts;
-using Sniper.Contracts.History;
+﻿using Sniper.Contracts.Entities.Common;
+using Sniper.Contracts.Entities.History;
 using Sniper.History;
 using System.Collections.ObjectModel;
 

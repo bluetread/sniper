@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Sniper.Application;
-using Sniper.Contracts;
+using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
 
@@ -12,9 +12,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Milestones/meta">API documentation - Milestone</a>
     /// </remarks>
-    public class Milestone : IHasId, IHasName, IHasDescription, IHasDate, IHasProjects
+    public class Milestone : Entity, IHasName, IHasDescription, IHasDate, IHasProjects
     {
-        public int Id { get; set; }
         public string CssClass { get; set; }
         public string Description { get; set; }
 

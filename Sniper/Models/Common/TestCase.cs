@@ -1,6 +1,8 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
@@ -13,6 +15,16 @@ namespace Sniper.Common
     /// </remarks>
     public class TestCase : General, IHasPriority, IHasTestPlans, IHasTestCaseRuns, IHasTestSteps, IHasUserStories
     {
+        #region Required for Create
+
+        [RequiredForCreate]
+        public override string Name { get; set; }
+
+        [RequiredForCreate(JsonProperties.Id)]
+        public override Project Project { get; set; }
+
+        #endregion
+
         public string LastFailureComment { get; set; }
         public DateTime? LastRunDate { get; set; }
 

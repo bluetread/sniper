@@ -1,15 +1,19 @@
 ﻿using Newtonsoft.Json;
-using Sniper.Contracts;
+using Sniper.Contracts.Entities.Common;
+using Sniper.Contracts.Exceptions;
 using Sniper.Http;
 using Sniper.TargetProcess.Helpers;
 using Sniper.TargetProcess.Routes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Sniper.Application;
 using static Sniper.WarningsErrors.MessageSuppression;
 using static Sniper.CustomAttributes.CustomAttributes;
 using static Sniper.SniperExceptions;
@@ -56,9 +60,12 @@ namespace Sniper
 
         public IApiResponse<T> CreateData<T>(IHasId entity)
         {
-            if (!VerifyEntityForCreate(entity.GetType()))
+            Ensure.ArgumentNotNull(nameof(entity), entity);
+
+            var requiredPropertyResponse = VerifyEntityForCreate(entity);
+            if (requiredPropertyResponse.IsError)
             {
-                return HandleApiResponseExceptions<T>(new RequiredPropertyException());
+                return HandleApiResponseExceptions<T>(new RequiredPropertyException(requiredPropertyResponse));
             }
 
             var request = GetApiRequestFromEntity(this, entity, HttpMethod.Post);
@@ -75,6 +82,8 @@ namespace Sniper
 
         public async Task<IApiResponse<T>> CreateDataAsync<T>(IHasId entity)
         {
+            Ensure.ArgumentNotNull(nameof(entity), entity);
+
             var request = GetApiRequestFromEntity(this, entity, HttpMethod.Post);
             try
             {
@@ -118,11 +127,11 @@ namespace Sniper
             }
         }
 
-        protected ICollection<T> Convert<T>(string data)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(nameof(data), data);
-            return JsonConvert.DeserializeObject<TargetProcessResponseWrapper<T>>(data).Items;
-        }
+        //protected ICollection<T> Convert<T>(string data)
+        //{
+        //    Ensure.ArgumentNotNullOrEmptyString(nameof(data), data);
+        //    return JsonConvert.DeserializeObject<TargetProcessResponseWrapper<T>>(data).Items;
+        //}
 
         protected IHttpResponse ExecuteGetRequest<T>(IApiRequest apiRequest)
         {
@@ -202,7 +211,8 @@ namespace Sniper
             //To handle the return of raw data without throwing exception
             return typeof(T) == typeof(string) ? 
                 new HttpResponse(HttpStatusCode.OK, data, response.ResponseHeaders) : 
-                new HttpResponse(HttpStatusCode.OK, Convert<T>(data), response.ResponseHeaders);
+                new HttpResponse(HttpStatusCode.OK, 
+                JsonHelpers.ConvertIgnoreName<T>(data, JsonProperties.ResourceType), response.ResponseHeaders);
         }
 
         private static IApiRequest GetApiRequestFromEntity(
@@ -240,6 +250,7 @@ namespace Sniper
                 targetProcessClient.AuthenticationHandler.SiteInfo.ApiUrl,
                 targetProcessClient.ApiSiteInfo.Route);
 
+#if ToDoLaterIfNeeded
             var excludeList = targetProcessClient.ApiSiteInfo.IsInclude
                 ? new List<string>()
                 : targetProcessClient.ApiSiteInfo.FieldList;
@@ -247,7 +258,7 @@ namespace Sniper
             var includeList = targetProcessClient.ApiSiteInfo.IsInclude
                 ? targetProcessClient.ApiSiteInfo.FieldList
                 : new List<string>();
-
+#endif
             var customFilter = targetProcessClient.ApiSiteInfo.CustomFilter;
 
             var dictList = new[]
@@ -268,8 +279,10 @@ namespace Sniper
 
         private static string GetParameters(IEnumerable<IDictionary<string, string>> orderedList)
         {
+            var list = orderedList.ToList();
+            if (!list.Any()) return string.Empty;
             var finalList = new Dictionary<string, string>();
-            foreach (var dict in orderedList)
+            foreach (var dict in list)
             {
                 //Add (or replace) entries into one combined dictionary
                 foreach (var kvp in dict)
@@ -303,8 +316,12 @@ namespace Sniper
             }
             if (ex is JsonSerializationException)
             {
-                return new ApiResponse<T>(new HttpResponse(ex));
+                return new ApiResponse<T>(new HttpResponse(HttpStatusCode.NotAcceptable, ex));
 
+            }
+            if (ex is RequiredPropertyException)
+            {
+                return new ApiResponse<T>(new HttpResponse(HttpStatusCode.PartialContent, ex));
             }
             return new ApiResponse<T>(new HttpResponse(ex));
         }
@@ -314,10 +331,65 @@ namespace Sniper
             return new HttpResponse(ex);
         }
 
-        private static bool VerifyEntityForCreate(Type entityType)
+        //TODO: Break this up into smaller methods
+        private static IRequiredDataResponse VerifyEntityForCreate(IHasId entity)
         {
-            var list = entityType.PropertyNamesWithAttribute<RequiredForCreateAttribute>();
-            return true;
+            var response = new RequiredDataResponse();
+
+            Ensure.ArgumentNotNull(nameof(entity), entity);
+            var entityType = entity.GetType();
+            var propertyEntry = entityType.PropertyNamesWithAttribute<RequiredForCreateAttribute>(Properties.IsEnabled, true);
+            foreach (var entry in propertyEntry)
+            {
+                var propertyValue = entityType.GetProperty(entry.Key)?.GetValue(entity, null);
+                if (propertyValue == null)
+                {
+                    response.IsError = true;
+                    response.MissingPropertyNames.Add(entry.Key);
+                }
+                else
+                {
+                    // check if property is an object that has required fields.
+                    if (propertyValue is IHasId)
+                    {
+                        // check the returned list
+                        var items = entry.Value;
+                        var subItemList = new Collection<string>();
+                        var isSubError = false;
+                        foreach (var item in items)
+                        {
+                            var subItemValue = entityType.GetProperty(item)?.GetValue(propertyValue, null);
+                            var isNullOrDefault = false;
+                            // first check nullable, for any type
+                            var propertyType = entityType.GetProperty(item)?.PropertyType;
+                            if (propertyType != null)
+                            {
+                                if (propertyType.IsGenericType &&
+                                    propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                                {
+                                    isNullOrDefault = (subItemValue == null);
+                                }
+                                else
+                                {
+                                    var objectType = Activator.CreateInstance(propertyType);
+                                    isNullOrDefault = objectType.Equals(subItemValue);
+                                }
+                            }
+                            if (isNullOrDefault)
+                            {
+                                isSubError = true;
+                                subItemList.Add(item);
+                            }
+                        }
+                        if (isSubError)
+                        {
+                            response.IsError = true;
+                            response.MissingSubPropertyNames.Add(entry.Key, subItemList);
+                        }
+                    }
+                }
+            }
+            return response;
         }
     }
 }

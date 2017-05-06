@@ -1,6 +1,8 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -10,16 +12,23 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Revisions/meta">API documentation - Revision</a>
     /// </remarks>
-    public class Revision : IHasId, IHasDescription, IHasProject, IHasRevisionFiles, IHasAssignables
+    public class Revision : Entity, IHasDescription, IHasProject, IHasRevisionFiles, IHasAssignables
     {
-        public int Id { get; set; }
         public DateTime CommitDate { get; set; }
         public string Description { get; set; }
+
+        #region Required for Create
+
+        [RequiredForCreate]
         public string SourceControlId { get; set; }
 
-        public User Author { get; set; }
+        [RequiredForCreate(JsonProperties.Id)]
         public Project Project { get; set; }
 
+        #endregion
+
+        public User Author { get; set; }
+        
         public Collection<Assignable> Assignables { get; set; }
         public Collection<RevisionFile> RevisionFiles { get; set; }
     }

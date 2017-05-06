@@ -1,4 +1,6 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -8,12 +10,20 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Assignments/meta">API documentation - Assignment</a>
     /// </remarks>
-    public class Assignment : IHasId, IHasAssignable, IHasRole
+    public class Assignment : Entity, IHasAssignable, IHasRole
     {
-        public int Id { get; set; }
+        #region Required for Create
 
+        [RequiredForCreate(JsonProperties.Id)]
         public Assignable Assignable { get; set; }
+
+        [RequiredForCreate(JsonProperties.Id)]
         public Role Role { get; set; }
+
+        [RequiredForCreate(JsonProperties.Id)]
         public User GeneralUser { get; set; }
+
+        #endregion
+
     }
 }

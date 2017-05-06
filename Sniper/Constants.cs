@@ -11,6 +11,12 @@ namespace Sniper.Application
     {
         public const string Date = "Date";
         public const string Id = "Id";
+        public const string ResourceType = "ResourceType";
+    }
+
+    public static class Properties
+    {
+        public const string IsEnabled = "IsEnabled";
     }
 }
 
@@ -214,23 +220,23 @@ namespace Sniper.TargetProcess
     {
         internal static class StatusCodeTitles
         {
-            public const string Success = "Success";
             public const string BadFormat = "Bad format";
-            public const string Unauthorized = "Unauthorized";
             public const string Forbidden = "Forbidden";
-            public const string RequestedEntityNotFound = "Requested Entity not found";
             public const string InternalServerError = "Internal server error";
             public const string NotImplemented = "Not implemented";
+            public const string RequestedEntityNotFound = "Requested Entity not found";
+            public const string Success = "Success";
+            public const string Unauthorized = "Unauthorized";
         }
 
         internal static class StatusCodeDetails
         {
-            public const string Success = "Request was handled correctly";
             public const string BadFormat = "Incorrect parameter or query string";
-            public const string Unauthorized = "Wrong or missed credentials";
             public const string Forbidden = "A user has insufficient rights to perform an action";
             public const string InternalServerError = "Targetprocess messed up";
             public const string NotImplemented = "The requested action is either not supported or not implemented yet";
+            public const string Success = "Request was handled correctly";
+            public const string Unauthorized = "Wrong or missed credentials";
         }
     }
 }

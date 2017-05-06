@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts;
+﻿using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
 
 namespace Sniper.Common
@@ -9,9 +9,8 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Practices/meta">API documentation - Practice</a>
     /// </remarks>
-    public class Practice : IHasId, IHasName, IHasDescription, IHasProcesses
+    public class Practice : Entity, IHasName, IHasDescription, IHasProcesses
     {
-        public int Id { get; set; }
         public string DisplayName { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

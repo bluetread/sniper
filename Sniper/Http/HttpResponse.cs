@@ -11,6 +11,16 @@ namespace Sniper.Http
     internal class HttpResponse : IHttpResponse
     {
         private HttpStatusCode _statusCode;
+        private readonly ICollection<HttpStatusCode> _successCodeList = new List<HttpStatusCode>
+        {
+            HttpStatusCode.OK,
+            HttpStatusCode.Accepted,
+            HttpStatusCode.Created,
+            HttpStatusCode.NonAuthoritativeInformation,
+            HttpStatusCode.NoContent,
+            HttpStatusCode.ResetContent,
+            HttpStatusCode.PartialContent
+        };
 
         public HttpResponse() : this(HttpStatusCode.InternalServerError) { }
 
@@ -100,7 +110,7 @@ namespace Sniper.Http
             private set
             {
                 IsError = true;
-                if (value == HttpStatusCode.OK)
+                if (_successCodeList.Contains(value))
                 {
                     IsError = false;
                 }

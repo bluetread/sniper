@@ -209,10 +209,10 @@ namespace Sniper
             string data = (string)response.Data;
 
             //To handle the return of raw data without throwing exception
-            return typeof(T) == typeof(string) ? 
-                new HttpResponse(HttpStatusCode.OK, data, response.ResponseHeaders) : 
-                new HttpResponse(HttpStatusCode.OK, 
-                JsonHelpers.ConvertIgnoreName<T>(data, JsonProperties.ResourceType), response.ResponseHeaders);
+            return typeof(T) == typeof(string) 
+                ? new HttpResponse(HttpStatusCode.OK, data, response.ResponseHeaders) 
+                : new HttpResponse(HttpStatusCode.OK, JsonConvert.DeserializeObject<T>(
+                    data, JsonHelpers.DefaultSerializerSettings), response.ResponseHeaders);
         }
 
         private static IApiRequest GetApiRequestFromEntity(

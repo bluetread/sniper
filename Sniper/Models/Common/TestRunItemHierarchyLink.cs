@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 
 namespace Sniper.Common
 {
@@ -11,7 +12,10 @@ namespace Sniper.Common
     /// </remarks>
     public class TestRunItemHierarchyLink : Entity, IHasTestCaseRun, IHasTestPlanRun
     {
+        [JsonProperty(Required = Required.Default)]
         public TestCaseRun TestCaseRun { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public TestPlanRun TestPlanRun { get; set; }
     }
 }

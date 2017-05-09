@@ -1,5 +1,6 @@
-﻿using Sniper.Contracts.Entities.Common;
-
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
+using static Sniper.CustomAttributes.CustomAttributes;
 namespace Sniper.Common
 {
     ///<summary>
@@ -10,7 +11,12 @@ namespace Sniper.Common
     /// </remarks>
     public class ReleaseProject : Entity, IHasProject, IHasRelease
     {
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Project Project { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Release Release { get; set; }
     }
 }

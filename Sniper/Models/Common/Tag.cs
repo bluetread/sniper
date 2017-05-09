@@ -1,5 +1,7 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -11,8 +13,15 @@ namespace Sniper.Common
     /// </remarks>
     public class Tag : Entity, IHasName, IHasGenerals
     {
+        #region Required for Create
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Name { get; set; }
 
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<General> Generals { get; set; }
     }
 }

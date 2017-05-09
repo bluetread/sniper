@@ -1,4 +1,6 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -11,14 +13,34 @@ namespace Sniper.Common
     /// </remarks>
     public class RoleEffort : Entity, IHasEffort, IHasInitialEstimate, IHasTimeSpent, IHasAssignable, IHasRole
     {
-        public decimal Effort { get; set; }
-        public decimal EffortCompleted { get; set; }
-        public decimal EffortToDo { get; set; }
-        public decimal InitialEstimate { get; set; }
-        public decimal TimeRemain { get; set; }
-        public decimal TimeSpent { get; set; }
+        #region Required for Create
 
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Assignable Assignable { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Role Role { get; set; }
+
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal Effort { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal EffortCompleted { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal EffortToDo { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal InitialEstimate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal TimeRemain { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal TimeSpent { get; set; }
     }
 }

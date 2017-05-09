@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
 
 namespace Sniper.Common
@@ -11,7 +12,10 @@ namespace Sniper.Common
     /// </remarks>
     public class RelationType : Entity, IHasName
     {
+        [JsonProperty(Required = Required.Default)]
         public string Name { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Relation> Relations { get; set; }
     }
 }

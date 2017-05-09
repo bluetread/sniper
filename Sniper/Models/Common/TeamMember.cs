@@ -1,5 +1,7 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -11,11 +13,26 @@ namespace Sniper.Common
     /// </remarks>
     public class TeamMember : Entity, IHasDateRange, IHasRole, IHasTeam, IHasUser
     {
-        public DateTime? EndDate { get; set; }
-        public DateTime? StartDate { get; set; }
+        #region Required for Create
 
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Role Role { get; set; }
-        public User User { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Team Team { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public User User { get; set; }
+
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime? EndDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime? StartDate { get; set; }
     }
 }

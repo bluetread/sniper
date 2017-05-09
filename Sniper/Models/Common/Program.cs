@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
 using static Sniper.CustomAttributes.CustomAttributes;
 
@@ -15,10 +16,12 @@ namespace Sniper.Common
         #region Required for Create
 
         [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
 
         #endregion
 
+        [JsonProperty(Required = Required.Default)]
         public Collection<Project> Projects { get; set; }
     }
 }

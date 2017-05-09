@@ -1,6 +1,7 @@
 ﻿using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
+using Newtonsoft.Json;
 using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
@@ -14,26 +15,29 @@ namespace Sniper.Common
     public class TestPlanRun : Assignable, IHasBuild, IHasTestPlan, IHasTestCaseRuns, IHasTestPlanRuns,
         IHasBugs, IHasTestCaseRunLinks
     {
+
+        #region Required for Create
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public override string Name { get; set; }
+
+        [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public override Project Project { get; set; }
+
+        [RequiredForCreate(JsonProperties.Name)]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public TestPlan TestPlan { get; set; }
+
+        #endregion
+
         public int BlockedCount { get; set; }
         public int FailedCount { get; set; }
         public bool IsLastStarted { get; set; }
         public int NotRunCount { get; set; }
         public int OnHoldCount { get; set; }
         public int PassedCount { get; set; }
-
-        #region Required for Create
-
-        [RequiredForCreate]
-        public override string Name { get; set; }
-
-        [RequiredForCreate(JsonProperties.Id)]
-        public override Project Project { get; set; }
-
-        [RequiredForCreate(JsonProperties.Id)]
-        public TestPlan TestPlan { get; set; }
-
-        #endregion
-
         public Build Build { get; set; }
         public TestPlanRun ParentTestPlanRun { get; set; }
 

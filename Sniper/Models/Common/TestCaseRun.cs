@@ -1,4 +1,5 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
@@ -17,31 +18,61 @@ namespace Sniper.Common
     public class TestCaseRun : Entity, IHasName, IHasDescription, IHasTestPlanRun, IHasTestCase,
         IHasEntityType, IHasPriority, IHasTestStepRuns, IHasBugs, IHasTestPlanRunLinks
     {
-        public string Comment { get; set; }
-        public string Description { get; set; }
-        public DateTime EndRunDate { get; set; }
-        public string Name { get; set; }
-        public DateTime StartRunDate { get; set; }
-        public TestCaseRunStatus Status { get; set; }
-        public string Steps { get; set; }
-        public string Success { get; set; }
-
-        public EntityType EntityType { get; set; }
-        public User LastExecutor { get; set; }
-        public Priority Priority { get; set; }
-        public TestPlanRun RootTestPlanRun { get; set; }
-        public TestCase TestCase { get; set; }
-
         #region Required for Create
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public TestPlanRun TestPlanRun { get; set; }
 
-        #endregion
-        
+        [RequiredForCreate(JsonProperties.Name)]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public TestPlanRun RootTestPlanRun { get; set; }
 
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public string Comment { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public string Description { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime EndRunDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public string Name { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime StartRunDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public TestCaseRunStatus Status { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public string Steps { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public string Success { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public EntityType EntityType { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public User LastExecutor { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Priority Priority { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public TestCase TestCase { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<TestStepRun> TestStepRuns { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Bug> Bugs { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<TestRunItemHierarchyLink> TestPlanRunLinks { get; set; }
     }
 }

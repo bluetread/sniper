@@ -1,4 +1,5 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
@@ -17,18 +18,29 @@ namespace Sniper.Common
         #region Required for Create
 
         [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
         
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 
         #endregion
 
+        [JsonProperty(Required = Required.Default)]
         public DateTime BuildDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Iteration Iteration { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Release Release { get; set; }
 
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Bug> Bugs { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<TestPlanRun> TestPlanRuns { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using static Sniper.CustomAttributes.CustomAttributes;
 using static Sniper.TargetProcess.Common.Enumerations;
 
@@ -12,14 +13,19 @@ namespace Sniper.Common
     /// </remarks>
     public class RevisionFile : Entity
     {
-        public string FileName { get; set; }
-        public FileAction FileAction { get; set; }
-
         #region Required for Create
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Revision Revision { get; set; }
-        
+
         #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public string FileName { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public FileAction FileAction { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using static Sniper.CustomAttributes.CustomAttributes;
 
@@ -15,12 +16,15 @@ namespace Sniper.Common
         #region Required for Create
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Assignable Assignable { get; set; }
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Role Role { get; set; }
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public User GeneralUser { get; set; }
 
         #endregion

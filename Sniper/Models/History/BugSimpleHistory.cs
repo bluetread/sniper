@@ -1,4 +1,5 @@
-﻿using Sniper.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Common;
 using Sniper.Contracts.Entities.Common;
 
 namespace Sniper.History
@@ -11,6 +12,8 @@ namespace Sniper.History
     /// </remarks>
     public class BugSimpleHistory : SimpleHistoryExtendedBase, IHasBug
     {
+
+        [JsonProperty(Required = Required.Default)]
         public Bug Bug { get; set; }
     }
 }

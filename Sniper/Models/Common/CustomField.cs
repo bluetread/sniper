@@ -1,5 +1,7 @@
-﻿using Sniper.Contracts.Entities.Common;
-using static Sniper.TargetProcess.Common.Enumerations;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
+using Sniper.TargetProcess.Common;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -14,16 +16,36 @@ namespace Sniper.Common
     /// </remarks>
     public class CustomField : Entity, IHasName, IHasEntityType, IHasProcess
     {
-        public bool EnabledForFilter { get; set; }
-        public string EntityFieldName { get; set; }
+        [RequiredForCreate]
+        [JsonProperty(Required = Newtonsoft.Json.Required.DisallowNull)]
         public string Name { get; set; }
+
+        [JsonProperty(Required = Newtonsoft.Json.Required.Default)]
+        public bool EnabledForFilter { get; set; }
+
+        [JsonProperty(Required = Newtonsoft.Json.Required.Default)]
+        public string EntityFieldName { get; set; }
+
+        [JsonProperty(Required = Newtonsoft.Json.Required.Default)]
         public double NumericPriority { get; set; }
+
+        [JsonProperty(Required = Newtonsoft.Json.Required.Default)]
         public bool Required { get; set; }
+
+        [JsonProperty(Required = Newtonsoft.Json.Required.Default)]
         public string Value { get; set; }
 
+        [JsonProperty(Required = Newtonsoft.Json.Required.Default)]
         public CustomFieldConfig Config { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Newtonsoft.Json.Required.DisallowNull)]
         public EntityType EntityType { get; set; }
-        public FieldType FieldType { get; set; }
+
+        [JsonProperty(Required = Newtonsoft.Json.Required.Default)]
+        public Enumerations.FieldType FieldType { get; set; }
+
+        [JsonProperty(Required = Newtonsoft.Json.Required.Default)]
         public Process Process { get; set; }
     }
 }

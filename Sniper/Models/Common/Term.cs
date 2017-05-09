@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 
 namespace Sniper.Common
 {
@@ -10,9 +11,16 @@ namespace Sniper.Common
     /// </remarks>
     public class Term : Entity, IHasProcess, IHasEntityType
     {
+        [JsonProperty(Required = Required.Default)]
         public string WordKey { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string Value { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Process Process { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public EntityType EntityType { get; set; }
     }
 }

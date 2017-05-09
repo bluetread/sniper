@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
 using static Sniper.CustomAttributes.CustomAttributes;
 
@@ -13,9 +14,15 @@ namespace Sniper.Common
     [CannotCreateReadUpdateDelete]
     public class RequestType : Entity, IHasName, IHasRequests
     {
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Icon { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Name { get; set; }
 
+        [JsonProperty(Required = Required.Default)]
         public Collection<Request> Requests { get; set; }
     }
 }

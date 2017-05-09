@@ -6,9 +6,9 @@ namespace Sniper
     [JsonObject(ItemRequired = Required.Always)]
     public abstract class Entity : IHasId, IHasResourceType
     {
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
         [JsonIgnore, JsonProperty(Required = Required.Default)]
-        public string ResourceType { get; private set; }
+        public virtual string ResourceType { get; private set; }
     }
 }

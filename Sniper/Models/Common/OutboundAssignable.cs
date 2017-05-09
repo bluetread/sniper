@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 
 namespace Sniper.Common
 {
@@ -10,7 +11,10 @@ namespace Sniper.Common
     /// </remarks>
     public class OutboundAssignable : Assignable, IHasRelationType
     {
+        [JsonProperty(Required = Required.Default)]
         public General InboundGeneral { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public RelationType RelationType { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
 
 namespace Sniper.Common
@@ -11,12 +12,22 @@ namespace Sniper.Common
     /// </remarks>
     public class SsoSettings : IHasEnabled
     {
+        [JsonProperty(Required = Required.Default)]
         public string Certificate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public bool IsEnabled { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public bool IsFormAuthenticationDisabled { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public bool IsUserProvisioningEnabled { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string SignonUrl { get; set; }
 
+        [JsonProperty(Required = Required.Default)]
         public Collection<User> ExceptionUsers { get; set; }
     }
 }

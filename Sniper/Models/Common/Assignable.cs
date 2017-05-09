@@ -1,4 +1,5 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
@@ -20,44 +21,92 @@ namespace Sniper.Common
         #region Required for Create
 
         [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public virtual EntityState EntityState { get; set; }
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public virtual Priority Priority { get; set; }
 
         #endregion
 
-        public double CycleTime { get; set; }
-        public decimal Effort { get; set; }
-        public decimal EffortCompleted { get; set; }
-        public decimal EffortToDo { get; set; }
-        public DateTime? ForecastEndDate { get; set; }
-        public DateTime? LastStateChangeDate { get; set; }
-        public double LeadTime { get; set; }
-        public DateTime? PlannedEndDate { get; set; }
-        public DateTime? PlannedStartDate { get; set; }
-        public decimal Progress { get; set; }
-        public decimal TimeRemain { get; set; }
-        public decimal TimeSpent { get; set; }
-        public string Units { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public virtual double CycleTime { get; set; }
 
-        
-        public Iteration Iteration { get; set; }
-       
-        public Release Release { get; set; }
-        public TeamAssignment ResponsibleTeam { get; set; }
-        public TeamIteration TeamIteration { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public virtual decimal Effort { get; set; }
 
-        public Collection<AssignedEffort> AssignedEfforts { get; set; }
-        public Collection<TeamAssignment> AssignedTeams { get; set; }
-        public Collection<GeneralUser> AssignedUser { get; set; }
-        public Collection<Assignment> Assignments { get; set; }
-        public Collection<Impediment> Impediments { get; set; }
-        public Collection<Revision> Revisions { get; set; }
-        public Collection<RoleEffort> RoleEfforts { get; set; }
-        public Collection<Time> Times { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public virtual decimal EffortCompleted { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual decimal EffortToDo { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual DateTime? ForecastEndDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual DateTime? LastStateChangeDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual double LeadTime { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual DateTime? PlannedEndDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual DateTime? PlannedStartDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual decimal Progress { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual decimal TimeRemain { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual decimal TimeSpent { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual string Units { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual Iteration Iteration { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual Release Release { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual TeamAssignment ResponsibleTeam { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual TeamIteration TeamIteration { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual Collection<AssignedEffort> AssignedEfforts { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual Collection<TeamAssignment> AssignedTeams { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual Collection<GeneralUser> AssignedUser { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual Collection<Assignment> Assignments { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual Collection<Impediment> Impediments { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual Collection<Revision> Revisions { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual Collection<RoleEffort> RoleEfforts { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual Collection<Time> Times { get; set; }
     }
 }

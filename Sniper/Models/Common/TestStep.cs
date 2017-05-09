@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 
 namespace Sniper.Common
 {
@@ -10,10 +11,16 @@ namespace Sniper.Common
     /// </remarks>
     public class TestStep : Entity, IHasDescription, IHasTestCase
     {
+        [JsonProperty(Required = Required.Default)]
         public string Description { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string Result { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public int RunOrder { get; set; }
 
+        [JsonProperty(Required = Required.Default)]
         public TestCase TestCase { get; set; }
     }
 }

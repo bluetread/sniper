@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using Sniper.Contracts.Entities.History;
 using Sniper.History;
 using System.Collections.ObjectModel;
@@ -14,8 +15,13 @@ namespace Sniper.Common
     /// </remarks>
     public class Epic : Assignable, IHasInitialEstimate, IHasFeatures, IHasEpicHistory
     {
+        [JsonProperty(Required = Required.Default)]
         public decimal InitialEstimate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Feature> Features { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<EpicSimpleHistory> History { get; set; }
     }
 }

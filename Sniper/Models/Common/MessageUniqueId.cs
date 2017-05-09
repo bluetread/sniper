@@ -1,4 +1,4 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
 
 namespace Sniper.Common
 {
@@ -10,8 +10,14 @@ namespace Sniper.Common
     /// </remarks>
     public class MessageUniqueId : Entity
     {
+
+        [JsonProperty(Required = Required.Default)]
         public string MailLogin { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string MailServer { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string Uid { get; set; }
     }
 }

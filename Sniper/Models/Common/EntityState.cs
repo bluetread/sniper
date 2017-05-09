@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
 using static Sniper.CustomAttributes.CustomAttributes;
 
@@ -12,27 +13,52 @@ namespace Sniper.Common
     /// </remarks>
     public class EntityState : Entity, IHasName, IHasRole, IHasProjects, IHasAssignables
     {
-        public bool IsCommentRequired { get; set; }
-        public bool IsFinal { get; set; }
-        public bool IsInitial { get; set; }
-        public bool IsPlanned { get; set; }
-        public double NumericPriority { get; set; }
 
         #region Required for Create
 
         [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Name { get; set; }
 
         #endregion
 
+        [JsonProperty(Required = Required.Default)]
+        public bool IsCommentRequired { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public bool IsFinal { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public bool IsInitial { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public bool IsPlanned { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public double NumericPriority { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public EntityState ParentEntityState { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Role Role { get; set; }
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public Workflow Workflow { get; set; }
 
+        [JsonProperty(Required = Required.Default)]
         public Collection<Assignable> Assignables { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<EntityState> NextStates { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<EntityState> PreviousStates { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Project> Projects { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<EntityState> SubEntityStates { get; set; }
     }
 }

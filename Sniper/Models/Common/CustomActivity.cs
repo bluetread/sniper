@@ -1,4 +1,5 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
@@ -14,21 +15,28 @@ namespace Sniper.Common
     /// </remarks>
     public class CustomActivity : Entity, IHasName, IHasCreated, IHasEstimate, IHasProject, IHasTimes, IHasUser
     {
+        [JsonProperty(Required = Required.Default)]
         public DateTime Created { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public decimal Estimate { get; set; }
 
         #region Required for Create
 
         [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Name { get; set; }
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Project Project { get; set; }
 
         #endregion
 
+        [JsonProperty(Required = Required.Default)]
         public User User { get; set; }
 
+        [JsonProperty(Required = Required.Default)]
         public Collection<Time> Times { get; set; }
     }
 }

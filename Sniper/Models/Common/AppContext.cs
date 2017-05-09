@@ -6,6 +6,6 @@
     /// </remarks>
     public class AppContext : Entity
     {
-        private SimpleContext TeamContext { get; set; }
+        public SimpleContext TeamContext { get; set; }
     }
 }

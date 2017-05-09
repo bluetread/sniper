@@ -28,7 +28,7 @@ namespace Sniper
             var optionalQueryStringMatch = _optionalQueryStringRegex.Match(template);
             if (optionalQueryStringMatch.Success)
             {
-                var expansion = string.Empty;
+                var expansion = String.Empty;
                 var parameters = optionalQueryStringMatch.Groups[1].Value.Split(',');
 
                 foreach (var parameter in parameters)
@@ -36,7 +36,7 @@ namespace Sniper
                     var parameterProperty = values.GetType().GetProperty(parameter);
                     if (parameterProperty != null)
                     {
-                        expansion += string.IsNullOrWhiteSpace(expansion) ? "?" : "&";
+                        expansion += String.IsNullOrWhiteSpace(expansion) ? "?" : "&";
                         expansion += parameter + "=" +
                                      Uri.EscapeDataString("" + parameterProperty.GetValue(values, new object[0]));
                     }
@@ -50,7 +50,7 @@ namespace Sniper
         {
             Ensure.ArgumentNotNullOrEmptyString(HttpKeys.Pattern, pattern);
 
-            return new Uri(string.Format(CultureInfo.InvariantCulture, pattern, args), UriKind.Relative);
+            return new Uri(String.Format(CultureInfo.InvariantCulture, pattern, args), UriKind.Relative);
         }
 
         public static string FromBase64String(this string encoded)
@@ -62,7 +62,7 @@ namespace Sniper
         public static string FromRubyCase(this string propertyName)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(propertyName), propertyName);
-            return string.Join(string.Empty, propertyName.Split('_')).ToCapitalizedInvariant();
+            return String.Join(String.Empty, propertyName.Split('_')).ToCapitalizedInvariant();
         }
 
         public static string ToBase64String(this string input)
@@ -73,7 +73,7 @@ namespace Sniper
         public static string ToCapitalizedInvariant(this string value)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(value), value);
-            return string.Concat(value[0].ToString().ToUpperInvariant(), value.Substring(1));
+            return String.Concat(value[0].ToString().ToUpperInvariant(), value.Substring(1));
         }
 
         [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase)]
@@ -103,7 +103,7 @@ namespace Sniper
         public static string ToRubyCase(this string propertyName)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(propertyName), propertyName);
-            return string.Join("_", propertyName.SplitUpperCase()).ToLowerInvariant();
+            return String.Join("_", propertyName.SplitUpperCase()).ToLowerInvariant();
         }
 
         public static string UriEncode(this string input)
@@ -129,12 +129,12 @@ namespace Sniper
 
             var wordStartIndex = 0;
             var letters = source.ToCharArray();
-            var previousChar = char.MinValue;
+            var previousChar = Char.MinValue;
 
             // Skip the first letter. we don't care what case it is.
             for (var i = 1; i < letters.Length; i++)
             {
-                if (char.IsUpper(letters[i]) && !char.IsWhiteSpace(previousChar))
+                if (Char.IsUpper(letters[i]) && !Char.IsWhiteSpace(previousChar))
                 {
                     //Grab everything before the current character.
                     yield return new string(letters, wordStartIndex, i - wordStartIndex);
@@ -145,6 +145,11 @@ namespace Sniper
 
             //We need to have the last word.
             yield return new string(letters, wordStartIndex, letters.Length - wordStartIndex);
+        }
+
+        public static string ConvertSingleQuotedJson(string singleQuotedData)
+        {
+            return singleQuotedData.Replace('\'', '"');
         }
     }
 }

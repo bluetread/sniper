@@ -15,16 +15,25 @@ namespace Sniper.Common
     [CannotCreateReadUpdateDelete]
     public class Attachment : Entity, IHasDescription, IHasDate, IHasGeneral, IHasMessage, IHasName, IHasOwner
     {
+        [JsonProperty(Required = Required.Default)]
         public string Description { get; set; }
 
-        [JsonProperty(JsonProperties.Date)]
+        [JsonProperty(JsonProperties.Date, Required = Required.Default)]
         public DateTime? EntryDate { get; set; }
 
+        [JsonProperty(Required = Required.Default)]
         public string Name { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string UniqueFileName { get; set; }
 
+        [JsonProperty(Required = Required.Default)]
         public General General { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Message Message { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public GeneralUser Owner { get; set; }
     }
 }

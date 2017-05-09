@@ -1,4 +1,5 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using static Sniper.CustomAttributes.CustomAttributes;
 
@@ -12,17 +13,22 @@ namespace Sniper.Common
     /// </remarks>
     public class Priority : Entity, IHasName, IHasEntityType
     {
-        public int Importance { get; set; }
-        public bool IsDefault { get; set; }
-        
         #region Required for Create
 
         [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Name { get; set; }
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public EntityType EntityType { get; set; }
 
         #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public int Importance { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public bool IsDefault { get; set; }
     }
 }

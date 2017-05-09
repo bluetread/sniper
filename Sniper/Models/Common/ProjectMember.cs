@@ -1,4 +1,5 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
@@ -14,25 +15,39 @@ namespace Sniper.Common
     /// </remarks>
     public class ProjectMember : Entity, IHasActive, IHasProject, IHasUser, IHasRole
     {
-        public int Allocation { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime MembershipEndDate { get; set; }
-        public DateTime MembershipStartDate { get; set; }
-        public decimal WeeklyAvailableHours { get; set; }
-
         #region Required for Create
 
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public int Allocation { get; set; }
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Project Project { get; set; }
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Role Role { get; set; }
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public User User { get; set; }
 
         #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public bool IsActive { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime MembershipEndDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime MembershipStartDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal WeeklyAvailableHours { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<UserProjectAllocation> Allocations { get; set; }
     }
 }

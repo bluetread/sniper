@@ -1,6 +1,8 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -12,14 +14,31 @@ namespace Sniper.Common
     /// </remarks>
     public class TeamProject : Entity, IHasDateRange, IHasTeam, IHasProject, IHasAllocations, IHasWorkFlows
     {
-        public DateTime? EndDate { get; set; }
-        public bool IsProjectAccessed { get; set; }
-        public DateTime? StartDate { get; set; }
+        #region Required for Create
 
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Project Project { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Team Team { get; set; }
 
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime? EndDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public bool IsProjectAccessed { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime? StartDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<ProjectAllocation> Allocations { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Workflow> Workflows { get; set; }
     }
 }

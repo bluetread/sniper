@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
 using static Sniper.CustomAttributes.CustomAttributes;
 
@@ -13,20 +14,33 @@ namespace Sniper.Common
     public class Process : Entity, IHasName, IHasDescription, IHasProjects,
         IHasPractices, IHasCustomFields, IHasProcessAdmins, IHasTerms, IHasWorkFlows
     {
-        public string Description { get; set; }
-
         #region Required for Create
 
         [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Name { get; set; }
 
         #endregion
 
+        [JsonProperty(Required = Required.Default)]
+        public string Description { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<CustomField> CustomFields { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Practice> Practices { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<User> ProcessAdmins { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Project> Projects { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Term> Terms { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Workflow> Workflows { get; set; }
     }
 }

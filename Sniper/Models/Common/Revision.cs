@@ -1,4 +1,5 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
@@ -14,22 +15,31 @@ namespace Sniper.Common
     /// </remarks>
     public class Revision : Entity, IHasDescription, IHasProject, IHasRevisionFiles, IHasAssignables
     {
-        public DateTime CommitDate { get; set; }
-        public string Description { get; set; }
-
         #region Required for Create
 
         [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string SourceControlId { get; set; }
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Project Project { get; set; }
 
         #endregion
 
+        [JsonProperty(Required = Required.Default)]
+        public DateTime CommitDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public string Description { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public User Author { get; set; }
-        
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Assignable> Assignables { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<RevisionFile> RevisionFiles { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 
 namespace Sniper.Common
 {
@@ -10,13 +11,28 @@ namespace Sniper.Common
     /// </remarks>
     public class Culture : Entity, IHasName
     {
+        [JsonProperty(Required = Required.Default)]
         public string CurrencyDecimalDigits { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string CurrencyDecimalSeparator { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string CurrencyGroupSeparator { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string DecimalSeparator { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string LongDateFormat { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string Name { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string ShortDateFormat { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string TimePattern { get; set; }
     }
 }

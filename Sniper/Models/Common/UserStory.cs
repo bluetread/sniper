@@ -1,10 +1,10 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using Sniper.Contracts.Entities.History;
 using Sniper.History;
 using System.Collections.ObjectModel;
 using static Sniper.CustomAttributes.CustomAttributes;
-
 
 namespace Sniper.Common
 {
@@ -19,28 +19,42 @@ namespace Sniper.Common
         #region Required for Create
 
         [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
 
-
         [RequiredForCreate(IsEnabled = false)] // Override setting from Assignable. Only required for create there.
+        [JsonProperty(JsonProperties.Name, Required = Required.DisallowNull)]
         public override EntityState EntityState { get; set; }
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 
-        [RequiredForCreate(IsEnabled = false)] // Override setting from Assignable. Only required for create there.
+        [RequiredForCreate(JsonProperties.Name, IsEnabled = false)] // Override setting from Assignable. Only required for create there.
+        [JsonProperty(Required = Required.DisallowNull)]
         public override Priority Priority { get; set; }
 
         #endregion
 
+        [JsonProperty(Required = Required.Default)]
         public decimal InitialEstimate { get; set; }
 
+        [JsonProperty(Required = Required.Default)]
         public Feature Feature { get; set; }
 
+        [JsonProperty(Required = Required.Default)]
         public Collection<Bug> Bugs { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<UserStorySimpleHistory> History { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Task> Tasks { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<TestCase> UserStoryTestCases { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<TestPlan> UserStoryTestPlans { get; set; }
     }
 }

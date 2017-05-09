@@ -1,4 +1,5 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using Sniper.Contracts.Entities.History;
 using Sniper.History;
@@ -21,20 +22,39 @@ namespace Sniper.Common
         #region Required for Create
 
         [RequiredForCreate]
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 
         #endregion
 
+
+        [JsonProperty(Required = Required.Default)]
         public bool IsPrivate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public DateTime? PlannedEndDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public DateTime? PlannedStartDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Assignable Assignable { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public EntityState EntityState { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<ImpedimentSimpleHistory> History { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Priority Priority { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public User Responsible { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -10,7 +12,13 @@ namespace Sniper.Common
     /// </remarks>
     public class GeneralFollower : Entity, IHasGeneral, IHasUser
     {
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public General General { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public User User { get; set; }
     }
 }

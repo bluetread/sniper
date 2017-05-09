@@ -1,4 +1,7 @@
-﻿namespace Sniper.Common
+﻿using Newtonsoft.Json;
+using static Sniper.CustomAttributes.CustomAttributes;
+
+namespace Sniper.Common
 {
     ///<summary>
     /// Relation between two Entities.
@@ -8,8 +11,16 @@
     /// </remarks>
     public class Relation : Entity
     {
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public General Master { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public RelationType RelationType { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public General Slave { get; set; }
     }
 }

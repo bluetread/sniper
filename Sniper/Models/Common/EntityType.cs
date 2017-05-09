@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
 using static Sniper.CustomAttributes.CustomAttributes;
 using static Sniper.TargetProcess.Common.Enumerations;
@@ -14,12 +15,25 @@ namespace Sniper.Common
     [CannotCreateReadUpdateDelete]
     public class EntityType : Entity, IHasName, IAssignable, IExtendable
     {
-        private CustomFieldScope CustomFieldScope { get; set; }
-        public bool IsAssignable { get; set; }
-        public bool IsExtendable { get; set; }
-        public bool IsSearchable { get; set; }
-        public bool IsUnitInHourOnly { get; set; }
-        public string Name { get; set; }
-        public Collection<EntityState> EntityStates { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public virtual CustomFieldScope CustomFieldScope { get; set; } = CustomFieldScope.None;
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual bool IsAssignable { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual bool IsExtendable { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual bool IsSearchable { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual bool IsUnitInHourOnly { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual string Name { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual Collection<EntityState> EntityStates { get; set; }
     }
 }

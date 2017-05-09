@@ -2,6 +2,7 @@
 using Sniper.Contracts.Entities.History;
 using Sniper.History;
 using System.Collections.ObjectModel;
+using Newtonsoft.Json;
 using static Sniper.CustomAttributes.CustomAttributes;
 using static Sniper.TargetProcess.Common.Enumerations;
 
@@ -15,27 +16,41 @@ namespace Sniper.Common
     /// </remarks>
     public class Request : Assignable, IHasRequestHistory
     {
-        public bool IsPrivate { get; set; }
-        public bool IsReplied { get; set; }
-        public int VotesCount { get; set; }
-
         #region Required for Create
 
         [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public override EntityState EntityState { get; set; }
 
         [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 
         #endregion
 
-        public RequestSource SourceType { get; set; }
-        public RequestType RequestType { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public bool IsPrivate { get; set; }
 
+        [JsonProperty(Required = Required.Default)]
+        public bool IsReplied { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public int VotesCount { get; set; }
+        
+        [JsonProperty(Required = Required.Default)]
+        public RequestSource SourceType { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public RequestType RequestType { get; set; }
+        
+        [JsonProperty(Required = Required.Default)]
         public Collection<GeneralUser> Requesters { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<RequestSimpleHistory> History { get; set; }
     }
 }

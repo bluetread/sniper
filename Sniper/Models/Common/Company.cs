@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
 using static Sniper.CustomAttributes.CustomAttributes;
 
@@ -12,17 +13,24 @@ namespace Sniper.Common
     /// </remarks>
     public class Company : Entity, IHasDescription, IHasName, IHasUrl, IHasProjects, IHasRequesters
     {
-        public string Description { get; set; }
-        public string Url { get; set; }
-
         #region Required for Create
 
         [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Name { get; set; }
 
         #endregion
 
+        [JsonProperty(Required = Required.Default)]
+        public string Description { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public string Url { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Project> Projects { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Collection<Requester> Requesters { get; set; }
     }
 }

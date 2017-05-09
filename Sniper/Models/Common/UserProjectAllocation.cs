@@ -1,4 +1,7 @@
-﻿namespace Sniper.Common
+﻿using Newtonsoft.Json;
+using static Sniper.CustomAttributes.CustomAttributes;
+
+namespace Sniper.Common
 {
     ///<summary>
     /// User allocation to a Project
@@ -8,6 +11,12 @@
     /// </remarks>
     public class UserProjectAllocation : ProjectAllocation
     {
+        #region Required for Create
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public ProjectMember ProjectMember { get; set; }
+
+        #endregion
     }
 }

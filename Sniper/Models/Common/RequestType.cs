@@ -1,5 +1,7 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -9,12 +11,18 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/RequestTypes/meta">API documentation - RequestType</a>
     /// </remarks>
-    public class RequestType : IHasId, IHasName, IHasRequests
+    [CanCreateReadUpdateDelete]
+    public class RequestType : Entity, IHasName, IHasRequests
     {
-        public int Id { get; set; }
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Icon { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Name { get; set; }
 
-        public Collection<Request> Requests { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public Collection<Request> Requests { get; internal set; }
     }
 }

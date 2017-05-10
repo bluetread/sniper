@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -56,8 +56,8 @@
     <ApplicationIcon>sniper.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -78,130 +78,135 @@
     <Compile Include="Authentication\CookieAuthenticator.cs" />
     <Compile Include="Authentication\ServiceTokenAuthenticator.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Contracts\History\IHasBugHistory.cs" />
-    <Compile Include="Contracts\History\IHasEpicHistory.cs" />
-    <Compile Include="Contracts\History\IHasFeatureHistory.cs" />
-    <Compile Include="Contracts\History\IHasImpedimentHistory.cs" />
-    <Compile Include="Contracts\History\IHasModifier.cs" />
-    <Compile Include="Contracts\History\IHasRequestHistory.cs" />
-    <Compile Include="Contracts\History\IHasTaskHistory.cs" />
-    <Compile Include="Contracts\History\IHasUserHistory.cs" />
-    <Compile Include="Contracts\IAssignable.cs" />
-    <Compile Include="Contracts\ICanBeFinished.cs" />
-    <Compile Include="Contracts\IExtendable.cs" />
-    <Compile Include="Contracts\IHasActive.cs" />
-    <Compile Include="Contracts\IHasAllocations.cs" />
-    <Compile Include="Contracts\IHasAssignable.cs" />
-    <Compile Include="Contracts\IHasAssignables.cs" />
-    <Compile Include="Contracts\IHasAssignedEfforts.cs" />
-    <Compile Include="Contracts\IHasAssignedTeams.cs" />
-    <Compile Include="Contracts\IHasAttachments.cs" />
-    <Compile Include="Contracts\IHasBug.cs" />
-    <Compile Include="Contracts\IHasBugs.cs" />
-    <Compile Include="Contracts\IHasBuild.cs" />
-    <Compile Include="Contracts\IHasBuilds.cs" />
-    <Compile Include="Contracts\IHasComments.cs" />
-    <Compile Include="Contracts\IHasCommonCollections.cs" />
-    <Compile Include="Contracts\IHasCommonEntityCollections.cs" />
-    <Compile Include="Contracts\IHasCompany.cs" />
-    <Compile Include="Contracts\IHasCreated.cs" />
-    <Compile Include="Contracts\IHasCreateDate.cs" />
-    <Compile Include="Contracts\IHasCurrent.cs" />
-    <Compile Include="Contracts\IHasCustomActivities.cs" />
-    <Compile Include="Contracts\IHasCustomActivity.cs" />
-    <Compile Include="Contracts\IHasCustomFields.cs" />
-    <Compile Include="Contracts\IHasDate.cs" />
-    <Compile Include="Contracts\IHasDateRange.cs" />
-    <Compile Include="Contracts\IHasDescription.cs" />
-    <Compile Include="Contracts\IHasDuration.cs" />
-    <Compile Include="Contracts\IHasEffectiveDates.cs" />
-    <Compile Include="Contracts\IHasEffort.cs" />
-    <Compile Include="Contracts\IHasEnabled.cs" />
-    <Compile Include="Contracts\IHasEntityState.cs" />
-    <Compile Include="Contracts\IHasEntityStates.cs" />
-    <Compile Include="Contracts\IHasEntityType.cs" />
-    <Compile Include="Contracts\IHasEpic.cs" />
-    <Compile Include="Contracts\IHasEpics.cs" />
-    <Compile Include="Contracts\IHasEstimate.cs" />
-    <Compile Include="Contracts\IHasFeature.cs" />
-    <Compile Include="Contracts\IHasFeatures.cs" />
-    <Compile Include="Contracts\IHasFollowers.cs" />
-    <Compile Include="Contracts\IHasForecastEndDate.cs" />
-    <Compile Include="Contracts\IHasGeneral.cs" />
-    <Compile Include="Contracts\IHasGenerals.cs" />
-    <Compile Include="Contracts\IHasGeneralUser.cs" />
-    <Compile Include="Contracts\IHasId.cs" />
-    <Compile Include="Contracts\IHasImpediment.cs" />
-    <Compile Include="Contracts\IHasImpediments.cs" />
-    <Compile Include="Contracts\IHasInitialEstimate.cs" />
-    <Compile Include="Contracts\IHasIteration.cs" />
-    <Compile Include="Contracts\IHasIterations.cs" />
-    <Compile Include="Contracts\IHasLastStateChangeDate.cs" />
-    <Compile Include="Contracts\IHasLeadCycleTimes.cs" />
-    <Compile Include="Contracts\IHasMessage.cs" />
-    <Compile Include="Contracts\IHasMessages.cs" />
-    <Compile Include="Contracts\IHasMilestones.cs" />
-    <Compile Include="Contracts\IHasModifyDate.cs" />
-    <Compile Include="Contracts\IHasName.cs" />
-    <Compile Include="Contracts\IHasOwner.cs" />
-    <Compile Include="Contracts\IHasPlannedDates.cs" />
-    <Compile Include="Contracts\IHasPractices.cs" />
-    <Compile Include="Contracts\IHasPriority.cs" />
-    <Compile Include="Contracts\IHasPrivate.cs" />
-    <Compile Include="Contracts\IHasProcess.cs" />
-    <Compile Include="Contracts\IHasProcessAdmins.cs" />
-    <Compile Include="Contracts\IHasProcesses.cs" />
-    <Compile Include="Contracts\IHasProgress.cs" />
-    <Compile Include="Contracts\IHasProject.cs" />
-    <Compile Include="Contracts\IHasProjectMembers.cs" />
-    <Compile Include="Contracts\IHasProjects.cs" />
-    <Compile Include="Contracts\IHasRelations.cs" />
-    <Compile Include="Contracts\IHasRelationType.cs" />
-    <Compile Include="Contracts\IHasRelease.cs" />
-    <Compile Include="Contracts\IHasReleases.cs" />
-    <Compile Include="Contracts\IHasRequest.cs" />
-    <Compile Include="Contracts\IHasRequesters.cs" />
-    <Compile Include="Contracts\IHasRequests.cs" />
-    <Compile Include="Contracts\IHasResponsibleTeam.cs" />
-    <Compile Include="Contracts\IHasResponsibleUser.cs" />
-    <Compile Include="Contracts\IHasRevisionFiles.cs" />
-    <Compile Include="Contracts\IHasRevisions.cs" />
-    <Compile Include="Contracts\IHasRole.cs" />
-    <Compile Include="Contracts\IHasRoleEfforts.cs" />
-    <Compile Include="Contracts\IHasRoleTimes.cs" />
-    <Compile Include="Contracts\IHasSeverity.cs" />
-    <Compile Include="Contracts\IHasTags.cs" />
-    <Compile Include="Contracts\IHasTask.cs" />
-    <Compile Include="Contracts\IHasTasks.cs" />
-    <Compile Include="Contracts\IHasTeam.cs" />
-    <Compile Include="Contracts\IHasTeamIterations.cs" />
-    <Compile Include="Contracts\IHasTeamMembers.cs" />
-    <Compile Include="Contracts\IHasTeamProject.cs" />
-    <Compile Include="Contracts\IHasTeamProjects.cs" />
-    <Compile Include="Contracts\IHasTerms.cs" />
-    <Compile Include="Contracts\IHasTestCase.cs" />
-    <Compile Include="Contracts\IHasTestCaseRun.cs" />
-    <Compile Include="Contracts\IHasTestCaseRunLinks.cs" />
-    <Compile Include="Contracts\IHasTestCaseRuns.cs" />
-    <Compile Include="Contracts\IHasTestCases.cs" />
-    <Compile Include="Contracts\IHasTestPlan.cs" />
-    <Compile Include="Contracts\IHasTestPlanRun.cs" />
-    <Compile Include="Contracts\IHasTestPlanRunLinks.cs" />
-    <Compile Include="Contracts\IHasTestPlanRuns.cs" />
-    <Compile Include="Contracts\IHasTestPlans.cs" />
-    <Compile Include="Contracts\IHasTestStep.cs" />
-    <Compile Include="Contracts\IHasTestStepRuns.cs" />
-    <Compile Include="Contracts\IHasTestSteps.cs" />
-    <Compile Include="Contracts\IHasTimes.cs" />
-    <Compile Include="Contracts\IHasTimeSpent.cs" />
-    <Compile Include="Contracts\IHasUnits.cs" />
-    <Compile Include="Contracts\IHasUrl.cs" />
-    <Compile Include="Contracts\IHasUser.cs" />
-    <Compile Include="Contracts\IHasUserStories.cs" />
-    <Compile Include="Contracts\IHasUserStory.cs" />
-    <Compile Include="Contracts\IHasVelocity.cs" />
-    <Compile Include="Contracts\IHasWorkEffort.cs" />
-    <Compile Include="Contracts\IHasWorkFlows.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasResourceType.cs" />
+    <Compile Include="Contracts\Entities\History\IHasBugHistory.cs" />
+    <Compile Include="Contracts\Entities\History\IHasEpicHistory.cs" />
+    <Compile Include="Contracts\Entities\History\IHasFeatureHistory.cs" />
+    <Compile Include="Contracts\Entities\History\IHasImpedimentHistory.cs" />
+    <Compile Include="Contracts\Entities\History\IHasModifier.cs" />
+    <Compile Include="Contracts\Entities\History\IHasRequestHistory.cs" />
+    <Compile Include="Contracts\Entities\History\IHasTaskHistory.cs" />
+    <Compile Include="Contracts\Entities\History\IHasUserHistory.cs" />
+    <Compile Include="Contracts\Entities\Common\IAssignable.cs" />
+    <Compile Include="Contracts\Entities\Common\ICanBeFinished.cs" />
+    <Compile Include="Contracts\Entities\Common\IExtendable.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasActive.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasAllocations.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasAssignable.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasAssignables.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasAssignedEfforts.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasAssignedTeams.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasAttachments.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasBug.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasBugs.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasBuild.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasBuilds.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasComments.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasCommonCollections.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasCommonEntityCollections.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasCompany.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasCreated.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasCreateDate.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasCurrent.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasCustomActivities.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasCustomActivity.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasCustomFields.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasDate.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasDateRange.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasDescription.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasDuration.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasEffectiveDates.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasEffort.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasEnabled.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasEntityState.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasEntityStates.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasEntityType.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasEpic.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasEpics.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasEstimate.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasFeature.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasFeatures.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasFollowers.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasForecastEndDate.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasGeneral.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasGenerals.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasGeneralUser.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasId.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasImpediment.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasImpediments.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasInitialEstimate.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasIteration.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasIterations.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasLastStateChangeDate.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasLeadCycleTimes.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasMessage.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasMessages.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasMilestones.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasModifyDate.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasName.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasOwner.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasPlannedDates.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasPractices.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasPriority.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasPrivate.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasProcess.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasProcessAdmins.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasProcesses.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasProgress.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasProject.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasProjectMembers.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasProjects.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasRelations.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasRelationType.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasRelease.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasReleases.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasRequest.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasRequesters.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasRequests.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasResponsibleTeam.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasResponsibleUser.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasRevisionFiles.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasRevisions.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasRole.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasRoleEfforts.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasRoleTimes.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasSeverity.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTags.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTask.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTasks.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTeam.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTeamIterations.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTeamMembers.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTeamProject.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTeamProjects.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTerms.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestCase.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestCaseRun.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestCaseRunLinks.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestCaseRuns.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestCases.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestPlan.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestPlanRun.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestPlanRunLinks.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestPlanRuns.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestPlans.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestStep.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestStepRuns.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTestSteps.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTimes.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasTimeSpent.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasUnits.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasUrl.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasUser.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasUserStories.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasUserStory.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasVelocity.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasWorkEffort.cs" />
+    <Compile Include="Contracts\Entities\Common\IHasWorkFlows.cs" />
+    <Compile Include="Contracts\Exceptions\IRequiredDataResponse.cs" />
+    <Compile Include="CustomAttributes\CustomAttributes.cs" />
+    <Compile Include="Exceptions\RequiredDataResponse.cs" />
+    <Compile Include="Exceptions\SniperExceptions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\ApiSiteHelpers.cs" />
     <Compile Include="Helpers\ApiUrls.Authorizations.cs" />
@@ -230,6 +235,7 @@
     <Compile Include="Http\IApiRequest.cs" />
     <Compile Include="Http\ISiteInfo.cs" />
     <Compile Include="Http\HttpResponse.cs" />
+    <Compile Include="Models\Entity.cs" />
     <Compile Include="TargetProcess\Common\StatusCodes.cs" />
     <Compile Include="ITargetProcessClient.cs" />
     <Compile Include="Models\Authentication\User.cs" />
@@ -374,7 +380,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets. -->

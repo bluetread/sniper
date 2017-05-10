@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using static Sniper.Application.Messages.MessageKeys;
-
 namespace Sniper
 {
     internal class PropertyOrField

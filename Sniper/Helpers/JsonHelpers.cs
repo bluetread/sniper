@@ -5,6 +5,14 @@ namespace Sniper
 {
     public static class JsonHelpers
     {
+        public static JsonSerializerSettings DefaultSerializerSettings =
+            new JsonSerializerSettings
+            {
+                DefaultValueHandling = DefaultValueHandling.Populate,
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
         internal class ConcreteConverter<T> : JsonConverter
         {
             public override bool CanConvert(Type objectType) => true;

@@ -1,6 +1,7 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
-
+using static Sniper.CustomAttributes.CustomAttributes;
 namespace Sniper.Common
 {
     ///<summary>
@@ -9,13 +10,21 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Practices/meta">API documentation - Practice</a>
     /// </remarks>
-    public class Practice : IHasId, IHasName, IHasDescription, IHasProcesses
+    [CannotCreateReadUpdateDelete]
+    public class Practice : Entity, IHasName, IHasDescription, IHasProcesses
     {
-        public int Id { get; set; }
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string DisplayName { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Name { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string Description { get; set; }
 
-        public Collection<Process> Processes { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public Collection<Process> Processes { get; internal set; }
     }
 }

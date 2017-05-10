@@ -1,5 +1,7 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -9,14 +11,27 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Companies/meta">API documentation - Company</a>
     /// </remarks>
-    public class Company : IHasId, IHasDescription, IHasName, IHasUrl, IHasProjects, IHasRequesters
+    [CanCreateReadUpdateDelete]
+    public class Company : Entity, IHasDescription, IHasName, IHasUrl, IHasProjects, IHasRequesters
     {
-        public int Id { get; set; }
-        public string Description { get; set; }
+        #region Required for Create
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Name { get; set; }
+
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public string Description { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string Url { get; set; }
 
-        public Collection<Project> Projects { get; set; }
-        public Collection<Requester> Requesters { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public Collection<Project> Projects { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<Requester> Requesters { get; internal set; }
     }
 }

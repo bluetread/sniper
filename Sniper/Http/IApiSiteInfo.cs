@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Net.Http;
 
 namespace Sniper.Http
 {
     public interface IApiSiteInfo
     {
-        HttpMethod Method { get; }
+        //HttpMethod Method { get; }
         IDictionary<string, string> Parameters { get; }
         string Route { get; }
         //ResponseFormat ResponseFormat { get; }

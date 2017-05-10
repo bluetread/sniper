@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -8,11 +9,17 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/MessageUids/meta">API documentation - MessageUid</a>
     /// </remarks>
-    public class MessageUniqueId : IHasId
+    [CanCreateReadUpdateDelete]
+    public class MessageUniqueId : Entity
     {
-        public int Id { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string MailLogin { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string MailServer { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string Uid { get; set; }
     }
 }

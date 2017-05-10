@@ -1,4 +1,6 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -8,12 +10,24 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Priorities/meta">API documentation - Priority</a>
     /// </remarks>
-    public class Priority : IHasId, IHasName, IHasEntityType
+    [CanCreateReadUpdateDelete]
+    public class Priority : Entity, IHasName, IHasEntityType
     {
-        public int Id { get; set; }
-        public int Importance { get; set; }
-        public bool IsDefault { get; set; }
+        #region Required for Create
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public string Name { get; set; }
-        public EntityType EntityType { get; set; }
+
+        [JsonProperty(Required = Required.DisallowNull)]
+        public EntityType EntityType { get; internal set; }
+
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public int Importance { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public bool IsDefault { get; set; }
     }
 }

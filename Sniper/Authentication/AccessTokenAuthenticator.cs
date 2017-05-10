@@ -7,7 +7,10 @@ namespace Sniper
     internal class AccessTokenAuthenticator : TokenAuthenticatorBase
     {
         protected override AuthenticationTokenType TokenType { get; set; } = AuthenticationTokenType.AccessToken;
-        public override Dictionary<string, string> AuthenticationParameters => new Dictionary<string, string> { { AuthenticationTokenParameters.AccessToken, Credentials.Password } };
+        public override Dictionary<string, string> AuthenticationParameters => new Dictionary<string, string>
+        {
+            { AuthenticationTokenParameters.AccessToken, Credentials.Password }
+        };
 
         public AccessTokenAuthenticator()
         {

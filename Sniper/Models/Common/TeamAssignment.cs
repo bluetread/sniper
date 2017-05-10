@@ -1,5 +1,8 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System;
+using Sniper.Application;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -9,14 +12,29 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TeamAssignments/meta">API documentation - TeamAssignment</a>
     /// </remarks>
-    public class TeamAssignment : IHasId, IHasDateRange, IHasAssignable, IHasEntityState, IHasTeam
+    [CanCreateReadUpdateDelete]
+    public class TeamAssignment : Entity, IHasDateRange, IHasAssignable, IHasEntityState, IHasTeam
     {
-        public int Id { get; set; }
-        public DateTime? EndDate { get; set; }
-        public DateTime? StartDate { get; set; }
+        #region Required for Create
 
-        public Assignable Assignable { get; set; }
-        public EntityState EntityState { get; set; }
+        [RequiredForCreate(JsonProperties.Name, 
+            JsonProperties.EntityState, JsonProperties.Project, JsonProperties.Priority)]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public Assignable Assignable { get; internal set; }
+
+        [RequiredForCreate(JsonProperties.Name)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Team Team { get; set; }
+
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime? EndDate { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime? StartDate { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public EntityState EntityState { get; set; }
     }
 }

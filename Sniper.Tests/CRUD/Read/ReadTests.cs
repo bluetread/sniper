@@ -27,7 +27,7 @@ namespace Sniper.Tests.CRUD.Read
         [Fact]
         public void ReadTimeAsyncReturnsData()
         {
-            var client = new TargetProcessClient()
+            var client = new TargetProcessClient
             {
                 ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Times)
             };
@@ -42,7 +42,7 @@ namespace Sniper.Tests.CRUD.Read
         [Fact]
         public void ReadUserStoryReturnsData()
         {
-            var client = new TargetProcessClient()
+            var client = new TargetProcessClient
             {
                 ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories) { CustomFilter = "&where=id eq 205" }
             };
@@ -61,7 +61,7 @@ namespace Sniper.Tests.CRUD.Read
         [Fact]
         public void ReadUserStoriesReturnsData()
         {
-            var client = new TargetProcessClient()
+            var client = new TargetProcessClient
             {
                 ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
             };

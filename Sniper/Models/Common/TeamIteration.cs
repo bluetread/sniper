@@ -1,4 +1,8 @@
-﻿namespace Sniper.Common
+﻿using Sniper.Application;
+using Newtonsoft.Json;
+using static Sniper.CustomAttributes.CustomAttributes;
+
+namespace Sniper.Common
 {
     ///<summary>
     /// A single iteration results in an increment(s) of product functionality.
@@ -9,6 +13,12 @@
     /// </remarks>
     public class TeamIteration : IterationBase
     {
+        #region Required for Create
+
+        [RequiredForCreate(JsonProperties.Name)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Team Team { get; set; }
+
+        #endregion
     }
 }

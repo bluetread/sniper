@@ -1,21 +1,27 @@
 ﻿using Newtonsoft.Json;
 using Sniper.Application;
 using Sniper.Common;
-using Sniper.Contracts;
-using Sniper.Contracts.History;
+using Sniper.Contracts.Entities.Common;
+using Sniper.Contracts.Entities.History;
 using System;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.History
 {
-    public abstract class SimpleHistoryBase : IHasId, IHasDate, IHasEntityState, IHasModifier, IHasProject
+    [CannotCreateReadUpdateDelete]
+    public abstract class SimpleHistoryBase : Entity, IHasDate, IHasEntityState, IHasModifier, IHasProject
     {
-        public int Id { get; set; }
-
-        [JsonProperty(JsonProperties.Date)]
+        [JsonProperty(JsonProperties.Date, Required = Required.Default)]
         public DateTime? EntryDate { get; set; }
 
-        public EntityState EntityState { get; set; }
-        public GeneralUser Modifier { get; set; }
-        public Project Project { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public EntityState EntityState { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public GeneralUser Modifier { get; internal set; }
+
+        //[RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
+        [JsonProperty(Required = Required.Default)]
+        public Project Project { get; internal set; }
     }
 }

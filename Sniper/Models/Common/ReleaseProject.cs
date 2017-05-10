@@ -1,5 +1,7 @@
-﻿using Sniper.Contracts;
-
+﻿using Newtonsoft.Json;
+using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
+using static Sniper.CustomAttributes.CustomAttributes;
 namespace Sniper.Common
 {
     ///<summary>
@@ -8,11 +10,15 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/ReleaseProjects/meta">API documentation - ReleaseProject</a>
     /// </remarks>
-    public class ReleaseProject : IHasId, IHasProject, IHasRelease
+    [CanCreateReadUpdateDelete]
+    public class ReleaseProject : Entity, IHasProject, IHasRelease
     {
-        public int Id { get; set; }
-
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Project Project { get; set; }
+
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.StartDate, JsonProperties.EndDate)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Release Release { get; set; }
     }
 }

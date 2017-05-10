@@ -14,5 +14,7 @@ namespace Sniper
         IApiSiteInfo ApiSiteInfo { get; }
 
         IApiResponse<T> GetData<T>();
+
+        IAuthenticationHandler AuthenticationHandler { get; }
     }
 }

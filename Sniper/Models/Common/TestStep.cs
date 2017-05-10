@@ -1,4 +1,6 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -8,13 +10,19 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TestSteps/meta">API documentation - TestStep</a>
     /// </remarks>
-    public class TestStep : IHasId, IHasDescription, IHasTestCase
+    [CanCreateReadUpdateDelete]
+    public class TestStep : Entity, IHasDescription, IHasTestCase
     {
-        public int Id { get; set; }
+        [JsonProperty(Required = Required.Default)]
         public string Description { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string Result { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public int RunOrder { get; set; }
 
+        [JsonProperty(Required = Required.Default)]
         public TestCase TestCase { get; set; }
     }
 }

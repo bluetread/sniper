@@ -1,6 +1,9 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -10,19 +13,43 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/ProjectMembers/meta">API documentation - ProjectMember</a>
     /// </remarks>
-    public class ProjectMember : IHasId, IHasActive, IHasProject, IHasUser, IHasRole
+    [CanCreateReadUpdateDelete]
+    public class ProjectMember : Entity, IHasActive, IHasProject, IHasUser, IHasRole
     {
-        public int Id { get; set; }
-        public int Allocation { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime MembershipEndDate { get; set; }
-        public DateTime MembershipStartDate { get; set; }
-        public decimal WeeklyAvailableHours { get; set; }
+        #region Required for Create
 
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public int Allocation { get; set; }
+
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Project Project { get; set; }
+
+        [RequiredForCreate(JsonProperties.Name)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Role Role { get; set; }
+
+        [RequiredForCreate(JsonProperties.Email, JsonProperties.Login,
+            JsonProperties.Password, JsonProperties.WeeklyAvailableHours)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public User User { get; set; }
 
-        public Collection<UserProjectAllocation> Allocations { get; set; }
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public bool IsActive { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime MembershipEndDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime MembershipStartDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal WeeklyAvailableHours { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<UserProjectAllocation> Allocations { get; internal set; }
     }
 }

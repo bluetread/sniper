@@ -1,4 +1,6 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -9,11 +11,13 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TestRunItemHierarchyLinks/meta">API documentation - TestRunItemHierarchyLink</a>
     /// </remarks>
-    public class TestRunItemHierarchyLink : IHasId, IHasTestCaseRun, IHasTestPlanRun
+    [CannotCreateReadUpdateDelete]
+    public class TestRunItemHierarchyLink : Entity, IHasTestCaseRun, IHasTestPlanRun
     {
-        public int Id { get; set; }
-
+        [JsonProperty(Required = Required.Default)]
         public TestCaseRun TestCaseRun { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public TestPlanRun TestPlanRun { get; set; }
     }
 }

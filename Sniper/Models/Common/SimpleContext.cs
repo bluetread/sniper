@@ -1,10 +1,12 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
-    public class SimpleContext : IHasId
+    [CanCreateReadUpdateDelete]
+    public class SimpleContext : Entity
     {
-        public int Id { get; set; }
+        [JsonProperty(Required = Required.Default)]
         public bool No { get; set; }
     }
 }

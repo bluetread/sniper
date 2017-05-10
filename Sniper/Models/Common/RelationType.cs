@@ -1,4 +1,5 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
 
 namespace Sniper.Common
@@ -9,10 +10,12 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/RelationTypes/meta">API documentation - RelationType</a>
     /// </remarks>
-    public class RelationType : IHasId, IHasName
+    public class RelationType : Entity, IHasName, IHasRelations
     {
-        public int Id { get; set; }
+        [JsonProperty(Required = Required.Default)]
         public string Name { get; set; }
-        public Collection<Relation> Relations { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<Relation> Relations { get; internal set; }
     }
 }

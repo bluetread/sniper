@@ -1,4 +1,7 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -9,17 +12,37 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/RoleEfforts/meta">API documentation - RoleEffort</a>
     /// </remarks>
-    public class RoleEffort : IHasId, IHasEffort, IHasInitialEstimate, IHasTimeSpent, IHasAssignable, IHasRole
+    [CanCreateReadUpdateDelete]
+    public class RoleEffort : Entity, IHasEffort, IHasInitialEstimate, IHasTimeSpent, IHasAssignable, IHasRole
     {
-        public int Id { get; set; }
-        public decimal Effort { get; set; }
-        public decimal EffortCompleted { get; set; }
-        public decimal EffortToDo { get; set; }
-        public decimal InitialEstimate { get; set; }
-        public decimal TimeRemain { get; set; }
-        public decimal TimeSpent { get; set; }
+        #region Required for Create
 
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.Project, JsonProperties.EntityState)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Assignable Assignable { get; set; }
+
+        [RequiredForCreate(JsonProperties.Name)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Role Role { get; set; }
+
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal Effort { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal EffortCompleted { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal EffortToDo { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal InitialEstimate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal TimeRemain { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal TimeSpent { get; set; }
     }
 }

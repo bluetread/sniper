@@ -1,7 +1,10 @@
-﻿using Sniper.Contracts;
-using Sniper.Contracts.History;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
+using Sniper.Contracts.Entities.History;
 using Sniper.History;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -11,15 +14,36 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Features/meta">API documentation - Feature</a>
     /// </remarks>
-    public class Feature : Assignable, IHasInitialEstimate, IHasEpic,
-        IHasBugs, IHasFeatureHistory, IHasUserStories
+    [CanCreateReadUpdateDelete]
+    public class Feature : Assignable, IHasInitialEstimate, IHasEpic, IHasBugs, 
+        IHasFeatureHistory, IHasUserStories
     {
+        #region Required for Create
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public override string Name { get; set; }
+
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public override Project Project { get; set; }
+
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
         public decimal InitialEstimate { get; set; }
 
+        [RequiredForCreate(JsonProperties.Name)]
+        [JsonProperty(Required = Required.Default)]
         public Epic Epic { get; set; }
 
-        public Collection<Bug> Bugs { get; set; }
-        public Collection<FeatureSimpleHistory> History { get; set; }
-        public Collection<UserStory> UserStories { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public Collection<Bug> Bugs { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<FeatureSimpleHistory> History { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<UserStory> UserStories { get; internal set; }
     }
 }

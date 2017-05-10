@@ -1,5 +1,8 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System;
+using Sniper.Application;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -9,14 +12,30 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TeamMembers/meta">API documentation - TeamMember</a>
     /// </remarks>
-    public class TeamMember : IHasId, IHasDateRange, IHasRole, IHasTeam, IHasUser
+    [CanCreateReadUpdateDelete]
+    public class TeamMember : Entity, IHasDateRange, IHasRole, IHasTeam, IHasUser
     {
-        public int Id { get; set; }
-        public DateTime? EndDate { get; set; }
-        public DateTime? StartDate { get; set; }
+        #region Required for Create
 
+        [RequiredForCreate(JsonProperties.Name)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Role Role { get; set; }
-        public User User { get; set; }
+
+        [RequiredForCreate(JsonProperties.Name)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public Team Team { get; set; }
+
+        [RequiredForCreate(JsonProperties.Email, JsonProperties.Login, 
+            JsonProperties.Password, JsonProperties.WeeklyAvailableHours)]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public User User { get; set; }
+
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime? EndDate { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime? StartDate { get; set; }
     }
 }

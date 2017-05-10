@@ -1,6 +1,6 @@
-﻿using Sniper.Application.Messages;
-using System;
+﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Sniper.Application.Messages;
 using static Sniper.WarningsErrors.MessageSuppression;
 
 namespace Sniper

@@ -1,6 +1,8 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -13,28 +15,83 @@ namespace Sniper.Common
     public class User : GeneralUser, IHasRole, IHasTimes, IHasImpediments, IHasCustomActivities,
         IHasRevisions, IHasTeamMembers, IHasProjectMembers, IHasMilestones
     {
-        public string ActiveDirectoryName { get; set; }
-        public DateTime AvailableFrom { get; set; }
-        public int AvailableFutureAllocation { get; set; }
-        public int AvailableFutureHours { get; set; }
-        public decimal CurrentAvailableHours { get; set; }
-        public bool IsContributor { get; set; }
-        public bool IsObserver { get; set; }
-        public DateTime? LastLoginDate { get; set; }
-        public string Locale { get; set; }
-        public string Skills { get; set; }
+
+        #region Required for Create
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
         public decimal WeeklyAvailableHours { get; set; }
 
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public string ActiveDirectoryName { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime AvailableFrom { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public int AvailableFutureAllocation { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public int AvailableFutureHours { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public decimal CurrentAvailableHours { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public override string FirstName { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public bool IsContributor { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public bool IsObserver { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime? LastLoginDate { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public override string LastName { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public string Locale { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public string Skills { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public Role Role { get; set; }
 
-        public Collection<Process> AdminProcesses { get; set; }
-        public Collection<CustomActivity> CustomActivities { get; set; }
-        public Collection<GeneralFollower> Following { get; set; }
-        public Collection<Impediment> Impediments { get; set; }
-        public Collection<Milestone> Milestones { get; set; }
-        public Collection<ProjectMember> ProjectMembers { get; set; }
-        public Collection<Revision> Revisions { get; set; }
-        public Collection<TeamMember> TeamMember { get; set; }
-        public Collection<Time> Times { get; set; }
+        #region Collections
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<Process> AdminProcesses { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<CustomActivity> CustomActivities { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<GeneralFollower> Following { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<Impediment> Impediments { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<Milestone> Milestones { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<ProjectMember> ProjectMembers { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<Revision> Revisions { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<TeamMember> TeamMember { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<Time> Times { get; internal set; }
+
+        #endregion
     }
 }

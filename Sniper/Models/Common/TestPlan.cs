@@ -1,5 +1,7 @@
-﻿using Sniper.Contracts;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -9,29 +11,65 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TestPlans/meta">API documentation - TestPlan</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class TestPlan : Assignable, IHasInitialEstimate, IHasRevisions, IHasTestCases,
         IHasTestPlanRuns, IHasRoleEfforts, IHasUserStories
     {
-        public decimal CalculatedEstimate { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public decimal CalculatedEstimate { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
         public decimal InitialEstimate { get; set; }
 
-        public Assignable LinkedAssignable { get; set; }
-        public Bug LinkedBug { get; set; }
-        public Build LinkedBuild { get; set; }
-        public Epic LinkedEpic { get; set; }
-        public Feature LinkedFeature { get; set; }
-        public General LinkedGeneral { get; set; }
-        public Iteration LinkedIteration { get; set; }
-        public Release LinkedRelease { get; set; }
-        public Request LinkedRequest { get; set; }
-        public Task LinkedTask { get; set; }
-        public TeamIteration LinkedTeamIteration { get; set; }
-        public UserStory LinkedUserStory { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public Assignable LinkedAssignable { get; internal set; }
 
-        public Collection<TestCase> TestCases { get; set; }
-        public Collection<TestPlan> ChildTestPlans { get; set; }
-        public Collection<TestPlan> ParentTestPlans { get; set; }
-        public Collection<TestPlanRun> TestPlanRuns { get; set; }
-        public Collection<UserStory> UserStories { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public Bug LinkedBug { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Build LinkedBuild { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Epic LinkedEpic { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Feature LinkedFeature { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public General LinkedGeneral { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Iteration LinkedIteration { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Release LinkedRelease { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Request LinkedRequest { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Task LinkedTask { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public TeamIteration LinkedTeamIteration { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public UserStory LinkedUserStory { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<TestCase> TestCases { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<TestPlan> ChildTestPlans { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<TestPlan> ParentTestPlans { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<TestPlanRun> TestPlanRuns { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<UserStory> UserStories { get; internal set; }
     }
 }

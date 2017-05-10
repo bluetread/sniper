@@ -15,28 +15,11 @@ namespace Sniper
 {
     internal static class StringExtensions
     {
-        public static Uri FormatUri(this string pattern, params object[] args)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(HttpKeys.Pattern, pattern);
-
-            return new Uri(string.Format(CultureInfo.InvariantCulture, pattern, args), UriKind.Relative);
-        }
-
-        public static string UriEncode(this string input)
-        {
-            return WebUtility.UrlEncode(input);
-        }
-
-        public static string ToBase64String(this string input)
-        {
-            return Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
-        }
-
-        public static string FromBase64String(this string encoded)
-        {
-            var decodedBytes = Convert.FromBase64String(encoded);
-            return Encoding.UTF8.GetString(decodedBytes, 0, decodedBytes.Length);
-        }
+        // the rule:
+        // Username may only contain alphanumeric characters or single hyphens
+        // and cannot begin or end with a hyphen
+        private static readonly Regex _nameWithOwner = new Regex("[a-z0-9.-]{1,}/[a-z0-9.-_]{1,}",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private static readonly Regex _optionalQueryStringRegex = new Regex("\\{\\?([^}]+)\\}");
 
@@ -45,7 +28,7 @@ namespace Sniper
             var optionalQueryStringMatch = _optionalQueryStringRegex.Match(template);
             if (optionalQueryStringMatch.Success)
             {
-                var expansion = string.Empty;
+                var expansion = String.Empty;
                 var parameters = optionalQueryStringMatch.Groups[1].Value.Split(',');
 
                 foreach (var parameter in parameters)
@@ -53,7 +36,7 @@ namespace Sniper
                     var parameterProperty = values.GetType().GetProperty(parameter);
                     if (parameterProperty != null)
                     {
-                        expansion += string.IsNullOrWhiteSpace(expansion) ? "?" : "&";
+                        expansion += String.IsNullOrWhiteSpace(expansion) ? "?" : "&";
                         expansion += parameter + "=" +
                                      Uri.EscapeDataString("" + parameterProperty.GetValue(values, new object[0]));
                     }
@@ -61,6 +44,36 @@ namespace Sniper
                 template = _optionalQueryStringRegex.Replace(template, expansion);
             }
             return new Uri(template);
+        }
+
+        public static Uri FormatUri(this string pattern, params object[] args)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(HttpKeys.Pattern, pattern);
+
+            return new Uri(String.Format(CultureInfo.InvariantCulture, pattern, args), UriKind.Relative);
+        }
+
+        public static string FromBase64String(this string encoded)
+        {
+            var decodedBytes = Convert.FromBase64String(encoded);
+            return Encoding.UTF8.GetString(decodedBytes, 0, decodedBytes.Length);
+        }
+
+        public static string FromRubyCase(this string propertyName)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(nameof(propertyName), propertyName);
+            return String.Join(String.Empty, propertyName.Split('_')).ToCapitalizedInvariant();
+        }
+
+        public static string ToBase64String(this string input)
+        {
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(input));
+        }
+
+        public static string ToCapitalizedInvariant(this string value)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(nameof(value), value);
+            return String.Concat(value[0].ToString().ToUpperInvariant(), value.Substring(1));
         }
 
         [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase)]
@@ -86,38 +99,42 @@ namespace Sniper
             return nameValueCollection;
         }
 
-
         [SuppressMessage(Categories.Globalization, MessageAttributes.NormalizeStringsToUppercase)]
         public static string ToRubyCase(this string propertyName)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(propertyName), propertyName);
-            return string.Join("_", propertyName.SplitUpperCase()).ToLowerInvariant();
+            return String.Join("_", propertyName.SplitUpperCase()).ToLowerInvariant();
         }
 
-        public static string FromRubyCase(this string propertyName)
+        public static string UriEncode(this string input)
         {
-            Ensure.ArgumentNotNullOrEmptyString(nameof(propertyName), propertyName);
-            return string.Join(string.Empty, propertyName.Split('_')).ToCapitalizedInvariant();
+            return WebUtility.UrlEncode(input);
         }
 
-        public static string ToCapitalizedInvariant(this string value)
+        internal static IReadOnlyDictionary<string, string> GetHeaders(this WebHeaderCollection webHeaderCollection)
         {
-            Ensure.ArgumentNotNullOrEmptyString(nameof(value), value);
-            return string.Concat(value[0].ToString().ToUpperInvariant(), value.Substring(1));
+            Ensure.ArgumentNotNull(nameof(webHeaderCollection), webHeaderCollection);
+            var dict = webHeaderCollection.AllKeys.ToDictionary(λ => λ, λ => webHeaderCollection[λ]);
+            return new ReadOnlyDictionary<string, string>(dict);
         }
 
+        internal static bool IsNameWithOwnerFormat(this string input)
+        {
+            return _nameWithOwner.IsMatch(input);
+        }
+        
         private static IEnumerable<string> SplitUpperCase(this string source)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(source), source);
 
             var wordStartIndex = 0;
             var letters = source.ToCharArray();
-            var previousChar = char.MinValue;
+            var previousChar = Char.MinValue;
 
             // Skip the first letter. we don't care what case it is.
             for (var i = 1; i < letters.Length; i++)
             {
-                if (char.IsUpper(letters[i]) && !char.IsWhiteSpace(previousChar))
+                if (Char.IsUpper(letters[i]) && !Char.IsWhiteSpace(previousChar))
                 {
                     //Grab everything before the current character.
                     yield return new string(letters, wordStartIndex, i - wordStartIndex);
@@ -130,22 +147,9 @@ namespace Sniper
             yield return new string(letters, wordStartIndex, letters.Length - wordStartIndex);
         }
 
-        // the rule:
-        // Username may only contain alphanumeric characters or single hyphens
-        // and cannot begin or end with a hyphen
-        private static readonly Regex _nameWithOwner = new Regex("[a-z0-9.-]{1,}/[a-z0-9.-_]{1,}",
-            RegexOptions.Compiled | RegexOptions.IgnoreCase);
-
-        internal static bool IsNameWithOwnerFormat(this string input)
+        public static string ConvertSingleQuotedJson(string singleQuotedData)
         {
-            return _nameWithOwner.IsMatch(input);
-        }
-
-        internal static IReadOnlyDictionary<string, string> GetHeaders(this WebHeaderCollection webHeaderCollection)
-        {
-            Ensure.ArgumentNotNull(nameof(webHeaderCollection), webHeaderCollection);
-            var dict = webHeaderCollection.AllKeys.ToDictionary(λ => λ, λ => webHeaderCollection[λ]);
-            return new ReadOnlyDictionary<string, string>(dict);
+            return singleQuotedData.Replace('\'', '"');
         }
     }
 }

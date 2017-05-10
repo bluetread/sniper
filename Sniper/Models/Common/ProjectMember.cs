@@ -13,6 +13,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/ProjectMembers/meta">API documentation - ProjectMember</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class ProjectMember : Entity, IHasActive, IHasProject, IHasUser, IHasRole
     {
         #region Required for Create
@@ -21,22 +22,23 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.DisallowNull)]
         public int Allocation { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Project Project { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Role Role { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Email, JsonProperties.Login,
+            JsonProperties.Password, JsonProperties.WeeklyAvailableHours)]
         [JsonProperty(Required = Required.DisallowNull)]
         public User User { get; set; }
 
         #endregion
 
         [JsonProperty(Required = Required.Default)]
-        public bool IsActive { get; set; }
+        public bool IsActive { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public DateTime MembershipEndDate { get; set; }
@@ -48,6 +50,6 @@ namespace Sniper.Common
         public decimal WeeklyAvailableHours { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<UserProjectAllocation> Allocations { get; set; }
+        public Collection<UserProjectAllocation> Allocations { get; internal set; }
     }
 }

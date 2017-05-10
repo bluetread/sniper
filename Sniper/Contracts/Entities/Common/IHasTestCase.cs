@@ -4,6 +4,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasTestCase
     {
-        TestCase TestCase { get; set; }
+        TestCase TestCase { get; }
     }
 }

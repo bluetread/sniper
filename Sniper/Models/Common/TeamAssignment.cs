@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Sniper.Contracts.Entities.Common;
 using System;
+using Sniper.Application;
 using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
@@ -11,25 +12,27 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TeamAssignments/meta">API documentation - TeamAssignment</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class TeamAssignment : Entity, IHasDateRange, IHasAssignable, IHasEntityState, IHasTeam
     {
         #region Required for Create
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Name, 
+            JsonProperties.EntityState, JsonProperties.Project, JsonProperties.Priority)]
         [JsonProperty(Required = Required.DisallowNull)]
-        public Assignable Assignable { get; set; }
+        public Assignable Assignable { get; internal set; }
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Team Team { get; set; }
 
         #endregion
 
         [JsonProperty(Required = Required.Default)]
-        public DateTime? EndDate { get; set; }
+        public DateTime? EndDate { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public DateTime? StartDate { get; set; }
+        public DateTime? StartDate { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public EntityState EntityState { get; set; }

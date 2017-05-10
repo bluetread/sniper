@@ -2,7 +2,7 @@
 {
     public interface IHasTimeSpent
     {
-        decimal TimeRemain { get; set; }
-        decimal TimeSpent { get; set; }
+        decimal TimeRemain { get; }
+        decimal TimeSpent { get; }
     }
 }

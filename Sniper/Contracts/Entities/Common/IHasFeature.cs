@@ -4,6 +4,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasFeature
     {
-        Feature Feature { get; set; }
+        Feature Feature { get; }
     }
 }

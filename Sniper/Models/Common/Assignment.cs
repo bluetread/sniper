@@ -11,19 +11,21 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Assignments/meta">API documentation - Assignment</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Assignment : Entity, IHasAssignable, IHasRole
     {
         #region Required for Create
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.EntityState, JsonProperties.Priority)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Assignable Assignable { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Role Role { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Email, JsonProperties.Login,
+            JsonProperties.Password, JsonProperties.WeeklyAvailableHours)]
         [JsonProperty(Required = Required.DisallowNull)]
         public User GeneralUser { get; set; }
 

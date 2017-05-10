@@ -10,6 +10,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Practices/meta">API documentation - Practice</a>
     /// </remarks>
+    [CannotCreateReadUpdateDelete]
     public class Practice : Entity, IHasName, IHasDescription, IHasProcesses
     {
         [RequiredForCreate]
@@ -24,6 +25,6 @@ namespace Sniper.Common
         public string Description { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Process> Processes { get; set; }
+        public Collection<Process> Processes { get; internal set; }
     }
 }

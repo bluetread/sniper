@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasFollowers
     {
-        Collection<GeneralFollower> Followers { get; set; }
+        Collection<GeneralFollower> Followers { get; }
     }
 }

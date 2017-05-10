@@ -2,6 +2,7 @@
 using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
+using Sniper.Application;
 using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
@@ -12,15 +13,16 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TeamProjects/meta">API documentation - TeamProject</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class TeamProject : Entity, IHasDateRange, IHasTeam, IHasProject, IHasAllocations, IHasWorkFlows
     {
         #region Required for Create
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Project Project { get; set; }
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Team Team { get; set; }
 
@@ -36,9 +38,9 @@ namespace Sniper.Common
         public DateTime? StartDate { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<ProjectAllocation> Allocations { get; set; }
+        public Collection<ProjectAllocation> Allocations { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Workflow> Workflows { get; set; }
+        public Collection<Workflow> Workflows { get; internal set; }
     }
 }

@@ -12,6 +12,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Workflows/meta">API documentation - Workflow</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Workflow : Entity, IHasName, IHasEntityType, IHasProcess, IHasEntityStates, IHasTeamProjects
     {
         #region Required for Create
@@ -22,25 +23,25 @@ namespace Sniper.Common
 
         [RequiredForCreate]
         [JsonProperty(Required = Required.DisallowNull)]
-        public EntityType EntityType { get; set; }
+        public EntityType EntityType { get; internal set; }
 
         [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
-        public Process Process { get; set; }
+        public Process Process { get; internal set; }
 
         [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
-        public Workflow ParentWorkflow { get; set; }
+        public Workflow ParentWorkflow { get; internal set; }
 
         #endregion
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<EntityState> EntityStates { get; set; }
+        public Collection<EntityState> EntityStates { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Workflow> SubWorkflows { get; set; }
+        public Collection<Workflow> SubWorkflows { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<TeamProject> TeamProjects { get; set; }
+        public Collection<TeamProject> TeamProjects { get; internal set; }
     }
 }

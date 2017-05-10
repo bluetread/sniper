@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasMilestones
     {
-        Collection<Milestone> Milestones { get; set; }
+        Collection<Milestone> Milestones { get; }
     }
 }

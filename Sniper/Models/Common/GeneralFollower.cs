@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using static Sniper.CustomAttributes.CustomAttributes;
 
@@ -10,6 +11,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/GeneralFollowers/meta">API documentation - GeneralFollower</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class GeneralFollower : Entity, IHasGeneral, IHasUser
     {
 
@@ -17,7 +19,8 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.DisallowNull)]
         public General General { get; set; }
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Email, JsonProperties.Login,
+            JsonProperties.Password, JsonProperties.WeeklyAvailableHours)]
         [JsonProperty(Required = Required.DisallowNull)]
         public User User { get; set; }
     }

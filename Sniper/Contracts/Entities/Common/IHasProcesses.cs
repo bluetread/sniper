@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasProcesses
     {
-        Collection<Process> Processes { get; set; }
+        Collection<Process> Processes { get; }
     }
 }

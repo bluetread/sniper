@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasCustomActivities
     {
-        Collection<CustomActivity> CustomActivities { get; set; }
+        Collection<CustomActivity> CustomActivities { get; }
     }
 }

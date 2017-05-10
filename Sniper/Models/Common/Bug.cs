@@ -14,6 +14,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Bugs/meta">API documentation - Bug</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Bug : Assignable, IHasBuild, IHasFeature, IHasSeverity, IHasUserStory,
         IHasBugHistory, IHasTestCaseRuns, IHasTestPlanRuns
     {
@@ -22,12 +23,12 @@ namespace Sniper.Common
         [RequiredForCreate]
         [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
-        
+
         ////TODO: double-check this
         //[RequiredForCreate(JsonProperties.Id)]
         //public override EntityState EntityState { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 

@@ -2,6 +2,6 @@
 {
     public interface IHasCurrent
     {
-        bool IsCurrent { get; set; }
+        bool IsCurrent { get; }
     }
 }

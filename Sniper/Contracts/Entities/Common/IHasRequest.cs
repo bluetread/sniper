@@ -4,6 +4,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasRequest
     {
-        Request Request { get; set; }
+        Request Request { get; }
     }
 }

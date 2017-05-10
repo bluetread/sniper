@@ -11,6 +11,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Tags/meta">API documentation - Tag</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Tag : Entity, IHasName, IHasGenerals
     {
         #region Required for Create
@@ -22,6 +23,6 @@ namespace Sniper.Common
         #endregion
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<General> Generals { get; set; }
+        public Collection<General> Generals { get; internal set; }
     }
 }

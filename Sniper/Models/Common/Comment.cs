@@ -12,6 +12,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Comments/meta">API documentation - Comment</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Comment : Entity, IHasDescription, IHasCreateDate, IHasGeneral, IHasOwner
     {
         #region Required for Create
@@ -20,14 +21,14 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.DisallowNull)]
         public string Description { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
         public General General { get; set; }
 
         #endregion
 
         [JsonProperty(Required = Required.Default)]
-        public DateTime? CreateDate { get; set; }
+        public DateTime? CreateDate { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public int? ParentId { get; set; }

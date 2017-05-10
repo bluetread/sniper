@@ -10,12 +10,12 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/RelationTypes/meta">API documentation - RelationType</a>
     /// </remarks>
-    public class RelationType : Entity, IHasName
+    public class RelationType : Entity, IHasName, IHasRelations
     {
         [JsonProperty(Required = Required.Default)]
         public string Name { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Relation> Relations { get; set; }
+        public Collection<Relation> Relations { get; internal set; }
     }
 }

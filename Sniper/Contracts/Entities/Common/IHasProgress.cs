@@ -2,6 +2,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasProgress
     {
-        decimal Progress { get; set; }
+        decimal Progress { get; }
     }
 }

@@ -1,8 +1,8 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
-using Newtonsoft.Json;
 using static Sniper.CustomAttributes.CustomAttributes;
 using static Sniper.TargetProcess.Common.Enumerations;
 
@@ -14,6 +14,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TestCases/meta">API documentation - TestCase</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class TestCase : General, IHasPriority, IHasTestPlans, IHasTestCaseRuns, IHasTestSteps, IHasUserStories
     {
         #region Required for Create
@@ -22,7 +23,7 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 

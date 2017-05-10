@@ -4,6 +4,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasCreated
     {
-        DateTime Created { get; set; }
+        DateTime Created { get; }
     }
 }

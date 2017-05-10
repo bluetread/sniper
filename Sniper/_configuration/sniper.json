@@ -2,7 +2,7 @@
   "credentials": {
     "authenticationType": "Basic", //anonymous (not allowed for TP), basic, cookie, accessToken, serviceToken or token (Service Token). Do not use "Unknown"
     "login": "apiaccess", //login, username, etc.
-    "password": "BlueTre@d" // not checked in
+    "password": "<enter password here>" // not checked in
   },
   "siteInfo": {
     "baseUrl": "tpondemand.com",

@@ -11,6 +11,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/EntityStates/meta">API documentation - EntityState</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class EntityState : Entity, IHasName, IHasRole, IHasProjects, IHasAssignables
     {
 
@@ -29,7 +30,7 @@ namespace Sniper.Common
         public bool IsFinal { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public bool IsInitial { get; set; }
+        public bool IsInitial { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public bool IsPlanned { get; set; }
@@ -38,27 +39,27 @@ namespace Sniper.Common
         public double NumericPriority { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public EntityState ParentEntityState { get; set; }
+        public EntityState ParentEntityState { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public Role Role { get; set; }
 
         [JsonProperty(Required = Required.DisallowNull)]
-        public Workflow Workflow { get; set; }
+        public Workflow Workflow { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Assignable> Assignables { get; set; }
+        public Collection<Assignable> Assignables { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<EntityState> NextStates { get; set; }
+        public Collection<EntityState> NextStates { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<EntityState> PreviousStates { get; set; }
+        public Collection<EntityState> PreviousStates { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Project> Projects { get; set; }
+        public Collection<Project> Projects { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<EntityState> SubEntityStates { get; set; }
+        public Collection<EntityState> SubEntityStates { get; internal set; }
     }
 }

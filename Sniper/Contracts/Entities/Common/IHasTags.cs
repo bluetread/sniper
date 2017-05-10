@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasTags
     {
-        Collection<Tag> TagObjects { get; set; }
+        Collection<Tag> TagObjects { get; }
     }
 }

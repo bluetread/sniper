@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.History
 {
     public interface IHasEpicHistory
     {
-        Collection<EpicSimpleHistory> History { get; set; }
+        Collection<EpicSimpleHistory> History { get; }
     }
 }

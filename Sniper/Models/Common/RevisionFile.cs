@@ -11,18 +11,19 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/RevisionFiles/meta">API documentation - RevisionFile</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class RevisionFile : Entity
     {
         #region Required for Create
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.SourceControlId)]
         [JsonProperty(Required = Required.DisallowNull)]
-        public Revision Revision { get; set; }
+        public Revision Revision { get; internal set; }
 
         #endregion
 
         [JsonProperty(Required = Required.Default)]
-        public string FileName { get; set; }
+        public string FileName { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public FileAction FileAction { get; set; }

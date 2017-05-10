@@ -13,29 +13,25 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Assignables/meta">API documentation - Assignable</a>
     /// </remarks>
-    [CannotCreateReadUpdateDelete]
+    [CanCreateReadUpdateDelete(CanCreate = false)]
     public class Assignable : General, IHasEffort, IHasAssignedEfforts, IHasAssignedTeams, IHasForecastEndDate,
         IHasLeadCycleTimes, IHasPlannedDates, IHasProgress, IHasTimeSpent, IHasEntityState, IHasImpediments,
         IHasIteration, IHasPriority, IHasRelease, IHasResponsibleTeam, IHasTimes, IHasUnits
     {
         #region Required for Create
-
-        [RequiredForCreate]
-        [JsonProperty(Required = Required.DisallowNull)]
-        public override string Name { get; set; }
-
+        
         [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
         public virtual EntityState EntityState { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
         public virtual Priority Priority { get; set; }
 
         #endregion
 
         [JsonProperty(Required = Required.Default)]
-        public virtual double CycleTime { get; set; }
+        public virtual double CycleTime { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public virtual decimal Effort { get; set; }
@@ -47,13 +43,13 @@ namespace Sniper.Common
         public virtual decimal EffortToDo { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual DateTime? ForecastEndDate { get; set; }
+        public virtual DateTime? ForecastEndDate { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual DateTime? LastStateChangeDate { get; set; }
+        public virtual DateTime? LastStateChangeDate { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual double LeadTime { get; set; }
+        public virtual double LeadTime { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public virtual DateTime? PlannedEndDate { get; set; }
@@ -62,16 +58,16 @@ namespace Sniper.Common
         public virtual DateTime? PlannedStartDate { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual decimal Progress { get; set; }
+        public virtual decimal Progress { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual decimal TimeRemain { get; set; }
+        public virtual decimal TimeRemain { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual decimal TimeSpent { get; set; }
+        public virtual decimal TimeSpent { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual string Units { get; set; }
+        public virtual string Units { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public virtual Iteration Iteration { get; set; }
@@ -80,33 +76,33 @@ namespace Sniper.Common
         public virtual Release Release { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual TeamAssignment ResponsibleTeam { get; set; }
+        public virtual TeamAssignment ResponsibleTeam { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public virtual TeamIteration TeamIteration { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<AssignedEffort> AssignedEfforts { get; set; }
+        public virtual Collection<AssignedEffort> AssignedEfforts { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<TeamAssignment> AssignedTeams { get; set; }
+        public virtual Collection<TeamAssignment> AssignedTeams { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<GeneralUser> AssignedUser { get; set; }
+        public virtual Collection<GeneralUser> AssignedUser { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<Assignment> Assignments { get; set; }
+        public virtual Collection<Assignment> Assignments { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<Impediment> Impediments { get; set; }
+        public virtual Collection<Impediment> Impediments { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<Revision> Revisions { get; set; }
+        public virtual Collection<Revision> Revisions { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<RoleEffort> RoleEfforts { get; set; }
+        public virtual Collection<RoleEffort> RoleEfforts { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<Time> Times { get; set; }
+        public virtual Collection<Time> Times { get; internal set; }
     }
 }

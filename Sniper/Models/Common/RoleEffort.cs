@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using static Sniper.CustomAttributes.CustomAttributes;
 
@@ -11,15 +12,16 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/RoleEfforts/meta">API documentation - RoleEffort</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class RoleEffort : Entity, IHasEffort, IHasInitialEstimate, IHasTimeSpent, IHasAssignable, IHasRole
     {
         #region Required for Create
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.Project, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Assignable Assignable { get; set; }
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Role Role { get; set; }
 

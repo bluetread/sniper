@@ -13,6 +13,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/CustomActivities/meta">API documentation - CustomActivity</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class CustomActivity : Entity, IHasName, IHasCreated, IHasEstimate, IHasProject, IHasTimes, IHasUser
     {
         [JsonProperty(Required = Required.Default)]
@@ -27,16 +28,18 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.DisallowNull)]
         public string Name { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Project Project { get; set; }
 
         #endregion
 
+        [RequiredForCreate(JsonProperties.Email, JsonProperties.Login,
+            JsonProperties.Password, JsonProperties.WeeklyAvailableHours)]
         [JsonProperty(Required = Required.Default)]
         public User User { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Time> Times { get; set; }
+        public Collection<Time> Times { get; internal set; }
     }
 }

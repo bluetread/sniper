@@ -15,6 +15,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TestCaseRuns/meta">API documentation - TestCaseRun</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class TestCaseRun : Entity, IHasName, IHasDescription, IHasTestPlanRun, IHasTestCase,
         IHasEntityType, IHasPriority, IHasTestStepRuns, IHasBugs, IHasTestPlanRunLinks
     {
@@ -26,7 +27,7 @@ namespace Sniper.Common
 
         [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
-        public TestPlanRun RootTestPlanRun { get; set; }
+        public TestPlanRun RootTestPlanRun { get; internal set; }
 
         #endregion
 
@@ -34,13 +35,13 @@ namespace Sniper.Common
         public string Comment { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public string Description { get; set; }
+        public string Description { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public DateTime EndRunDate { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public string Name { get; set; }
+        public string Name { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public DateTime StartRunDate { get; set; }
@@ -49,30 +50,30 @@ namespace Sniper.Common
         public TestCaseRunStatus Status { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public string Steps { get; set; }
+        public string Steps { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public string Success { get; set; }
+        public string Success { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public EntityType EntityType { get; set; }
+        public EntityType EntityType { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public User LastExecutor { get; set; }
+        public User LastExecutor { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public Priority Priority { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public TestCase TestCase { get; set; }
+        public TestCase TestCase { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<TestStepRun> TestStepRuns { get; set; }
+        public Collection<TestStepRun> TestStepRuns { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Bug> Bugs { get; set; }
+        public Collection<Bug> Bugs { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<TestRunItemHierarchyLink> TestPlanRunLinks { get; set; }
+        public Collection<TestRunItemHierarchyLink> TestPlanRunLinks { get; internal set; }
     }
 }

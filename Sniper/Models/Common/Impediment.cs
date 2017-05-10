@@ -15,6 +15,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Impediments/meta">API documentation - Impediment</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Impediment : General, IHasPrivate, IHasPlannedDates,
         IHasAssignable, IHasEntityState, IHasImpedimentHistory, IHasPriority, IHasResponsibleUser
     {
@@ -26,7 +27,7 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 

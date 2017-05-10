@@ -13,6 +13,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Milestones/meta">API documentation - Milestone</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Milestone : Entity, IHasName, IHasDescription, IHasDate, IHasProjects
     {
         [RequiredForCreate]
@@ -34,6 +35,6 @@ namespace Sniper.Common
         public User Owner { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Project> Projects { get; set; }
+        public Collection<Project> Projects { get; internal set; }
     }
 }

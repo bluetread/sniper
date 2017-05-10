@@ -13,7 +13,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Times/meta">API documentation - Time</a>
     /// </remarks>
-
+    [CanCreateReadUpdateDelete]
     public class Time : Entity, IHasAssignable, IHasBug, IHasCreateDate, IHasCustomActivity,
         IHasDate, IHasDescription, IHasProject, IHasRequest, IHasRole, IHasTask, IHasTestPlan,
         IHasTestPlanRun, IHasUser, IHasUserStory, IHasWorkEffort, IHasCustomFields
@@ -21,22 +21,24 @@ namespace Sniper.Common
 
         #region Required for Create
 
-        [RequiredForCreate] //TODO:check. Docs don't have this required, but I believe it is.
-        [JsonProperty(Required = Required.DisallowNull)]
-        public string Description { get; set; }
-
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Project Project { get; set; }
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Email, JsonProperties.Login,
+            JsonProperties.Password, JsonProperties.WeeklyAvailableHours)]
         [JsonProperty(Required = Required.DisallowNull)]
         public User User { get; set; }
 
         #endregion
 
         [JsonProperty(Required = Required.Default)]
-        public DateTime? CreateDate { get; set; }
+        public DateTime? CreateDate { get; internal set; }
+
+        //[RequiredForCreate] //TODO:check. Docs don't have this required, but I believe it is.
+        [JsonProperty(Required = Required.Default)]
+        public string Description { get; set; }
+
 
         [JsonProperty(JsonProperties.Date, Required = Required.Default)]
         public DateTime? EntryDate { get; set; }
@@ -54,30 +56,30 @@ namespace Sniper.Common
         public Assignable Assignable { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Bug Bug { get; set; }
+        public Bug Bug { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public CustomActivity CustomActivity { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Request Request { get; set; }
+        public Request Request { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public Role Role { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Task Task { get; set; }
+        public Task Task { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public TestPlan TestPlan { get; set; }
+        public TestPlan TestPlan { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public TestPlanRun TestPlanRun { get; set; }
+        public TestPlanRun TestPlanRun { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public UserStory UserStory { get; set; }
+        public UserStory UserStory { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<CustomField> CustomFields { get; set; }
+        public Collection<CustomField> CustomFields { get; internal set; }
     }
 }

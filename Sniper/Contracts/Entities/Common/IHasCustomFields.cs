@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasCustomFields
     {
-        Collection<CustomField> CustomFields { get; set; }
+        Collection<CustomField> CustomFields { get; }
     }
 }

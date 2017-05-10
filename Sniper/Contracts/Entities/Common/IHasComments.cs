@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasComments
     {
-        Collection<Comment> Comments { get; set; }
+        Collection<Comment> Comments { get; }
     }
 }

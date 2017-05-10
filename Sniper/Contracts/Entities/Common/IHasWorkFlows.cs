@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasWorkFlows
     {
-        Collection<Workflow> Workflows { get; set; }
+        Collection<Workflow> Workflows { get; }
     }
 }

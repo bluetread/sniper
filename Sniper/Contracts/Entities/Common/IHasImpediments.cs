@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasImpediments
     {
-        Collection<Impediment> Impediments { get; set; }
+        Collection<Impediment> Impediments { get; }
     }
 }

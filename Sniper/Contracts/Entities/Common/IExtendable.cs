@@ -2,6 +2,6 @@
 {
     public interface IExtendable
     {
-        bool IsExtendable { get; set; }
+        bool IsExtendable { get; }
     }
 }

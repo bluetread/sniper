@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Sniper.Contracts.Entities.Common;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -9,6 +10,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/AssignedEfforts/meta">API documentation - AssignedEffort</a>
     /// </remarks>
+    [CannotCreateReadUpdateDelete]
     public class AssignedEffort : Entity, IHasEffort, IHasInitialEstimate, IHasRoleTimes,
         IHasAssignable, IHasRole, IHasGeneralUser
     {

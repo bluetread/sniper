@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasAttachments
     {
-        Collection<Attachment> Attachments { get; set; }
+        Collection<Attachment> Attachments { get; }
     }
 }

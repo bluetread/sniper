@@ -11,7 +11,7 @@ namespace Sniper.CustomAttributes
             public bool CanDelete { get; set; }
             public bool CanRead { get; set; } 
             public bool CanUpdate { get; set; }
-            public bool RequiresAdminRights { get; set; } 
+            public bool RequiresAdminRights { get; set; }
         }
 
         public class CanCreateAttribute : CrudBaseAttribute
@@ -45,7 +45,7 @@ namespace Sniper.CustomAttributes
             }
         }
 
-        public class CannotCreateReadUpdateDeleteAttribute : CrudBaseAttribute { }
+        public class CannotCreateReadUpdateDeleteAttribute : CrudBaseAttribute {}
 
         public class RequiredForCreateAttribute : Attribute
         {

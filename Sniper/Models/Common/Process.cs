@@ -11,8 +11,9 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Processes/meta">API documentation - Process</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Process : Entity, IHasName, IHasDescription, IHasProjects,
-        IHasPractices, IHasCustomFields, IHasProcessAdmins, IHasTerms, IHasWorkFlows
+        IHasCustomFields, IHasPractices, IHasProcessAdmins, IHasTerms, IHasWorkFlows
     {
         #region Required for Create
 
@@ -26,21 +27,21 @@ namespace Sniper.Common
         public string Description { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<CustomField> CustomFields { get; set; }
+        public Collection<CustomField> CustomFields { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Practice> Practices { get; set; }
+        public Collection<Practice> Practices { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<User> ProcessAdmins { get; set; }
+        public Collection<User> ProcessAdmins { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Project> Projects { get; set; }
+        public Collection<Project> Projects { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Term> Terms { get; set; }
+        public Collection<Term> Terms { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Workflow> Workflows { get; set; }
+        public Collection<Workflow> Workflows { get; internal set; }
     }
 }

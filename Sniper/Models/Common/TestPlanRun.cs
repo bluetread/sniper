@@ -12,38 +12,32 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TestPlanRuns/meta">API documentation - TestPlanRun</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class TestPlanRun : Assignable, IHasBuild, IHasTestPlan, IHasTestCaseRuns, IHasTestPlanRuns,
         IHasBugs, IHasTestCaseRunLinks
     {
 
         #region Required for Create
 
-        [RequiredForCreate]
-        [JsonProperty(Required = Required.DisallowNull)]
-        public override string Name { get; set; }
-
-        [RequiredForCreate(JsonProperties.Id)]
-        [JsonProperty(Required = Required.DisallowNull)]
-        public override Project Project { get; set; }
-
-        [RequiredForCreate(JsonProperties.Name)]
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState, 
+            JsonProperties.Project, JsonProperties.Priority)]
         [JsonProperty(Required = Required.DisallowNull)]
         public TestPlan TestPlan { get; set; }
 
         #endregion
 
-        public int BlockedCount { get; set; }
-        public int FailedCount { get; set; }
-        public bool IsLastStarted { get; set; }
-        public int NotRunCount { get; set; }
-        public int OnHoldCount { get; set; }
-        public int PassedCount { get; set; }
+        public int BlockedCount { get; internal set; }
+        public int FailedCount { get; internal set; }
+        public bool IsLastStarted { get; internal set; }
+        public int NotRunCount { get; internal set; }
+        public int OnHoldCount { get; internal set; }
+        public int PassedCount { get; internal set; }
         public Build Build { get; set; }
-        public TestPlanRun ParentTestPlanRun { get; set; }
+        public TestPlanRun ParentTestPlanRun { get; internal set; }
 
-        public Collection<Bug> Bugs { get; set; }
-        public Collection<TestCaseRun> TestCaseRun { get; set; }
-        public Collection<TestRunItemHierarchyLink> TestCaseRunLinks { get; set; }
-        public Collection<TestPlanRun> TestPlanRuns { get; set; }
+        public Collection<Bug> Bugs { get; internal set; }
+        public Collection<TestCaseRun> TestCaseRun { get; internal set; }
+        public Collection<TestRunItemHierarchyLink> TestCaseRunLinks { get; internal set; }
+        public Collection<TestPlanRun> TestPlanRuns { get; internal set; }
     }
 }

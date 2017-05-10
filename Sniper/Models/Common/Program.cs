@@ -11,6 +11,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Programs/meta">API documentation - Program</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Program : General, IHasProjects
     {
         #region Required for Create
@@ -22,6 +23,6 @@ namespace Sniper.Common
         #endregion
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Project> Projects { get; set; }
+        public Collection<Project> Projects { get; internal set; }
     }
 }

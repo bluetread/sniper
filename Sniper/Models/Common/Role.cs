@@ -11,6 +11,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Roles/meta">API documentation - Role</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Role : Entity, IHasName, IHasEntityStates, IHasRoleEfforts
     {
         #region Required for Create
@@ -28,9 +29,9 @@ namespace Sniper.Common
         public bool HasEffort { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<EntityState> EntityStates { get; set; }
+        public Collection<EntityState> EntityStates { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<RoleEffort> RoleEfforts { get; set; }
+        public Collection<RoleEffort> RoleEfforts { get; internal set; }
     }
 }

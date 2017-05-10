@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.History
 {
     public interface IHasFeatureHistory
     {
-        Collection<FeatureSimpleHistory> History { get; set; }
+        Collection<FeatureSimpleHistory> History { get; }
     }
 }

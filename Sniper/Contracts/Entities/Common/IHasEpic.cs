@@ -4,6 +4,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasEpic
     {
-        Epic Epic { get; set; }
+        Epic Epic { get; }
     }
 }

@@ -19,7 +19,7 @@ namespace Sniper.Tests.CRUD.Create.UserStories
             var data = client.CreateData<UserStory>(story);
             Assert.NotNull(data);
             Assert.True(data.HttpResponse.IsError);
-            Assert.True(data.HttpResponse.Exception.GetType() == typeof(SniperExceptions.RequiredPropertyException));
+            Assert.IsType(typeof(SniperExceptions.RequiredPropertyException), data.HttpResponse.Exception);
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace Sniper.Tests.CRUD.Create.UserStories
             var data = client.CreateData<UserStory>(story);
             Assert.NotNull(data);
             Assert.True(data.HttpResponse.IsError);
-            Assert.True(data.HttpResponse.Exception.GetType() == typeof(SniperExceptions.RequiredPropertyException));
+            Assert.IsType(typeof(SniperExceptions.RequiredPropertyException), data.HttpResponse.Exception);
         }
 
         [Fact]
@@ -57,6 +57,7 @@ namespace Sniper.Tests.CRUD.Create.UserStories
             Assert.NotNull(data);
             Assert.True(data.HttpResponse.IsError);
             Assert.True(data.HttpResponse.Exception.GetType() == typeof(SniperExceptions.RequiredPropertyException));
+            Assert.IsType(typeof(SniperExceptions.RequiredPropertyException), data.HttpResponse.Exception);
         }
 
         [Fact]

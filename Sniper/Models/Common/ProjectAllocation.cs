@@ -1,6 +1,7 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
+using Sniper.Contracts.Entities.Common;
 using System;
-using Newtonsoft.Json;
 using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
@@ -11,6 +12,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/ProjectAllocations/meta">API documentation - ProjectAllocation</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete(CanCreate = false)]
     public class ProjectAllocation : Entity, IHasDateRange, IHasEntityType, IHasProject, IHasEffectiveDates
     {
         #region Required For Create
@@ -19,23 +21,23 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.DisallowNull)]
         public int Percentage { get; set; }
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
-        public Project Project { get; set; }
+        public Project Project { get; internal set; }
 
         #endregion
 
         [JsonProperty(Required = Required.Default)]
-        public DateTime? EffectiveEndDate { get; set; }
+        public DateTime? EffectiveEndDate { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public DateTime? EffectiveStartDate { get; set; }
+        public DateTime? EffectiveStartDate { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public DateTime? EndDate { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public bool IsEffective { get; set; }
+        public bool IsEffective { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public DateTime? StartDate { get; set; }

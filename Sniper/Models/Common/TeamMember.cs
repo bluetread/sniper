@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Sniper.Contracts.Entities.Common;
 using System;
+using Sniper.Application;
 using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
@@ -11,19 +12,21 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/TeamMembers/meta">API documentation - TeamMember</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class TeamMember : Entity, IHasDateRange, IHasRole, IHasTeam, IHasUser
     {
         #region Required for Create
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Role Role { get; set; }
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Team Team { get; set; }
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Email, JsonProperties.Login, 
+            JsonProperties.Password, JsonProperties.WeeklyAvailableHours)]
         [JsonProperty(Required = Required.DisallowNull)]
         public User User { get; set; }
 

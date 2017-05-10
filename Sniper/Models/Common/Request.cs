@@ -14,6 +14,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Requests/meta">API documentation - Request</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Request : Assignable, IHasRequestHistory
     {
         #region Required for Create
@@ -26,7 +27,7 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.DisallowNull)]
         public override EntityState EntityState { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 
@@ -39,7 +40,7 @@ namespace Sniper.Common
         public bool IsReplied { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public int VotesCount { get; set; }
+        public int VotesCount { get; internal set; }
         
         [JsonProperty(Required = Required.Default)]
         public RequestSource SourceType { get; set; }
@@ -48,9 +49,9 @@ namespace Sniper.Common
         public RequestType RequestType { get; set; }
         
         [JsonProperty(Required = Required.Default)]
-        public Collection<GeneralUser> Requesters { get; set; }
+        public Collection<GeneralUser> Requesters { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<RequestSimpleHistory> History { get; set; }
+        public Collection<RequestSimpleHistory> History { get; internal set; }
     }
 }

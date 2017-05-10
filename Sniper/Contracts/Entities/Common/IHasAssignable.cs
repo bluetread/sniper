@@ -4,6 +4,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasAssignable
     {
-        Assignable Assignable { get; set; }
+        Assignable Assignable { get; }
     }
 }

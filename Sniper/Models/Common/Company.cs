@@ -11,6 +11,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Companies/meta">API documentation - Company</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Company : Entity, IHasDescription, IHasName, IHasUrl, IHasProjects, IHasRequesters
     {
         #region Required for Create
@@ -28,9 +29,9 @@ namespace Sniper.Common
         public string Url { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Project> Projects { get; set; }
+        public Collection<Project> Projects { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Requester> Requesters { get; set; }
+        public Collection<Requester> Requesters { get; internal set; }
     }
 }

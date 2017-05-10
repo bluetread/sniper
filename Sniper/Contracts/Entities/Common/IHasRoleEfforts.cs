@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasRoleEfforts
     {
-        Collection<RoleEffort> RoleEfforts { get; set; }
+        Collection<RoleEffort> RoleEfforts { get; }
     }
 }

@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasBuilds
     {
-        Collection<Build> Builds { get; set; }
+        Collection<Build> Builds { get; }
     }
 }

@@ -15,6 +15,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Tasks/meta">API documentation - Task</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Task : Assignable, IHasUserStory, IHasTaskHistory
     {
         #region Required for Create
@@ -23,16 +24,17 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 
-        [RequiredForCreate(JsonProperties.Id)]
+        [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
         public UserStory UserStory { get; set; }
+
         #endregion
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<TaskSimpleHistory> History { get; set; }
+        public Collection<TaskSimpleHistory> History { get; internal set; }
     }
 }

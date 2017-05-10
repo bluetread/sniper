@@ -12,7 +12,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Attachments/meta">API documentation - Attachment</a>
     /// </remarks>
-    [CannotCreateReadUpdateDelete]
+    [CanCreateReadUpdateDelete]
     public class Attachment : Entity, IHasDescription, IHasDate, IHasGeneral, IHasMessage, IHasName, IHasOwner
     {
         [JsonProperty(Required = Required.Default)]
@@ -22,10 +22,22 @@ namespace Sniper.Common
         public DateTime? EntryDate { get; set; }
 
         [JsonProperty(Required = Required.Default)]
+        public string MimeType { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string Name { get; set; }
 
         [JsonProperty(Required = Required.Default)]
+        public string ThumbnailUri { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public long Size { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
         public string UniqueFileName { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public string Uri{ get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public General General { get; set; }

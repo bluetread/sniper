@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasProcessAdmins
     {
-        Collection<User> ProcessAdmins { get; set; }
+        Collection<User> ProcessAdmins { get; }
     }
 }

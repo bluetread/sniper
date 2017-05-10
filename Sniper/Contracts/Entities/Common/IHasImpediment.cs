@@ -4,6 +4,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasImpediment
     {
-        Impediment Impediment { get; set; }
+        Impediment Impediment { get; }
     }
 }

@@ -10,6 +10,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/CustomRules/meta">API documentation - CustomRule</a>
     /// </remarks>
+    [CanRead, CanUpdate]
     public class CustomRule : Entity, IHasName, IHasDescription, IHasEnabled
     {
         [RequiredForCreate]

@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
+using static Sniper.CustomAttributes.CustomAttributes;
 using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
@@ -10,6 +12,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Requesters/meta">API documentation - Requester</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Requester : GeneralUser, IHasCompany
     {
 
@@ -23,6 +26,7 @@ namespace Sniper.Common
         public RequesterSourceType SourceType { get; set; }
         
         [JsonProperty(Required = Required.Default)]
+        [RequiredForCreate(JsonProperties.Name)]
         public Company Company { get; set; }
     }
 }

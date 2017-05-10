@@ -14,6 +14,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/CustomFields/meta">API documentation - CustomField</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class CustomField : Entity, IHasName, IHasEntityType, IHasProcess
     {
         [RequiredForCreate]

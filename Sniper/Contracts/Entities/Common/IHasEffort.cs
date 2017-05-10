@@ -2,8 +2,8 @@
 {
     public interface IHasEffort
     {
-        decimal Effort { get; set; }
-        decimal EffortCompleted { get; set; }
-        decimal EffortToDo { get; set; }
+        decimal Effort { get; }
+        decimal EffortCompleted { get; }
+        decimal EffortToDo { get; }
     }
 }

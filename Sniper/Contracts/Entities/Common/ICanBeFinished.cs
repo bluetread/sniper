@@ -2,6 +2,6 @@
 {
     public interface ICanBeFinished
     {
-        bool CanBeFinished { get; set; }
+        bool CanBeFinished { get; }
     }
 }

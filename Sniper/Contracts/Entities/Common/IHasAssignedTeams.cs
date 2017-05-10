@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasAssignedTeams
     {
-        Collection<TeamAssignment> AssignedTeams { get; set; }
+        Collection<TeamAssignment> AssignedTeams { get; }
     }
 }

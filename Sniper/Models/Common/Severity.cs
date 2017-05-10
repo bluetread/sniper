@@ -10,6 +10,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Severities/meta">API documentation - Severity</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Severity : Entity, IHasName
     {
         #region Required for Create

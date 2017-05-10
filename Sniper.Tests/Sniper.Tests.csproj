@@ -94,6 +94,7 @@
     <Compile Include="Authentication\ServiceTokenAuthenticationTests.cs" />
     <Compile Include="Configuration\ConfigurationTests.cs" />
     <Compile Include="CRUD\Create\CreateTests.cs" />
+    <Compile Include="CRUD\Create\UserStories\CreateAssignableTests.cs" />
     <Compile Include="CRUD\Create\UserStories\CreateUserStoryTests.cs" />
     <Compile Include="CRUD\Read\ReadTests.cs" />
     <Compile Include="Helpers\NSubstituteExtensions.cs" />

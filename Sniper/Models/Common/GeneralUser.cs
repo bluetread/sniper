@@ -13,24 +13,37 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/GeneralUsers/meta">API documentation - GeneralUser</a>
     /// </remarks>
-    [CannotCreateReadUpdateDelete]
+    [CannotCreateReadUpdateDelete(CanCreate = false)]
     public class GeneralUser : Entity, IHasActive, IHasCreateDate, IHasModifyDate,
         IHasCustomFields, IHasAssignables, IHasComments, IHasRequests
     {
-        [JsonProperty(Required = Required.Default)]
-        public DateTime? CreateDate { get; set; }
+        #region Required for Create
 
-        [JsonProperty(Required = Required.Default)]
-        public DateTime? DeleteDate { get; set; }
-
+        [RequiredForCreate]
         [JsonProperty(Required = Required.DisallowNull)]
         public virtual string Email { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public virtual string Login { get; set; }
+
+        [RequiredForCreate]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public virtual string Password { get; set; }
+
+        #endregion
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime? CreateDate { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public DateTime? DeleteDate { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public virtual string FirstName { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public string GlobalId { get; set; }
+        public string GlobalId { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public bool IsActive { get; set; }
@@ -41,31 +54,25 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.Default)]
         public virtual string LastName { get; set; }
 
-        [JsonProperty(Required = Required.DisallowNull)]
-        public virtual string Login { get; set; }
-
         [JsonProperty(Required = Required.Default)]
         public DateTime? ModifyDate { get; set; }
 
-        [JsonProperty(Required = Required.DisallowNull)]
-        public virtual string Password { get; set; }
+        [JsonProperty(Required = Required.Default)]
+        public Uri AvatarUrl { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Uri AvatarUrl { get; set; }
+        public UserEntityKind Kind { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public UserEntityKind Kind { get; set; }
+        public Collection<Assignable> Assignables { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Assignable> Assignables { get; set; }
+        public Collection<CustomField> CustomFields { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<CustomField> CustomFields { get; set; }
+        public Collection<Comment> Comments { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Comment> Comments { get; set; }
-
-        [JsonProperty(Required = Required.Default)]
-        public Collection<Request> Requests { get; set; }
+        public Collection<Request> Requests { get; internal set; }
     }
 }

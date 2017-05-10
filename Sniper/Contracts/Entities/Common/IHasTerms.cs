@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasTerms
     {
-        Collection<Term> Terms { get; set; }
+        Collection<Term> Terms { get; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Sniper.Application;
+using Newtonsoft.Json;
 using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
@@ -14,7 +15,7 @@ namespace Sniper.Common
     {
         #region Required for Create
 
-        [RequiredForCreate]
+        [RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.DisallowNull)]
         public Team Team { get; set; }
 

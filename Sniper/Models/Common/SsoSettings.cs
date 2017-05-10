@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
+using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
 {
@@ -10,6 +11,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/SsoSettings/meta">API documentation - SsoSettings</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class SsoSettings : IHasEnabled
     {
         [JsonProperty(Required = Required.Default)]
@@ -28,6 +30,6 @@ namespace Sniper.Common
         public string SignonUrl { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<User> ExceptionUsers { get; set; }
+        public Collection<User> ExceptionUsers { get; internal set; }
     }
 }

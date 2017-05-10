@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasRequesters
     {
-        Collection<Requester> Requesters { get; set; }
+        Collection<Requester> Requesters { get; }
     }
 }

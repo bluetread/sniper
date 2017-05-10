@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
+using static Sniper.CustomAttributes.CustomAttributes;
 using static Sniper.TargetProcess.Common.Enumerations;
-
 namespace Sniper.Common
 {
     /// <summary>
@@ -9,6 +9,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/GlobalSettings/meta">API documentation - GlobalSettings</a>
     /// </remarks>
+    [CanUpdate]
     public class GlobalSettings : Entity
     {
         [JsonProperty(Required = Required.Default)]

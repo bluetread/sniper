@@ -4,7 +4,7 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasEffectiveDates
     {
-        DateTime? EffectiveEndDate { get; set; }
-        DateTime? EffectiveStartDate { get; set; }
+        DateTime? EffectiveEndDate { get; }
+        DateTime? EffectiveStartDate { get; }
     }
 }

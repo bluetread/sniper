@@ -4,6 +4,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasRelease
     {
-        Release Release { get; set; }
+        Release Release { get; }
     }
 }

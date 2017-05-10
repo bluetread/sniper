@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasEntityStates
     {
-        Collection<EntityState> EntityStates { get; set; }
+        Collection<EntityState> EntityStates { get; }
     }
 }

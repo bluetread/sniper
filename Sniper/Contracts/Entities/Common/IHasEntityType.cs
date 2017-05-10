@@ -4,6 +4,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasEntityType
     {
-        EntityType EntityType { get; set; }
+        EntityType EntityType { get; }
     }
 }

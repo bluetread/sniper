@@ -2,6 +2,6 @@
 {
     public interface IAssignable
     {
-        bool IsAssignable { get; set; }
+        bool IsAssignable { get; }
     }
 }

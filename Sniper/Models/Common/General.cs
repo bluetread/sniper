@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
@@ -11,11 +12,12 @@ namespace Sniper.Common
         IHasEntityType, IHasModifyDate, IHasOwner, IHasProject, IHasCustomFields,
         IHasAttachments, IHasComments, IHasFollowers, IHasMessages, IHasTags
     {
+        [RequiredForCreate]
         [JsonProperty(Required = Required.DisallowNull)]
         public virtual string Name { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual DateTime? CreateDate { get; set; }
+        public virtual DateTime? CreateDate { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public virtual string Description { get; set; }
@@ -24,13 +26,13 @@ namespace Sniper.Common
         public virtual DateTime? EndDate { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual bool IsNext { get; set; }
+        public virtual bool IsNext { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual bool IsNow { get; set; }
+        public virtual bool IsNow { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual bool IsPrevious { get; set; }
+        public virtual bool IsPrevious { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public virtual DateTime? LastCommentDate { get; set; }
@@ -48,10 +50,10 @@ namespace Sniper.Common
         public virtual string Tags { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual EntityType EntityType { get; set; }
+        public virtual EntityType EntityType { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual GeneralUser LastCommentedUser { get; set; }
+        public virtual GeneralUser LastCommentedUser { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public virtual GeneralUser LastEditor { get; set; }
@@ -62,37 +64,38 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.Default)]
         public virtual GeneralUser Owner { get; set; }
 
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         public virtual Project Project { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<Attachment> Attachments { get; set; }
+        public virtual Collection<Attachment> Attachments { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<Comment> Comments { get; set; }
+        public virtual Collection<Comment> Comments { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<CustomField> CustomFields { get; set; }
+        public virtual Collection<CustomField> CustomFields { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<GeneralFollower> Followers { get; set; }
+        public virtual Collection<GeneralFollower> Followers { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<InboundAssignable> InboundAssignables { get; set; }
+        public virtual Collection<InboundAssignable> InboundAssignables { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<Relation> MasterRelations { get; set; }
+        public virtual Collection<Relation> MasterRelations { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<Message> Messages { get; set; }
+        public virtual Collection<Message> Messages { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<OutboundAssignable> OutboundAssignables { get; set; }
+        public virtual Collection<OutboundAssignable> OutboundAssignables { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<Relation> SlaveRelations { get; set; }
+        public virtual Collection<Relation> SlaveRelations { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<Tag> TagObjects { get; set; }
+        public virtual Collection<Tag> TagObjects { get; internal set; }
     }
 }

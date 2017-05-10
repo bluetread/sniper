@@ -9,6 +9,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Relations/meta">API documentation - Relation</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Relation : Entity
     {
         [RequiredForCreate]

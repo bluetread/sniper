@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasTimes
     {
-        Collection<Time> Times { get; set; }
+        Collection<Time> Times { get; }
     }
 }

@@ -4,6 +4,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasProject
     {
-        Project Project { get; set; }
+        Project Project { get; }
     }
 }

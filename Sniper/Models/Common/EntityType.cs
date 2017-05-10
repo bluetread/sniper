@@ -16,24 +16,24 @@ namespace Sniper.Common
     public class EntityType : Entity, IHasName, IAssignable, IExtendable
     {
         [JsonProperty(Required = Required.Default)]
-        public virtual CustomFieldScope CustomFieldScope { get; set; } = CustomFieldScope.None;
+        public virtual CustomFieldScope CustomFieldScope { get; internal set; } = CustomFieldScope.None;
 
         [JsonProperty(Required = Required.Default)]
-        public virtual bool IsAssignable { get; set; }
+        public virtual bool IsAssignable { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual bool IsExtendable { get; set; }
+        public virtual bool IsExtendable { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual bool IsSearchable { get; set; }
+        public virtual bool IsSearchable { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual bool IsUnitInHourOnly { get; set; }
+        public virtual bool IsUnitInHourOnly { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual string Name { get; set; }
+        public virtual string Name { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public virtual Collection<EntityState> EntityStates { get; set; }
+        public virtual Collection<EntityState> EntityStates { get; internal set; }
     }
 }

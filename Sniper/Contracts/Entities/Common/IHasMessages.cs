@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasMessages
     {
-        Collection<Message> Messages { get; set; }
+        Collection<Message> Messages { get; }
     }
 }

@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasTestCaseRuns
     {
-        Collection<TestCaseRun> TestCaseRun { get; set; }
+        Collection<TestCaseRun> TestCaseRun { get; }
     }
 }

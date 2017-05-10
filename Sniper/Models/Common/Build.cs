@@ -13,6 +13,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Builds/meta">API documentation - Build</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Build : General, IHasBugs, IHasTestPlanRuns
     {
         #region Required for Create
@@ -20,8 +21,8 @@ namespace Sniper.Common
         [RequiredForCreate]
         [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
-        
-        [RequiredForCreate(JsonProperties.Id)]
+
+        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 

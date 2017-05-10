@@ -11,7 +11,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/RequestTypes/meta">API documentation - RequestType</a>
     /// </remarks>
-    [CannotCreateReadUpdateDelete]
+    [CanCreateReadUpdateDelete]
     public class RequestType : Entity, IHasName, IHasRequests
     {
         [RequiredForCreate]
@@ -23,6 +23,6 @@ namespace Sniper.Common
         public string Name { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Request> Requests { get; set; }
+        public Collection<Request> Requests { get; internal set; }
     }
 }

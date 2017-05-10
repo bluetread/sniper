@@ -13,6 +13,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/Projects/meta">API documentation - Project</a>
     /// </remarks>
+    [CanCreateReadUpdateDelete]
     public class Project : General, IHasActive, IHasAllocations, IHasBugs, IHasBuilds,
         IHasCompany, IHasCustomActivities, IHasEffort, IHasEntityState, IHasEpics,
         IHasFeatures, IHasForecastEndDate, IHasGenerals, IHasIterations, IHasLeadCycleTimes,
@@ -36,13 +37,13 @@ namespace Sniper.Common
         public string Abbreviation { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public DateTime? AnticipatedEndDate { get; set; }
+        public DateTime? AnticipatedEndDate { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public string Color { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public double CycleTime { get; set; }
+        public double CycleTime { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public decimal Effort { get; set; }
@@ -54,7 +55,7 @@ namespace Sniper.Common
         public decimal EffortToDo { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public DateTime? ForecastEndDate { get; set; }
+        public DateTime? ForecastEndDate { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public bool IsActive { get; set; }
@@ -66,16 +67,16 @@ namespace Sniper.Common
         public bool IsProduct { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public DateTime? LastStateChangeDate { get; set; }
+        public DateTime? LastStateChangeDate { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public double LeadTime { get; set; }
+        public double LeadTime { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public string MailReplyAddress { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public decimal Progress { get; set; }
+        public decimal Progress { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
         public DateTime? PlannedEndDate { get; set; }
@@ -84,9 +85,10 @@ namespace Sniper.Common
         public DateTime? PlannedStartDate { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public string Units { get; set; }
+        public string Units { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
+        [RequiredForCreate(JsonProperties.Name)]
         public Company Company { get; set; }
 
         [JsonProperty(Required = Required.Default)]
@@ -95,67 +97,71 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.Default)]
         public Program Program { get; set; }
 
-        [JsonProperty(Required = Required.Default)]
-        public Collection<ProjectAllocation> Allocations { get; set; }
+        #region Collections
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Bug> Bugs { get; set; }
+        public Collection<ProjectAllocation> Allocations { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Build> Builds { get; set; }
+        public Collection<Bug> Bugs { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Release> CrossProjectReleases { get; set; }
+        public Collection<Build> Builds { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<CustomActivity> CustomActivities { get; set; }
+        public Collection<Release> CrossProjectReleases { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Epic> Epics { get; set; }
+        public Collection<CustomActivity> CustomActivities { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Feature> Features { get; set; }
+        public Collection<Epic> Epics { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<General> Generals { get; set; }
+        public Collection<Feature> Features { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Iteration> Iterations { get; set; }
+        public Collection<General> Generals { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Milestone> Milestones { get; set; }
+        public Collection<Iteration> Iterations { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<ProjectMember> ProjectMembers { get; set; }
+        public Collection<Milestone> Milestones { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Release> Releases { get; set; }
+        public Collection<ProjectMember> ProjectMembers { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Request> Requests { get; set; }
+        public Collection<Release> Releases { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Revision> Revisions { get; set; }
+        public Collection<Request> Requests { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Task> Tasks { get; set; }
+        public Collection<Revision> Revisions { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<TeamProject> TeamProjects { get; set; }
+        public Collection<Task> Tasks { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<TestCase> TestCases { get; set; }
+        public Collection<TeamProject> TeamProjects { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<TestPlanRun> TestPlanRuns { get; set; }
+        public Collection<TestCase> TestCases { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<TestPlan> TestPlan { get; set; }
+        public Collection<TestPlanRun> TestPlanRuns { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<Time> Times { get; set; }
+        public Collection<TestPlan> TestPlan { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        public Collection<UserStory> UserStories { get; set; }
+        public Collection<Time> Times { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Collection<UserStory> UserStories { get; internal set; }
+
+        #endregion
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IHasUnits
     {
-        string Units { get; set; }
+        string Units { get; }
     }
 }

@@ -2,7 +2,7 @@
 {
     public interface IHasLeadCycleTimes
     {
-        double CycleTime { get; set; }
-        double LeadTime { get; set; }
+        double CycleTime { get; }
+        double LeadTime { get; }
     }
 }

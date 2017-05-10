@@ -5,6 +5,6 @@ namespace Sniper.Contracts.Entities.Common
 {
     public interface IHasAllocations
     {
-        Collection<ProjectAllocation> Allocations { get; set; }
+        Collection<ProjectAllocation> Allocations { get; }
     }
 }

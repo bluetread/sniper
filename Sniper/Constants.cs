@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 namespace Sniper.Application
 {
@@ -9,10 +10,26 @@ namespace Sniper.Application
 
     public static class JsonProperties
     {
+        public const string Allocation = "Allocation";
         public const string Date = "Date";
+        public const string Email = "Email";
+        public const string EndDate = "EndDate";
+        public const string EntityState = "EntityState";
         public const string Id = "Id";
+        public const string Login = "Login";
         public const string Name = "Name";
+        public const string Password = "Password";
+        public const string Priority = "Priority";
+        public const string Project = "Project";
         public const string ResourceType = "ResourceType";
+        public const string Role = "Role";
+        public const string RootTestPlanRun = "RootTestPlanRun";
+        public const string SourceControlId = "SourceControlId";
+        public const string StartDate = "StartDate";
+        public const string Team = "Team";
+        public const string TestPlanRun = "TestPlanRun";
+        public const string User = "User";
+        public const string WeeklyAvailableHours = "WeeklyAvailableHours";
     }
 
     public static class Properties
@@ -34,6 +51,18 @@ namespace Sniper.Application.Messages
         public const string JsonStringInvalid = "Invalid JSON string";
         public const string StandardKeyValueFormat = @"{0}:{1}";
         public const string TimespanZero = "Timespan must be greater than zero";
+    }
+
+    public static class CrudMessages
+    {
+        public const string AdminProhibited = "Admin rights are needed for this entity.";
+        public const string AllProhibited = "No operations are allowed (Create, Read, Update or Delete).";
+        public const string CreateProhibited = "Create for this entity is not permitted.";
+        public const string DeleteProhibited = "Delete for this entity is not permitted.";
+        public const string ReadProhibited = "Read for this entity is not permitted.";
+        public const string UpdateProhibited = "Update for this entity is not permitted.";
+        public const string UnknownError = "A general error occurred.";
+
     }
 }
 
@@ -94,6 +123,20 @@ namespace Sniper.FileAndDirectory
 
 namespace Sniper.Http
 {
+    public static class CRUD
+    {
+        [Flags]
+        public enum CrudTypes
+        {
+            None,
+            Create,
+            Read,
+            Update, 
+            Delete,
+            All = Create | Read | Update | Delete
+        }
+    }
+
     public static class HttpKeys
     {
         public const string First = "first";

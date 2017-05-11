@@ -18,6 +18,7 @@ namespace Sniper.Tests.CRUD.Create.Common.AppContexts
             {
             };
             var data = client.CreateData<AppContext>(appContext);
+            Assert.False(data.HttpResponse.IsError);
         }
     }
 }

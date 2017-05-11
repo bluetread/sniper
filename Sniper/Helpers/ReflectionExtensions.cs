@@ -35,6 +35,7 @@ namespace Sniper
 
         public static IEnumerable<PropertyInfo> PropertiesWithAttribute<T>(this Type type) where T : Attribute
         {
+            var test = type.GetProperties().Where(λ => Attribute.IsDefined(λ, typeof(T)));
             return type.GetProperties().Where(λ => Attribute.IsDefined(λ, typeof(T)));
         }
 

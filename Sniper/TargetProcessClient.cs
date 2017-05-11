@@ -69,7 +69,7 @@ namespace Sniper
             try
             {
                 var response = ExecutePostRequest<T>(request);
-                return new ApiResponse<T>(new HttpResponse(response.StatusCode, response.Data));
+                return new ApiResponse<T>(response);
             }
             catch (Exception exception)
             {
@@ -406,7 +406,7 @@ namespace Sniper
             }
             if (crudFlags.HasFlag(CRUD.CrudTypes.Create))
             {
-                return crudAttribute.CanCreate;
+                return crudAttribute?.CanCreate ?? true;
             }
 
             if (crudFlags.HasFlag(CRUD.CrudTypes.Read))

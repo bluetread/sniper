@@ -1,9 +1,10 @@
-﻿using Sniper.Common;
+﻿using System;
+using Sniper.Common;
 using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.UserStories
+namespace Sniper.Tests.CRUD.Create.Common.UserStories
 {
     public class CreateUserStoryTests
     {
@@ -79,6 +80,25 @@ namespace Sniper.Tests.CRUD.Create.UserStories
         }
 
         [Fact]
+        public void CreateUserStoryWithNameAndNewProjectWithNameMinimumFieldsSucceeds()
+        {
+            var client = new TargetProcessClient
+            {
+                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
+            };
+
+            var story = new UserStory
+            {
+                Name = $"Sample Create From Code Story - {DateTime.Now}",
+                Project = new Project { Name = $"Some new project from code - {DateTime.Now}" }
+            };
+            var data = client.CreateData<UserStory>(story);
+            Assert.NotNull(data);
+            Assert.False(data.HttpResponse.IsError);
+        }
+
+
+        [Fact]
         public void CreateUserStoryWithNameAndProjectWithIdMinimumFieldsSucceeds()
         {
             var client = new TargetProcessClient
@@ -88,7 +108,7 @@ namespace Sniper.Tests.CRUD.Create.UserStories
 
             var story = new UserStory
             {
-                Name = "Sample Create From Code Story",
+                Name = $"Sample Create From Code Story - {DateTime.Now}",
                 Project = new Project { Id = 194 }
             };
             var data = client.CreateData<UserStory>(story);

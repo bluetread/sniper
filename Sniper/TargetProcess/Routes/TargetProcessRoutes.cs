@@ -8,41 +8,41 @@ namespace Sniper.TargetProcess.Routes
         public enum Route
         {
             None = 0,
-
+            AppContexts,
             [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldBeSpelledCorrectly)]
             Assignables,
-
             AssignedEfforts,
             Assignments,
             Attachments,
             Bugs,
             Builds,
+            Comments,
             Companies,
             Context, //singular - Do not change
+            Cultures,
             CustomActivities,
+            CustomFieldConfigs,
             CustomFields,
             CustomRules,
             EntityStates,
             EntityTypes,
             Epics,
+            ExtendedContexts,
             Features,
             Generals,
             GeneralFollowers,
             GeneralUsers,
             GlobalSettings,
             Impediments,
-
             [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldBeSpelledCorrectly)]
             InboundAssignables,
-
             Iterations,
             Messages,
             MessageUniqueIds,
             Milestones,
-
             [SuppressMessage(Categories.Naming, MessageAttributes.IdentifiersShouldBeSpelledCorrectly)]
             OutboundAssignables,
-
+            Practices,
             Priorities,
             Processes,
             Programs,
@@ -61,6 +61,8 @@ namespace Sniper.TargetProcess.Routes
             Roles,
             RoleEfforts,
             Severities,
+            SimpleContexts,
+            SsoSettings,
             Tags,
             Tasks,
             Teams,

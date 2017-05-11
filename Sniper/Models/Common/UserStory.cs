@@ -21,7 +21,7 @@ namespace Sniper.Common
 
         [RequiredForCreate(JsonProperties.Name, IsEnabled = false)] // Override setting from Assignable. Only required for create there.
         [JsonProperty(Required = Required.DisallowNull)]
-        public override EntityState EntityState { get; set; }
+        public override EntityState EntityState { get; set; } 
 
         [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]

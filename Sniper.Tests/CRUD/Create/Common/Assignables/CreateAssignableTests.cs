@@ -1,9 +1,9 @@
-﻿using Sniper.Common;
+using Sniper.Common;
 using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.UserStories
+namespace Sniper.Tests.CRUD.Create.Common.Assignables 
 {
     public class CreateAssignableTests
     {
@@ -21,4 +21,4 @@ namespace Sniper.Tests.CRUD.Create.UserStories
             var data = client.CreateData<Assignable>(assignable);
         }
     }
-}
+} 

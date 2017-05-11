@@ -481,7 +481,8 @@ namespace Sniper
                             var propertyType = entityType.GetProperty(item)?.PropertyType;
                             if (propertyType != null)
                             {
-                                if (propertyType.IsGenericType &&
+                                if (propertyType == typeof(string) || 
+                                    propertyType.IsGenericType && 
                                     propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
                                 {
                                     isNullOrDefault = (subItemValue == null);

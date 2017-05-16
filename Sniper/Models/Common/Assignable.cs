@@ -19,13 +19,16 @@ namespace Sniper.Common
         IHasIteration, IHasPriority, IHasRelease, IHasResponsibleTeam, IHasTimes, IHasUnits
     {
         #region Required for Create
-        
-        [RequiredForCreate(JsonProperties.Name)]
-        [JsonProperty(Required = Required.DisallowNull)]
+     
+        //TODO: Revisit this for Assignable Create. May be required for this but not subclasses
+        //[RequiredForCreate(JsonProperties.Name)]
+        //[JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Default)]
         public virtual EntityState EntityState { get; set; }
 
-        [RequiredForCreate(JsonProperties.Name)]
-        [JsonProperty(Required = Required.DisallowNull)]
+        //[RequiredForCreate(JsonProperties.Name)]
+        //[JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Default)]
         public virtual Priority Priority { get; set; }
 
         #endregion

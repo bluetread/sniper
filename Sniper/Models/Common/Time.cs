@@ -21,13 +21,15 @@ namespace Sniper.Common
 
         #region Required for Create
 
-        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
-        [JsonProperty(Required = Required.DisallowNull)]
+        //[RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
+        //[JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Default)]
         public Project Project { get; set; }
 
-        [RequiredForCreate(JsonProperties.Email, JsonProperties.Login,
-            JsonProperties.Password, JsonProperties.WeeklyAvailableHours)]
-        [JsonProperty(Required = Required.DisallowNull)]
+        //[RequiredForCreate(JsonProperties.Email, JsonProperties.Login,
+        //    JsonProperties.Password, JsonProperties.WeeklyAvailableHours)]
+        //[JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Default)]
         public User User { get; set; }
 
         #endregion

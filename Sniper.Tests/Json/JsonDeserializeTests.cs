@@ -15,7 +15,7 @@ namespace Sniper.Tests.Json
             var result = JsonConvert.DeserializeObject<UserStory>(data, JsonHelpers.DefaultSerializerSettings);
             Assert.NotNull(result);
             Assert.IsType<UserStory>(result);
-            int userStoryId = result.Id;
+            int? userStoryId = result.Id;
             Assert.NotEqual(0, userStoryId);
         }
 

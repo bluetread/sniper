@@ -24,7 +24,7 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
 
-        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
+        [RequiredForCreate(JsonProperties.Id)]
         [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 
@@ -33,7 +33,7 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.Default)]
         public decimal InitialEstimate { get; set; }
 
-        [RequiredForCreate(JsonProperties.Name)]
+        //[RequiredForCreate(JsonProperties.Name)]
         [JsonProperty(Required = Required.Default)]
         public Epic Epic { get; set; }
 

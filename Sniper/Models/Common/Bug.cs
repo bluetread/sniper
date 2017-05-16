@@ -28,7 +28,7 @@ namespace Sniper.Common
         //[RequiredForCreate(JsonProperties.Id)]
         //public override EntityState EntityState { get; set; }
 
-        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
+        [RequiredForCreate(JsonProperties.Id)]
         [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 

@@ -207,7 +207,6 @@
     <Folder Include="CRUD\Create\History\UserStorySimpleHistories\" />
     <Folder Include="CRUD\Delete\" />
     <Folder Include="CRUD\Update\" />
-    <Folder Include="Fixtures\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

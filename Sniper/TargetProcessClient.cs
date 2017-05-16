@@ -325,7 +325,7 @@ namespace Sniper
             }
             if (ex is RequiredPropertyException)
             {
-                return new ApiResponse<T>(new HttpResponse(HttpStatusCode.PartialContent, ex));
+                return new ApiResponse<T>(new HttpResponse(HttpStatusCode.ExpectationFailed, ex));
             }
             return new ApiResponse<T>(new HttpResponse(ex));
         }

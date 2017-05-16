@@ -79,6 +79,8 @@ namespace Sniper.Tests.CRUD.Create.Common.UserStories
             Assert.False(data.HttpResponse.IsError); //TODO: Fix exception to show actual error. 
         }
 
+        //TODO; This may or may not be correct. Need to investigate to see if creating a new project 
+        // as part of cr
         [Fact]
         public void CreateUserStoryWithNameAndNewProjectWithNameMinimumFieldsSucceeds()
         {
@@ -114,6 +116,7 @@ namespace Sniper.Tests.CRUD.Create.Common.UserStories
             var data = client.CreateData<UserStory>(story);
             Assert.NotNull(data);
             Assert.False(data.HttpResponse.IsError);
+
         }
 
         //[Fact]

@@ -20,6 +20,12 @@ namespace Sniper.Http
 
             HttpResponse = response;
             var data = response.Data;
+            if (data == null)
+            {
+                DataCollection = null;
+                return;
+
+            }
             if (data.GetType() == typeof(T))
             {
                 DataCollection = new Collection<T> { (T)data };

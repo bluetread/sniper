@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.TeamProjectAllocations 
-{ 
-    public class TeamProjectAllocationTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.TeamProjectAllocations
+{
+    public class CreateTeamProjectAllocationTests
+    { 
         [Fact] 
         public void TeamProjectAllocationThrowsError() 
         { 

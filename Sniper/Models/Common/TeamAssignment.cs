@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using System;
-using Sniper.Application;
 using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common

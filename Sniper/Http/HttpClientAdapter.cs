@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sniper.Net;
+using Sniper.Types;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -9,8 +11,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Sniper.Net;
-using Sniper.Types;
 using static Sniper.Authentication.AuthenticationKeys;
 using static Sniper.WarningsErrors.MessageSuppression;
 

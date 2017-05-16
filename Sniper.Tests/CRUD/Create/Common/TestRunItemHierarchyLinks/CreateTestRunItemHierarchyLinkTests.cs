@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.TestRunItemHierarchyLinks 
-{ 
-    public class TestRunItemHierarchyLinkTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.TestRunItemHierarchyLinks
+{
+    public class CreateTestRunItemHierarchyLinkTests
+    { 
         [Fact] 
         public void TestRunItemHierarchyLinkThrowsError() 
         { 

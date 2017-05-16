@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.Terms 
-{ 
-    public class TermTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.Terms
+{
+    public class CreateTermTests
+    { 
         [Fact] 
         public void TermThrowsError() 
         { 

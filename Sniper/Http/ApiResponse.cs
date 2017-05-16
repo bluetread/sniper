@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Sniper.Http
@@ -13,7 +14,34 @@ namespace Sniper.Http
         /// Create a ApiResponse from an existing request
         /// </summary>
         /// <param name="response">An existing request to wrap</param>
-        public ApiResponse(IHttpResponse response) : this(response, (ICollection<T>)response?.Data) { }
+        public ApiResponse(IHttpResponse response)
+        {
+            Ensure.ArgumentNotNull(nameof(response), response);
+
+            HttpResponse = response;
+            var data = response.Data;
+            if (data == null)
+            {
+                DataCollection = null;
+                return;
+
+            }
+            if (data.GetType() == typeof(T))
+            {
+                DataCollection = new Collection<T> { (T)data };
+            }
+            else
+            {
+                DataCollection = (ICollection<T>)data;
+            }
+        }
+
+        /// <summary>
+        /// Create a ApiResponse from an existing request and object
+        /// </summary>
+        /// <param name="response">An existing request to wrap</param>
+        /// <param name="dataAsObject">The payload from an existing request</param>
+        public ApiResponse(IHttpResponse response, T dataAsObject) : this(response, new Collection<T>{ dataAsObject }) { }
 
         /// <summary>
         /// Create a ApiResponse from an existing request and object

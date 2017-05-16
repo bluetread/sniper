@@ -8,7 +8,7 @@ namespace Sniper
         public static JsonSerializerSettings DefaultSerializerSettings =
             new JsonSerializerSettings
             {
-                DefaultValueHandling = DefaultValueHandling.Populate,
+                DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 NullValueHandling = NullValueHandling.Ignore
             };

@@ -69,7 +69,7 @@ namespace Sniper
             try
             {
                 var response = ExecutePostRequest<T>(request);
-                return new ApiResponse<T>(new HttpResponse(response.StatusCode, response.Data));
+                return new ApiResponse<T>(response);
             }
             catch (Exception exception)
             {
@@ -325,7 +325,7 @@ namespace Sniper
             }
             if (ex is RequiredPropertyException)
             {
-                return new ApiResponse<T>(new HttpResponse(HttpStatusCode.PartialContent, ex));
+                return new ApiResponse<T>(new HttpResponse(HttpStatusCode.ExpectationFailed, ex));
             }
             return new ApiResponse<T>(new HttpResponse(ex));
         }
@@ -406,7 +406,7 @@ namespace Sniper
             }
             if (crudFlags.HasFlag(CRUD.CrudTypes.Create))
             {
-                return crudAttribute.CanCreate;
+                return crudAttribute?.CanCreate ?? true;
             }
 
             if (crudFlags.HasFlag(CRUD.CrudTypes.Read))
@@ -481,7 +481,8 @@ namespace Sniper
                             var propertyType = entityType.GetProperty(item)?.PropertyType;
                             if (propertyType != null)
                             {
-                                if (propertyType.IsGenericType &&
+                                if (propertyType == typeof(string) || 
+                                    propertyType.IsGenericType && 
                                     propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
                                 {
                                     isNullOrDefault = (subItemValue == null);

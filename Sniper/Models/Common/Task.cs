@@ -24,11 +24,11 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
 
-        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
+        [RequiredForCreate(JsonProperties.Id)]
         [JsonProperty(Required = Required.DisallowNull)]
         public override Project Project { get; set; }
 
-        [RequiredForCreate(JsonProperties.Name)]
+        [RequiredForCreate(JsonProperties.Id)]
         [JsonProperty(Required = Required.DisallowNull)]
         public UserStory UserStory { get; set; }
 

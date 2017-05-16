@@ -64,8 +64,14 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.Default)]
         public virtual GeneralUser Owner { get; set; }
 
-        [RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
-        [JsonProperty(Required = Required.DisallowNull)]
+        /* //TODO
+         Revisit this. Project inherits from this, but cannot override since 
+         Project cannot contain property Project (nor should it). 
+         When testing General, I need to investigate further.
+         */
+        //[RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
+        //[JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Required = Required.Default)]
         public virtual Project Project { get; set; }
 
         [JsonProperty(Required = Required.Default)]

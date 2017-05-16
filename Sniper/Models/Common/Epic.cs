@@ -3,6 +3,7 @@ using Sniper.Contracts.Entities.Common;
 using Sniper.Contracts.Entities.History;
 using Sniper.History;
 using System.Collections.ObjectModel;
+using Sniper.Application;
 using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common
@@ -17,6 +18,10 @@ namespace Sniper.Common
     [CanCreateReadUpdateDelete]
     public class Epic : Assignable, IHasInitialEstimate, IHasFeatures, IHasEpicHistory
     {
+        [RequiredForCreate(JsonProperties.Id)]
+        [JsonProperty(Required = Required.DisallowNull)]
+        public override Project Project { get; set; }
+
         [JsonProperty(Required = Required.Default)]
         public decimal InitialEstimate { get; set; }
 

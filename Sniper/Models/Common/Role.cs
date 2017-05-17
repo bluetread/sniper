@@ -1,6 +1,6 @@
-﻿using Sniper.Contracts.Entities.Common;
+﻿using Newtonsoft.Json;
+using Sniper.Contracts.Entities.Common;
 using System.Collections.ObjectModel;
-using Newtonsoft.Json;
 using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common

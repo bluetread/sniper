@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.Attachments 
-{ 
-    public class AttachmentTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.Attachments
+{
+    public class CreateAttachmentTests
+    { 
         [Fact] 
         public void AttachmentThrowsError() 
         { 

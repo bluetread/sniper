@@ -1,23 +1,21 @@
-using System;
 using Sniper.Common;
 using Sniper.Http;
 using Sniper.TargetProcess.Routes;
+using System;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.Bugs 
-{ 
-    public class BugTests 
-     { 
-        [Fact] 
-        public void CreateBugThrowsError() 
-        { 
-            var client = new TargetProcessClient 
-            { 
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Bugs) 
-            }; 
-            var bug = new Bug 
-            { 
+namespace Sniper.Tests.CRUD.Create.Common.Bugs
+{
+    public class CreateBugTests
+    {
+        [Fact]
+        public void CreateBugThrowsError()
+        {
+            var client = new TargetProcessClient
+            {
+                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Bugs)
             };
+            var bug = new Bug();
             var data = client.CreateData<Bug>(bug);
 
             Assert.NotNull(data);
@@ -25,22 +23,22 @@ namespace Sniper.Tests.CRUD.Create.Common.Bugs
         }
 
 
-         [Fact]
-         public void CreateBugWithMinimumDataSucceeds()
-         {
-             var client = new TargetProcessClient
-             {
-                 ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Bugs)
-             };
-             var bug = new Bug
-             {
-                 Name = $"Sample Bug From Code - {DateTime.Now}",
-                 Project = new Project { Id = 194 },
-             };
-             var data = client.CreateData<Bug>(bug);
+        [Fact]
+        public void CreateBugWithMinimumDataSucceeds()
+        {
+            var client = new TargetProcessClient
+            {
+                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Bugs)
+            };
+            var bug = new Bug
+            {
+                Name = $"Sample Bug From Code - {DateTime.Now}",
+                Project = new Project { Id = 194 },
+            };
+            var data = client.CreateData<Bug>(bug);
 
-             Assert.NotNull(data);
-             Assert.False(data.HttpResponse.IsError);
-         }
-    } 
-} 
+            Assert.NotNull(data);
+            Assert.False(data.HttpResponse.IsError);
+        }
+    }
+}

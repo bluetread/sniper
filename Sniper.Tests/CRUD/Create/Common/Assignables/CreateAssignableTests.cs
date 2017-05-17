@@ -3,7 +3,7 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.Assignables 
+namespace Sniper.Tests.CRUD.Create.Common.Assignables
 {
     public class CreateAssignableTests
     {
@@ -21,4 +21,4 @@ namespace Sniper.Tests.CRUD.Create.Common.Assignables
             var data = client.CreateData<Assignable>(assignable);
         }
     }
-} 
+}

@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.AssignedEfforts 
-{ 
-    public class AssignedEffortTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.AssignedEfforts
+{
+    public class CreateAssignedEffortTests
+    { 
         [Fact] 
         public void AssignedEffortThrowsError() 
         { 

@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.Processes 
-{ 
-    public class ProcessTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.Processes
+{
+    public class CreateProcessTests
+    { 
         [Fact] 
         public void ProcessThrowsError() 
         { 

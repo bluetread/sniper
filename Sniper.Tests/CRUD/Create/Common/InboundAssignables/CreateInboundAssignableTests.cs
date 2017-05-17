@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.InboundAssignables 
-{ 
-    public class InboundAssignableTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.InboundAssignables
+{
+    public class CreateInboundAssignableTests
+    { 
         [Fact] 
         public void InboundAssignableThrowsError() 
         { 

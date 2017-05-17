@@ -147,5 +147,145 @@ namespace Sniper
 
 
         #endregion
+
+        #region Create
+
+        public IApiResponse<Assignable> CreateAssignable(Assignable assignable) => CreateData<Assignable>(assignable);
+        public IApiResponse<AssignedEffort> CreateAssignedEffort(AssignedEffort assignedEffort) => CreateData<AssignedEffort>(assignedEffort);
+        public IApiResponse<Assignment> CreateAssignment(Assignment assignment) => CreateData<Assignment>(assignment);
+        public IApiResponse<Attachment> CreateAttachment(Attachment attachment) => CreateData<Attachment>(attachment);
+        public IApiResponse<Bug> CreateBug(Bug bug) => CreateData<Bug>(bug);
+        public IApiResponse<Build> CreateBuild(Build build) => CreateData<Build>(build);
+        public IApiResponse<Company> CreateCompany(Company company) => CreateData<Company>(company);
+        public IApiResponse<Context> CreateContext(Context context) => CreateData<Context>(context);
+        public IApiResponse<CustomActivity> CreateCustomActivity(CustomActivity customActivity) => CreateData<CustomActivity>(customActivity);
+        public IApiResponse<CustomField> CreateCustomField(CustomField customField) => CreateData<CustomField>(customField);
+        public IApiResponse<CustomRule> CreateCustomRule(CustomRule customRule) => CreateData<CustomRule>(customRule);
+        public IApiResponse<EntityState> CreateEntityState(EntityState entityState) => CreateData<EntityState>(entityState);
+        public IApiResponse<EntityType> CreateEntityType(EntityType entityType) => CreateData<EntityType>(entityType);
+        public IApiResponse<Epic> CreateEpic(Epic epic) => CreateData<Epic>(epic);
+        public IApiResponse<Feature> CreateFeature(Feature feature) => CreateData<Feature>(feature);
+        public IApiResponse<General> CreateGeneral(General general) => CreateData<General>(general);
+        public IApiResponse<GeneralFollower> CreateGeneralFollower(GeneralFollower generalFollower) => CreateData<GeneralFollower>(generalFollower);
+        public IApiResponse<GeneralUser> CreateGeneralUser(GeneralUser generalUser) => CreateData<GeneralUser>(generalUser);
+        public IApiResponse<GlobalSettings> CreateGlobalSetting(GlobalSettings globalSettings) => CreateData<GlobalSettings>(globalSettings);
+        public IApiResponse<Impediment> CreateImpediment(Impediment impediment) => CreateData<Impediment>(impediment);
+        public IApiResponse<InboundAssignable> CreateInboundAssignable(InboundAssignable inboundAssignable) => CreateData<InboundAssignable>(inboundAssignable);
+        public IApiResponse<Iteration> CreateIteration(Iteration iteration) => CreateData<Iteration>(iteration);
+        public IApiResponse<Message> CreateMessage(Message message) => CreateData<Message>(message);
+        public IApiResponse<MessageUniqueId> CreateMessageUniqueId(MessageUniqueId messageUniqueId) => CreateData<MessageUniqueId>(messageUniqueId);
+        public IApiResponse<Milestone> CreateMilestone(Milestone milestone) => CreateData<Milestone>(milestone);
+        public IApiResponse<OutboundAssignable> CreateOutboundAssignable(OutboundAssignable outboundAssignable) => CreateData<OutboundAssignable>(outboundAssignable);
+        public IApiResponse<Priority> CreatePriority(Priority priority) => CreateData<Priority>(priority);
+        public IApiResponse<Process> CreateProcess(Process process) => CreateData<Process>(process);
+        public IApiResponse<Program> CreateProgram(Program program) => CreateData<Program>(program);
+        public IApiResponse<Project> CreateProject(Project project) => CreateData<Project>(project);
+        public IApiResponse<ProjectAllocation> CreateProjectAllocation(ProjectAllocation projectAllocation) => CreateData<ProjectAllocation>(projectAllocation);
+        public IApiResponse<ProjectMember> CreateProjectMember(ProjectMember projectMember) => CreateData<ProjectMember>(projectMember);
+        public IApiResponse<Relation> CreateRelation(Relation relation) => CreateData<Relation>(relation);
+        public IApiResponse<RelationType> CreateRelationType(RelationType relationType) => CreateData<RelationType>(relationType);
+        public IApiResponse<Release> CreateRelease(Release release) => CreateData<Release>(release);
+        public IApiResponse<ReleaseProject> CreateReleaseProject(ReleaseProject releaseProject) => CreateData<ReleaseProject>(releaseProject);
+        public IApiResponse<Request> CreateRequest(Request request) => CreateData<Request>(request);
+        public IApiResponse<Requester> CreateRequester(Requester requester) => CreateData<Requester>(requester);
+        public IApiResponse<RequestType> CreateRequestType(RequestType requestType) => CreateData<RequestType>(requestType);
+        public IApiResponse<Revision> CreateRevision(Revision revision) => CreateData<Revision>(revision);
+        public IApiResponse<RevisionFile> CreateRevisionFile(RevisionFile revisionFile) => CreateData<RevisionFile>(revisionFile);
+        public IApiResponse<Role> CreateRole(Role role) => CreateData<Role>(role);
+        public IApiResponse<RoleEffort> CreateRoleEffort(RoleEffort roleEffort) => CreateData<RoleEffort>(roleEffort);
+        public IApiResponse<Severity> CreateSeverity(Severity severity) => CreateData<Severity>(severity);
+        public IApiResponse<Tag> CreateTag(Tag tag) => CreateData<Tag>(tag);
+        public IApiResponse<Task> CreateTask(Task task) => CreateData<Task>(task);
+        public IApiResponse<Team> CreateTeam(Team team) => CreateData<Team>(team);
+        public IApiResponse<TeamAssignment> CreateTeamAssignment(TeamAssignment teamAssignment) => CreateData<TeamAssignment>(teamAssignment);
+        public IApiResponse<TeamIteration> CreateTeamIteration(TeamIteration teamIteration) => CreateData<TeamIteration>(teamIteration);
+        public IApiResponse<TeamMember> CreateTeamMember(TeamMember teamMember) => CreateData<TeamMember>(teamMember);
+        public IApiResponse<TeamProject> CreateTeamProject(TeamProject teamProject) => CreateData<TeamProject>(teamProject);
+        public IApiResponse<TeamProjectAllocation> CreateTeamProjectAllocation(TeamProjectAllocation teamProjectAllocation) => CreateData<TeamProjectAllocation>(teamProjectAllocation);
+        public IApiResponse<Term> CreateTerm(Term term) => CreateData<Term>(term);
+        public IApiResponse<TestCase> CreateTestCase(TestCase testCase) => CreateData<TestCase>(testCase);
+        public IApiResponse<TestCaseRun> CreateTestCaseRun(TestCaseRun testCaseRun) => CreateData<TestCaseRun>(testCaseRun);
+        public IApiResponse<TestPlan> CreateTestPlan(TestPlan testPlan) => CreateData<TestPlan>(testPlan);
+        public IApiResponse<TestPlanRun> CreateTestPlanRun(TestPlanRun testPlanRun) => CreateData<TestPlanRun>(testPlanRun);
+        public IApiResponse<TestRunItemHierarchyLink> CreateTestRunItemHierarchyLink(TestRunItemHierarchyLink testRunItemHierarchyLink) => CreateData<TestRunItemHierarchyLink>(testRunItemHierarchyLink);
+        public IApiResponse<TestStep> CreateTestStep(TestStep testStep) => CreateData<TestStep>(testStep);
+        public IApiResponse<TestStepRun> CreateTestStepRun(TestStepRun testStepRun) => CreateData<TestStepRun>(testStepRun);
+        public IApiResponse<Time> CreateTime(Time time) => CreateData<Time>(time);
+        public IApiResponse<User> CreateUser(User user) => CreateData<User>(user);
+        public IApiResponse<UserProjectAllocation> CreateUserProjectAllocation(UserProjectAllocation userProjectAllocation) => CreateData<UserProjectAllocation>(userProjectAllocation);
+        public IApiResponse<UserStory> CreateUserStory(UserStory userStory) => CreateData<UserStory>(userStory);
+        public IApiResponse<Workflow> CreateWorkflow(Workflow workflow) => CreateData<Workflow>(workflow);
+
+        #endregion
+
+        #region CreateAsync
+
+        public Task<IApiResponse<Assignable>> CreateAssignableAsync(Assignable assignable) => CreateDataAsync<Assignable>(assignable);
+        public Task<IApiResponse<AssignedEffort>> CreateAssignedEffortAsync(AssignedEffort assignedEffort) => CreateDataAsync<AssignedEffort>(assignedEffort);
+        public Task<IApiResponse<Assignment>> CreateAssignmentAsync(Assignment assignment) => CreateDataAsync<Assignment>(assignment);
+        public Task<IApiResponse<Attachment>> CreateAttachmentAsync(Attachment attachment) => CreateDataAsync<Attachment>(attachment);
+        public Task<IApiResponse<Bug>> CreateBugAsync(Bug bug) => CreateDataAsync<Bug>(bug);
+        public Task<IApiResponse<Build>> CreateBuildAsync(Build build) => CreateDataAsync<Build>(build);
+        public Task<IApiResponse<Company>> CreateCompanyAsync(Company company) => CreateDataAsync<Company>(company);
+        public Task<IApiResponse<Context>> CreateContextAsync(Context context) => CreateDataAsync<Context>(context);
+        public Task<IApiResponse<CustomActivity>> CreateCustomActivityAsync(CustomActivity customActivity) => CreateDataAsync<CustomActivity>(customActivity);
+        public Task<IApiResponse<CustomField>> CreateCustomFieldAsync(CustomField customField) => CreateDataAsync<CustomField>(customField);
+        public Task<IApiResponse<CustomRule>> CreateCustomRuleAsync(CustomRule customRule) => CreateDataAsync<CustomRule>(customRule);
+        public Task<IApiResponse<EntityState>> CreateEntityStateAsync(EntityState entityState) => CreateDataAsync<EntityState>(entityState);
+        public Task<IApiResponse<EntityType>> CreateEntityTypeAsync(EntityType entityType) => CreateDataAsync<EntityType>(entityType);
+        public Task<IApiResponse<Epic>> CreateEpicAsync(Epic epic) => CreateDataAsync<Epic>(epic);
+        public Task<IApiResponse<Feature>> CreateFeatureAsync(Feature feature) => CreateDataAsync<Feature>(feature);
+        public Task<IApiResponse<General>> CreateGeneralAsync(General general) => CreateDataAsync<General>(general);
+        public Task<IApiResponse<GeneralFollower>> CreateGeneralFollowerAsync(GeneralFollower generalFollower) => CreateDataAsync<GeneralFollower>(generalFollower);
+        public Task<IApiResponse<GeneralUser>> CreateGeneralUserAsync(GeneralUser generalUser) => CreateDataAsync<GeneralUser>(generalUser);
+        public Task<IApiResponse<GlobalSettings>> CreateGlobalSettingAsync(GlobalSettings globalSettings) => CreateDataAsync<GlobalSettings>(globalSettings);
+        public Task<IApiResponse<Impediment>> CreateImpedimentAsync(Impediment impediment) => CreateDataAsync<Impediment>(impediment);
+        public Task<IApiResponse<InboundAssignable>> CreateInboundAssignableAsync(InboundAssignable inboundAssignable) => CreateDataAsync<InboundAssignable>(inboundAssignable);
+        public Task<IApiResponse<Iteration>> CreateIterationAsync(Iteration iteration) => CreateDataAsync<Iteration>(iteration);
+        public Task<IApiResponse<Message>> CreateMessageAsync(Message message) => CreateDataAsync<Message>(message);
+        public Task<IApiResponse<MessageUniqueId>> CreateMessageUniqueIdAsync(MessageUniqueId messageUniqueId) => CreateDataAsync<MessageUniqueId>(messageUniqueId);
+        public Task<IApiResponse<Milestone>> CreateMilestoneAsync(Milestone milestone) => CreateDataAsync<Milestone>(milestone);
+        public Task<IApiResponse<OutboundAssignable>> CreateOutboundAssignableAsync(OutboundAssignable outboundAssignable) => CreateDataAsync<OutboundAssignable>(outboundAssignable);
+        public Task<IApiResponse<Priority>> CreatePriorityAsync(Priority priority) => CreateDataAsync<Priority>(priority);
+        public Task<IApiResponse<Process>> CreateProcessAsync(Process process) => CreateDataAsync<Process>(process);
+        public Task<IApiResponse<Program>> CreateProgramAsync(Program program) => CreateDataAsync<Program>(program);
+        public Task<IApiResponse<Project>> CreateProjectAsync(Project project) => CreateDataAsync<Project>(project);
+        public Task<IApiResponse<ProjectAllocation>> CreateProjectAllocationAsync(ProjectAllocation projectAllocation) => CreateDataAsync<ProjectAllocation>(projectAllocation);
+        public Task<IApiResponse<ProjectMember>> CreateProjectMemberAsync(ProjectMember projectMember) => CreateDataAsync<ProjectMember>(projectMember);
+        public Task<IApiResponse<Relation>> CreateRelationAsync(Relation relation) => CreateDataAsync<Relation>(relation);
+        public Task<IApiResponse<RelationType>> CreateRelationTypeAsync(RelationType relationType) => CreateDataAsync<RelationType>(relationType);
+        public Task<IApiResponse<Release>> CreateReleaseAsync(Release release) => CreateDataAsync<Release>(release);
+        public Task<IApiResponse<ReleaseProject>> CreateReleaseProjectAsync(ReleaseProject releaseProject) => CreateDataAsync<ReleaseProject>(releaseProject);
+        public Task<IApiResponse<Request>> CreateRequestAsync(Request request) => CreateDataAsync<Request>(request);
+        public Task<IApiResponse<Requester>> CreateRequesterAsync(Requester requester) => CreateDataAsync<Requester>(requester);
+        public Task<IApiResponse<RequestType>> CreateRequestTypeAsync(RequestType requestType) => CreateDataAsync<RequestType>(requestType);
+        public Task<IApiResponse<Revision>> CreateRevisionAsync(Revision revision) => CreateDataAsync<Revision>(revision);
+        public Task<IApiResponse<RevisionFile>> CreateRevisionFileAsync(RevisionFile revisionFile) => CreateDataAsync<RevisionFile>(revisionFile);
+        public Task<IApiResponse<Role>> CreateRoleAsync(Role role) => CreateDataAsync<Role>(role);
+        public Task<IApiResponse<RoleEffort>> CreateRoleEffortAsync(RoleEffort roleEffort) => CreateDataAsync<RoleEffort>(roleEffort);
+        public Task<IApiResponse<Severity>> CreateSeverityAsync(Severity severity) => CreateDataAsync<Severity>(severity);
+        public Task<IApiResponse<Tag>> CreateTagAsync(Tag tag) => CreateDataAsync<Tag>(tag);
+        public Task<IApiResponse<Task>> CreateTaskAsync(Task task) => CreateDataAsync<Task>(task);
+        public Task<IApiResponse<Team>> CreateTeamAsync(Team team) => CreateDataAsync<Team>(team);
+        public Task<IApiResponse<TeamAssignment>> CreateTeamAssignmentAsync(TeamAssignment teamAssignment) => CreateDataAsync<TeamAssignment>(teamAssignment);
+        public Task<IApiResponse<TeamIteration>> CreateTeamIterationAsync(TeamIteration teamIteration) => CreateDataAsync<TeamIteration>(teamIteration);
+        public Task<IApiResponse<TeamMember>> CreateTeamMemberAsync(TeamMember teamMember) => CreateDataAsync<TeamMember>(teamMember);
+        public Task<IApiResponse<TeamProject>> CreateTeamProjectAsync(TeamProject teamProject) => CreateDataAsync<TeamProject>(teamProject);
+        public Task<IApiResponse<TeamProjectAllocation>> CreateTeamProjectAllocationAsync(TeamProjectAllocation teamProjectAllocation) => CreateDataAsync<TeamProjectAllocation>(teamProjectAllocation);
+        public Task<IApiResponse<Term>> CreateTermAsync(Term term) => CreateDataAsync<Term>(term);
+        public Task<IApiResponse<TestCase>> CreateTestCaseAsync(TestCase testCase) => CreateDataAsync<TestCase>(testCase);
+        public Task<IApiResponse<TestCaseRun>> CreateTestCaseRunAsync(TestCaseRun testCaseRun) => CreateDataAsync<TestCaseRun>(testCaseRun);
+        public Task<IApiResponse<TestPlan>> CreateTestPlanAsync(TestPlan testPlan) => CreateDataAsync<TestPlan>(testPlan);
+        public Task<IApiResponse<TestPlanRun>> CreateTestPlanRunAsync(TestPlanRun testPlanRun) => CreateDataAsync<TestPlanRun>(testPlanRun);
+        public Task<IApiResponse<TestRunItemHierarchyLink>> CreateTestRunItemHierarchyLinkAsync(TestRunItemHierarchyLink testRunItemHierarchyLink) => CreateDataAsync<TestRunItemHierarchyLink>(testRunItemHierarchyLink);
+        public Task<IApiResponse<TestStep>> CreateTestStepAsync(TestStep testStep) => CreateDataAsync<TestStep>(testStep);
+        public Task<IApiResponse<TestStepRun>> CreateTestStepRunAsync(TestStepRun testStepRun) => CreateDataAsync<TestStepRun>(testStepRun);
+        public Task<IApiResponse<Time>> CreateTimeAsync(Time time) => CreateDataAsync<Time>(time);
+        public Task<IApiResponse<User>> CreateUserAsync(User user) => CreateDataAsync<User>(user);
+        public Task<IApiResponse<UserProjectAllocation>> CreateUserProjectAllocationAsync(UserProjectAllocation userProjectAllocation) => CreateDataAsync<UserProjectAllocation>(userProjectAllocation);
+        public Task<IApiResponse<UserStory>> CreateUserStoryAsync(UserStory userStory) => CreateDataAsync<UserStory>(userStory);
+        public Task<IApiResponse<Workflow>> CreateWorkflowAsync(Workflow workflow) => CreateDataAsync<Workflow>(workflow);
+
+        #endregion
     }
 }

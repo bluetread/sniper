@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.ExtendedContexts 
-{ 
-    public class ExtendedContextTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.ExtendedContexts
+{
+    public class CreateExtendedContextTests
+    { 
         [Fact] 
         public void ExtendedContextThrowsError() 
         { 

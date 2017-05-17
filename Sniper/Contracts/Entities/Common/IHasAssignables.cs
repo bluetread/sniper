@@ -1,5 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using Sniper.Common;
+﻿using Sniper.Common;
+using System.Collections.ObjectModel;
 
 namespace Sniper.Contracts.Entities.Common
 {

@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.RelationTypes 
-{ 
-    public class RelationTypeTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.RelationTypes
+{
+    public class CreateRelationTypeTests
+    { 
         [Fact] 
         public void RelationTypeThrowsError() 
         { 

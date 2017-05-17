@@ -1,13 +1,12 @@
-using System;
 using Sniper.Common;
 using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.Times 
-{ 
-    public class TimeTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.Times
+{
+    public class CreateTimeTests
+    { 
         [Fact] 
         public void TimeThrowsError() 
         { 

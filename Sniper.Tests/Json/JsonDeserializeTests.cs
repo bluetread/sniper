@@ -1,8 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Sniper.Common;
+using System.Collections.ObjectModel;
 using Xunit;
-
 using static Sniper.Tests.TestDataConstants;
 namespace Sniper.Tests.Json
 {
@@ -24,7 +23,7 @@ namespace Sniper.Tests.Json
         public void DeserializeObjectReturnedFromRead()
         {
             var data = StringExtensions.ConvertSingleQuotedJson(SingleQuotedJson.UserStoryFromReadResult);
-            var result = JsonConvert.DeserializeObject<TargetProcessResponseWrapper<UserStory>>(
+            var result = JsonConvert.DeserializeObject<TargetProcessReadResponseWrapper<UserStory>>(
                 data, JsonHelpers.DefaultSerializerSettings).Items;
             Assert.NotNull(result);
             Assert.IsType<Collection<UserStory>>(result);

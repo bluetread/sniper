@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.TestSteps 
-{ 
-    public class TestStepTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.TestSteps
+{
+    public class CreateTestStepTests
+    { 
         [Fact] 
         public void TestStepThrowsError() 
         { 

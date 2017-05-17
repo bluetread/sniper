@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.Tags 
-{ 
-    public class TagTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.Tags
+{
+    public class CreateTagTests
+    { 
         [Fact] 
         public void TagThrowsError() 
         { 

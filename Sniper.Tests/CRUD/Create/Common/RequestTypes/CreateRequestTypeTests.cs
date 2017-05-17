@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.RequestTypes 
-{ 
-    public class RequestTypeTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.RequestTypes
+{
+    public class CreateRequestTypeTests
+    { 
         [Fact] 
         public void RequestTypeThrowsError() 
         { 

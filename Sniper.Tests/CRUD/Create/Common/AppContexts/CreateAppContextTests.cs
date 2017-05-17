@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Sniper.Tests.CRUD.Create.Common.AppContexts
 {
-    public class AppContextTests
+    public class CreateAppContextTests
     {
         [Fact]
         public void AppContextThrowsError()

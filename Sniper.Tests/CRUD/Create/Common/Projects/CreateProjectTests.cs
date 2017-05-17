@@ -1,25 +1,13 @@
-using System;
 using Sniper.Common;
 using Sniper.Http;
 using Sniper.TargetProcess.Routes;
+using System;
 using Xunit;
 
 namespace Sniper.Tests.CRUD.Create.Common.Projects
 {
-    public class ProjectTests
+    public class CreateProjectTests
     {
-        [Fact]
-        public void ProjectThrowsError()
-        {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Projects)
-            };
-            var project = new Project
-            {
-            };
-        }
-
         [Fact]
         public void CreateProjectWithoutNameThrowsError()
         {

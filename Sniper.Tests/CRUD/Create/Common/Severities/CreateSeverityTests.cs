@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.Severities 
-{ 
-    public class SeverityTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.Severities
+{
+    public class CreateSeverityTests
+    { 
         [Fact] 
         public void SeverityThrowsError() 
         { 

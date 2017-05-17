@@ -2,8 +2,8 @@
 using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;
-using static Sniper.TargetProcess.Common.Enumerations;
 using static Sniper.CustomAttributes.CustomAttributes;
+using static Sniper.TargetProcess.Common.Enumerations;
 
 namespace Sniper.Common
 {

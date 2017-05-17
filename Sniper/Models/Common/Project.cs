@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Sniper.Application;
 using Sniper.Contracts.Entities.Common;
 using System;
 using System.Collections.ObjectModel;

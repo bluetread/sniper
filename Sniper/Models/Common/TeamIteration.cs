@@ -1,5 +1,5 @@
-﻿using Sniper.Application;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using static Sniper.CustomAttributes.CustomAttributes;
 
 namespace Sniper.Common

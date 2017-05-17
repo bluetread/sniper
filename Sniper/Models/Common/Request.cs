@@ -1,8 +1,8 @@
-﻿using Sniper.Application;
+﻿using Newtonsoft.Json;
+using Sniper.Application;
 using Sniper.Contracts.Entities.History;
 using Sniper.History;
 using System.Collections.ObjectModel;
-using Newtonsoft.Json;
 using static Sniper.CustomAttributes.CustomAttributes;
 using static Sniper.TargetProcess.Common.Enumerations;
 

@@ -36,8 +36,8 @@ namespace Sniper
             {ResponseFormatKeys.ResultFormat, ResponseFormatKeys.Json }
         };
 
-        public TargetProcessClient() : this(true) {} 
-        
+        public TargetProcessClient() : this(true) { }
+
         public TargetProcessClient(bool useConfigHandler)
         {
             if (useConfigHandler)
@@ -122,6 +122,19 @@ namespace Sniper
             {
                 return HandleApiResponseExceptions<T>(exception);
             }
+        }
+
+        //TODO: This may need to change once the Include/Exclude is added
+        public IApiResponse<T> UpdateData<T>(Entity entity)
+        {
+            Ensure.ArgumentNotNull(nameof(entity), entity);
+            return CreateData<T>(entity);
+        }
+
+        public async Task<IApiResponse<T>> UpdateDataAsync<T>(Entity entity)
+        {
+            Ensure.ArgumentNotNull(nameof(entity), entity);
+            return await CreateDataAsync<T>(entity);
         }
 
         private ICollection<T> Convert<T>(string data)
@@ -224,7 +237,7 @@ namespace Sniper
         {
             Ensure.ArgumentNotNull(nameof(targetProcessClient), targetProcessClient);
             Ensure.ArgumentNotNull(nameof(targetProcessClient.ApiSiteInfo), targetProcessClient.ApiSiteInfo);
-            Ensure.ArgumentNotNull(nameof(targetProcessClient.AuthenticationHandler), 
+            Ensure.ArgumentNotNull(nameof(targetProcessClient.AuthenticationHandler),
                 targetProcessClient.AuthenticationHandler);
 
             var request = new ApiRequest
@@ -347,8 +360,8 @@ namespace Sniper
             if (!response.IsError) return VerifyEntityProperties(entity, crudFlags);
 
             response.Message = GetMessageForEntity(
-                entityType.GetCustomAttribute<CannotCreateReadUpdateDeleteAttribute>(false) == null 
-                    ? CRUD.CrudTypes.None 
+                entityType.GetCustomAttribute<CannotCreateReadUpdateDeleteAttribute>(false) == null
+                    ? CRUD.CrudTypes.None
                     : crudFlags);
 
             return response;
@@ -386,7 +399,7 @@ namespace Sniper
                 return CrudMessages.DeleteProhibited;
             }
 
-            return CrudMessages.UnknownError; 
+            return CrudMessages.UnknownError;
         }
 
         //TODO
@@ -445,7 +458,7 @@ namespace Sniper
             {
                 return VerifyEntityPropertiesForDelete(entity);
             }
-            return new RequiredDataResponse{IsError = true, Message = CrudMessages.UnknownError};
+            return new RequiredDataResponse { IsError = true, Message = CrudMessages.UnknownError };
         }
 
         //TODO: Break this up into smaller methods
@@ -481,8 +494,8 @@ namespace Sniper
                             var propertyType = entityType.GetProperty(item)?.PropertyType;
                             if (propertyType != null)
                             {
-                                if (propertyType == typeof(string) || 
-                                    propertyType.IsGenericType && 
+                                if (propertyType == typeof(string) ||
+                                    propertyType.IsGenericType &&
                                     propertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
                                 {
                                     isNullOrDefault = (subItemValue == null);

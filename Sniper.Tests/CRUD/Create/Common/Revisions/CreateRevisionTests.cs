@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.Revisions 
-{ 
-    public class RevisionTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.Revisions
+{
+    public class CreateRevisionTests
+    { 
         [Fact] 
         public void RevisionThrowsError() 
         { 

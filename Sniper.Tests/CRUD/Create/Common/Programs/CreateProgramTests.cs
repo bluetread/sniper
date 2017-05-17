@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.Programs 
-{ 
-    public class ProgramTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.Programs
+{
+    public class CreateProgramTests
+    { 
         [Fact] 
         public void ProgramThrowsError() 
         { 

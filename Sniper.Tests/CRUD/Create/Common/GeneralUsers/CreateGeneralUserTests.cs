@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.GeneralUsers 
-{ 
-    public class GeneralUserTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.GeneralUsers
+{
+    public class CreateGeneralUserTests
+    { 
         [Fact] 
         public void GeneralUserThrowsError() 
         { 

@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.EntityTypes 
-{ 
-    public class EntityTypeTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.EntityTypes
+{
+    public class CreateEntityTypeTests
+    { 
         [Fact] 
         public void EntityTypeThrowsError() 
         { 

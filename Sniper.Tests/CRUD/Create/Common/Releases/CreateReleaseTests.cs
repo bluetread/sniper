@@ -3,10 +3,10 @@ using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
-namespace Sniper.Tests.CRUD.Create.Common.Releases 
-{ 
-    public class ReleaseTests 
-     { 
+namespace Sniper.Tests.CRUD.Create.Common.Releases
+{
+    public class CreateReleaseTests
+    { 
         [Fact] 
         public void ReleaseThrowsError() 
         { 

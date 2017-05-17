@@ -1,7 +1,7 @@
-﻿using System;
-using Sniper.Common;
+﻿using Sniper.Common;
 using Sniper.Http;
 using Sniper.TargetProcess.Routes;
+using System;
 using Xunit;
 
 namespace Sniper.Tests.CRUD.Create.Common.UserStories

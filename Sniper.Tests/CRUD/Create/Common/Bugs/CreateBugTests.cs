@@ -15,9 +15,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Bugs
             {
                 ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Bugs)
             };
-            var bug = new Bug
-            {
-            };
+            var bug = new Bug();
             var data = client.CreateData<Bug>(bug);
 
             Assert.NotNull(data);

@@ -93,6 +93,43 @@ namespace Sniper
             }
         }
 
+        public IApiResponse<T> DeleteData<T>(int id)
+        {
+            Ensure.ArgumentNotNull(nameof(id), id);
+
+            var request = GetApiDeleteRequestFromEntityId<T>(this, id);
+            try
+            {
+                var response = ExecuteDeleteRequest<T>(request);
+                return new ApiResponse<T>(response);
+            }
+            catch (Exception exception)
+            {
+                return HandleApiResponseExceptions<T>(exception);
+            }
+        }
+
+        public async Task<IApiResponse<T>> DeleteDataAsync<T>(Entity entity)
+        {
+            Ensure.ArgumentNotNull(nameof(entity), entity);
+
+            var request = GetApiRequestFromEntity(this, entity, HttpMethod.Delete);
+            try
+            {
+                var response = await ExecuteDeleteRequestAsync<T>(request);
+                return new ApiResponse<T>(new HttpResponse(response.StatusCode, response.Data));
+            }
+            catch (Exception exception)
+            {
+                return HandleApiResponseExceptions<T>(exception);
+            }
+        }
+
+        public IApiResponse<string> GetData()
+        {
+            return null;
+        }
+
         [SuppressMessage(Categories.Design, MessageAttributes.DoNotCatchGeneralExceptionTypes)]
         public IApiResponse<T> GetData<T>()
         {
@@ -140,7 +177,58 @@ namespace Sniper
         private ICollection<T> Convert<T>(string data)
         {
             Ensure.ArgumentNotNullOrEmptyString(nameof(data), data);
-            return JsonConvert.DeserializeObject<TargetProcessResponseWrapper<T>>(data, JsonHelpers.DefaultSerializerSettings).Items;
+            ICollection<T> result;
+            try
+            {
+                result = JsonConvert.DeserializeObject<TargetProcessReadResponseWrapper<T>>(data, JsonHelpers.DefaultSerializerSettings).Items;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            return result;
+        }
+
+        //private ICollection<T> ConvertDeleteResponse<T>(string data)
+        //{
+        //    Ensure.ArgumentNotNullOrEmptyString(nameof(data), data);
+        //    var result = JsonConvert.DeserializeObject<TargetProcessDeleteResponseWrapper>(data, JsonHelpers.DefaultSerializerSettings).Id;
+
+        //    return new Collection<T> { (T)result };
+        //}
+
+        protected IHttpResponse ExecuteDeleteRequest<T>(IApiRequest apiRequest)
+        {
+            Ensure.ArgumentNotNull(nameof(apiRequest), apiRequest);
+            try
+            {
+                using (var client = new HttpClientAdapter())
+                {
+                    var response = client.DeleteData(apiRequest);
+                    return GetResponseData<T>(response, CRUD.CrudTypes.Delete);
+                }
+            }
+            catch (Exception exception)
+            {
+                return HandleHttpResponseExceptions(exception);
+            }
+        }
+
+        protected async Task<IHttpResponse> ExecuteDeleteRequestAsync<T>(IApiRequest apiRequest)
+        {
+            Ensure.ArgumentNotNull(nameof(apiRequest), apiRequest);
+            try
+            {
+                using (var client = new HttpClientAdapter())
+                {
+                    var response = await client.DeleteDataAsync(apiRequest);
+                    return GetResponseData<T>(response, CRUD.CrudTypes.Delete);
+                }
+            }
+            catch (Exception exception)
+            {
+                return HandleHttpResponseExceptions(exception);
+            }
         }
 
         protected IHttpResponse ExecuteGetRequest<T>(IApiRequest apiRequest)
@@ -214,6 +302,12 @@ namespace Sniper
         protected IHttpResponse GetResponseData<T>(IHttpResponse response, CRUD.CrudTypes crudFlags)
         {
             Ensure.ArgumentNotNull(nameof(response), response);
+
+            if (response.IsError)
+            {
+                return response;
+            }
+
             Ensure.ArgumentNotNull(nameof(response.Data), response.Data);
 
             string data = (string)response.Data;
@@ -222,14 +316,33 @@ namespace Sniper
             if (typeof(T) == typeof(string))
                 return new HttpResponse(HttpStatusCode.OK, data, response.ResponseHeaders);
 
-            if (crudFlags.HasFlag(CRUD.CrudTypes.Create))
+            if (crudFlags.HasFlag(CRUD.CrudTypes.Create) || crudFlags.HasFlag(CRUD.CrudTypes.Delete))
             {
-                return new HttpResponse(HttpStatusCode.OK, JsonConvert.DeserializeObject<T>(
-                    data, JsonHelpers.DefaultSerializerSettings), response.ResponseHeaders);
+                var converted = JsonConvert.DeserializeObject<T>(data, JsonHelpers.DefaultSerializerSettings);
+                return new HttpResponse(HttpStatusCode.OK, converted, response.ResponseHeaders);
             }
 
             // Default Read
             return new HttpResponse(HttpStatusCode.OK, Convert<T>(data), response.ResponseHeaders);
+        }
+
+        private static IApiRequest GetApiDeleteRequestFromEntityId<T>(ITargetProcessClient targetProcessClient, int id)
+        {
+            Ensure.ArgumentNotNull(nameof(id), id);
+            Ensure.ArgumentNotNull(nameof(targetProcessClient), targetProcessClient);
+            Ensure.ArgumentNotNull(nameof(targetProcessClient.ApiSiteInfo), targetProcessClient.ApiSiteInfo);
+            Ensure.ArgumentNotNull(nameof(targetProcessClient.AuthenticationHandler), targetProcessClient.AuthenticationHandler);
+            var request = new ApiRequest
+            {
+                AuthenticationHandler = targetProcessClient.AuthenticationHandler,
+                BaseAddress = GetFullPath(targetProcessClient, HttpMethod.Delete, id),
+                Data = null,
+                Method = HttpMethod.Delete,
+                Parameters = targetProcessClient.DefaultQueryParameters,
+                Route = GetRouteText<T>(id)
+            };
+
+            return request;
         }
 
         private static IApiRequest GetApiRequestFromEntity(
@@ -253,7 +366,7 @@ namespace Sniper
             return request;
         }
 
-        private static Uri GetFullPath(ITargetProcessClient targetProcessClient, HttpMethod httpMethod)
+        private static Uri GetFullPath(ITargetProcessClient targetProcessClient, HttpMethod httpMethod, int id = 0)
         {
             Ensure.ArgumentNotNull(nameof(targetProcessClient), targetProcessClient);
             Ensure.ArgumentNotNull(nameof(targetProcessClient.AuthenticationHandler),
@@ -267,6 +380,11 @@ namespace Sniper
                 targetProcessClient.AuthenticationHandler.SiteInfo.ApiUrl,
                 targetProcessClient.ApiSiteInfo.Route);
 
+            if (httpMethod == HttpMethod.Delete && id > 0)
+            {
+                fullPath = ApiSiteHelpers.CombineUrlPaths(fullPath, id.ToString());
+            }
+
 #if ToDoLaterIfNeeded
             var excludeList = targetProcessClient.ApiSiteInfo.IsInclude
                 ? new List<string>()
@@ -277,6 +395,7 @@ namespace Sniper
                 : new List<string>();
 #endif
             var customFilter = targetProcessClient.ApiSiteInfo.CustomFilter;
+
 
             var dictList = new[]
             {
@@ -315,6 +434,14 @@ namespace Sniper
             if (entity == null) return string.Empty;
 
             return TargetProcessHelpers.ResourceTypeRoutes.TryGetValue(entity.GetType(),
+                out TargetProcessRoutes.Route route) ? route.ToLowerCase() : string.Empty;
+        }
+
+        private static string GetRouteText<T>(int id)
+        {
+            if (id <= 0) return string.Empty;
+
+            return TargetProcessHelpers.ResourceTypeRoutes.TryGetValue(typeof(T),
                 out TargetProcessRoutes.Route route) ? route.ToLowerCase() : string.Empty;
         }
 
@@ -401,13 +528,13 @@ namespace Sniper
 
             return CrudMessages.UnknownError;
         }
-
+#if TODO
         //TODO
         private static bool VerifyEntityAdminRights<T>(CRUD.CrudTypes crudFlags)
         {
             return true;
         }
-
+#endif
         private static bool VerifyEntity<T>(CRUD.CrudTypes crudFlags)
         {
             var entityType = typeof(T);

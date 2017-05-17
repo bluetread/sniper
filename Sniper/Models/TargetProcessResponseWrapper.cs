@@ -2,8 +2,14 @@
 
 namespace Sniper
 {
-    public class TargetProcessResponseWrapper<T>
+    public class TargetProcessReadResponseWrapper<T>
     {
         public Collection<T> Items { get; set; }
+    }
+
+    public class TargetProcessDeleteResponseWrapper
+    {
+        public string ResourceType { get; set; }
+        public int Id { get; set; }
     }
 }

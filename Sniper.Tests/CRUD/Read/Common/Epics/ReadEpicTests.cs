@@ -42,7 +42,7 @@ namespace Sniper.Tests.CRUD.Read.Common.Epics
         }
 
         [Fact]
-        public void CreateEpicithMinimumDataSucceeds()
+        public void CreateEpicWithMinimumDataSucceeds()
         {
             var client = new TargetProcessClient
             {

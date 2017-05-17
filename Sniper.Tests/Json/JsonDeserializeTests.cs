@@ -23,7 +23,7 @@ namespace Sniper.Tests.Json
         public void DeserializeObjectReturnedFromRead()
         {
             var data = StringExtensions.ConvertSingleQuotedJson(SingleQuotedJson.UserStoryFromReadResult);
-            var result = JsonConvert.DeserializeObject<TargetProcessResponseWrapper<UserStory>>(
+            var result = JsonConvert.DeserializeObject<TargetProcessReadResponseWrapper<UserStory>>(
                 data, JsonHelpers.DefaultSerializerSettings).Items;
             Assert.NotNull(result);
             Assert.IsType<Collection<UserStory>>(result);

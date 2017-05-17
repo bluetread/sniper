@@ -2,6 +2,7 @@
 using Sniper.Types;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -54,6 +55,44 @@ namespace Sniper.Http
             Dispose(false);
         }
 
+        public IHttpResponse DeleteData(IApiRequest request)
+        {
+            Ensure.ArgumentNotNull(nameof(request), request);
+
+            using (var client = new WebClient())
+            {
+                client.BaseAddress = request.BaseAddress.ToString();
+                client.Credentials = request.AuthenticationHandler.NetworkCredentials;
+                try
+                {
+                    var byteArray = client.UploadValues(client.BaseAddress, HttpMethod.Delete.Method, new NameValueCollection());
+                    var result = Encoding.UTF8.GetString(byteArray);
+                    return new HttpResponse(HttpStatusCode.OK, result);
+                }
+                catch (WebException webException)
+                {
+                    var code = (webException.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
+                    return new HttpResponse(code, webException);
+                }
+                catch (Exception e)
+                {
+                    return new HttpResponse(e);
+                }
+            }
+        }
+
+        public async Task<IHttpResponse> DeleteDataAsync(IApiRequest request)
+        {
+            Ensure.ArgumentNotNull(nameof(request), request);
+
+            using (var requestMessage = BuildRequestMessage(request))
+            {
+                using (var httpResponseMessage = await GetResponseMessageForDeleteAsync(requestMessage, CancellationToken.None))
+                {
+                    return await BuildResponseAsync(httpResponseMessage).ConfigureAwait(false);
+                }
+            }
+        }
         /// <summary>
         /// Sends the specified request and returns a response.
         /// </summary>
@@ -372,6 +411,22 @@ namespace Sniper.Http
                                            DefaultBinaryContentTypes.Any(λ => λ.Equals(contentType, StringComparison.OrdinalIgnoreCase)));
         }
 
+        private async Task<HttpResponseMessage> GetResponseMessageForDeleteAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken)
+        {
+            Ensure.ArgumentNotNull(nameof(requestMessage), requestMessage);
+            try
+            {
+                var address = requestMessage.RequestUri;
+                var responseMessage = await _httpClient.DeleteAsync(address, cancellationToken);
+                return responseMessage;
+            }
+            catch (Exception exception)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+
+
         private async Task<HttpResponseMessage> GetResponseMessageForGetAsync(HttpRequestMessage requestMessage, CancellationToken cancellationToken)
         {
             Ensure.ArgumentNotNull(nameof(requestMessage), requestMessage);
@@ -384,7 +439,6 @@ namespace Sniper.Http
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
-
         }
 
         private async Task<HttpResponseMessage> GetResponseMessageForPostAsync(HttpRequestMessage requestMessage, IApiRequest request)

@@ -84,7 +84,7 @@ namespace Sniper
             var request = GetApiRequestFromEntity(this, entity, HttpMethod.Post);
             try
             {
-                var response = await ExecuteGetRequestAsync<T>(request);
+                var response = await ExecutePostRequestAsync<T>(request);
                 return new ApiResponse<T>(new HttpResponse(response.StatusCode, response.Data));
             }
             catch (Exception exception)

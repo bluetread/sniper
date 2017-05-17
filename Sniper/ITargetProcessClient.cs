@@ -1,5 +1,6 @@
 ﻿using Sniper.Http;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Sniper
 {
@@ -13,7 +14,14 @@ namespace Sniper
 
         IApiSiteInfo ApiSiteInfo { get; }
 
+        IApiResponse<T> CreateData<T>(Entity entity);
+        Task<IApiResponse<T>> CreateDataAsync<T>(Entity entity);
+        IApiResponse<T> DeleteData<T>(int id);
+        Task<IApiResponse<T>> DeleteDataAsync<T>(Entity entity);
         IApiResponse<T> GetData<T>();
+        Task<IApiResponse<T>> GetDataAsync<T>();
+        IApiResponse<T> UpdateData<T>(Entity entity);
+        Task<IApiResponse<T>> UpdateDataAsync<T>(Entity entity);
 
         IAuthenticationHandler AuthenticationHandler { get; }
     }

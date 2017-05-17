@@ -118,25 +118,5 @@ namespace Sniper.Tests.CRUD.Create.Common.UserStories
             Assert.False(data.HttpResponse.IsError);
 
         }
-
-        //[Fact]
-        //public void CreateUserStoryAddsData()
-        //{
-        //    var client = new TargetProcessClient
-        //    {
-        //        ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
-        //    };
-
-        //    var story = new UserStory
-        //    {
-        //        Name = "Sample Create From Code Story",
-        //        Feature = new Feature { Id = 203 },
-        //        Project = new Project()
-        //    };
-
-        //    var data = client.CreateData<UserStory>(story);
-        //    Assert.NotNull(data);
-        //    Assert.False(data.HttpResponse.IsError);
-        //}
     }
 }

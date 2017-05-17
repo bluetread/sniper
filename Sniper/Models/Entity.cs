@@ -9,6 +9,6 @@ namespace Sniper
         public virtual int? Id { get; set; }
 
         [JsonIgnore, JsonProperty(Required = Required.Default)]
-        public virtual string ResourceType { get; private set; }
+        public virtual string ResourceType { get; internal set; }
     }
 }

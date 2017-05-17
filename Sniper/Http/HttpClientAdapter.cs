@@ -111,6 +111,11 @@ namespace Sniper.Http
                     var result = client.DownloadString(client.BaseAddress);
                     return new HttpResponse(HttpStatusCode.OK, result);
                 }
+                catch (WebException webException)
+                {
+                    var code = (webException.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
+                    return new HttpResponse(code, webException);
+                }
                 catch (Exception e)
                 {
                     return new HttpResponse(e);
@@ -420,7 +425,12 @@ namespace Sniper.Http
                 var responseMessage = await _httpClient.DeleteAsync(address, cancellationToken);
                 return responseMessage;
             }
-            catch (Exception exception)
+            catch (WebException webException)
+            {
+                var code = (webException.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
+                return new HttpResponseMessage(code);
+            }
+            catch (Exception)
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
@@ -435,7 +445,12 @@ namespace Sniper.Http
                 var responseMessage = await _httpClient.SendAsync(requestMessage, cancellationToken);
                 return responseMessage;
             }
-            catch (Exception exception)
+            catch (WebException webException)
+            {
+                var code = (webException.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
+                return new HttpResponseMessage(code);
+            }
+            catch (Exception)
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
@@ -464,7 +479,12 @@ namespace Sniper.Http
                 return responseMessage;
 
             }
-            catch (Exception exception) //TODO:
+            catch (WebException webException)
+            {
+                var code = (webException.Response as HttpWebResponse)?.StatusCode ?? HttpStatusCode.InternalServerError;
+                return new HttpResponseMessage(code);
+            }
+            catch (Exception)
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }

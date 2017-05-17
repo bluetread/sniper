@@ -35,7 +35,7 @@ namespace Sniper.Common
 
         [JsonProperty(Required = Required.Default)]
         public virtual DateTime? LastCommentDate { get; set; }
-        
+
         [JsonProperty(Required = Required.Default)]
         public virtual double NumericPriority { get; set; }
 

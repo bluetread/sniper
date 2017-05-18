@@ -236,6 +236,7 @@
     <Compile Include="Http\ISiteInfo.cs" />
     <Compile Include="Http\HttpResponse.cs" />
     <Compile Include="Models\Entity.cs" />
+    <Compile Include="Models\TargetProcessUndeleteModel.cs" />
     <Compile Include="TargetProcess\Common\StatusCodes.cs" />
     <Compile Include="ITargetProcessClient.cs" />
     <Compile Include="Models\Authentication\User.cs" />

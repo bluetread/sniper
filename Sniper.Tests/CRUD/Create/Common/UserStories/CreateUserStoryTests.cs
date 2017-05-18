@@ -1,5 +1,4 @@
 ﻿using Sniper.Common;
-using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using System;
 using Xunit;
@@ -11,10 +10,7 @@ namespace Sniper.Tests.CRUD.Create.Common.UserStories
         [Fact]
         public void CreateUserStoryWithoutDataThrowsError()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.UserStories);
 
             var story = new UserStory();
             var data = client.CreateData<UserStory>(story);
@@ -26,10 +22,7 @@ namespace Sniper.Tests.CRUD.Create.Common.UserStories
         [Fact]
         public void CreateUserStoryWithOnlyNameThrowsError()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.UserStories);
 
             var story = new UserStory
             {
@@ -44,10 +37,7 @@ namespace Sniper.Tests.CRUD.Create.Common.UserStories
         [Fact]
         public void CreateUserStoryWithNameAndProjectWithoutIdThrowsError()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.UserStories);
 
             var story = new UserStory
             {
@@ -64,10 +54,7 @@ namespace Sniper.Tests.CRUD.Create.Common.UserStories
         [Fact]
         public void CreateUserStoryWithNameAndInvalidProjectIdThrowsError()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.UserStories);
 
             var story = new UserStory
             {
@@ -84,10 +71,7 @@ namespace Sniper.Tests.CRUD.Create.Common.UserStories
         [Fact]
         public void CreateUserStoryWithNameAndNewProjectWithNameMinimumFieldsSucceeds()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.UserStories);
 
             var story = new UserStory
             {
@@ -103,10 +87,7 @@ namespace Sniper.Tests.CRUD.Create.Common.UserStories
         [Fact]
         public void CreateUserStoryWithNameAndProjectWithIdMinimumFieldsSucceeds()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.UserStories)
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.UserStories);
 
             var story = new UserStory
             {

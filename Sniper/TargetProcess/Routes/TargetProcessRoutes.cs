@@ -80,6 +80,7 @@ namespace Sniper.TargetProcess.Routes
             TestSteps,
             TestStepRuns,
             Times,
+            Undelete,
             Users,
             UserProjectAllocations,
             UserStories,

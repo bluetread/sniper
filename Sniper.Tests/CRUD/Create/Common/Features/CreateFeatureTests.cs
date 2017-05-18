@@ -1,5 +1,4 @@
 using Sniper.Common;
-using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using System;
 using Xunit;
@@ -11,10 +10,8 @@ namespace Sniper.Tests.CRUD.Create.Common.Features
         [Fact]
         public void CreateFeatureWithoutNameThrowsError()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Features)
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Features);
+
             var feature = new Feature();
             var data = client.CreateData<Feature>(feature);
 
@@ -25,10 +22,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Features
         [Fact]
         public void CreateFeatureWithNameButNoProjectIdFails()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Features)
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Features);
             var feature = new Feature
             {
                 Name = $"Sample Feature From Code - {DateTime.Now}"
@@ -43,10 +37,8 @@ namespace Sniper.Tests.CRUD.Create.Common.Features
         [Fact]
         public void CreateFeatureWithNameAndProjectIdSucceeds()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Features)
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Features);
+
             var feature = new Feature
             {
                 Name = $"Sample Feature From Code - {DateTime.Now}",

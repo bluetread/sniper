@@ -93,6 +93,7 @@
     <Compile Include="Authentication\CredentialsTests.cs" />
     <Compile Include="Authentication\ServiceTokenAuthenticationTests.cs" />
     <Compile Include="Configuration\ConfigurationTests.cs" />
+    <Compile Include="CRUD\CommonMethods.cs" />
     <Compile Include="CRUD\Create\Common\AppContexts\CreateAppContextTests.cs" />
     <Compile Include="CRUD\Create\Common\Assignables\CreateAssignableTests.cs" />
     <Compile Include="CRUD\Create\Common\AssignedEfforts\CreateAssignedEffortTests.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="CRUD\Create\Common\UserStories\CreateUserStoryTests.cs" />
     <Compile Include="CRUD\Create\Common\Users\CreateUserTests.cs" />
     <Compile Include="CRUD\Create\Common\Workflows\CreateWorkflowTests.cs" />
+    <Compile Include="CRUD\Create\CreateCommonMethods.cs" />
     <Compile Include="CRUD\Create\CreateTests.cs" />
     <Compile Include="CRUD\Delete\Common\AppContexts\AppContextTests.cs" />
     <Compile Include="CRUD\Delete\Common\Assignables\DeleteDeleteAssignableTests.cs" />
@@ -311,6 +313,7 @@
     <Compile Include="CRUD\Read\Common\Users\ReadUserTests.cs" />
     <Compile Include="CRUD\Read\Common\Workflows\ReadWorkflowTests.cs" />
     <Compile Include="CRUD\Read\ReadTests.cs" />
+    <Compile Include="CRUD\Undelete\UndeleteTests.cs" />
     <Compile Include="CRUD\Update\Common\AppContexts\UpdateAppContextTests.cs" />
     <Compile Include="CRUD\Update\Common\Assignables\UpdateAssignableTests.cs" />
     <Compile Include="CRUD\Update\Common\AssignedEfforts\UpdateAssignedEffortTests.cs" />

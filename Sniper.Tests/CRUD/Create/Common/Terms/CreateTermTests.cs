@@ -1,22 +1,17 @@
 using Sniper.Common;
-using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
 namespace Sniper.Tests.CRUD.Create.Common.Terms
 {
     public class CreateTermTests
-    { 
-        [Fact] 
-        public void TermThrowsError() 
-        { 
-            var client = new TargetProcessClient 
-            { 
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Terms) 
-            }; 
-            var term = new Term 
-            { 
-            }; 
-        } 
-    } 
-} 
+    {
+        [Fact]
+        public void TermThrowsError()
+        {
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Terms);
+
+            var term = new Term();
+        }
+    }
+}

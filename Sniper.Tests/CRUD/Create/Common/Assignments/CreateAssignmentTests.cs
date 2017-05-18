@@ -1,22 +1,52 @@
+﻿using Sniper.Application;
 using Sniper.Common;
-using Sniper.Http;
 using Sniper.TargetProcess.Routes;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Sniper.Tests.CRUD.Create.Common.Assignments
 {
     public class CreateAssignmentTests
-    { 
-        [Fact] 
-        public void AssignmentThrowsError() 
-        { 
-            var client = new TargetProcessClient 
-            { 
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Assignments) 
-            }; 
-            var assignment = new Assignment 
-            { 
-            }; 
-        } 
-    } 
-} 
+    {
+        [Fact]
+        public void CreateAssignmentWithoutRequiredFieldsThrowsError()
+        {
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Assignments);
+
+            var assignment = new Assignment();
+            var data = client.CreateData<Assignment>(assignment);
+
+            Assert.NotNull(data);
+            Assert.True(data.HttpResponse.IsError);
+
+            var exception = (SniperExceptions.RequiredPropertyException)data.HttpResponse.Exception;
+            var listOfMissingProperties = exception.RequiredDataResponse.MissingPropertyNames;
+            var compareList = new List<string> { JsonProperties.Assignable, JsonProperties.GeneralUser, JsonProperties.Role };
+            Assert.Equal(3, listOfMissingProperties.Count);
+
+            foreach (var item in listOfMissingProperties)
+            {
+                Assert.True(compareList.Contains(item));
+            }
+        }
+
+        [Fact] //TODO: Check this
+        public void CreateAssignmentWithRequiredFieldsSucceeds()
+        {
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Assignments);
+
+            var assignment = new Assignment
+            {
+                Assignable = new Assignable(),
+                GeneralUser = new User(),
+                Role = new Role()
+            };
+            var data = client.CreateData<Assignment>(assignment);
+
+            Assert.NotNull(data);
+            Assert.False(data.HttpResponse.IsError);
+
+
+        }
+    }
+}

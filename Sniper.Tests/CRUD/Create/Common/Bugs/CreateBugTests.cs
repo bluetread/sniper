@@ -1,5 +1,4 @@
 using Sniper.Common;
-using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using System;
 using Xunit;
@@ -11,10 +10,8 @@ namespace Sniper.Tests.CRUD.Create.Common.Bugs
         [Fact]
         public void CreateBugThrowsError()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Bugs)
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Bugs);
+
             var bug = new Bug();
             var data = client.CreateData<Bug>(bug);
 
@@ -26,10 +23,8 @@ namespace Sniper.Tests.CRUD.Create.Common.Bugs
         [Fact]
         public void CreateBugWithMinimumDataSucceeds()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Bugs)
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Bugs);
+
             var bug = new Bug
             {
                 Name = $"Sample Bug From Code - {DateTime.Now}",

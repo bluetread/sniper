@@ -11,10 +11,12 @@ namespace Sniper.Application
     public static class JsonProperties
     {
         public const string Allocation = "Allocation";
+        public const string Assignable = "Assignable";
         public const string Date = "Date";
         public const string Email = "Email";
         public const string EndDate = "EndDate";
         public const string EntityState = "EntityState";
+        public const string GeneralUser = "GeneralUser";
         public const string Id = "Id";
         public const string Login = "Login";
         public const string Name = "Name";
@@ -131,7 +133,7 @@ namespace Sniper.Http
             None,
             Create,
             Read,
-            Update, 
+            Update,
             Delete,
             All = Create | Read | Update | Delete
         }
@@ -180,7 +182,7 @@ namespace Sniper.Net
 
     public static class Security
     {
-        public static SecurityProtocolType DefaultSecurityProtocolType = 
+        public static SecurityProtocolType DefaultSecurityProtocolType =
             SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12 | SecurityProtocolType.Ssl3;
     }
 }
@@ -310,7 +312,7 @@ namespace Sniper.Types
         ///<summary>ZIP archive files; Registered[7]</summary>
         public const string ApplicationZip = "application/zip";
 
-        
+
     }
 }
 

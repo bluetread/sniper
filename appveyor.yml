@@ -1,11 +1,8 @@
-init:
-  - git config --global core.autocrlf input
-build_script:
-  - cmd: build.cmd BuildApp
-  - cmd: build.cmd UnitTests
-  - cmd: build.cmd ConventionTests
-  - cmd: build.cmd CreatePackages
+version: 1.0.{build}
+configuration: Release
+platform: Any CPU
+build:
+  publish_nuget: true
+  verbosity: minimal
 test: off
-artifacts:
-- path: 'packaging\sniper*.nupkg'
-  name: SniperPackages
+

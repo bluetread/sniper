@@ -21,10 +21,10 @@ namespace Sniper
         public IApiResponse<CustomField> GetCustomFields(int? id = null) => GetData<CustomField>(id);
         public IApiResponse<CustomRule> GetCustomRules(int? id = null) => GetData<CustomRule>(id);
         public IApiResponse<EntityState> GetEntityStates(int? id = null) => GetData<EntityState>(id);
-        public IApiResponse<EntityType> GetEntityTypes(int? id = null) => GetData<EntityType>(id);
+        // NOT ALLOWED GetEntityTypes //
         public IApiResponse<Epic> GetEpics(int? id = null) => GetData<Epic>(id);
         public IApiResponse<Feature> GetFeatures(int? id = null) => GetData<Feature>(id);
-        public IApiResponse<General> GetGenerals(int? id = null) => GetData<General>(id);
+        // NOT ALLOWED GetGenerals //
         public IApiResponse<GeneralFollower> GetGeneralFollowers(int? id = null) => GetData<GeneralFollower>(id);
         public IApiResponse<GeneralUser> GetGeneralUsers(int? id = null) => GetData<GeneralUser>(id);
         public IApiResponse<GlobalSettings> GetGlobalSettings(int? id = null) => GetData<GlobalSettings>(id);
@@ -66,7 +66,7 @@ namespace Sniper
         public IApiResponse<TestCaseRun> GetTestCaseRuns(int? id = null) => GetData<TestCaseRun>(id);
         public IApiResponse<TestPlan> GetTestPlans(int? id = null) => GetData<TestPlan>(id);
         public IApiResponse<TestPlanRun> GetTestPlanRuns(int? id = null) => GetData<TestPlanRun>(id);
-        public IApiResponse<TestRunItemHierarchyLink> GetTestRunItemHierarchyLinks(int? id = null) => GetData<TestRunItemHierarchyLink>(id);
+        // NOT ALLOWED GetTestRunItemHierarchyLinks //
         public IApiResponse<TestStep> GetTestSteps(int? id = null) => GetData<TestStep>(id);
         public IApiResponse<TestStepRun> GetTestStepRuns(int? id = null) => GetData<TestStepRun>(id);
         public IApiResponse<Time> GetTimes(int? id = null) => GetData<Time>(id);
@@ -75,83 +75,98 @@ namespace Sniper
         public IApiResponse<UserStory> GetUserStories(int? id = null) => GetData<UserStory>(id);
         public IApiResponse<Workflow> GetWorkflows(int? id = null) => GetData<Workflow>(id);
 
+        // NOT ALLOWED GetBugSimpleHistories //
+        // NOT ALLOWED GetEpicSimpleHistories //
+        // NOT ALLOWED GetFeatureSimpleHistories //
+        // NOT ALLOWED GetImpedimentSimpleHistories //
+        // NOT ALLOWED GetRequestSimpleHistories //
+        // NOT ALLOWED GetTaskSimpleHistories //
+        // NOT ALLOWED GetUserStorySimpleHistories //
+
         #endregion
 
         #region GET / Read Async
 
-        public Task<IApiResponse<Assignable>> GetAssignablesAsync() => GetDataAsync<Assignable>();
-        public Task<IApiResponse<AssignedEffort>> GetAssignedEffortsAsync() => GetDataAsync<AssignedEffort>();
-        public Task<IApiResponse<Assignment>> GetAssignmentsAsync() => GetDataAsync<Assignment>();
-        public Task<IApiResponse<Attachment>> GetAttachmentsAsync() => GetDataAsync<Attachment>();
-        public Task<IApiResponse<Bug>> GetBugsAsync() => GetDataAsync<Bug>();
-        public Task<IApiResponse<Build>> GetBuildsAsync() => GetDataAsync<Build>();
-        public Task<IApiResponse<Company>> GetCompaniesAsync() => GetDataAsync<Company>();
-        public Task<IApiResponse<Context>> GetContextAsync() => GetDataAsync<Context>();
-        public Task<IApiResponse<CustomActivity>> GetCustomActivitiesAsync() => GetDataAsync<CustomActivity>();
-        public Task<IApiResponse<CustomField>> GetCustomFieldsAsync() => GetDataAsync<CustomField>();
-        public Task<IApiResponse<CustomRule>> GetCustomRulesAsync() => GetDataAsync<CustomRule>();
-        public Task<IApiResponse<EntityState>> GetEntityStatesAsync() => GetDataAsync<EntityState>();
-        public Task<IApiResponse<EntityType>> GetEntityTypesAsync() => GetDataAsync<EntityType>();
-        public Task<IApiResponse<Epic>> GetEpicsAsync() => GetDataAsync<Epic>();
-        public Task<IApiResponse<Feature>> GetFeaturesAsync() => GetDataAsync<Feature>();
-        public Task<IApiResponse<General>> GetGeneralsAsync() => GetDataAsync<General>();
-        public Task<IApiResponse<GeneralFollower>> GetGeneralFollowersAsync() => GetDataAsync<GeneralFollower>();
-        public Task<IApiResponse<GeneralUser>> GetGeneralUsersAsync() => GetDataAsync<GeneralUser>();
-        public Task<IApiResponse<GlobalSettings>> GetGlobalSettingsAsync() => GetDataAsync<GlobalSettings>();
-        public Task<IApiResponse<Impediment>> GetImpedimentsAsync() => GetDataAsync<Impediment>();
-        public Task<IApiResponse<InboundAssignable>> GetInboundAssignablesAsync() => GetDataAsync<InboundAssignable>();
-        public Task<IApiResponse<Iteration>> GetIterationsAsync() => GetDataAsync<Iteration>();
-        public Task<IApiResponse<Message>> GetMessagesAsync() => GetDataAsync<Message>();
-        public Task<IApiResponse<MessageUniqueId>> GetMessageUniqueIdsAsync() => GetDataAsync<MessageUniqueId>();
-        public Task<IApiResponse<Milestone>> GetMilestonesAsync() => GetDataAsync<Milestone>();
-        public Task<IApiResponse<OutboundAssignable>> GetOutboundAssignablesAsync() => GetDataAsync<OutboundAssignable>();
-        public Task<IApiResponse<Priority>> GetPrioritiesAsync() => GetDataAsync<Priority>();
-        public Task<IApiResponse<Process>> GetProcessesAsync() => GetDataAsync<Process>();
-        public Task<IApiResponse<Program>> GetProgramsAsync() => GetDataAsync<Program>();
-        public Task<IApiResponse<Project>> GetProjectsAsync() => GetDataAsync<Project>();
-        public Task<IApiResponse<ProjectAllocation>> GetProjectAllocationsAsync() => GetDataAsync<ProjectAllocation>();
-        public Task<IApiResponse<ProjectMember>> GetProjectMembersAsync() => GetDataAsync<ProjectMember>();
-        public Task<IApiResponse<Relation>> GetRelationsAsync() => GetDataAsync<Relation>();
-        public Task<IApiResponse<RelationType>> GetRelationTypesAsync() => GetDataAsync<RelationType>();
-        public Task<IApiResponse<Release>> GetReleasesAsync() => GetDataAsync<Release>();
-        public Task<IApiResponse<ReleaseProject>> GetReleaseProjectsAsync() => GetDataAsync<ReleaseProject>();
-        public Task<IApiResponse<Request>> GetRequestsAsync() => GetDataAsync<Request>();
-        public Task<IApiResponse<Requester>> GetRequestersAsync() => GetDataAsync<Requester>();
-        public Task<IApiResponse<RequestType>> GetRequestTypesAsync() => GetDataAsync<RequestType>();
-        public Task<IApiResponse<Revision>> GetRevisionsAsync() => GetDataAsync<Revision>();
-        public Task<IApiResponse<RevisionFile>> GetRevisionFilesAsync() => GetDataAsync<RevisionFile>();
-        public Task<IApiResponse<Role>> GetRolesAsync() => GetDataAsync<Role>();
-        public Task<IApiResponse<RoleEffort>> GetRoleEffortsAsync() => GetDataAsync<RoleEffort>();
-        public Task<IApiResponse<Severity>> GetSeveritiesAsync() => GetDataAsync<Severity>();
-        public Task<IApiResponse<Tag>> GetTagsAsync() => GetDataAsync<Tag>();
-        public Task<IApiResponse<Task>> GetTasksAsync() => GetDataAsync<Task>();
-        public Task<IApiResponse<Team>> GetTeamsAsync() => GetDataAsync<Team>();
-        public Task<IApiResponse<TeamAssignment>> GetTeamAssignmentsAsync() => GetDataAsync<TeamAssignment>();
-        public Task<IApiResponse<TeamIteration>> GetTeamIterationsAsync() => GetDataAsync<TeamIteration>();
-        public Task<IApiResponse<TeamMember>> GetTeamMembersAsync() => GetDataAsync<TeamMember>();
-        public Task<IApiResponse<TeamProject>> GetTeamProjectsAsync() => GetDataAsync<TeamProject>();
-        public Task<IApiResponse<TeamProjectAllocation>> GetTeamProjectAllocationsAsync() => GetDataAsync<TeamProjectAllocation>();
-        public Task<IApiResponse<Term>> GetTermsAsync() => GetDataAsync<Term>();
-        public Task<IApiResponse<TestCase>> GetTestCasesAsync() => GetDataAsync<TestCase>();
-        public Task<IApiResponse<TestCaseRun>> GetTestCaseRunsAsync() => GetDataAsync<TestCaseRun>();
-        public Task<IApiResponse<TestPlan>> GetTestPlansAsync() => GetDataAsync<TestPlan>();
-        public Task<IApiResponse<TestPlanRun>> GetTestPlanRunsAsync() => GetDataAsync<TestPlanRun>();
-        public Task<IApiResponse<TestRunItemHierarchyLink>> GetTestRunItemHierarchyLinksAsync() => GetDataAsync<TestRunItemHierarchyLink>();
-        public Task<IApiResponse<TestStep>> GetTestStepsAsync() => GetDataAsync<TestStep>();
-        public Task<IApiResponse<TestStepRun>> GetTestStepRunsAsync() => GetDataAsync<TestStepRun>();
-        public Task<IApiResponse<Time>> GetTimesAsync() => GetDataAsync<Time>();
-        public Task<IApiResponse<User>> GetUsersAsync() => GetDataAsync<User>();
-        public Task<IApiResponse<UserProjectAllocation>> GetUserProjectAllocationsAsync() => GetDataAsync<UserProjectAllocation>();
-        public Task<IApiResponse<UserStory>> GetUserStoriesAsync() => GetDataAsync<UserStory>();
-        public Task<IApiResponse<Workflow>> GetWorkflowsAsync() => GetDataAsync<Workflow>();
+        public Task<IApiResponse<Assignable>> GetAssignablesAsync(int? id = null) => GetDataAsync<Assignable>(id);
+        public Task<IApiResponse<AssignedEffort>> GetAssignedEffortsAsync(int? id = null) => GetDataAsync<AssignedEffort>(id);
+        public Task<IApiResponse<Assignment>> GetAssignmentsAsync(int? id = null) => GetDataAsync<Assignment>(id);
+        public Task<IApiResponse<Attachment>> GetAttachmentsAsync(int? id = null) => GetDataAsync<Attachment>(id);
+        public Task<IApiResponse<Bug>> GetBugsAsync(int? id = null) => GetDataAsync<Bug>(id);
+        public Task<IApiResponse<Build>> GetBuildsAsync(int? id = null) => GetDataAsync<Build>(id);
+        public Task<IApiResponse<Company>> GetCompaniesAsync(int? id = null) => GetDataAsync<Company>(id);
+        public Task<IApiResponse<Context>> GetContextAsync(int? id = null) => GetDataAsync<Context>(id);
+        public Task<IApiResponse<CustomActivity>> GetCustomActivitiesAsync(int? id = null) => GetDataAsync<CustomActivity>(id);
+        public Task<IApiResponse<CustomField>> GetCustomFieldsAsync(int? id = null) => GetDataAsync<CustomField>(id);
+        public Task<IApiResponse<CustomRule>> GetCustomRulesAsync(int? id = null) => GetDataAsync<CustomRule>(id);
+        public Task<IApiResponse<EntityState>> GetEntityStatesAsync(int? id = null) => GetDataAsync<EntityState>(id);
+        // NOT ALLOWED GetEntityTypesAsync //
+        public Task<IApiResponse<Epic>> GetEpicsAsync(int? id = null) => GetDataAsync<Epic>(id);
+        public Task<IApiResponse<Feature>> GetFeaturesAsync(int? id = null) => GetDataAsync<Feature>(id);
+        // NOT ALLOWED GetGeneralsAsync //
+        public Task<IApiResponse<GeneralFollower>> GetGeneralFollowersAsync(int? id = null) => GetDataAsync<GeneralFollower>(id);
+        public Task<IApiResponse<GeneralUser>> GetGeneralUsersAsync(int? id = null) => GetDataAsync<GeneralUser>(id);
+        public Task<IApiResponse<GlobalSettings>> GetGlobalSettingsAsync(int? id = null) => GetDataAsync<GlobalSettings>(id);
+        public Task<IApiResponse<Impediment>> GetImpedimentsAsync(int? id = null) => GetDataAsync<Impediment>(id);
+        public Task<IApiResponse<InboundAssignable>> GetInboundAssignablesAsync(int? id = null) => GetDataAsync<InboundAssignable>(id);
+        public Task<IApiResponse<Iteration>> GetIterationsAsync(int? id = null) => GetDataAsync<Iteration>(id);
+        public Task<IApiResponse<Message>> GetMessagesAsync(int? id = null) => GetDataAsync<Message>(id);
+        public Task<IApiResponse<MessageUniqueId>> GetMessageUniqueIdsAsync(int? id = null) => GetDataAsync<MessageUniqueId>(id);
+        public Task<IApiResponse<Milestone>> GetMilestonesAsync(int? id = null) => GetDataAsync<Milestone>(id);
+        public Task<IApiResponse<OutboundAssignable>> GetOutboundAssignablesAsync(int? id = null) => GetDataAsync<OutboundAssignable>(id);
+        public Task<IApiResponse<Priority>> GetPrioritiesAsync(int? id = null) => GetDataAsync<Priority>(id);
+        public Task<IApiResponse<Process>> GetProcessesAsync(int? id = null) => GetDataAsync<Process>(id);
+        public Task<IApiResponse<Program>> GetProgramsAsync(int? id = null) => GetDataAsync<Program>(id);
+        public Task<IApiResponse<Project>> GetProjectsAsync(int? id = null) => GetDataAsync<Project>(id);
+        public Task<IApiResponse<ProjectAllocation>> GetProjectAllocationsAsync(int? id = null) => GetDataAsync<ProjectAllocation>(id);
+        public Task<IApiResponse<ProjectMember>> GetProjectMembersAsync(int? id = null) => GetDataAsync<ProjectMember>(id);
+        public Task<IApiResponse<Relation>> GetRelationsAsync(int? id = null) => GetDataAsync<Relation>(id);
+        public Task<IApiResponse<RelationType>> GetRelationTypesAsync(int? id = null) => GetDataAsync<RelationType>(id);
+        public Task<IApiResponse<Release>> GetReleasesAsync(int? id = null) => GetDataAsync<Release>(id);
+        public Task<IApiResponse<ReleaseProject>> GetReleaseProjectsAsync(int? id = null) => GetDataAsync<ReleaseProject>(id);
+        public Task<IApiResponse<Request>> GetRequestsAsync(int? id = null) => GetDataAsync<Request>(id);
+        public Task<IApiResponse<Requester>> GetRequestersAsync(int? id = null) => GetDataAsync<Requester>(id);
+        public Task<IApiResponse<RequestType>> GetRequestTypesAsync(int? id = null) => GetDataAsync<RequestType>(id);
+        public Task<IApiResponse<Revision>> GetRevisionsAsync(int? id = null) => GetDataAsync<Revision>(id);
+        public Task<IApiResponse<RevisionFile>> GetRevisionFilesAsync(int? id = null) => GetDataAsync<RevisionFile>(id);
+        public Task<IApiResponse<Role>> GetRolesAsync(int? id = null) => GetDataAsync<Role>(id);
+        public Task<IApiResponse<RoleEffort>> GetRoleEffortsAsync(int? id = null) => GetDataAsync<RoleEffort>(id);
+        public Task<IApiResponse<Severity>> GetSeveritiesAsync(int? id = null) => GetDataAsync<Severity>(id);
+        public Task<IApiResponse<Tag>> GetTagsAsync(int? id = null) => GetDataAsync<Tag>(id);
+        public Task<IApiResponse<Task>> GetTasksAsync(int? id = null) => GetDataAsync<Task>(id);
+        public Task<IApiResponse<Team>> GetTeamsAsync(int? id = null) => GetDataAsync<Team>(id);
+        public Task<IApiResponse<TeamAssignment>> GetTeamAssignmentsAsync(int? id = null) => GetDataAsync<TeamAssignment>(id);
+        public Task<IApiResponse<TeamIteration>> GetTeamIterationsAsync(int? id = null) => GetDataAsync<TeamIteration>(id);
+        public Task<IApiResponse<TeamMember>> GetTeamMembersAsync(int? id = null) => GetDataAsync<TeamMember>(id);
+        public Task<IApiResponse<TeamProject>> GetTeamProjectsAsync(int? id = null) => GetDataAsync<TeamProject>(id);
+        public Task<IApiResponse<TeamProjectAllocation>> GetTeamProjectAllocationsAsync(int? id = null) => GetDataAsync<TeamProjectAllocation>(id);
+        public Task<IApiResponse<Term>> GetTermsAsync(int? id = null) => GetDataAsync<Term>(id);
+        public Task<IApiResponse<TestCase>> GetTestCasesAsync(int? id = null) => GetDataAsync<TestCase>(id);
+        public Task<IApiResponse<TestCaseRun>> GetTestCaseRunsAsync(int? id = null) => GetDataAsync<TestCaseRun>(id);
+        public Task<IApiResponse<TestPlan>> GetTestPlansAsync(int? id = null) => GetDataAsync<TestPlan>(id);
+        public Task<IApiResponse<TestPlanRun>> GetTestPlanRunsAsync(int? id = null) => GetDataAsync<TestPlanRun>(id);
+        // NOT ALLOWED GetTestRunItemHierarchyLinksAsync //
+        public Task<IApiResponse<TestStep>> GetTestStepsAsync(int? id = null) => GetDataAsync<TestStep>(id);
+        public Task<IApiResponse<TestStepRun>> GetTestStepRunsAsync(int? id = null) => GetDataAsync<TestStepRun>(id);
+        public Task<IApiResponse<Time>> GetTimesAsync(int? id = null) => GetDataAsync<Time>(id);
+        public Task<IApiResponse<User>> GetUsersAsync(int? id = null) => GetDataAsync<User>(id);
+        public Task<IApiResponse<UserProjectAllocation>> GetUserProjectAllocationsAsync(int? id = null) => GetDataAsync<UserProjectAllocation>(id);
+        public Task<IApiResponse<UserStory>> GetUserStoriesAsync(int? id = null) => GetDataAsync<UserStory>(id);
+        public Task<IApiResponse<Workflow>> GetWorkflowsAsync(int? id = null) => GetDataAsync<Workflow>(id);
 
+        // NOT ALLOWED GetBugSimpleHistoriesAsync //
+        // NOT ALLOWED GetEpicSimpleHistoriesAsync //
+        // NOT ALLOWED GetFeatureSimpleHistoriesAsync //
+        // NOT ALLOWED GetImpedimentSimpleHistoriesAsync //
+        // NOT ALLOWED GetRequestSimpleHistoriesAsync //
+        // NOT ALLOWED GetTaskSimpleHistoriesAsync //
+        // NOT ALLOWED GetUserStorySimpleHistoriesAsync //
 
         #endregion
 
         #region Create
 
-        public IApiResponse<Assignable> CreateAssignable(Assignable assignable) => CreateData<Assignable>(assignable);
-        public IApiResponse<AssignedEffort> CreateAssignedEffort(AssignedEffort assignedEffort) => CreateData<AssignedEffort>(assignedEffort);
+        // NOT ALLOWED CreateAssignable //
+        // NOT ALLOWED CreateAssignedEffort //
         public IApiResponse<Assignment> CreateAssignment(Assignment assignment) => CreateData<Assignment>(assignment);
         public IApiResponse<Attachment> CreateAttachment(Attachment attachment) => CreateData<Attachment>(attachment);
         public IApiResponse<Bug> CreateBug(Bug bug) => CreateData<Bug>(bug);
@@ -162,12 +177,12 @@ namespace Sniper
         public IApiResponse<CustomField> CreateCustomField(CustomField customField) => CreateData<CustomField>(customField);
         public IApiResponse<CustomRule> CreateCustomRule(CustomRule customRule) => CreateData<CustomRule>(customRule);
         public IApiResponse<EntityState> CreateEntityState(EntityState entityState) => CreateData<EntityState>(entityState);
-        public IApiResponse<EntityType> CreateEntityType(EntityType entityType) => CreateData<EntityType>(entityType);
+        // NOT ALLOWED CreateEntityType //
         public IApiResponse<Epic> CreateEpic(Epic epic) => CreateData<Epic>(epic);
         public IApiResponse<Feature> CreateFeature(Feature feature) => CreateData<Feature>(feature);
-        public IApiResponse<General> CreateGeneral(General general) => CreateData<General>(general);
+        // NOT ALLOWED CreateGeneral //
         public IApiResponse<GeneralFollower> CreateGeneralFollower(GeneralFollower generalFollower) => CreateData<GeneralFollower>(generalFollower);
-        public IApiResponse<GeneralUser> CreateGeneralUser(GeneralUser generalUser) => CreateData<GeneralUser>(generalUser);
+        // NOT ALLOWED CreateGeneralUser //
         public IApiResponse<GlobalSettings> CreateGlobalSetting(GlobalSettings globalSettings) => CreateData<GlobalSettings>(globalSettings);
         public IApiResponse<Impediment> CreateImpediment(Impediment impediment) => CreateData<Impediment>(impediment);
         public IApiResponse<InboundAssignable> CreateInboundAssignable(InboundAssignable inboundAssignable) => CreateData<InboundAssignable>(inboundAssignable);
@@ -176,11 +191,12 @@ namespace Sniper
         public IApiResponse<MessageUniqueId> CreateMessageUniqueId(MessageUniqueId messageUniqueId) => CreateData<MessageUniqueId>(messageUniqueId);
         public IApiResponse<Milestone> CreateMilestone(Milestone milestone) => CreateData<Milestone>(milestone);
         public IApiResponse<OutboundAssignable> CreateOutboundAssignable(OutboundAssignable outboundAssignable) => CreateData<OutboundAssignable>(outboundAssignable);
+        // NOT ALLOWED CreatePractice //
         public IApiResponse<Priority> CreatePriority(Priority priority) => CreateData<Priority>(priority);
         public IApiResponse<Process> CreateProcess(Process process) => CreateData<Process>(process);
         public IApiResponse<Program> CreateProgram(Program program) => CreateData<Program>(program);
         public IApiResponse<Project> CreateProject(Project project) => CreateData<Project>(project);
-        public IApiResponse<ProjectAllocation> CreateProjectAllocation(ProjectAllocation projectAllocation) => CreateData<ProjectAllocation>(projectAllocation);
+        // NOT ALLOWED CreateProjectAllocation //
         public IApiResponse<ProjectMember> CreateProjectMember(ProjectMember projectMember) => CreateData<ProjectMember>(projectMember);
         public IApiResponse<Relation> CreateRelation(Relation relation) => CreateData<Relation>(relation);
         public IApiResponse<RelationType> CreateRelationType(RelationType relationType) => CreateData<RelationType>(relationType);
@@ -207,7 +223,7 @@ namespace Sniper
         public IApiResponse<TestCaseRun> CreateTestCaseRun(TestCaseRun testCaseRun) => CreateData<TestCaseRun>(testCaseRun);
         public IApiResponse<TestPlan> CreateTestPlan(TestPlan testPlan) => CreateData<TestPlan>(testPlan);
         public IApiResponse<TestPlanRun> CreateTestPlanRun(TestPlanRun testPlanRun) => CreateData<TestPlanRun>(testPlanRun);
-        public IApiResponse<TestRunItemHierarchyLink> CreateTestRunItemHierarchyLink(TestRunItemHierarchyLink testRunItemHierarchyLink) => CreateData<TestRunItemHierarchyLink>(testRunItemHierarchyLink);
+        // NOT ALLOWED CreateTestRunItemHierarchyLink //
         public IApiResponse<TestStep> CreateTestStep(TestStep testStep) => CreateData<TestStep>(testStep);
         public IApiResponse<TestStepRun> CreateTestStepRun(TestStepRun testStepRun) => CreateData<TestStepRun>(testStepRun);
         public IApiResponse<Time> CreateTime(Time time) => CreateData<Time>(time);
@@ -216,12 +232,21 @@ namespace Sniper
         public IApiResponse<UserStory> CreateUserStory(UserStory userStory) => CreateData<UserStory>(userStory);
         public IApiResponse<Workflow> CreateWorkflow(Workflow workflow) => CreateData<Workflow>(workflow);
 
+        // NOT ALLOWED CreateBugSimpleHistories //
+        // NOT ALLOWED CreateBugSimpleHistories //
+        // NOT ALLOWED CreateEpicSimpleHistories //
+        // NOT ALLOWED CreateFeatureSimpleHistories //
+        // NOT ALLOWED CreateImpedimentSimpleHistories //
+        // NOT ALLOWED CreateRequestSimpleHistories //
+        // NOT ALLOWED CreateTaskSimpleHistories //
+        // NOT ALLOWED CreateUserStorySimpleHistories //
+
         #endregion
 
         #region CreateAsync
 
-        public Task<IApiResponse<Assignable>> CreateAssignableAsync(Assignable assignable) => CreateDataAsync<Assignable>(assignable);
-        public Task<IApiResponse<AssignedEffort>> CreateAssignedEffortAsync(AssignedEffort assignedEffort) => CreateDataAsync<AssignedEffort>(assignedEffort);
+        // NOT ALLOWED CreateAssignableAsync //
+        // NOT ALLOWED CreateAssignedEffortAsync //
         public Task<IApiResponse<Assignment>> CreateAssignmentAsync(Assignment assignment) => CreateDataAsync<Assignment>(assignment);
         public Task<IApiResponse<Attachment>> CreateAttachmentAsync(Attachment attachment) => CreateDataAsync<Attachment>(attachment);
         public Task<IApiResponse<Bug>> CreateBugAsync(Bug bug) => CreateDataAsync<Bug>(bug);
@@ -232,12 +257,12 @@ namespace Sniper
         public Task<IApiResponse<CustomField>> CreateCustomFieldAsync(CustomField customField) => CreateDataAsync<CustomField>(customField);
         public Task<IApiResponse<CustomRule>> CreateCustomRuleAsync(CustomRule customRule) => CreateDataAsync<CustomRule>(customRule);
         public Task<IApiResponse<EntityState>> CreateEntityStateAsync(EntityState entityState) => CreateDataAsync<EntityState>(entityState);
-        public Task<IApiResponse<EntityType>> CreateEntityTypeAsync(EntityType entityType) => CreateDataAsync<EntityType>(entityType);
+        // NOT ALLOWED CreateEntityTypeAsync //
         public Task<IApiResponse<Epic>> CreateEpicAsync(Epic epic) => CreateDataAsync<Epic>(epic);
         public Task<IApiResponse<Feature>> CreateFeatureAsync(Feature feature) => CreateDataAsync<Feature>(feature);
-        public Task<IApiResponse<General>> CreateGeneralAsync(General general) => CreateDataAsync<General>(general);
+        // NOT ALLOWED CreateGeneralAsync //
         public Task<IApiResponse<GeneralFollower>> CreateGeneralFollowerAsync(GeneralFollower generalFollower) => CreateDataAsync<GeneralFollower>(generalFollower);
-        public Task<IApiResponse<GeneralUser>> CreateGeneralUserAsync(GeneralUser generalUser) => CreateDataAsync<GeneralUser>(generalUser);
+        // NOT ALLOWED CreateGeneralUserAsync //
         public Task<IApiResponse<GlobalSettings>> CreateGlobalSettingAsync(GlobalSettings globalSettings) => CreateDataAsync<GlobalSettings>(globalSettings);
         public Task<IApiResponse<Impediment>> CreateImpedimentAsync(Impediment impediment) => CreateDataAsync<Impediment>(impediment);
         public Task<IApiResponse<InboundAssignable>> CreateInboundAssignableAsync(InboundAssignable inboundAssignable) => CreateDataAsync<InboundAssignable>(inboundAssignable);
@@ -246,11 +271,12 @@ namespace Sniper
         public Task<IApiResponse<MessageUniqueId>> CreateMessageUniqueIdAsync(MessageUniqueId messageUniqueId) => CreateDataAsync<MessageUniqueId>(messageUniqueId);
         public Task<IApiResponse<Milestone>> CreateMilestoneAsync(Milestone milestone) => CreateDataAsync<Milestone>(milestone);
         public Task<IApiResponse<OutboundAssignable>> CreateOutboundAssignableAsync(OutboundAssignable outboundAssignable) => CreateDataAsync<OutboundAssignable>(outboundAssignable);
+        // NOT ALLOWED CreatePracticeAsync //
         public Task<IApiResponse<Priority>> CreatePriorityAsync(Priority priority) => CreateDataAsync<Priority>(priority);
         public Task<IApiResponse<Process>> CreateProcessAsync(Process process) => CreateDataAsync<Process>(process);
         public Task<IApiResponse<Program>> CreateProgramAsync(Program program) => CreateDataAsync<Program>(program);
         public Task<IApiResponse<Project>> CreateProjectAsync(Project project) => CreateDataAsync<Project>(project);
-        public Task<IApiResponse<ProjectAllocation>> CreateProjectAllocationAsync(ProjectAllocation projectAllocation) => CreateDataAsync<ProjectAllocation>(projectAllocation);
+        // NOT ALLOWED CreateProjectAllocationAsync //
         public Task<IApiResponse<ProjectMember>> CreateProjectMemberAsync(ProjectMember projectMember) => CreateDataAsync<ProjectMember>(projectMember);
         public Task<IApiResponse<Relation>> CreateRelationAsync(Relation relation) => CreateDataAsync<Relation>(relation);
         public Task<IApiResponse<RelationType>> CreateRelationTypeAsync(RelationType relationType) => CreateDataAsync<RelationType>(relationType);
@@ -277,7 +303,7 @@ namespace Sniper
         public Task<IApiResponse<TestCaseRun>> CreateTestCaseRunAsync(TestCaseRun testCaseRun) => CreateDataAsync<TestCaseRun>(testCaseRun);
         public Task<IApiResponse<TestPlan>> CreateTestPlanAsync(TestPlan testPlan) => CreateDataAsync<TestPlan>(testPlan);
         public Task<IApiResponse<TestPlanRun>> CreateTestPlanRunAsync(TestPlanRun testPlanRun) => CreateDataAsync<TestPlanRun>(testPlanRun);
-        public Task<IApiResponse<TestRunItemHierarchyLink>> CreateTestRunItemHierarchyLinkAsync(TestRunItemHierarchyLink testRunItemHierarchyLink) => CreateDataAsync<TestRunItemHierarchyLink>(testRunItemHierarchyLink);
+        // NOT ALLOWED CreateTestRunItemHierarchyLinkAsync //
         public Task<IApiResponse<TestStep>> CreateTestStepAsync(TestStep testStep) => CreateDataAsync<TestStep>(testStep);
         public Task<IApiResponse<TestStepRun>> CreateTestStepRunAsync(TestStepRun testStepRun) => CreateDataAsync<TestStepRun>(testStepRun);
         public Task<IApiResponse<Time>> CreateTimeAsync(Time time) => CreateDataAsync<Time>(time);
@@ -286,6 +312,91 @@ namespace Sniper
         public Task<IApiResponse<UserStory>> CreateUserStoryAsync(UserStory userStory) => CreateDataAsync<UserStory>(userStory);
         public Task<IApiResponse<Workflow>> CreateWorkflowAsync(Workflow workflow) => CreateDataAsync<Workflow>(workflow);
 
+        // NOT ALLOWED CreateBugSimpleHistoriesAsync //
+        // NOT ALLOWED CreateBugSimpleHistoriesAsync //
+        // NOT ALLOWED CreateEpicSimpleHistoriesAsync //
+        // NOT ALLOWED CreateFeatureSimpleHistoriesAsync //
+        // NOT ALLOWED CreateImpedimentSimpleHistoriesAsync //
+        // NOT ALLOWED CreateRequestSimpleHistoriesAsync //
+        // NOT ALLOWED CreateTaskSimpleHistoriesAsync //
+        // NOT ALLOWED CreateUserStorySimpleHistoriesAsync //
         #endregion
+
+        #region Delete
+
+        // NOT ALLOWED DeleteAssignedEffort //
+        // NOT ALLOWED DeleteEntityType //
+        // NOT ALLOWED DeleteGeneral //
+        // NOT ALLOWED DeletePractice //
+        // NOT ALLOWED DeleteTestRunItemHierarchyLink //
+
+        // NOT ALLOWED DeleteBugSimpleHistories //
+        // NOT ALLOWED DeleteBugSimpleHistories //
+        // NOT ALLOWED DeleteEpicSimpleHistories //
+        // NOT ALLOWED DeleteFeatureSimpleHistories //
+        // NOT ALLOWED DeleteImpedimentSimpleHistories //
+        // NOT ALLOWED DeleteRequestSimpleHistories //
+        // NOT ALLOWED DeleteTaskSimpleHistories //
+        // NOT ALLOWED DeleteUserStorySimpleHistories //
+
+        #endregion
+
+        #region DeleteAsync
+
+        // NOT ALLOWED DeleteAssignedEffortAsync //
+        // NOT ALLOWED DeleteEntityTypeAsync //
+        // NOT ALLOWED DeleteGeneralAsync //
+        // NOT ALLOWED DeletePracticeAsync //
+        // NOT ALLOWED DeleteTestRunItemHierarchyLinkAsync //
+
+        // NOT ALLOWED DeleteBugSimpleHistoriesAsync //
+        // NOT ALLOWED DeleteBugSimpleHistoriesAsync //
+        // NOT ALLOWED DeleteEpicSimpleHistoriesAsync //
+        // NOT ALLOWED DeleteFeatureSimpleHistoriesAsync //
+        // NOT ALLOWED DeleteImpedimentSimpleHistoriesAsync //
+        // NOT ALLOWED DeleteRequestSimpleHistoriesAsync //
+        // NOT ALLOWED DeleteTaskSimpleHistoriesAsync //
+        // NOT ALLOWED DeleteUserStorySimpleHistoriesAsync //
+
+        #endregion
+
+        #region Update
+
+        // NOT ALLOWED UpdateAssignedEffort //
+        // NOT ALLOWED UpdateEntityType //
+        // NOT ALLOWED UpdateGeneral //
+        // NOT ALLOWED UpdatePractice //
+        // NOT ALLOWED UpdateTestRunItemHierarchyLink //
+
+        // NOT ALLOWED UpdateBugSimpleHistories //
+        // NOT ALLOWED UpdateBugSimpleHistories //
+        // NOT ALLOWED UpdateEpicSimpleHistories //
+        // NOT ALLOWED UpdateFeatureSimpleHistories //
+        // NOT ALLOWED UpdateImpedimentSimpleHistories //
+        // NOT ALLOWED UpdateRequestSimpleHistories //
+        // NOT ALLOWED UpdateTaskSimpleHistories //
+        // NOT ALLOWED UpdateUserStorySimpleHistories //
+
+        #endregion
+
+        #region UpdateAsync
+
+        // NOT ALLOWED UpdateAssignedEffortAsync //
+        // NOT ALLOWED UpdateEntityTypeAsync //
+        // NOT ALLOWED UpdateGeneralAsync //
+        // NOT ALLOWED UpdatePracticeAsync //
+        // NOT ALLOWED UpdateTestRunItemHierarchyLinkAsync //
+
+        // NOT ALLOWED UpdateBugSimpleHistoriesAsync //
+        // NOT ALLOWED UpdateBugSimpleHistoriesAsync //
+        // NOT ALLOWED UpdateEpicSimpleHistoriesAsync //
+        // NOT ALLOWED UpdateFeatureSimpleHistoriesAsync //
+        // NOT ALLOWED UpdateImpedimentSimpleHistoriesAsync //
+        // NOT ALLOWED UpdateRequestSimpleHistoriesAsync //
+        // NOT ALLOWED UpdateTaskSimpleHistoriesAsync //
+        // NOT ALLOWED UpdateUserStorySimpleHistoriesAsync //
+        #endregion
+
+
     }
 }

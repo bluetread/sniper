@@ -19,7 +19,7 @@ namespace Sniper
         IApiResponse<T> DeleteData<T>(int id);
         Task<IApiResponse<T>> DeleteDataAsync<T>(Entity entity);
         IApiResponse<T> GetData<T>(int? id = null);
-        Task<IApiResponse<T>> GetDataAsync<T>();
+        Task<IApiResponse<T>> GetDataAsync<T>(int? id = null);
         IApiResponse<T> UpdateData<T>(Entity entity);
         Task<IApiResponse<T>> UpdateDataAsync<T>(Entity entity);
 

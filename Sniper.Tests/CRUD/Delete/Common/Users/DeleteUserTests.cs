@@ -8,7 +8,7 @@ namespace Sniper.Tests.CRUD.Delete.Common.Users
         public void DeleteUserThrowsError()
         {
             //var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Users);
-            //var data = client.DeleteData<User>(19);
+            //var data = client.DeleteData<User>(1019);
             //Assert.True(data.HttpResponse.IsError);
         }
     }

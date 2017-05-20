@@ -151,9 +151,10 @@ namespace Sniper
         }
 
         [SuppressMessage(Categories.Design, MessageAttributes.DoNotCatchGeneralExceptionTypes)]
-        public async Task<IApiResponse<T>> GetDataAsync<T>()
+        public async Task<IApiResponse<T>> GetDataAsync<T>(int? id = null)
         {
-            var request = GetApiRequestFromEntity(this, null, HttpMethod.Get);
+
+            var request = GetApiRequestFromEntity(this, new IdOnlyEntity { Id = id }, HttpMethod.Get);
             try
             {
                 var response = await ExecuteGetRequestAsync<T>(request);

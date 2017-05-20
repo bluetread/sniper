@@ -13,7 +13,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/GeneralUsers/meta">API documentation - GeneralUser</a>
     /// </remarks>
-    [CannotCreateReadUpdateDelete(CanCreate = false)]
+    [CanCreateReadUpdateDelete(CanCreate = false)]
     public class GeneralUser : Entity, IHasActive, IHasCreateDate, IHasModifyDate,
         IHasCustomFields, IHasAssignables, IHasComments, IHasRequests
     {

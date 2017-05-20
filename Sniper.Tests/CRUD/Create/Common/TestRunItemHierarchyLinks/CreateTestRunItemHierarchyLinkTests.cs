@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.TestRunItemHierarchyLinks
     public class CreateTestRunItemHierarchyLinkTests
     {
         [Fact]
-        public void TestRunItemHierarchyLinkThrowsError()
+        public void CreateTestRunItemHierarchyLinkThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.TestRunItemHierarchyLinks);
 

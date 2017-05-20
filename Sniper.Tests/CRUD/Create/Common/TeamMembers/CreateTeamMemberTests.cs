@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.TeamMembers
     public class CreateTeamMemberTests
     {
         [Fact]
-        public void TeamMemberThrowsError()
+        public void CreateTeamMemberThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.TeamMembers);
             var teamMember = new TeamMember();

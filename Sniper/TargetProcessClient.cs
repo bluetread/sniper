@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Sniper.Application;
 using Sniper.Application.Messages;
 using Sniper.Common;
@@ -126,15 +127,17 @@ namespace Sniper
             }
         }
 
+        //TODO
         public IApiResponse<string> GetData()
         {
             return null;
         }
 
         [SuppressMessage(Categories.Design, MessageAttributes.DoNotCatchGeneralExceptionTypes)]
-        public IApiResponse<T> GetData<T>()
+        public IApiResponse<T> GetData<T>(int? id = null)
         {
-            var request = GetApiRequestFromEntity(this, null, HttpMethod.Get);
+            var idEntity = new IdOnlyEntity { Id = id };
+            var request = GetApiRequestFromEntity(this, idEntity, HttpMethod.Get);
             try
             {
                 var response = ExecuteGetRequest<T>(request);
@@ -307,6 +310,7 @@ namespace Sniper
 
             if (response.IsError)
             {
+                response = ProcessResponse(response);
                 return response;
             }
 
@@ -325,10 +329,17 @@ namespace Sniper
             }
 
             // Default Read
-            var convertedItems = JsonConvert.DeserializeObject<TargetProcessReadResponseWrapper<T>>
-                (data, JsonHelpers.DefaultSerializerSettings).Items;
+            var jo = JObject.Parse(data);
+            var path = jo.First.Path;
 
-            return new HttpResponse(HttpStatusCode.OK, convertedItems, response.ResponseHeaders);
+            if ("Items".Equals(path, StringComparison.CurrentCultureIgnoreCase))
+            {
+                var convertedItems = JsonConvert.DeserializeObject<TargetProcessReadResponseWrapper<T>>
+                    (data, JsonHelpers.DefaultSerializerSettings).Items;
+                return new HttpResponse(HttpStatusCode.OK, convertedItems, response.ResponseHeaders);
+            }
+            var convertedItem = JsonConvert.DeserializeObject<T>(data, JsonHelpers.DefaultSerializerSettings);
+            return new HttpResponse(HttpStatusCode.OK, convertedItem, response.ResponseHeaders);
         }
 
         private static IApiRequest GetApiDeleteRequestFromEntityId<T>(ITargetProcessClient targetProcessClient, int id)
@@ -358,11 +369,20 @@ namespace Sniper
             Ensure.ArgumentNotNull(nameof(targetProcessClient.AuthenticationHandler),
                 targetProcessClient.AuthenticationHandler);
 
+            var fullPath = GetFullPath(targetProcessClient, httpMethod, entity.Id ?? 0);
+            string data = null;
+
+            if (httpMethod != HttpMethod.Get)
+            {
+                fullPath = GetFullPath(targetProcessClient, httpMethod);
+                data = GetSerializedEntity(entity);
+            }
+
             var request = new ApiRequest
             {
                 AuthenticationHandler = targetProcessClient.AuthenticationHandler,
-                BaseAddress = GetFullPath(targetProcessClient, httpMethod),
-                Data = httpMethod == HttpMethod.Get ? null : GetSerializedEntity(entity),
+                BaseAddress = fullPath,
+                Data = data,
                 Method = httpMethod,
                 Parameters = targetProcessClient.DefaultQueryParameters,
                 Route = GetRouteText(entity)
@@ -394,7 +414,7 @@ namespace Sniper
                 targetProcessClient.AuthenticationHandler.SiteInfo.ApiUrl,
                 targetProcessClient.ApiSiteInfo.Route);
 
-            if (httpMethod == HttpMethod.Delete && id > 0)
+            if ((httpMethod == HttpMethod.Get || httpMethod == HttpMethod.Delete) && id > 0)
             {
                 fullPath = ApiSiteHelpers.CombineUrlPaths(fullPath, id.ToString());
             }
@@ -668,6 +688,24 @@ namespace Sniper
                     }
                 }
             }
+            return response;
+        }
+
+        private static IHttpResponse ProcessResponse(IHttpResponse response)
+        {
+            Ensure.ArgumentNotNull(nameof(response), response);
+
+            if (!response.IsError)
+            {
+                return response;
+            }
+
+            if (response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                var converted = JsonConvert.DeserializeObject<TargetProcessBadRequestModel>((string)response.Data, JsonHelpers.DefaultSerializerSettings);
+                return new HttpResponse(response.StatusCode, converted, response.ResponseHeaders, response.ContentType);
+            }
+
             return response;
         }
 

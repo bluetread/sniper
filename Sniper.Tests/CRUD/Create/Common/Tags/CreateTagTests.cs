@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Tags
     public class CreateTagTests
     {
         [Fact]
-        public void TagThrowsError()
+        public void CreateTagThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Tags);
 

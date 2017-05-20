@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Milestones
     public class CreateMilestoneTests
     {
         [Fact]
-        public void MilestoneThrowsError()
+        public void CreateMilestoneThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Milestones);
 

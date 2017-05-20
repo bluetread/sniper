@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Companies
     public class CreateCompanyTests
     {
         [Fact]
-        public void CompanyThrowsError()
+        public void CreateCompanyThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Companies);
 

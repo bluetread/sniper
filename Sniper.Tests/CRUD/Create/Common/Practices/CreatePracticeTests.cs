@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Practices
     public class CreatePracticeTests
     {
         [Fact]
-        public void PracticeThrowsError()
+        public void CreatePracticeThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Practices);
 

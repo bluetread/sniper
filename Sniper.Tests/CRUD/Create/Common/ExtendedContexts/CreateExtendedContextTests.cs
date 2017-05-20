@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.ExtendedContexts
     public class CreateExtendedContextTests
     {
         [Fact]
-        public void ExtendedContextThrowsError()
+        public void CreateExtendedContextThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.ExtendedContexts);
             var extendedContext = new ExtendedContext();

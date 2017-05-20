@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.UserProjectAllocations
     public class CreateUserProjectAllocationTests
     {
         [Fact]
-        public void UserProjectAllocationThrowsError()
+        public void CreateUserProjectAllocationThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.ProjectAllocations);
             var userProjectAllocation = new UserProjectAllocation();

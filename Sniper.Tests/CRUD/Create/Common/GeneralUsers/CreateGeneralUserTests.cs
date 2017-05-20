@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.GeneralUsers
     public class CreateGeneralUserTests
     {
         [Fact]
-        public void GeneralUserThrowsError()
+        public void CreateGeneralUserThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.GeneralUsers);
 

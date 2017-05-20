@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Iterations
     public class CreateIterationTests
     {
         [Fact]
-        public void IterationThrowsError()
+        public void CreateIterationThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Iterations);
 

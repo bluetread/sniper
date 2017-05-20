@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Workflows
     public class CreateWorkflowTests
     {
         [Fact]
-        public void WorkflowThrowsError()
+        public void CreateWorkflowThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Workflows);
 

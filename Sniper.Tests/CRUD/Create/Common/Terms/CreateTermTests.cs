@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Terms
     public class CreateTermTests
     {
         [Fact]
-        public void TermThrowsError()
+        public void CreateTermThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Terms);
 

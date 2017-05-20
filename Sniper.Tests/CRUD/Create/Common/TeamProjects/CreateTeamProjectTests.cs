@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.TeamProjects
     public class CreateTeamProjectTests
     {
         [Fact]
-        public void TeamProjectThrowsError()
+        public void CreateTeamProjectThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.TeamProjects);
 

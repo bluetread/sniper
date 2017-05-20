@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.MessageUniqueIds
     public class CreateMessageUniqueIdTests
     {
         [Fact]
-        public void MessageUniqueIdThrowsError()
+        public void CreateMessageUniqueIdThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.MessageUniqueIds);
 

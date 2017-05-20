@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Severities
     public class CreateSeverityTests
     {
         [Fact]
-        public void SeverityThrowsError()
+        public void CreateSeverityThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Severities);
 

@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Revisions
     public class CreateRevisionTests
     {
         [Fact]
-        public void RevisionThrowsError()
+        public void CreateRevisionThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Revisions);
 

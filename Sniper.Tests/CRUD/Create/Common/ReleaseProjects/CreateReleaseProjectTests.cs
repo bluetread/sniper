@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.ReleaseProjects
     public class CreateReleaseProjectTests
     {
         [Fact]
-        public void ReleaseProjectThrowsError()
+        public void CreateReleaseProjectThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.ReleaseProjects);
 

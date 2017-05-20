@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.TestSteps
     public class CreateTestStepTests
     {
         [Fact]
-        public void TestStepThrowsError()
+        public void CreateTestStepThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.TestSteps);
 

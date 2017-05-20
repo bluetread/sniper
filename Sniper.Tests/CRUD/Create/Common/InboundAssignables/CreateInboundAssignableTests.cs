@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.InboundAssignables
     public class CreateInboundAssignableTests
     {
         [Fact]
-        public void InboundAssignableThrowsError()
+        public void CreateInboundAssignableThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.InboundAssignables);
 

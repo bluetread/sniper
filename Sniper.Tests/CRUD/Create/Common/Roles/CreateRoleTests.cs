@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Roles
     public class CreateRoleTests
     {
         [Fact]
-        public void RoleThrowsError()
+        public void CreateRoleThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Roles);
 

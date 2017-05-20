@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.CustomFieldConfigs
     public class CreateCustomFieldConfigTests
     {
         [Fact]
-        public void CustomFieldConfigThrowsError()
+        public void CreateCustomFieldConfigThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.CustomFieldConfigs);
 

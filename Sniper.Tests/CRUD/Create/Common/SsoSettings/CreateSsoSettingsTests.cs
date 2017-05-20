@@ -6,7 +6,7 @@ namespace Sniper.Tests.CRUD.Create.Common.SsoSettings
     public class CreateSsoSettingsTests
     {
         [Fact]
-        public void SsoSettingsThrowsError()
+        public void CreateSsoSettingsThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.SsoSettings);
 

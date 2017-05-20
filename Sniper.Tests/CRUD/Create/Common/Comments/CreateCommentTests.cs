@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Comments
     public class CreateCommentTests
     {
         [Fact]
-        public void CommentThrowsError()
+        public void CreateCommentThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Comments);
 

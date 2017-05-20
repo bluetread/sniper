@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.EntityTypes
     public class CreateEntityTypeTests
     {
         [Fact]
-        public void EntityTypeThrowsError()
+        public void CreateEntityTypeThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.EntityTypes);
 

@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.TeamAssignments
     public class CreateTeamAssignmentTests
     {
         [Fact]
-        public void TeamAssignmentThrowsError()
+        public void CreateTeamAssignmentThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.TeamAssignments);
             var teamAssignment = new TeamAssignment();

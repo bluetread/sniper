@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.ProjectMembers
     public class CreateProjectMemberTests
     {
         [Fact]
-        public void ProjectMemberThrowsError()
+        public void CreateProjectMemberThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.ProjectMembers);
 

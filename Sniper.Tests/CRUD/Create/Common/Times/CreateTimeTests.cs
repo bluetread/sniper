@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Times
     public class CreateTimeTests
     {
         [Fact]
-        public void TimeThrowsError()
+        public void CreateTimeThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Times);
 

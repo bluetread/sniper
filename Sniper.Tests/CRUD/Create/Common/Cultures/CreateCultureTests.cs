@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Cultures
     public class CreateCultureTests
     {
         [Fact]
-        public void CultureThrowsError()
+        public void CreateCultureThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Cultures);
 

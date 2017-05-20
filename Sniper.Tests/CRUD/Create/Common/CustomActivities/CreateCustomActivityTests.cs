@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.CustomActivities
     public class CreateCustomActivityTests
     {
         [Fact]
-        public void CustomActivityThrowsError()
+        public void CreateCustomActivityThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.CustomActivities);
 

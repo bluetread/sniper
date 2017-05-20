@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.RelationTypes
     public class CreateRelationTypeTests
     {
         [Fact]
-        public void RelationTypeThrowsError()
+        public void CreateRelationTypeThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.RelationTypes);
 

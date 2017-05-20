@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.GeneralFollowers
     public class CreateGeneralFollowerTests
     {
         [Fact]
-        public void GeneralFollowerThrowsError()
+        public void CreateGeneralFollowerThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.GeneralFollowers);
 

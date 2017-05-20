@@ -6,7 +6,7 @@ namespace Sniper.Tests.CRUD.Create.Common.GlobalSettings
     public class CreateGlobalSettingsTests
     {
         [Fact]
-        public void GlobalSettingsThrowsError()
+        public void CreateGlobalSettingsThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.GlobalSettings);
 

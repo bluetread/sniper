@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Impediments
     public class CreateImpedimentTests
     {
         [Fact]
-        public void ImpedimentThrowsError()
+        public void CreateImpedimentThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Impediments);
 

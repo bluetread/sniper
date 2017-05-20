@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Messages
     public class CreateMessageTests
     {
         [Fact]
-        public void MessageThrowsError()
+        public void CreateMessageThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Messages);
 

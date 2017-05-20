@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.CustomRules
     public class CreateCustomRuleTests
     {
         [Fact]
-        public void CustomRuleThrowsError()
+        public void CreateCustomRuleThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.CustomRules);
 

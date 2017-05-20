@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Programs
     public class CreateProgramTests
     {
         [Fact]
-        public void ProgramThrowsError()
+        public void CreateProgramThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Programs);
 

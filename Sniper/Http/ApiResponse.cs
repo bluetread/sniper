@@ -20,7 +20,7 @@ namespace Sniper.Http
 
             HttpResponse = response;
             var data = response.Data;
-            if (data == null)
+            if (data == null || response.IsError)
             {
                 DataCollection = null;
                 return;
@@ -41,7 +41,7 @@ namespace Sniper.Http
         /// </summary>
         /// <param name="response">An existing request to wrap</param>
         /// <param name="dataAsObject">The payload from an existing request</param>
-        public ApiResponse(IHttpResponse response, T dataAsObject) : this(response, new Collection<T>{ dataAsObject }) { }
+        public ApiResponse(IHttpResponse response, T dataAsObject) : this(response, new Collection<T> { dataAsObject }) { }
 
         /// <summary>
         /// Create a ApiResponse from an existing request and object

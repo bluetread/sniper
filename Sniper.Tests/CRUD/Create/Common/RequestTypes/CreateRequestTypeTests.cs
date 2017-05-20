@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.RequestTypes
     public class CreateRequestTypeTests
     {
         [Fact]
-        public void RequestTypeThrowsError()
+        public void CreateRequestTypeThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.RequestTypes);
 

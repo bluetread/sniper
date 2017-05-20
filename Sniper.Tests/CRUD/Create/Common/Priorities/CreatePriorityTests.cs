@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Priorities
     public class CreatePriorityTests
     {
         [Fact]
-        public void PriorityThrowsError()
+        public void CreatePriorityThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Priorities);
 

@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.TestPlans
     public class CreateTestPlanTests
     {
         [Fact]
-        public void TestPlanThrowsError()
+        public void CreateTestPlanThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.TestPlans);
 

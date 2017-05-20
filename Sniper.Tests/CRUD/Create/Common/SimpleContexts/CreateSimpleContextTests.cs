@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.SimpleContexts
     public class CreateSimpleContextTests
     {
         [Fact]
-        public void SimpleContextThrowsError()
+        public void CreateSimpleContextThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.SimpleContexts);
 

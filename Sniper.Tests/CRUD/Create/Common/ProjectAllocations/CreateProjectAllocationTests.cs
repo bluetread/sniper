@@ -7,7 +7,7 @@ namespace Sniper.Tests.CRUD.Create.Common.ProjectAllocations
     public class CreateProjectAllocationTests
     {
         [Fact]
-        public void ProjectAllocationThrowsError()
+        public void CreateProjectAllocationThrowsError()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.ProjectAllocations);
 

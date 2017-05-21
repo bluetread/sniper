@@ -701,9 +701,9 @@ namespace Sniper
                 return response;
             }
 
-            if (response.StatusCode == HttpStatusCode.BadRequest)
+            if (response.StatusCode >= HttpStatusCode.BadRequest && response.StatusCode <= HttpStatusCode.InternalServerError)
             {
-                var converted = JsonConvert.DeserializeObject<TargetProcessBadRequestModel>((string)response.Data, JsonHelpers.DefaultSerializerSettings);
+                var converted = JsonConvert.DeserializeObject<TargetProcessErrorResponseModel>((string)response.Data, JsonHelpers.DefaultSerializerSettings);
                 return new HttpResponse(response.StatusCode, converted, response.ResponseHeaders, response.ContentType);
             }
 

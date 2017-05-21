@@ -10,5 +10,11 @@ namespace Sniper.Tests.CRUD
             var client = new TargetProcessClient { ApiSiteInfo = new ApiSiteInfo(route) };
             return client;
         }
+
+        public static ITargetProcessClient GetClientByHistoryRoute(TargetProcessHistoryRoutes.HistoryRoute historyRoute)
+        {
+            var client = new TargetProcessClient { ApiSiteInfo = new ApiSiteInfo(historyRoute) };
+            return client;
+        }
     }
 }

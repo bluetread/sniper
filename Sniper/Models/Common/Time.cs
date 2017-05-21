@@ -18,22 +18,6 @@ namespace Sniper.Common
         IHasDate, IHasDescription, IHasProject, IHasRequest, IHasRole, IHasTask, IHasTestPlan,
         IHasTestPlanRun, IHasUser, IHasUserStory, IHasWorkEffort, IHasCustomFields
     {
-
-        #region Required for Create
-
-        //[RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
-        //[JsonProperty(Required = Required.DisallowNull)]
-        [JsonProperty(Required = Required.Default)]
-        public Project Project { get; set; }
-
-        //[RequiredForCreate(JsonProperties.Email, JsonProperties.Login,
-        //    JsonProperties.Password, JsonProperties.WeeklyAvailableHours)]
-        //[JsonProperty(Required = Required.DisallowNull)]
-        [JsonProperty(Required = Required.Default)]
-        public User User { get; set; }
-
-        #endregion
-
         [JsonProperty(Required = Required.Default)]
         public DateTime? CreateDate { get; internal set; }
 
@@ -53,7 +37,7 @@ namespace Sniper.Common
 
         [JsonProperty(Required = Required.Default)]
         public decimal Spent { get; set; }
-        
+
         [JsonProperty(Required = Required.Default)]
         public Assignable Assignable { get; set; }
 
@@ -62,6 +46,9 @@ namespace Sniper.Common
 
         [JsonProperty(Required = Required.Default)]
         public CustomActivity CustomActivity { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public Project Project { get; set; }
 
         [JsonProperty(Required = Required.Default)]
         public Request Request { get; internal set; }
@@ -77,6 +64,9 @@ namespace Sniper.Common
 
         [JsonProperty(Required = Required.Default)]
         public TestPlanRun TestPlanRun { get; internal set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public User User { get; set; }
 
         [JsonProperty(Required = Required.Default)]
         public UserStory UserStory { get; internal set; }

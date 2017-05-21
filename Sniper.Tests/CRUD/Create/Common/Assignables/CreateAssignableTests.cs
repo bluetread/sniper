@@ -22,17 +22,5 @@ namespace Sniper.Tests.CRUD.Create.Common.Assignables
             var exception = (SniperExceptions.RequiredPropertyException)data.HttpResponse.Exception;
             Assert.Equal(exception.RequiredDataResponse.Message, CrudMessages.CreateProhibited);
         }
-
-        [Fact]
-        public void CreateAssignableWithMinimumFieldsSucceeds()
-        {
-            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Assignables);
-
-            var assignable = new Assignable();
-            var data = client.CreateData<Assignable>(assignable);
-
-            Assert.NotNull(data);
-            Assert.False(data.HttpResponse.IsError);
-        }
     }
 }

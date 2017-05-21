@@ -2,6 +2,7 @@
 using Sniper.Common;
 using Sniper.TargetProcess.Routes;
 using System.Collections.Generic;
+using System.Net;
 using Xunit;
 
 namespace Sniper.Tests.CRUD.Create.Common.Assignments
@@ -31,7 +32,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Assignments
         }
 
         [Fact] //TODO: Check this
-        public void CreateAssignmentWithRequiredFieldsSucceeds()
+        public void CreateAssignmentWithAssignableFailsSinceAbstract()
         {
             var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Assignments);
 
@@ -44,9 +45,13 @@ namespace Sniper.Tests.CRUD.Create.Common.Assignments
             var data = client.CreateData<Assignment>(assignment);
 
             Assert.NotNull(data);
-            Assert.False(data.HttpResponse.IsError);
+            Assert.True(data.HttpResponse.IsError);
+            Assert.Equal(data.HttpResponse.StatusCode, HttpStatusCode.MethodNotAllowed);
+        }
 
-
+        [Fact] //TODO: Check this
+        public void CreateAssignmentWithRequiredFieldsSucceeds()
+        {
         }
     }
 }

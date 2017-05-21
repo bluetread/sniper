@@ -168,6 +168,13 @@
     <Compile Include="CRUD\Create\Common\Workflows\CreateWorkflowTests.cs" />
     <Compile Include="CRUD\Create\CreateCommonMethods.cs" />
     <Compile Include="CRUD\Create\CreateTests.cs" />
+    <Compile Include="CRUD\Create\History\BugSimpleHistories\CreateBugSimpleHistoryTests.cs" />
+    <Compile Include="CRUD\Create\History\EpicSimpleHistories\CreateEpicSimpleHistoryTests.cs" />
+    <Compile Include="CRUD\Create\History\FeatureSimpleHistories\CreateFeatureSimpleHistoryTests.cs" />
+    <Compile Include="CRUD\Create\History\ImpedimentSimpleHistories\CreateImpedimentSimpleHistoryTests.cs" />
+    <Compile Include="CRUD\Create\History\RequestSimpleHistories\CreateRequestSimpleHistoryTests.cs" />
+    <Compile Include="CRUD\Create\History\TaskSimpleHistories\CreateTaskSimpleHistoryTests.cs" />
+    <Compile Include="CRUD\Create\History\UserStorySimpleHistories\CreateUserStorySimpleHistoryTests.cs" />
     <Compile Include="CRUD\Delete\Common\AppContexts\AppContextTests.cs" />
     <Compile Include="CRUD\Delete\Common\Assignables\DeleteDeleteAssignableTests.cs" />
     <Compile Include="CRUD\Delete\Common\AssignedEfforts\DeleteAssignedEffortTests.cs" />
@@ -417,13 +424,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CRUD\Create\Common\Contexts\" />
-    <Folder Include="CRUD\Create\History\BugSimpleHistories\" />
-    <Folder Include="CRUD\Create\History\EpicSimpleHistories\" />
-    <Folder Include="CRUD\Create\History\FeatureSimpleHistories\" />
-    <Folder Include="CRUD\Create\History\ImpedimentSimpleHistories\" />
-    <Folder Include="CRUD\Create\History\RequestSimpleHistories\" />
-    <Folder Include="CRUD\Create\History\TaskSimpleHistories\" />
-    <Folder Include="CRUD\Create\History\UserStorySimpleHistories\" />
     <Folder Include="CRUD\Delete\Common\Contexts\" />
     <Folder Include="CRUD\Read\Common\Contexts\" />
     <Folder Include="CRUD\Update\Common\Contexts\" />

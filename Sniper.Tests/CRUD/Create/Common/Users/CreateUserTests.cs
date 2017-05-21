@@ -36,7 +36,7 @@ namespace Sniper.Tests.CRUD.Create.Common.Users
             // Try to create user again, should fail.
             var data2 = client.CreateUser(user);
             Assert.True(data2.HttpResponse.IsError);
-            Assert.IsType<TargetProcessBadRequestModel>(data2.HttpResponse.Data);
+            Assert.IsType<TargetProcessErrorResponseModel>(data2.HttpResponse.Data);
 
             //cleanup (Delete created user)
             var result = client.DeleteData<User>(data.Data.Id ?? 0);

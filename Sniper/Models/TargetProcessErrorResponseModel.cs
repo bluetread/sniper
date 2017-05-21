@@ -2,7 +2,7 @@
 
 namespace Sniper
 {
-    public class TargetProcessBadRequestModel
+    public class TargetProcessErrorResponseModel
     {
         public HttpStatusCode Status { get; set; }
         public string ErrorId { get; set; }

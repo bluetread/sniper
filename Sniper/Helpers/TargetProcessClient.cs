@@ -395,6 +395,7 @@ namespace Sniper
         // NOT ALLOWED UpdateRequestSimpleHistoriesAsync //
         // NOT ALLOWED UpdateTaskSimpleHistoriesAsync //
         // NOT ALLOWED UpdateUserStorySimpleHistoriesAsync //
+
         #endregion
 
 

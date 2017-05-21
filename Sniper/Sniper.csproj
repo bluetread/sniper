@@ -237,7 +237,7 @@
     <Compile Include="Http\HttpResponse.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\IdOnlyEntity.cs" />
-    <Compile Include="Models\TargetProcessBadRequestModel.cs" />
+    <Compile Include="Models\TargetProcessErrorResponseModel.cs" />
     <Compile Include="Models\TargetProcessUndeleteModel.cs" />
     <Compile Include="TargetProcess\Common\StatusCodes.cs" />
     <Compile Include="ITargetProcessClient.cs" />

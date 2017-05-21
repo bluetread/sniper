@@ -175,6 +175,7 @@ namespace Sniper.Http
         public const string Json = "json";
         public const string Xml = "xml";
     }
+
 }
 
 namespace Sniper.Net
@@ -214,33 +215,6 @@ namespace Sniper.TargetProcess
         public const string Take = "take";
         public const string Where = "where";
     }
-
-    //public static class Entity
-    //{
-    //    public const string Assignable = "Assignables";
-    //    public const string AssignableInbound = "InboundAssignable";
-    //    public const string AssignableOutbound = "OutboundAssignable";
-    //    public const string Bug = "Bugs";
-    //    public const string Build = "Builds";
-    //    public const string Epic = "Epics";
-    //    public const string Feature = "Features";
-    //    public const string General = "Generals";
-    //    public const string Impediment = "Impediments";
-    //    public const string Iteration = "Iterations";
-    //    public const string Program = "Programs";
-    //    public const string Project = "Projects";
-    //    public const string Release = "Releases";
-    //    public const string Request = "Requests";
-    //    public const string Requester = "Requesters";
-    //    public const string Task = "Tasks";
-    //    public const string TeamIteration = "Team Iterations";
-    //    public const string Team = "Teams";
-    //    public const string TestCase = "Test Cases";
-    //    public const string TestPlan = "Test Plans";
-    //    public const string TestPlanRun = "Test Plan Runs";
-    //    public const string User = "Users";
-    //    public const string UserStory = "UserStories";
-    //}
 
     public static class FilterOperators
     {

@@ -6,17 +6,17 @@ using Xunit;
 namespace Sniper.Tests.CRUD.Create.Common.TestCaseRuns
 {
     public class CreateTestCaseRunTests
-    { 
-        [Fact] 
-        public void TestCaseRunThrowsError() 
-        { 
-            var client = new TargetProcessClient 
-            { 
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.TestCaseRuns) 
-            }; 
-            var testCaseRun = new TestCaseRun 
-            { 
-            }; 
-        } 
-    } 
-} 
+    {
+        [Fact]
+        public void CreateTestCaseRunThrowsError()
+        {
+            var client = new TargetProcessClient
+            {
+                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.TestCaseRuns)
+            };
+            var testCaseRun = new TestCaseRun
+            {
+            };
+        }
+    }
+}

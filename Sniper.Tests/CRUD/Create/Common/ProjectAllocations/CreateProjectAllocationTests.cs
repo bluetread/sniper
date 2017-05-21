@@ -1,22 +1,17 @@
 using Sniper.Common;
-using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
 namespace Sniper.Tests.CRUD.Create.Common.ProjectAllocations
 {
     public class CreateProjectAllocationTests
-    { 
-        [Fact] 
-        public void ProjectAllocationThrowsError() 
-        { 
-            var client = new TargetProcessClient 
-            { 
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.ProjectAllocations) 
-            }; 
-            var projectAllocation = new ProjectAllocation 
-            { 
-            }; 
-        } 
-    } 
-} 
+    {
+        [Fact]
+        public void CreateProjectAllocationThrowsError()
+        {
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.ProjectAllocations);
+
+            var projectAllocation = new ProjectAllocation();
+        }
+    }
+}

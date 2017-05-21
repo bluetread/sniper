@@ -20,7 +20,6 @@ namespace Sniper.History
         [JsonProperty(Required = Required.Default)]
         public GeneralUser Modifier { get; internal set; }
 
-        //[RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.Default)]
         public Project Project { get; internal set; }
     }

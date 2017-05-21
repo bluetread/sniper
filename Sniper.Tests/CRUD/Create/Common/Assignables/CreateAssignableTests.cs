@@ -1,5 +1,5 @@
+using Sniper.Application.Messages;
 using Sniper.Common;
-using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
@@ -10,15 +10,17 @@ namespace Sniper.Tests.CRUD.Create.Common.Assignables
         [Fact]
         public void CreateAssignableThrowsError()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Assignables)
-            };
-            var assignable = new Assignable
-            {
-                //EntityState = new EntityState { Name = "Some Entity state"}
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Assignables);
+
+            var assignable = new Assignable();
             var data = client.CreateData<Assignable>(assignable);
+
+            Assert.NotNull(data);
+            Assert.True(data.HttpResponse.IsError);
+            Assert.Equal(data.HttpResponse.Exception.GetType(), typeof(SniperExceptions.RequiredPropertyException));
+
+            var exception = (SniperExceptions.RequiredPropertyException)data.HttpResponse.Exception;
+            Assert.Equal(exception.RequiredDataResponse.Message, CrudMessages.CreateProhibited);
         }
     }
 }

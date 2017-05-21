@@ -1,22 +1,17 @@
 using Sniper.Common;
-using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
 namespace Sniper.Tests.CRUD.Create.Common.ProjectMembers
 {
     public class CreateProjectMemberTests
-    { 
-        [Fact] 
-        public void ProjectMemberThrowsError() 
-        { 
-            var client = new TargetProcessClient 
-            { 
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.ProjectMembers) 
-            }; 
-            var projectMember = new ProjectMember 
-            { 
-            }; 
-        } 
-    } 
-} 
+    {
+        [Fact]
+        public void CreateProjectMemberThrowsError()
+        {
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.ProjectMembers);
+
+            var projectMember = new ProjectMember();
+        }
+    }
+}

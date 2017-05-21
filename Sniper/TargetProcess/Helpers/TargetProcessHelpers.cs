@@ -198,6 +198,7 @@ namespace Sniper.TargetProcess.Helpers
             {typeof(UserStory), UserStories},
             {typeof(Workflow), Workflows}
         };
+
         [SuppressMessage(Categories.Security, MessageAttributes.DoNotDeclareReadOnlyMutableReferenceTypes)]
         public static readonly Dictionary<TargetProcessResource, HistoryRoute> ResourceHistoryRoutes = new Dictionary<TargetProcessResource, HistoryRoute>
         {
@@ -209,7 +210,7 @@ namespace Sniper.TargetProcess.Helpers
             {TargetProcessResource.Task, TaskSimpleHistories},
             {TargetProcessResource.UserStory, UserStorySimpleHistories}
         };
-
+#if false
         public static Route GetRouteByResource(TargetProcessResource resource)
         {
             Ensure.ArgumentNotNull(nameof(resource), resource);
@@ -223,7 +224,7 @@ namespace Sniper.TargetProcess.Helpers
 
             return ResourceHistoryRoutes.TryGetValue(resource, out HistoryRoute result) ? result : HistoryRoute.None;
         }
-
+#endif
         public static string ToRouteString(this Route route)
         {
             return route == Route.None ? string.Empty : route.ToString();

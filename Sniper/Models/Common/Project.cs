@@ -26,11 +26,6 @@ namespace Sniper.Common
         [JsonProperty(Required = Required.DisallowNull)]
         public override string Name { get; set; }
 
-        //[RequiredForCreate(JsonProperties.Name)]
-        //[JsonProperty(Required = Required.DisallowNull)]
-        [JsonProperty(Required = Required.Default)]
-        public EntityState EntityState { get; set; }
-
         #endregion
 
         [JsonProperty(Required = Required.Default)]
@@ -88,8 +83,10 @@ namespace Sniper.Common
         public string Units { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
-        //[RequiredForCreate(JsonProperties.Name)]
         public Company Company { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public EntityState EntityState { get; set; }
 
         [JsonProperty(Required = Required.Default)]
         public Process Process { get; set; }

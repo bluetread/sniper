@@ -17,21 +17,6 @@ namespace Sniper.Common
         IHasLeadCycleTimes, IHasPlannedDates, IHasProgress, IHasTimeSpent, IHasEntityState, IHasImpediments,
         IHasIteration, IHasPriority, IHasRelease, IHasResponsibleTeam, IHasTimes, IHasUnits
     {
-        #region Required for Create
-     
-        //TODO: Revisit this for Assignable Create. May be required for this but not subclasses
-        //[RequiredForCreate(JsonProperties.Name)]
-        //[JsonProperty(Required = Required.DisallowNull)]
-        [JsonProperty(Required = Required.Default)]
-        public virtual EntityState EntityState { get; set; }
-
-        //[RequiredForCreate(JsonProperties.Name)]
-        //[JsonProperty(Required = Required.DisallowNull)]
-        [JsonProperty(Required = Required.Default)]
-        public virtual Priority Priority { get; set; }
-
-        #endregion
-
         [JsonProperty(Required = Required.Default)]
         public virtual double CycleTime { get; internal set; }
 
@@ -72,7 +57,13 @@ namespace Sniper.Common
         public virtual string Units { get; internal set; }
 
         [JsonProperty(Required = Required.Default)]
+        public virtual EntityState EntityState { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
         public virtual Iteration Iteration { get; set; }
+
+        [JsonProperty(Required = Required.Default)]
+        public virtual Priority Priority { get; set; }
 
         [JsonProperty(Required = Required.Default)]
         public virtual Release Release { get; set; }

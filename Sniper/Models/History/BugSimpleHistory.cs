@@ -11,7 +11,7 @@ namespace Sniper.History
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/BugSimpleHistories/meta">API documentation - BugSimpleHistory</a>
     /// </remarks>
-    [CannotCreateReadUpdateDelete]
+    [CannotCreateReadUpdateDelete] //TODO: Read allowed?
     public class BugSimpleHistory : SimpleHistoryExtendedBase, IHasBug
     {
         [JsonProperty(Required = Required.Default)]

@@ -10,7 +10,7 @@ namespace Sniper.Common
     /// <remarks>
     /// See the <a href="https://md5.tpondemand.com/api/v1/AssignedEfforts/meta">API documentation - AssignedEffort</a>
     /// </remarks>
-    [CannotCreateReadUpdateDelete]
+    [CannotCreateReadUpdateDelete(CanRead = true)]
     public class AssignedEffort : Entity, IHasEffort, IHasInitialEstimate, IHasRoleTimes,
         IHasAssignable, IHasRole, IHasGeneralUser
     {

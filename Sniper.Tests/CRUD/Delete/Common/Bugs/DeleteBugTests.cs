@@ -1,5 +1,4 @@
 using Sniper.Common;
-using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using System;
 using System.Net;
@@ -12,10 +11,7 @@ namespace Sniper.Tests.CRUD.Delete.Common.Bugs
         [Fact]
         public void DeleteBugWithInvalidIdThrowsError()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Bugs)
-            };
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Bugs);
 
             var data = client.DeleteData<Bug>(2);
             Assert.NotNull(data);
@@ -28,11 +24,7 @@ namespace Sniper.Tests.CRUD.Delete.Common.Bugs
         public void CreateBugAndThenDeleteItSucceeds()
         {
             //Create a bug
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Bugs)
-            };
-
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.Bugs);
             var bug = new Bug
             {
                 Name = $"Sample Create From Code Bug - {DateTime.Now}",

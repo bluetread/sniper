@@ -19,18 +19,9 @@ namespace Sniper.Common
     {
         #region Required for Create
 
-        [RequiredForCreate(IsEnabled = false)] // Override setting from Assignable. Only required for create there.
-        [JsonProperty(Required = Required.Default)]
-        public override EntityState EntityState { get; set; }
-
-        //[RequiredForCreate(JsonProperties.Name, JsonProperties.EntityState)]
         [JsonProperty(Required = Required.DisallowNull)]
         [RequiredForCreate(JsonProperties.Id)]
         public override Project Project { get; set; }
-
-        [RequiredForCreate(IsEnabled = false)] // Override setting from Assignable. Only required for create there.
-        [JsonProperty(Required = Required.Default)]
-        public override Priority Priority { get; set; }
 
         #endregion
 

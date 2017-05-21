@@ -1,7 +1,7 @@
 using Sniper.Common;
 using Sniper.Http;
 using Sniper.TargetProcess.Routes;
-using System;
+using Sniper.Tests.CRUD.Create;
 using System.Net;
 using Xunit;
 
@@ -12,10 +12,7 @@ namespace Sniper.Tests.CRUD.Delete.Common.Projects
         [Fact]
         public void DeleteProjectWithInvalidIdThrowsError()
         {
-            var client = new TargetProcessClient
-            {
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Projects)
-            };
+            var client = new TargetProcessClient { ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Projects) };
 
             var data = client.DeleteData<Project>(220);
             Assert.NotNull(data);
@@ -33,11 +30,8 @@ namespace Sniper.Tests.CRUD.Delete.Common.Projects
                 ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.Projects)
             };
 
-            var project = new Project
-            {
-                Name = $"Sample Project From Code - {DateTime.Now}"
-            };
-            var data = client.CreateData<Project>(project);
+            var data = CreateCommonMethods.GetNewProject(client);
+
             Assert.NotNull(data);
             Assert.False(data.HttpResponse.IsError);
 
@@ -45,10 +39,13 @@ namespace Sniper.Tests.CRUD.Delete.Common.Projects
             Assert.NotEqual(0, createdId);
             Assert.NotNull(createdId);
 
+            // Delete the project
             var result = client.DeleteData<Project>((int)createdId);
             Assert.NotNull(result);
             Assert.NotNull(result.Data.Id);
             Assert.Equal(createdId, result.Data.Id);
         }
+
+
     }
 }

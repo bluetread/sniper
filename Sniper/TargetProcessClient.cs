@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Sniper.Application;
 using Sniper.Application.Messages;
+using Sniper.Common;
 using Sniper.Contracts.Exceptions;
 using Sniper.Http;
 using Sniper.TargetProcess.Helpers;
@@ -125,15 +127,17 @@ namespace Sniper
             }
         }
 
+        //TODO
         public IApiResponse<string> GetData()
         {
             return null;
         }
 
         [SuppressMessage(Categories.Design, MessageAttributes.DoNotCatchGeneralExceptionTypes)]
-        public IApiResponse<T> GetData<T>()
+        public IApiResponse<T> GetData<T>(int? id = null)
         {
-            var request = GetApiRequestFromEntity(this, null, HttpMethod.Get);
+            var idEntity = new IdOnlyEntity { Id = id };
+            var request = GetApiRequestFromEntity(this, idEntity, HttpMethod.Get);
             try
             {
                 var response = ExecuteGetRequest<T>(request);
@@ -147,9 +151,10 @@ namespace Sniper
         }
 
         [SuppressMessage(Categories.Design, MessageAttributes.DoNotCatchGeneralExceptionTypes)]
-        public async Task<IApiResponse<T>> GetDataAsync<T>()
+        public async Task<IApiResponse<T>> GetDataAsync<T>(int? id = null)
         {
-            var request = GetApiRequestFromEntity(this, null, HttpMethod.Get);
+
+            var request = GetApiRequestFromEntity(this, new IdOnlyEntity { Id = id }, HttpMethod.Get);
             try
             {
                 var response = await ExecuteGetRequestAsync<T>(request);
@@ -159,6 +164,30 @@ namespace Sniper
             {
                 return HandleApiResponseExceptions<T>(exception);
             }
+        }
+
+        public IApiResponse<Project> UndeleteProjectData(int id)
+        {
+            return UndeleteData<Project>(id, JsonProperties.Project);
+        }
+
+        public IApiResponse<User> UndeleteUserData(int id)
+        {
+            return UndeleteData<User>(id, JsonProperties.User);
+        }
+
+        private IApiResponse<T> UndeleteData<T>(int id, string entityType)
+        {
+            Ensure.ArgumentNotNull(nameof(id), id);
+            Ensure.ArgumentNotNullOrEmptyString(nameof(entityType), entityType);
+
+            if (typeof(T) != typeof(Project) && typeof(T) != typeof(User))
+            {
+                return new ApiResponse<T>(new HttpResponse(HttpStatusCode.Forbidden));
+            }
+
+            var undeleteModel = new TargetProcessUndeleteModel { Id = id, EntityType = entityType };
+            return CreateData<T>(undeleteModel);
         }
 
         //TODO: This may need to change once the Include/Exclude is added
@@ -173,29 +202,6 @@ namespace Sniper
             Ensure.ArgumentNotNull(nameof(entity), entity);
             return await CreateDataAsync<T>(entity);
         }
-
-        private ICollection<T> Convert<T>(string data)
-        {
-            Ensure.ArgumentNotNullOrEmptyString(nameof(data), data);
-            ICollection<T> result;
-            try
-            {
-                result = JsonConvert.DeserializeObject<TargetProcessReadResponseWrapper<T>>(data, JsonHelpers.DefaultSerializerSettings).Items;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
-            return result;
-        }
-
-        //private ICollection<T> ConvertDeleteResponse<T>(string data)
-        //{
-        //    Ensure.ArgumentNotNullOrEmptyString(nameof(data), data);
-        //    var result = JsonConvert.DeserializeObject<TargetProcessDeleteResponseWrapper>(data, JsonHelpers.DefaultSerializerSettings).Id;
-
-        //    return new Collection<T> { (T)result };
-        //}
 
         protected IHttpResponse ExecuteDeleteRequest<T>(IApiRequest apiRequest)
         {
@@ -305,6 +311,7 @@ namespace Sniper
 
             if (response.IsError)
             {
+                response = ProcessResponse(response);
                 return response;
             }
 
@@ -323,7 +330,17 @@ namespace Sniper
             }
 
             // Default Read
-            return new HttpResponse(HttpStatusCode.OK, Convert<T>(data), response.ResponseHeaders);
+            var jo = JObject.Parse(data);
+            var path = jo.First.Path;
+
+            if ("Items".Equals(path, StringComparison.CurrentCultureIgnoreCase))
+            {
+                var convertedItems = JsonConvert.DeserializeObject<TargetProcessReadResponseWrapper<T>>
+                    (data, JsonHelpers.DefaultSerializerSettings).Items;
+                return new HttpResponse(HttpStatusCode.OK, convertedItems, response.ResponseHeaders);
+            }
+            var convertedItem = JsonConvert.DeserializeObject<T>(data, JsonHelpers.DefaultSerializerSettings);
+            return new HttpResponse(HttpStatusCode.OK, convertedItem, response.ResponseHeaders);
         }
 
         private static IApiRequest GetApiDeleteRequestFromEntityId<T>(ITargetProcessClient targetProcessClient, int id)
@@ -353,11 +370,20 @@ namespace Sniper
             Ensure.ArgumentNotNull(nameof(targetProcessClient.AuthenticationHandler),
                 targetProcessClient.AuthenticationHandler);
 
+            var fullPath = GetFullPath(targetProcessClient, httpMethod, entity.Id ?? 0);
+            string data = null;
+
+            if (httpMethod != HttpMethod.Get)
+            {
+                fullPath = GetFullPath(targetProcessClient, httpMethod);
+                data = GetSerializedEntity(entity);
+            }
+
             var request = new ApiRequest
             {
                 AuthenticationHandler = targetProcessClient.AuthenticationHandler,
-                BaseAddress = GetFullPath(targetProcessClient, httpMethod),
-                Data = httpMethod == HttpMethod.Get ? null : GetSerializedEntity(entity),
+                BaseAddress = fullPath,
+                Data = data,
                 Method = httpMethod,
                 Parameters = targetProcessClient.DefaultQueryParameters,
                 Route = GetRouteText(entity)
@@ -374,13 +400,22 @@ namespace Sniper
             Ensure.ArgumentNotNull(nameof(targetProcessClient.AuthenticationHandler.SiteInfo),
                 targetProcessClient.AuthenticationHandler.SiteInfo);
 
-            if (httpMethod == HttpMethod.Post) return new Uri(targetProcessClient.AuthenticationHandler.SiteInfo.ApiUrl);
+            if (httpMethod == HttpMethod.Post)
+            {
+                if (targetProcessClient.ApiSiteInfo.Route == TargetProcessRoutes.Route.Undelete.ToString())
+                {
+                    var combinedUrl = ApiSiteHelpers.CombineUrlPaths(targetProcessClient.AuthenticationHandler.SiteInfo.ApiUrl,
+                        TargetProcessRoutes.Route.Undelete.ToString());
+                    return new Uri(combinedUrl);
+                }
+                return new Uri(targetProcessClient.AuthenticationHandler.SiteInfo.ApiUrl);
+            }
 
             var fullPath = ApiSiteHelpers.CombineUrlPaths(
                 targetProcessClient.AuthenticationHandler.SiteInfo.ApiUrl,
                 targetProcessClient.ApiSiteInfo.Route);
 
-            if (httpMethod == HttpMethod.Delete && id > 0)
+            if ((httpMethod == HttpMethod.Get || httpMethod == HttpMethod.Delete) && id > 0)
             {
                 fullPath = ApiSiteHelpers.CombineUrlPaths(fullPath, id.ToString());
             }
@@ -478,25 +513,20 @@ namespace Sniper
         private static IRequiredDataResponse VerifyPreConditions<T>(Entity entity, CRUD.CrudTypes crudFlags)
         {
             Ensure.ArgumentNotNull(nameof(entity), entity);
-            var entityType = typeof(T);
-            var response = new RequiredDataResponse
-            {
-                IsError = !VerifyEntity<T>(crudFlags),
-            };
+
+            var response = new RequiredDataResponse { IsError = !VerifyEntity<T>(crudFlags) };
 
             if (!response.IsError) return VerifyEntityProperties(entity, crudFlags);
 
-            response.Message = GetMessageForEntity(
-                entityType.GetCustomAttribute<CannotCreateReadUpdateDeleteAttribute>(false) == null
-                    ? CRUD.CrudTypes.None
-                    : crudFlags);
-
+            response.Message = GetMessageForEntity<T>(crudFlags);
             return response;
         }
 
-        private static string GetMessageForEntity(CRUD.CrudTypes crudFlags)
+        private static string GetMessageForEntity<T>(CRUD.CrudTypes crudFlags)
         {
-            if (crudFlags.HasFlag(CRUD.CrudTypes.None))
+            var crudAttribute = GetCannotCreateReadUpdateDeleteAttribute<T>() ?? GetCrudBaseAttribute<T>();
+
+            if (!crudAttribute.CanCreate && !crudAttribute.CanDelete && !crudAttribute.CanRead && !crudAttribute.CanUpdate)
             {
                 return CrudMessages.AllProhibited;
             }
@@ -506,25 +536,27 @@ namespace Sniper
                 return CrudMessages.AdminProhibited;
             }
 
-            if (crudFlags.HasFlag(CRUD.CrudTypes.Create))
+            if (crudFlags.HasFlag(CRUD.CrudTypes.Create) && !crudAttribute.CanCreate)
             {
                 return CrudMessages.CreateProhibited;
             }
 
-            if (crudFlags.HasFlag(CRUD.CrudTypes.Read))
+            if (crudFlags.HasFlag(CRUD.CrudTypes.Read) && !crudAttribute.CanRead)
             {
                 return CrudMessages.ReadProhibited;
             }
 
-            if (crudFlags.HasFlag(CRUD.CrudTypes.Update))
+            if (crudFlags.HasFlag(CRUD.CrudTypes.Update) && !crudAttribute.CanUpdate)
             {
                 return CrudMessages.UpdateProhibited;
             }
 
-            if (crudFlags.HasFlag(CRUD.CrudTypes.Delete))
+            if (crudFlags.HasFlag(CRUD.CrudTypes.Delete) && !crudAttribute.CanDelete)
             {
                 return CrudMessages.DeleteProhibited;
             }
+
+
 
             return CrudMessages.UnknownError;
         }
@@ -535,15 +567,25 @@ namespace Sniper
             return true;
         }
 #endif
-        private static bool VerifyEntity<T>(CRUD.CrudTypes crudFlags)
+
+        private static CrudBaseAttribute GetCrudBaseAttribute<T>()
         {
             var entityType = typeof(T);
             var crudAttribute = entityType.GetCustomAttribute<CrudBaseAttribute>(false);
+            return crudAttribute;
+        }
 
-            if (entityType.GetCustomAttribute<CannotCreateReadUpdateDeleteAttribute>(false) != null)
-            {
-                return false;
-            }
+        private static CrudBaseAttribute GetCannotCreateReadUpdateDeleteAttribute<T>()
+        {
+            var entityType = typeof(T);
+            var crudAttribute = entityType.GetCustomAttribute<CannotCreateReadUpdateDeleteAttribute>(false);
+            return crudAttribute;
+        }
+
+        private static bool VerifyEntity<T>(CRUD.CrudTypes crudFlags)
+        {
+            var crudAttribute = GetCannotCreateReadUpdateDeleteAttribute<T>() ?? GetCrudBaseAttribute<T>();
+
             if (crudFlags.HasFlag(CRUD.CrudTypes.Create))
             {
                 return crudAttribute?.CanCreate ?? true;
@@ -647,6 +689,24 @@ namespace Sniper
                     }
                 }
             }
+            return response;
+        }
+
+        private static IHttpResponse ProcessResponse(IHttpResponse response)
+        {
+            Ensure.ArgumentNotNull(nameof(response), response);
+
+            if (!response.IsError)
+            {
+                return response;
+            }
+
+            if (response.StatusCode >= HttpStatusCode.BadRequest && response.StatusCode <= HttpStatusCode.InternalServerError)
+            {
+                var converted = JsonConvert.DeserializeObject<TargetProcessErrorResponseModel>((string)response.Data, JsonHelpers.DefaultSerializerSettings);
+                return new HttpResponse(response.StatusCode, converted, response.ResponseHeaders, response.ContentType);
+            }
+
             return response;
         }
 

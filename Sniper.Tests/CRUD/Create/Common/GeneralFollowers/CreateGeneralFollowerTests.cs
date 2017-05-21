@@ -1,22 +1,17 @@
 using Sniper.Common;
-using Sniper.Http;
 using Sniper.TargetProcess.Routes;
 using Xunit;
 
 namespace Sniper.Tests.CRUD.Create.Common.GeneralFollowers
 {
     public class CreateGeneralFollowerTests
-    { 
-        [Fact] 
-        public void GeneralFollowerThrowsError() 
-        { 
-            var client = new TargetProcessClient 
-            { 
-                ApiSiteInfo = new ApiSiteInfo(TargetProcessRoutes.Route.GeneralFollowers) 
-            }; 
-            var generalFollower = new GeneralFollower 
-            { 
-            }; 
-        } 
-    } 
-} 
+    {
+        [Fact]
+        public void CreateGeneralFollowerThrowsError()
+        {
+            var client = CommonMethods.GetClientByRoute(TargetProcessRoutes.Route.GeneralFollowers);
+
+            var generalFollower = new GeneralFollower();
+        }
+    }
+}

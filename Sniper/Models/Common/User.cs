@@ -34,7 +34,7 @@ namespace Sniper.Common
         public int AvailableFutureAllocation { get; set; }
 
         [JsonProperty(Required = Required.Default)]
-        public int AvailableFutureHours { get; set; }
+        public decimal AvailableFutureHours { get; set; }
 
         [JsonProperty(Required = Required.Default)]
         public decimal CurrentAvailableHours { get; set; }
